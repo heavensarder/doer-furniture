@@ -211,9 +211,11 @@ export default function Navbar() {
             })}
 
             <div className="pt-4 border-t border-slate-800 flex flex-col gap-3">
-              <div className="flex items-center gap-2 text-xs text-slate-400 px-3">
-                <Phone className="w-4 h-4 text-[#FF3D00]" />
-                <span>01716535654 • info@doerbd.com</span>
+              <div className="flex items-center justify-center gap-2 text-xs text-slate-400 px-3 text-center">
+                <Phone className="w-4 h-4 text-[#FF3D00] shrink-0" />
+                <a href="tel:01716535654" className="hover:text-white transition-colors">01716535654</a>
+                <span className="text-slate-600">•</span>
+                <a href="mailto:info@doerbd.com" className="hover:text-white transition-colors">info@doerbd.com</a>
               </div>
               <Link
                 href="/contact"
