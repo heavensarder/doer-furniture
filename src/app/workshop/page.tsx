@@ -107,9 +107,9 @@ export default function WorkshopPage() {
   ];
 
   return (
-    <div className="pt-20 sm:pt-28 min-h-screen bg-white">
+    <div className="min-h-screen bg-white">
       {/* Page Banner */}
-      <section className="relative py-16 sm:py-20 lg:py-28 bg-slate-950 text-white overflow-hidden bg-architectural-grid-dark">
+      <section className="relative pt-28 sm:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-28 bg-slate-950 text-white overflow-hidden bg-architectural-grid-dark">
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=2000&q=80"

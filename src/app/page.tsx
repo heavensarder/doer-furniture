@@ -203,9 +203,9 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen pt-24 sm:pt-28 bg-white">
+    <div className="flex flex-col min-h-screen bg-white">
       {/* 01. HERO SECTION */}
-      <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center text-white overflow-hidden px-4 sm:px-6 lg:px-8">
+      <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center text-white overflow-hidden px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28">
         {/* Focused Architectural Interior Backdrop */}
         <div className="absolute inset-0 z-0">
           <Image
