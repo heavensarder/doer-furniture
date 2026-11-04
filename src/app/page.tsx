@@ -24,6 +24,32 @@ import {
   Utensils,
 } from 'lucide-react';
 
+export const metadata = {
+  title: 'DOER – Designing Spaces. Creating Experiences.',
+  description:
+    'DOER delivers innovative interior design, commercial fit-out, furniture manufacturing, and project execution solutions.',
+  openGraph: {
+    title: 'DOER – Designing Spaces. Creating Experiences.',
+    description:
+      'DOER delivers innovative interior design, commercial fit-out, furniture manufacturing, and project execution solutions.',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1734,
+        height: 907,
+        alt: 'DOER – Designing Spaces. Creating Experiences.',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'DOER – Designing Spaces. Creating Experiences.',
+    description:
+      'DOER delivers innovative interior design, commercial fit-out, furniture manufacturing, and project execution solutions.',
+    images: ['/og-image.jpg'],
+  },
+};
+
 export default function HomePage() {
   const services = [
     {

@@ -19,6 +19,24 @@ import {
 export const metadata = {
   title: 'Our Services – DOER Interior Design, Manufacturing & Execution',
   description: 'Complete interior design, commercial fit-out, customized furniture manufacturing, and project execution solutions by DOER.',
+  openGraph: {
+    title: 'Our Services – DOER Interior Design, Manufacturing & Execution',
+    description: 'Complete interior design, commercial fit-out, customized furniture manufacturing, and project execution solutions by DOER.',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1734,
+        height: 907,
+        alt: 'DOER Services',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Our Services – DOER Interior Design, Manufacturing & Execution',
+    description: 'Complete interior design, commercial fit-out, customized furniture manufacturing, and project execution solutions by DOER.',
+    images: ['/og-image.jpg'],
+  },
 };
 
 export default function ServicesPage() {

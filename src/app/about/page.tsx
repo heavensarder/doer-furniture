@@ -6,6 +6,24 @@ import { Target, Compass, Award, ArrowRight, Quote, ShieldCheck, Factory, Users 
 export const metadata = {
   title: 'About DOER – Creating Spaces That Inspire and Perform',
   description: 'Learn about DOER, our vision, mission, leadership, and our commitment to excellence in interior design, fit-out, and furniture manufacturing.',
+  openGraph: {
+    title: 'About DOER – Creating Spaces That Inspire and Perform',
+    description: 'Learn about DOER, our vision, mission, leadership, and our commitment to excellence in interior design, fit-out, and furniture manufacturing.',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1734,
+        height: 907,
+        alt: 'About DOER',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'About DOER – Creating Spaces That Inspire and Perform',
+    description: 'Learn about DOER, our vision, mission, leadership, and our commitment to excellence in interior design, fit-out, and furniture manufacturing.',
+    images: ['/og-image.jpg'],
+  },
 };
 
 export default function AboutPage() {

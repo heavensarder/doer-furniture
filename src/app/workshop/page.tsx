@@ -21,6 +21,24 @@ import {
 export const metadata = {
   title: 'Workshop & Capabilities – DOER Manufacturing & Facilities',
   description: 'Explore DOER in-house manufacturing facilities, modern machinery, multidisciplinary workforce, and materials like Water Bubble Stainless Steel.',
+  openGraph: {
+    title: 'Workshop & Capabilities – DOER Manufacturing & Facilities',
+    description: 'Explore DOER in-house manufacturing facilities, modern machinery, multidisciplinary workforce, and materials like Water Bubble Stainless Steel.',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1734,
+        height: 907,
+        alt: 'DOER Workshop & Capabilities',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Workshop & Capabilities – DOER Manufacturing & Facilities',
+    description: 'Explore DOER in-house manufacturing facilities, modern machinery, multidisciplinary workforce, and materials like Water Bubble Stainless Steel.',
+    images: ['/og-image.jpg'],
+  },
 };
 
 export default function WorkshopPage() {
