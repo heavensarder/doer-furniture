@@ -1,30 +1,12 @@
 import type { Metadata } from 'next';
+import { constructMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = constructMetadata({
   title: 'Portfolio & Projects – DOER Interior Architecture & Execution',
   description:
     'Explore DOER featured projects across commercial offices, retail outlets, luxury residences, hospitality spaces, and custom furniture fabrication.',
-  openGraph: {
-    title: 'Portfolio & Projects – DOER Interior Architecture & Execution',
-    description:
-      'Explore DOER featured projects across commercial offices, retail outlets, luxury residences, hospitality spaces, and custom furniture fabrication.',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1734,
-        height: 907,
-        alt: 'DOER Portfolio & Projects',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Portfolio & Projects – DOER Interior Architecture & Execution',
-    description:
-      'Explore DOER featured projects across commercial offices, retail outlets, luxury residences, hospitality spaces, and custom furniture fabrication.',
-    images: ['/og-image.jpg'],
-  },
-};
+  path: '/projects',
+});
 
 export default function ProjectsLayout({
   children,

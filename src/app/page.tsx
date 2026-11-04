@@ -23,32 +23,11 @@ import {
   Layers,
   Utensils,
 } from 'lucide-react';
+import { constructMetadata } from '@/lib/metadata';
 
-export const metadata = {
-  title: 'DOER – Designing Spaces. Creating Experiences.',
-  description:
-    'DOER delivers innovative interior design, commercial fit-out, furniture manufacturing, and project execution solutions.',
-  openGraph: {
-    title: 'DOER – Designing Spaces. Creating Experiences.',
-    description:
-      'DOER delivers innovative interior design, commercial fit-out, furniture manufacturing, and project execution solutions.',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1734,
-        height: 907,
-        alt: 'DOER – Designing Spaces. Creating Experiences.',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'DOER – Designing Spaces. Creating Experiences.',
-    description:
-      'DOER delivers innovative interior design, commercial fit-out, furniture manufacturing, and project execution solutions.',
-    images: ['/og-image.jpg'],
-  },
-};
+export const metadata = constructMetadata({
+  path: '/',
+});
 
 export default function HomePage() {
   const services = [
@@ -240,10 +219,10 @@ export default function HomePage() {
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-1 sm:pt-2 w-full max-w-md sm:max-w-none mx-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 pt-1 sm:pt-2 w-auto mx-auto">
             <Link
               href="/projects"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 bg-[#FF3D00] hover:bg-[#eb3800] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-xl shadow-black/30 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5"
+              className="w-auto min-w-[190px] sm:min-w-0 inline-flex items-center justify-center gap-2 px-5 sm:px-8 py-2.5 sm:py-3.5 bg-[#FF3D00] hover:bg-[#eb3800] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-xl shadow-black/30 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5"
             >
               <span>Explore Our Projects</span>
               <ArrowRight className="w-4 h-4" />
@@ -251,7 +230,7 @@ export default function HomePage() {
 
             <Link
               href="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-8 py-3.5 sm:py-4 bg-white/15 hover:bg-white/25 text-white font-bold text-xs uppercase tracking-wider rounded-xl border border-white/30 backdrop-blur-md transition-all duration-300 hover:border-white/50"
+              className="w-auto min-w-[190px] sm:min-w-0 inline-flex items-center justify-center gap-2 px-5 sm:px-8 py-2.5 sm:py-3.5 bg-white/15 hover:bg-white/25 text-white font-bold text-xs uppercase tracking-wider rounded-xl border border-white/30 backdrop-blur-md transition-all duration-300 hover:border-white/50"
             >
               <span>Get in Touch</span>
               <ArrowUpRight className="w-4 h-4 text-[#FF3D00]" />

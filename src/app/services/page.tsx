@@ -15,29 +15,13 @@ import {
   ArrowRight,
   ArrowUpRight,
 } from 'lucide-react';
+import { constructMetadata } from '@/lib/metadata';
 
-export const metadata = {
+export const metadata = constructMetadata({
   title: 'Our Services – DOER Interior Design, Manufacturing & Execution',
   description: 'Complete interior design, commercial fit-out, customized furniture manufacturing, and project execution solutions by DOER.',
-  openGraph: {
-    title: 'Our Services – DOER Interior Design, Manufacturing & Execution',
-    description: 'Complete interior design, commercial fit-out, customized furniture manufacturing, and project execution solutions by DOER.',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1734,
-        height: 907,
-        alt: 'DOER Services',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Our Services – DOER Interior Design, Manufacturing & Execution',
-    description: 'Complete interior design, commercial fit-out, customized furniture manufacturing, and project execution solutions by DOER.',
-    images: ['/og-image.jpg'],
-  },
-};
+  path: '/services',
+});
 
 export default function ServicesPage() {
   const mainServices = [

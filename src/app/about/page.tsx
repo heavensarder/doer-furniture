@@ -2,29 +2,13 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Target, Compass, Award, ArrowRight, Quote, ShieldCheck, Factory, Users } from 'lucide-react';
+import { constructMetadata } from '@/lib/metadata';
 
-export const metadata = {
+export const metadata = constructMetadata({
   title: 'About DOER – Creating Spaces That Inspire and Perform',
   description: 'Learn about DOER, our vision, mission, leadership, and our commitment to excellence in interior design, fit-out, and furniture manufacturing.',
-  openGraph: {
-    title: 'About DOER – Creating Spaces That Inspire and Perform',
-    description: 'Learn about DOER, our vision, mission, leadership, and our commitment to excellence in interior design, fit-out, and furniture manufacturing.',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1734,
-        height: 907,
-        alt: 'About DOER',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'About DOER – Creating Spaces That Inspire and Perform',
-    description: 'Learn about DOER, our vision, mission, leadership, and our commitment to excellence in interior design, fit-out, and furniture manufacturing.',
-    images: ['/og-image.jpg'],
-  },
-};
+  path: '/about',
+});
 
 export default function AboutPage() {
   return (
