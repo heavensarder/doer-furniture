@@ -139,23 +139,20 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
               {NAV_ITEMS.map((item) => {
                 const isActive = pathname === item.href;
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`text-[13px] tracking-wide uppercase font-semibold transition-all duration-200 relative py-1 ${
+                    className={`text-[12px] xl:text-[13px] tracking-wide uppercase font-bold px-3 xl:px-3.5 py-2 rounded-lg transition-all duration-200 ${
                       isActive
-                        ? 'text-[#FF3D00]'
-                        : 'text-slate-700 hover:text-[#FF3D00]'
+                        ? 'bg-[#FF3D00] text-white shadow-md shadow-[#FF3D00]/25'
+                        : 'text-slate-700 hover:bg-[#FF3D00] hover:text-white'
                     }`}
                   >
                     <span>{item.label}</span>
-                    {isActive && (
-                      <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-[#FF3D00] rounded-full" />
-                    )}
                   </Link>
                 );
               })}
@@ -204,8 +201,8 @@ export default function Navbar() {
                   href={item.href}
                   className={`block py-2.5 px-3 rounded-lg text-sm font-semibold tracking-wide uppercase transition-colors ${
                     isActive
-                      ? 'bg-[#FF3D00] text-white'
-                      : 'text-slate-300 hover:bg-slate-900 hover:text-[#FF3D00]'
+                      ? 'bg-[#FF3D00] text-white shadow-sm'
+                      : 'text-slate-300 hover:bg-[#FF3D00] hover:text-white'
                   }`}
                 >
                   {item.label}
