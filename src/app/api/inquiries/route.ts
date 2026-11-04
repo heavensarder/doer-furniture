@@ -17,9 +17,9 @@ export async function GET(request: Request) {
     const params: any[] = [];
 
     if (search) {
-      sql += ' AND (full_name LIKE ? OR company_name LIKE ? OR email LIKE ? OR phone LIKE ? OR service_interested LIKE ?)';
+      sql += ' AND (full_name LIKE ? OR company_name LIKE ? OR email LIKE ? OR phone LIKE ? OR service_interested LIKE ? OR project_location LIKE ? OR project_details LIKE ?)';
       const term = `%${search}%`;
-      params.push(term, term, term, term, term);
+      params.push(term, term, term, term, term, term, term);
     }
 
     if (status && status !== 'all') {

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
+import Link from 'next/link';
 import {
   Inbox,
   Clock,
@@ -19,6 +20,7 @@ import {
   Calendar,
   X,
   Sparkles,
+  ArrowUpRight,
 } from 'lucide-react';
 
 interface Inquiry {
@@ -193,75 +195,135 @@ export default function AdminDashboardPage() {
         </div>
       )}
 
+      {newInquiries > 0 && (
+        <div className="p-4 bg-gradient-to-r from-[#FF3D00]/15 via-slate-900 to-slate-900 border border-[#FF3D00]/30 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in">
+          <div className="flex items-center gap-3">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#FF3D00] animate-ping shrink-0" />
+            <div>
+              <p className="text-sm font-semibold text-white">
+                You have {newInquiries} new website {newInquiries === 1 ? 'enquiry' : 'enquiries'} waiting for review
+              </p>
+              <p className="text-xs text-slate-400">
+                Prospective clients have submitted project briefs through the contact form.
+              </p>
+            </div>
+          </div>
+          <Link
+            href="/admin/dashboard/enquiries"
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-[#FF3D00] hover:bg-[#e63700] text-white text-xs font-bold rounded-lg shadow-sm transition-colors shrink-0"
+          >
+            <span>Open Enquiries Center</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
+      )}
+
       {/* KPI Stats Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Total Inquiries */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition-all">
+        <Link
+          href="/admin/dashboard/enquiries"
+          className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-[#FF3D00]/60 transition-all group block"
+        >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 group-hover:text-slate-300">
               Total Inquiries
             </span>
-            <div className="w-9 h-9 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center group-hover:scale-110 transition-transform">
               <Inbox className="w-5 h-5" />
             </div>
           </div>
-          <div className="mt-4 flex items-baseline gap-2">
+          <div className="mt-4 flex items-baseline justify-between">
             <span className="text-3xl font-extrabold text-white">{totalInquiries}</span>
-            <span className="text-xs text-slate-500">recorded leads</span>
+            <span className="text-xs text-slate-500 group-hover:text-[#FF3D00] flex items-center gap-1">
+              View all <ArrowUpRight className="w-3 h-3" />
+            </span>
           </div>
-        </div>
+        </Link>
 
         {/* New / Pending */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition-all">
+        <Link
+          href="/admin/dashboard/enquiries"
+          className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-red-500/60 transition-all group block"
+        >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 group-hover:text-slate-300">
               New Leads
             </span>
-            <div className="w-9 h-9 rounded-lg bg-[#FF3D00]/10 text-[#FF3D00] flex items-center justify-center">
+            <div className="w-9 h-9 rounded-lg bg-[#FF3D00]/10 text-[#FF3D00] flex items-center justify-center group-hover:scale-110 transition-transform">
               <AlertCircle className="w-5 h-5" />
             </div>
           </div>
-          <div className="mt-4 flex items-baseline gap-2">
+          <div className="mt-4 flex items-baseline justify-between">
             <span className="text-3xl font-extrabold text-[#FF3D00]">{newInquiries}</span>
-            <span className="text-xs text-slate-500">awaiting response</span>
+            <span className="text-xs text-slate-500 group-hover:text-[#FF3D00] flex items-center gap-1">
+              Review new <ArrowUpRight className="w-3 h-3" />
+            </span>
           </div>
-        </div>
+        </Link>
 
         {/* In Progress */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition-all">
+        <Link
+          href="/admin/dashboard/enquiries"
+          className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-amber-500/60 transition-all group block"
+        >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 group-hover:text-slate-300">
               In Progress / Contacted
             </span>
-            <div className="w-9 h-9 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center group-hover:scale-110 transition-transform">
               <Clock className="w-5 h-5" />
             </div>
           </div>
-          <div className="mt-4 flex items-baseline gap-2">
+          <div className="mt-4 flex items-baseline justify-between">
             <span className="text-3xl font-extrabold text-amber-400">{inProgressInquiries}</span>
-            <span className="text-xs text-slate-500">in discussion</span>
+            <span className="text-xs text-slate-500 group-hover:text-amber-400 flex items-center gap-1">
+              Active leads <ArrowUpRight className="w-3 h-3" />
+            </span>
           </div>
-        </div>
+        </Link>
 
         {/* Completed */}
-        <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-slate-700 transition-all">
+        <Link
+          href="/admin/dashboard/enquiries"
+          className="bg-slate-900 border border-slate-800 rounded-xl p-5 hover:border-emerald-500/60 transition-all group block"
+        >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+            <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 group-hover:text-slate-300">
               Converted / Completed
             </span>
-            <div className="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+            <div className="w-9 h-9 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
               <CheckCircle2 className="w-5 h-5" />
             </div>
           </div>
-          <div className="mt-4 flex items-baseline gap-2">
+          <div className="mt-4 flex items-baseline justify-between">
             <span className="text-3xl font-extrabold text-emerald-400">{completedInquiries}</span>
-            <span className="text-xs text-slate-500">finalized</span>
+            <span className="text-xs text-slate-500 group-hover:text-emerald-400 flex items-center gap-1">
+              Finalized <ArrowUpRight className="w-3 h-3" />
+            </span>
           </div>
-        </div>
+        </Link>
       </div>
 
       {/* Main Table Section */}
       <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
+        {/* Table Top Header with link to dedicated Enquiries */}
+        <div className="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/40">
+          <div>
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
+              <span>Website Enquiries</span>
+              <span className="text-[11px] font-normal text-slate-400">({inquiries.length} total)</span>
+            </h3>
+            <p className="text-xs text-slate-400 mt-0.5">Quick overview of website leads directly from MySQL</p>
+          </div>
+          <Link
+            href="/admin/dashboard/enquiries"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF3D00] hover:bg-[#e63700] text-xs font-bold text-white transition-all shadow-sm shadow-[#FF3D00]/20"
+          >
+            <span>Full Enquiries Manager</span>
+            <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
+        </div>
         {/* Table Filters & Search Bar */}
         <div className="p-5 border-b border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="relative w-full md:w-96">

@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import {
   LayoutDashboard,
+  Inbox,
   LogOut,
   ExternalLink,
   Database,
@@ -23,6 +24,32 @@ export default function AdminDashboardLayout({
   const pathname = usePathname();
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [newCount, setNewCount] = useState<number>(0);
+
+  // Poll count of new inquiries for live badge
+  useEffect(() => {
+    let isMounted = true;
+    const fetchNewCount = async () => {
+      try {
+        const res = await fetch('/api/inquiries?status=new');
+        if (res.ok) {
+          const data = await res.json();
+          if (isMounted) {
+            setNewCount(data.inquiries?.length || 0);
+          }
+        }
+      } catch (err) {
+        // Silently catch network glitches
+      }
+    };
+
+    fetchNewCount();
+    const interval = setInterval(fetchNewCount, 30000);
+    return () => {
+      isMounted = false;
+      clearInterval(interval);
+    };
+  }, [pathname]);
 
   const handleLogout = async () => {
     try {
@@ -85,7 +112,6 @@ export default function AdminDashboardLayout({
           </div>
 
           {/* Navigation Menu */}
-          {/* As requested: "a side bar nav menu in dashboard no nav item need for now just the dsahboard nav item" */}
           <div className="p-4">
             <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 mb-2">
               Main Menu
@@ -102,6 +128,32 @@ export default function AdminDashboardLayout({
               >
                 <LayoutDashboard className="w-5 h-5 shrink-0" />
                 <span>Dashboard</span>
+              </Link>
+
+              <Link
+                href="/admin/dashboard/enquiries"
+                onClick={() => setMobileSidebarOpen(false)}
+                className={`flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                  pathname?.startsWith('/admin/dashboard/enquiries') || pathname?.startsWith('/admin/dashboard/inquiries')
+                    ? 'bg-[#FF3D00] text-white shadow-md shadow-[#FF3D00]/20 font-semibold'
+                    : 'text-slate-300 hover:bg-slate-800 hover:text-white'
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <Inbox className="w-5 h-5 shrink-0" />
+                  <span>Enquiries</span>
+                </div>
+                {newCount > 0 && (
+                  <span
+                    className={`px-2 py-0.5 text-[11px] font-bold rounded-full transition-colors ${
+                      pathname?.startsWith('/admin/dashboard/enquiries') || pathname?.startsWith('/admin/dashboard/inquiries')
+                        ? 'bg-white text-[#FF3D00]'
+                        : 'bg-[#FF3D00] text-white animate-pulse'
+                    }`}
+                  >
+                    {newCount}
+                  </span>
+                )}
               </Link>
             </nav>
           </div>
