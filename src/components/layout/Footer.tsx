@@ -73,7 +73,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://wa.me/8801716535654"
+                href="https://wa.me/8801976535654"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-8 h-8 rounded-lg bg-slate-900 hover:bg-[#FF3D00] text-slate-400 hover:text-white flex items-center justify-center transition-all duration-200 border border-slate-800"
@@ -162,8 +162,8 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-4 h-4 text-[#FF3D00] shrink-0" />
-                <a href="tel:01716535654" className="hover:text-[#FF3D00] transition-colors font-semibold">
-                  01716535654
+                <a href="tel:01976535654" className="hover:text-[#FF3D00] transition-colors font-semibold">
+                  01976535654
                 </a>
               </li>
               <li className="flex items-center gap-3">

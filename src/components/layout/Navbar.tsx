@@ -55,11 +55,11 @@ export default function Navbar() {
 
           <div className="flex items-center gap-5">
             <a
-              href="tel:01716535654"
+              href="tel:01976535654"
               className="flex items-center gap-1.5 text-white hover:text-white/85 transition-colors font-semibold"
             >
               <Phone className="w-3 h-3 text-white" />
-              <span>Hotline: 01716535654</span>
+              <span>Hotline: 01976535654</span>
             </a>
             
             <span className="text-white/40">•</span>
@@ -100,7 +100,7 @@ export default function Navbar() {
                 </svg>
               </a>
               <a
-                href="https://wa.me/8801716535654"
+                href="https://wa.me/8801976535654"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-5 h-5 rounded-full bg-white/15 hover:bg-white hover:text-[#FF3D00] text-white flex items-center justify-center transition-all duration-200"
@@ -213,7 +213,7 @@ export default function Navbar() {
             <div className="pt-4 border-t border-slate-800 flex flex-col gap-3">
               <div className="flex items-center justify-center gap-2 text-xs text-slate-400 px-3 text-center">
                 <Phone className="w-4 h-4 text-[#FF3D00] shrink-0" />
-                <a href="tel:01716535654" className="hover:text-white transition-colors">01716535654</a>
+                <a href="tel:01976535654" className="hover:text-white transition-colors">01976535654</a>
                 <span className="text-slate-600">•</span>
                 <a href="mailto:info@doerbd.com" className="hover:text-white transition-colors">info@doerbd.com</a>
               </div>

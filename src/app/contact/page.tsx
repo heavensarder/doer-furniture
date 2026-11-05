@@ -174,10 +174,10 @@ export default function ContactPage() {
                         Phone
                       </span>
                       <a
-                        href="tel:01716535654"
+                        href="tel:01976535654"
                         className="text-slate-900 font-bold hover:text-[#FF3D00] transition-colors text-sm sm:text-base"
                       >
-                        01716535654
+                        01976535654
                       </a>
                     </div>
                   </li>

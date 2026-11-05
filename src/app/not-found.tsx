@@ -72,8 +72,8 @@ export default function NotFound() {
         {/* Studio Help Line */}
         <div className="pt-6 border-t border-slate-900 text-xs text-slate-500">
           Need immediate interior assistance? Reach DOER hotline at{' '}
-          <a href="tel:01716535654" className="text-slate-300 hover:text-[#FF3D00] font-semibold transition-colors">
-            01716535654
+          <a href="tel:01976535654" className="text-slate-300 hover:text-[#FF3D00] font-semibold transition-colors">
+            01976535654
           </a>
         </div>
       </div>

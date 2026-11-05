@@ -626,11 +626,11 @@ export default function ConsoleTableShowcase() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <a
-                href="tel:01716535654"
+                href="tel:01976535654"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 sm:py-4 bg-white/10 hover:bg-white/15 text-white text-xs font-bold uppercase tracking-wider rounded-xl border border-white/15 transition-colors"
               >
                 <Phone className="w-4 h-4 text-[#FF3D00]" />
-                <span>Hotline: 01716535654</span>
+                <span>Hotline: 01976535654</span>
               </a>
             </div>
           </div>
@@ -811,11 +811,11 @@ export default function ConsoleTableShowcase() {
 
               <div className="flex items-center gap-2 sm:gap-3">
                 <a
-                  href="tel:01716535654"
+                  href="tel:01976535654"
                   className="px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl border border-slate-200 hover:border-slate-400 text-slate-800 text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 shrink-0"
                 >
                   <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FF3D00]" />
-                  <span>01716535654</span>
+                  <span>01976535654</span>
                 </a>
 
                 <Link
