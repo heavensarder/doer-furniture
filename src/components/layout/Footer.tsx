@@ -100,9 +100,9 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-[#FF3D00] transition-colors flex items-center gap-2">
+                <Link href="/products" className="hover:text-[#FF3D00] transition-colors flex items-center gap-2">
                   <span className="text-slate-600">›</span>
-                  <span>About Us</span>
+                  <span>Products</span>
                 </Link>
               </li>
               <li>
@@ -121,6 +121,12 @@ export default function Footer() {
                 <Link href="/workshop" className="hover:text-[#FF3D00] transition-colors flex items-center gap-2">
                   <span className="text-slate-600">›</span>
                   <span>Workshop & Capabilities</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-[#FF3D00] transition-colors flex items-center gap-2">
+                  <span className="text-slate-600">›</span>
+                  <span>About Us</span>
                 </Link>
               </li>
               <li>

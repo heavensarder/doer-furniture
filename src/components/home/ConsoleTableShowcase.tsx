@@ -599,43 +599,6 @@ export default function ConsoleTableShowcase() {
           ))}
         </div>
 
-        {/* Commercial Customization Banner */}
-        <div className="mt-12 sm:mt-16 p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl bg-slate-950 text-white relative overflow-hidden border border-slate-800 shadow-2xl">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF3D00]/10 rounded-full blur-3xl pointer-events-none" />
-          
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6 sm:gap-8">
-            <div className="space-y-2.5 sm:space-y-3 max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Custom CAD Architectural Sizing</span>
-              </div>
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight">
-                Require Custom Dimensions, Monitor Arrays, or Exotic Finishes?
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
-                Our in-house Khilkhet workshop builds every workstation, command console, and boardroom table to your exact architectural CAD drawings, complete with custom finishes, power boxes, and acoustic privacy screens.
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3">
-              <Link
-                href="/contact"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 sm:py-4 bg-[#FF3D00] hover:bg-[#e03600] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-[#FF3D00]/25"
-              >
-                <span>Submit Floor Plan For Quote</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <a
-                href="tel:01976535654"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 sm:py-4 bg-white/10 hover:bg-white/15 text-white text-xs font-bold uppercase tracking-wider rounded-xl border border-white/15 transition-colors"
-              >
-                <Phone className="w-4 h-4 text-[#FF3D00]" />
-                <span>Hotline: 01976535654</span>
-              </a>
-            </div>
-          </div>
-        </div>
-
       </div>
 
       {/* Professional Pop-up Specification Modal Mounted via Portal to Avoid Stacking Traps */}

@@ -2,8 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import FeaturedProjectsShowcase from '@/components/home/FeaturedProjectsShowcase';
-import ConsoleTableShowcase from '@/components/home/ConsoleTableShowcase';
 import MaterialsShowcase from '@/components/home/MaterialsShowcase';
+import HeroSlider from '@/components/home/HeroSlider';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -26,6 +26,9 @@ import {
 import { constructMetadata } from '@/lib/metadata';
 
 export const metadata = constructMetadata({
+  title: 'DOER – High-End Console Tables & Control Room Design',
+  description:
+    'DOER manufactures mission-critical command consoles, ergonomic modular workstations, and turnkey control room interiors in our in-house Khilkhet facility.',
   path: '/',
 });
 
@@ -183,87 +186,8 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      {/* 01. HERO SECTION */}
-      <section className="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center text-white overflow-hidden px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28">
-        {/* Focused Architectural Interior Backdrop */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=2600&q=90"
-            alt="DOER Luxury Interior Design and Architecture"
-            fill
-            priority
-            className="object-cover object-center scale-100"
-          />
-          {/* Subtle Warm Scrim Overlay - Keeps the interior photo clearly focused & visible while text is crisp */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/60" />
-        </div>
-
-        <div className="relative z-10 max-w-6xl mx-auto text-center space-y-6 sm:space-y-8 py-12 sm:py-16 md:py-20">
-          {/* Studio Category Badge */}
-          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full bg-black/50 border border-white/20 backdrop-blur-md text-[10px] sm:text-xs font-semibold tracking-wider uppercase text-white shadow-sm max-w-[92vw]">
-            <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#FF3D00] shrink-0" />
-            <span className="truncate">DOER • Interior Architecture & Turnkey Execution</span>
-          </div>
-
-          {/* Main Headline */}
-          <h1 className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight text-white leading-[1.1] sm:leading-[1.08] drop-shadow-sm">
-            Designing Spaces.{' '}
-            <span className="text-[#FF3D00] block sm:inline">
-              Creating Experiences.
-            </span>
-          </h1>
-
-          {/* Subheading */}
-          <p className="max-w-3xl mx-auto text-sm sm:text-base lg:text-xl text-slate-100/90 leading-relaxed font-normal drop-shadow-sm px-1 sm:px-0">
-            DOER delivers innovative interior design, commercial fit-out, furniture manufacturing, and project execution solutions. We transform ideas into functional, elegant, and inspiring spaces.
-          </p>
-
-          {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-4 pt-1 sm:pt-2 w-auto mx-auto">
-            <Link
-              href="/projects"
-              className="w-auto min-w-[190px] sm:min-w-0 inline-flex items-center justify-center gap-2 px-5 sm:px-8 py-2.5 sm:py-3.5 bg-[#FF3D00] hover:bg-[#eb3800] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-xl shadow-black/30 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5"
-            >
-              <span>Explore Our Projects</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-
-            <Link
-              href="/contact"
-              className="w-auto min-w-[190px] sm:min-w-0 inline-flex items-center justify-center gap-2 px-5 sm:px-8 py-2.5 sm:py-3.5 bg-white/15 hover:bg-white/25 text-white font-bold text-xs uppercase tracking-wider rounded-xl border border-white/30 backdrop-blur-md transition-all duration-300 hover:border-white/50"
-            >
-              <span>Get in Touch</span>
-              <ArrowUpRight className="w-4 h-4 text-[#FF3D00]" />
-            </Link>
-          </div>
-
-          {/* Studio Highlights Ribbon */}
-          <div className="pt-6 sm:pt-10 max-w-4xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5 p-3 sm:p-4 rounded-2xl bg-black/55 backdrop-blur-md border border-white/15 text-left shadow-2xl">
-              <div className="p-2 sm:p-3 border-r border-b md:border-b-0 border-white/10">
-                <span className="text-xl sm:text-2xl font-black text-[#FF3D00] block">100%</span>
-                <span className="text-[11px] sm:text-xs font-semibold text-white block mt-0.5">In-House Manufacturing</span>
-                <span className="text-[10px] sm:text-[11px] text-slate-300 block">Khilkhet workshop facility</span>
-              </div>
-              <div className="p-2 sm:p-3 border-b md:border-b-0 md:border-r border-white/10">
-                <span className="text-xl sm:text-2xl font-black text-white block">33+</span>
-                <span className="text-[11px] sm:text-xs font-semibold text-white block mt-0.5">Skilled Technical Team</span>
-                <span className="text-[10px] sm:text-[11px] text-slate-300 block">Artisans & engineers</span>
-              </div>
-              <div className="p-2 sm:p-3 border-r border-white/10">
-                <span className="text-xl sm:text-2xl font-black text-white block">Turnkey</span>
-                <span className="text-[11px] sm:text-xs font-semibold text-white block mt-0.5">Project Execution</span>
-                <span className="text-[10px] sm:text-[11px] text-slate-300 block">Design to final delivery</span>
-              </div>
-              <div className="p-2 sm:p-3">
-                <span className="text-xl sm:text-2xl font-black text-[#FF3D00] block">Bespoke</span>
-                <span className="text-[11px] sm:text-xs font-semibold text-white block mt-0.5">Custom Furniture</span>
-                <span className="text-[10px] sm:text-[11px] text-slate-300 block">CNC & metal fabrication</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 01. HERO SLIDER SECTION */}
+      <HeroSlider />
 
       {/* 02. INTRODUCTION SECTION */}
       <section className="py-16 sm:py-20 lg:py-28 bg-white relative bg-architectural-grid">
@@ -415,11 +339,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 03B. HIGHEND CONSOLE TABLE */}
-      <ConsoleTableShowcase />
-
-      {/* 03C. MATERIALS - WATER BUBBLE STAINLESS STEEL */}
-      <MaterialsShowcase />
+      {/* 03C. MATERIALS - ARCHITECTURAL PATINAS & SURFACE TEXTURES */}
+      <div id="materials" className="scroll-mt-20">
+        <MaterialsShowcase />
+      </div>
 
       {/* 04. FEATURED PROJECTS SECTION - INTERACTIVE MONOGRAPH SHOWCASE */}
       <FeaturedProjectsShowcase />

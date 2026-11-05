@@ -6,12 +6,19 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X, ArrowUpRight, Phone, ShieldCheck, MapPin } from 'lucide-react';
 
-const NAV_ITEMS = [
+interface NavItem {
+  label: string;
+  href: string;
+  shortLabel?: string;
+}
+
+const NAV_ITEMS: NavItem[] = [
   { label: 'Home', href: '/' },
-  { label: 'About Us', href: '/about' },
+  { label: 'Products', href: '/products' },
   { label: 'Services', href: '/services' },
   { label: 'Projects', href: '/projects' },
-  { label: 'Workshop & Capabilities', href: '/workshop' },
+  { label: 'Workshop & Capabilities', href: '/workshop', shortLabel: 'Workshop' },
+  { label: 'About Us', href: '/about' },
   { label: 'Contact Us', href: '/contact' },
 ];
 
@@ -124,10 +131,10 @@ export default function Navbar() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-2 xl:gap-4">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-36 sm:w-40 h-10 transition-transform duration-300 group-hover:scale-105">
+            <Link href="/" className="flex items-center gap-3 group shrink-0">
+              <div className="relative w-32 sm:w-36 xl:w-40 h-9 xl:h-10 transition-transform duration-300 group-hover:scale-105">
                 <Image
                   src="/images/logo.webp"
                   alt="DOER Logo"
@@ -139,33 +146,40 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+            <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1.5 shrink-0">
               {NAV_ITEMS.map((item) => {
                 const isActive = pathname === item.href;
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`text-[12px] xl:text-[13px] tracking-wide uppercase font-bold px-3 xl:px-3.5 py-2 rounded-lg transition-all duration-200 ${
+                    className={`whitespace-nowrap text-[11px] xl:text-[13px] tracking-wide uppercase font-bold px-2 xl:px-3 py-2 rounded-lg transition-all duration-200 shrink-0 ${
                       isActive
                         ? 'bg-[#FF3D00] text-white shadow-md shadow-[#FF3D00]/25'
                         : 'text-slate-700 hover:bg-[#FF3D00] hover:text-white'
                     }`}
                   >
-                    <span>{item.label}</span>
+                    {item.shortLabel ? (
+                      <>
+                        <span className="hidden xl:inline">{item.label}</span>
+                        <span className="xl:hidden">{item.shortLabel}</span>
+                      </>
+                    ) : (
+                      <span>{item.label}</span>
+                    )}
                   </Link>
                 );
               })}
             </nav>
 
             {/* CTA Button */}
-            <div className="hidden lg:flex items-center gap-4">
+            <div className="hidden lg:flex items-center shrink-0">
               <Link
                 href="/contact"
-                className="group relative inline-flex items-center gap-2 px-6 py-2.5 bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-md shadow-[#FF3D00]/25 hover:shadow-lg hover:shadow-[#FF3D00]/35 transition-all duration-200 transform hover:-translate-y-0.5"
+                className="group relative inline-flex items-center gap-1.5 xl:gap-2 px-3.5 xl:px-5 py-2 xl:py-2.5 bg-[#FF3D00] hover:bg-[#eb3800] text-white text-[11px] xl:text-xs font-bold uppercase tracking-wider rounded-lg shadow-md shadow-[#FF3D00]/25 hover:shadow-lg hover:shadow-[#FF3D00]/35 transition-all duration-200 whitespace-nowrap shrink-0"
               >
                 <span>Start Your Project</span>
-                <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                <ArrowUpRight className="w-3.5 h-3.5 xl:w-4 xl:h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
             </div>
 
