@@ -88,3 +88,12 @@ body {
 .group:hover .img-zoom {
   transform: scale(1.06);
 }
+
+/* Hide scrollbars on mobile horizontal pill & gallery strips */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

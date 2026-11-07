@@ -18,6 +18,15 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/product',
+        destination: '/products',
+        permanent: true,
+      },
+    ];
+  },
   async rewrites() {
     return [
       {

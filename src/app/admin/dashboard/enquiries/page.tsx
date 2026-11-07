@@ -7,7 +7,6 @@ import {
   CheckCircle2,
   AlertCircle,
   Search,
-  Filter,
   RefreshCw,
   Eye,
   Trash2,
@@ -23,8 +22,6 @@ import {
   Check,
   ChevronDown,
   ArrowUpDown,
-  ExternalLink,
-  MessageSquare,
 } from 'lucide-react';
 
 interface Inquiry {
@@ -145,14 +142,12 @@ export default function EnquiriesPage() {
   const filteredInquiries = useMemo(() => {
     let result = [...inquiries];
 
-    // Local Service Filter
     if (serviceFilter !== 'all') {
       result = result.filter((i) =>
         (i.service_interested || '').toLowerCase().includes(serviceFilter.toLowerCase())
       );
     }
 
-    // Sort
     result.sort((a, b) => {
       if (sortBy === 'newest') {
         return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
@@ -169,7 +164,7 @@ export default function EnquiriesPage() {
     return result;
   }, [inquiries, serviceFilter, sortBy]);
 
-  // Overall counts (independent of current filter)
+  // Overall counts
   const counts = useMemo(() => {
     return {
       all: inquiries.length,
@@ -237,31 +232,31 @@ export default function EnquiriesPage() {
     switch (status) {
       case 'new':
         return {
-          pill: 'bg-red-500/10 text-red-400 border-red-500/30',
+          pill: 'bg-red-50 text-red-700 border-red-200',
           dot: 'bg-red-500',
           label: 'New Lead',
         };
       case 'contacted':
         return {
-          pill: 'bg-blue-500/10 text-blue-400 border-blue-500/30',
-          dot: 'bg-blue-400',
+          pill: 'bg-blue-50 text-blue-700 border-blue-200',
+          dot: 'bg-blue-500',
           label: 'Contacted',
         };
       case 'in_progress':
         return {
-          pill: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
-          dot: 'bg-amber-400',
+          pill: 'bg-amber-50 text-amber-700 border-amber-200',
+          dot: 'bg-amber-500',
           label: 'In Progress',
         };
       case 'completed':
         return {
-          pill: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
-          dot: 'bg-emerald-400',
+          pill: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+          dot: 'bg-emerald-500',
           label: 'Completed',
         };
       default:
         return {
-          pill: 'bg-slate-800 text-slate-300 border-slate-700',
+          pill: 'bg-slate-100 text-slate-700 border-slate-200',
           dot: 'bg-slate-400',
           label: status,
         };
@@ -286,12 +281,12 @@ export default function EnquiriesPage() {
     <div className="space-y-6">
       {/* Toast Notification */}
       {toastMessage && (
-        <div className="fixed bottom-6 right-6 z-50 bg-slate-900 border border-[#FF3D00] text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 animate-in fade-in slide-in-from-bottom-3 duration-200 max-w-md">
+        <div className="fixed bottom-6 right-6 z-50 bg-white border border-[#FF3D00] text-slate-900 px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 animate-in fade-in slide-in-from-bottom-3 duration-200 max-w-md">
           <div className="w-2 h-2 rounded-full bg-[#FF3D00] animate-ping" />
-          <span className="text-xs font-medium">{toastMessage}</span>
+          <span className="text-xs font-semibold">{toastMessage}</span>
           <button
             onClick={() => setToastMessage(null)}
-            className="ml-auto text-slate-400 hover:text-white"
+            className="ml-auto text-slate-400 hover:text-slate-700"
           >
             <X className="w-4 h-4" />
           </button>
@@ -305,15 +300,15 @@ export default function EnquiriesPage() {
             <Sparkles className="w-3.5 h-3.5" />
             <span>DOER Client Lead Management</span>
           </div>
-          <h1 className="text-2xl lg:text-3xl font-extrabold tracking-tight text-white flex items-center gap-3">
+          <h1 className="text-2xl lg:text-3xl font-extrabold tracking-tight text-slate-900 flex items-center gap-3">
             <span>Website Enquiries</span>
             {counts.new > 0 && (
-              <span className="text-xs font-bold px-2.5 py-1 bg-[#FF3D00] text-white rounded-full shadow-md shadow-[#FF3D00]/30 animate-pulse">
+              <span className="text-xs font-bold px-2.5 py-1 bg-[#FF3D00] text-white rounded-full shadow-md shadow-[#FF3D00]/20 animate-pulse">
                 {counts.new} New
               </span>
             )}
           </h1>
-          <p className="text-sm text-slate-400 mt-1 max-w-2xl">
+          <p className="text-sm text-slate-500 mt-1 max-w-2xl">
             Review, track, and respond to commercial fit-out, residential, and custom fabrication enquiries submitted via the DOER website.
           </p>
         </div>
@@ -321,7 +316,7 @@ export default function EnquiriesPage() {
         <div className="flex flex-wrap items-center gap-2.5">
           <button
             onClick={() => fetchInquiries()}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-200 rounded-lg text-xs font-medium transition-colors"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 hover:border-slate-300 text-slate-700 rounded-lg text-xs font-semibold transition-colors shadow-2xs cursor-pointer"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-[#FF3D00]' : ''}`} />
             <span>Refresh</span>
@@ -329,7 +324,7 @@ export default function EnquiriesPage() {
 
           <button
             onClick={handleExportCSV}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF3D00] hover:bg-[#e63700] text-white rounded-lg text-xs font-bold shadow-md shadow-[#FF3D00]/20 transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF3D00] hover:bg-[#e63700] text-white rounded-lg text-xs font-bold shadow-md shadow-[#FF3D00]/20 transition-all cursor-pointer"
           >
             <Download className="w-3.5 h-3.5" />
             <span>Export CSV</span>
@@ -342,103 +337,103 @@ export default function EnquiriesPage() {
         {/* All Tab */}
         <button
           onClick={() => setStatusFilter('all')}
-          className={`p-3.5 rounded-xl border text-left transition-all ${
+          className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
             statusFilter === 'all'
-              ? 'bg-slate-900 border-[#FF3D00] shadow-md shadow-[#FF3D00]/10'
-              : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+              ? 'bg-white border-[#FF3D00] shadow-md shadow-[#FF3D00]/10'
+              : 'bg-white border-slate-200 hover:border-slate-300 shadow-2xs'
           }`}
         >
-          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-400">
+          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
             <span>All Leads</span>
             <Inbox className="w-4 h-4 text-slate-400" />
           </div>
-          <div className="mt-2 text-2xl font-extrabold text-white">{counts.all}</div>
+          <div className="mt-2 text-2xl font-extrabold text-slate-900">{counts.all}</div>
         </button>
 
         {/* New Leads */}
         <button
           onClick={() => setStatusFilter('new')}
-          className={`p-3.5 rounded-xl border text-left transition-all ${
+          className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
             statusFilter === 'new'
-              ? 'bg-slate-900 border-red-500 shadow-md shadow-red-500/10'
-              : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+              ? 'bg-white border-red-500 shadow-md shadow-red-500/10'
+              : 'bg-white border-slate-200 hover:border-slate-300 shadow-2xs'
           }`}
         >
-          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-red-400">
+          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-red-600">
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
               New Leads
             </span>
-            <AlertCircle className="w-4 h-4 text-red-400" />
+            <AlertCircle className="w-4 h-4 text-red-500" />
           </div>
-          <div className="mt-2 text-2xl font-extrabold text-red-400">{counts.new}</div>
+          <div className="mt-2 text-2xl font-extrabold text-red-600">{counts.new}</div>
         </button>
 
         {/* Contacted */}
         <button
           onClick={() => setStatusFilter('contacted')}
-          className={`p-3.5 rounded-xl border text-left transition-all ${
+          className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
             statusFilter === 'contacted'
-              ? 'bg-slate-900 border-blue-500 shadow-md shadow-blue-500/10'
-              : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+              ? 'bg-white border-blue-500 shadow-md shadow-blue-500/10'
+              : 'bg-white border-slate-200 hover:border-slate-300 shadow-2xs'
           }`}
         >
-          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-blue-400">
+          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-blue-600">
             <span>Contacted</span>
-            <Phone className="w-4 h-4 text-blue-400" />
+            <Phone className="w-4 h-4 text-blue-500" />
           </div>
-          <div className="mt-2 text-2xl font-extrabold text-blue-400">{counts.contacted}</div>
+          <div className="mt-2 text-2xl font-extrabold text-blue-600">{counts.contacted}</div>
         </button>
 
         {/* In Progress */}
         <button
           onClick={() => setStatusFilter('in_progress')}
-          className={`p-3.5 rounded-xl border text-left transition-all ${
+          className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
             statusFilter === 'in_progress'
-              ? 'bg-slate-900 border-amber-500 shadow-md shadow-amber-500/10'
-              : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+              ? 'bg-white border-amber-500 shadow-md shadow-amber-500/10'
+              : 'bg-white border-slate-200 hover:border-slate-300 shadow-2xs'
           }`}
         >
-          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-amber-400">
+          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-amber-600">
             <span>In Progress</span>
-            <Clock className="w-4 h-4 text-amber-400" />
+            <Clock className="w-4 h-4 text-amber-500" />
           </div>
-          <div className="mt-2 text-2xl font-extrabold text-amber-400">{counts.in_progress}</div>
+          <div className="mt-2 text-2xl font-extrabold text-amber-600">{counts.in_progress}</div>
         </button>
 
         {/* Completed */}
         <button
           onClick={() => setStatusFilter('completed')}
-          className={`col-span-2 sm:col-span-1 p-3.5 rounded-xl border text-left transition-all ${
+          className={`col-span-2 sm:col-span-1 p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
             statusFilter === 'completed'
-              ? 'bg-slate-900 border-emerald-500 shadow-md shadow-emerald-500/10'
-              : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+              ? 'bg-white border-emerald-500 shadow-md shadow-emerald-500/10'
+              : 'bg-white border-slate-200 hover:border-slate-300 shadow-2xs'
           }`}
         >
-          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-emerald-400">
+          <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-emerald-600">
             <span>Completed</span>
-            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <CheckCircle2 className="w-4 h-4 text-emerald-500" />
           </div>
-          <div className="mt-2 text-2xl font-extrabold text-emerald-400">{counts.completed}</div>
+          <div className="mt-2 text-2xl font-extrabold text-emerald-600">{counts.completed}</div>
         </button>
       </div>
 
       {/* Control Filter Bar */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-3 shadow-md">
+      <div className="bg-white border border-slate-200 rounded-2xl p-4 flex flex-col md:flex-row items-center justify-between gap-3 shadow-xs">
         {/* Search */}
         <div className="relative w-full md:w-80">
-          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
+          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search name, company, email, phone..."
-            className="w-full pl-9 pr-8 py-2 bg-slate-950 border border-slate-800 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-[#FF3D00] focus:border-[#FF3D00]"
+            className="w-full pl-9 pr-8 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-1 focus:ring-[#FF3D00] focus:border-[#FF3D00]"
           />
           {searchTerm && (
             <button
               onClick={() => setSearchTerm('')}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700"
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -448,12 +443,12 @@ export default function EnquiriesPage() {
         {/* Filter Dropdowns */}
         <div className="flex flex-wrap items-center gap-2.5 w-full md:w-auto">
           {/* Service Filter */}
-          <div className="flex items-center gap-1.5 bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1 text-xs">
-            <span className="text-slate-500 text-[11px] font-semibold uppercase">Service:</span>
+          <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs">
+            <span className="text-slate-500 text-[11px] font-bold uppercase">Service:</span>
             <select
               value={serviceFilter}
               onChange={(e) => setServiceFilter(e.target.value)}
-              className="bg-transparent text-slate-200 focus:outline-none font-medium text-xs cursor-pointer"
+              className="bg-transparent text-slate-800 focus:outline-none font-semibold text-xs cursor-pointer"
             >
               <option value="all">All Services</option>
               {uniqueServices.map((svc) => (
@@ -465,12 +460,12 @@ export default function EnquiriesPage() {
           </div>
 
           {/* Sort By */}
-          <div className="flex items-center gap-1.5 bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1 text-xs">
+          <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 text-xs">
             <ArrowUpDown className="w-3 h-3 text-slate-500" />
             <select
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value as any)}
-              className="bg-transparent text-slate-200 focus:outline-none font-medium text-xs cursor-pointer"
+              className="bg-transparent text-slate-800 focus:outline-none font-semibold text-xs cursor-pointer"
             >
               <option value="newest">Newest First</option>
               <option value="oldest">Oldest First</option>
@@ -478,26 +473,25 @@ export default function EnquiriesPage() {
             </select>
           </div>
 
-          <span className="text-xs text-slate-400 ml-auto md:ml-2">
-            Showing <strong className="text-white">{filteredInquiries.length}</strong> inquiries
+          <span className="text-xs text-slate-500 ml-auto md:ml-2">
+            Showing <strong className="text-slate-900">{filteredInquiries.length}</strong> inquiries
           </span>
         </div>
       </div>
 
       {/* Main Content: Desktop Table + Mobile Cards */}
-      <div className="bg-slate-900 border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
-        {/* Loading state */}
+      <div className="bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden">
         {loading && inquiries.length === 0 ? (
-          <div className="py-20 text-center text-slate-400">
+          <div className="py-20 text-center text-slate-500">
             <div className="inline-flex items-center gap-3">
               <div className="w-5 h-5 border-2 border-[#FF3D00] border-t-transparent rounded-full animate-spin" />
               <span className="text-sm font-medium">Fetching enquiries from MySQL...</span>
             </div>
           </div>
         ) : filteredInquiries.length === 0 ? (
-          <div className="py-20 text-center text-slate-400">
-            <Inbox className="w-10 h-10 mx-auto mb-3 text-slate-600" />
-            <h3 className="text-base font-semibold text-white">No Enquiries Found</h3>
+          <div className="py-20 text-center text-slate-500">
+            <Inbox className="w-10 h-10 mx-auto mb-3 text-slate-400" />
+            <h3 className="text-base font-bold text-slate-800">No Enquiries Found</h3>
             <p className="text-xs text-slate-500 mt-1 max-w-sm mx-auto">
               {searchTerm || statusFilter !== 'all' || serviceFilter !== 'all'
                 ? 'No inquiries match your current filters. Try clearing the search or status filter.'
@@ -510,7 +504,7 @@ export default function EnquiriesPage() {
                   setStatusFilter('all');
                   setServiceFilter('all');
                 }}
-                className="mt-4 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white rounded-lg transition-colors"
+                className="mt-4 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-xs font-semibold text-slate-800 rounded-lg transition-colors"
               >
                 Clear All Filters
               </button>
@@ -518,11 +512,11 @@ export default function EnquiriesPage() {
           </div>
         ) : (
           <>
-            {/* Desktop Table View (Hidden on mobile) */}
+            {/* Desktop Table View */}
             <div className="hidden lg:block overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-slate-950/70 border-b border-slate-800 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  <tr className="bg-slate-50 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
                     <th className="py-4 px-5">Lead / Client</th>
                     <th className="py-4 px-5">Contact Details</th>
                     <th className="py-4 px-5">Service & Scope</th>
@@ -531,7 +525,7 @@ export default function EnquiriesPage() {
                     <th className="py-4 px-5 text-right">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/60 text-sm">
+                <tbody className="divide-y divide-slate-200 text-sm">
                   {filteredInquiries.map((inquiry) => {
                     const badge = getStatusBadge(inquiry.status);
                     const initials = inquiry.full_name
@@ -546,31 +540,31 @@ export default function EnquiriesPage() {
                     return (
                       <tr
                         key={inquiry.id}
-                        className="hover:bg-slate-800/40 transition-colors group"
+                        className="hover:bg-slate-50 transition-colors group"
                       >
                         {/* Client Info */}
                         <td className="py-4 px-5">
                           <div className="flex items-start gap-3">
-                            <div className="w-9 h-9 rounded-full bg-slate-800 border border-slate-700 text-slate-300 font-bold text-xs flex items-center justify-center shrink-0">
+                            <div className="w-9 h-9 rounded-full bg-slate-100 border border-slate-200 text-slate-700 font-bold text-xs flex items-center justify-center shrink-0">
                               {initials}
                             </div>
                             <div>
-                              <div className="font-semibold text-white text-sm flex items-center gap-1.5">
+                              <div className="font-bold text-slate-900 text-sm flex items-center gap-1.5">
                                 <span>{inquiry.full_name}</span>
                                 {inquiry.status === 'new' && (
                                   <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-ping" />
                                 )}
                               </div>
                               {inquiry.company_name ? (
-                                <div className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
-                                  <Building2 className="w-3 h-3 text-slate-500" />
+                                <div className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
+                                  <Building2 className="w-3 h-3 text-slate-400" />
                                   <span>{inquiry.company_name}</span>
                                 </div>
                               ) : (
-                                <span className="text-[11px] text-slate-500 italic">Individual client</span>
+                                <span className="text-[11px] text-slate-400 italic">Individual client</span>
                               )}
                               {inquiry.project_location && (
-                                <div className="text-[11px] text-slate-400 flex items-center gap-1 mt-0.5">
+                                <div className="text-[11px] text-slate-500 flex items-center gap-1 mt-0.5">
                                   <MapPin className="w-3 h-3 text-[#FF3D00]" />
                                   <span>{inquiry.project_location}</span>
                                 </div>
@@ -581,8 +575,8 @@ export default function EnquiriesPage() {
 
                         {/* Contact Info */}
                         <td className="py-4 px-5 text-xs space-y-1.5">
-                          <div className="flex items-center gap-2 text-slate-300">
-                            <Mail className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                          <div className="flex items-center gap-2 text-slate-600">
+                            <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                             <a
                               href={`mailto:${inquiry.email}`}
                               className="hover:text-[#FF3D00] font-medium transition-colors truncate max-w-[180px]"
@@ -592,32 +586,32 @@ export default function EnquiriesPage() {
                             </a>
                             <button
                               onClick={() => copyToClipboard(inquiry.email, `email-${inquiry.id}`)}
-                              className="text-slate-500 hover:text-white"
+                              className="text-slate-400 hover:text-slate-700"
                               title="Copy email"
                             >
                               {copiedKey === `email-${inquiry.id}` ? (
-                                <Check className="w-3 h-3 text-emerald-400" />
+                                <Check className="w-3 h-3 text-emerald-600" />
                               ) : (
                                 <Copy className="w-3 h-3" />
                               )}
                             </button>
                           </div>
 
-                          <div className="flex items-center gap-2 text-slate-400">
-                            <Phone className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                          <div className="flex items-center gap-2 text-slate-500">
+                            <Phone className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                             <a
                               href={`tel:${inquiry.phone}`}
-                              className="hover:text-white font-medium transition-colors"
+                              className="hover:text-slate-900 font-medium transition-colors"
                             >
                               {inquiry.phone}
                             </a>
                             <button
                               onClick={() => copyToClipboard(inquiry.phone, `phone-${inquiry.id}`)}
-                              className="text-slate-500 hover:text-white"
+                              className="text-slate-400 hover:text-slate-700"
                               title="Copy phone"
                             >
                               {copiedKey === `phone-${inquiry.id}` ? (
-                                <Check className="w-3 h-3 text-emerald-400" />
+                                <Check className="w-3 h-3 text-emerald-600" />
                               ) : (
                                 <Copy className="w-3 h-3" />
                               )}
@@ -627,10 +621,10 @@ export default function EnquiriesPage() {
 
                         {/* Service & Scope */}
                         <td className="py-4 px-5 max-w-xs">
-                          <div className="inline-block px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-800 text-slate-200 border border-slate-700/80 mb-1">
+                          <div className="inline-block px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 text-slate-800 border border-slate-200 mb-1">
                             {inquiry.service_interested}
                           </div>
-                          <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                          <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
                             {inquiry.project_details}
                           </p>
                         </td>
@@ -642,23 +636,23 @@ export default function EnquiriesPage() {
                               disabled={updatingId === inquiry.id}
                               value={inquiry.status}
                               onChange={(e) => handleStatusChange(inquiry.id, e.target.value)}
-                              className={`text-xs font-bold pl-2.5 pr-7 py-1 rounded-full border bg-slate-950 focus:outline-none cursor-pointer appearance-none ${badge.pill}`}
+                              className={`text-xs font-bold pl-2.5 pr-7 py-1 rounded-full border focus:outline-none cursor-pointer appearance-none ${badge.pill}`}
                             >
                               <option value="new">● New Lead</option>
                               <option value="contacted">● Contacted</option>
                               <option value="in_progress">● In Progress</option>
                               <option value="completed">● Completed</option>
                             </select>
-                            <ChevronDown className="w-3 h-3 text-slate-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
+                            <ChevronDown className="w-3 h-3 text-slate-500 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none" />
                           </div>
                         </td>
 
                         {/* Date */}
-                        <td className="py-4 px-5 text-xs text-slate-400 whitespace-nowrap">
-                          <div className="text-white font-medium">
+                        <td className="py-4 px-5 text-xs text-slate-500 whitespace-nowrap">
+                          <div className="text-slate-900 font-semibold">
                             {formatRelativeTime(inquiry.created_at)}
                           </div>
-                          <div className="text-[11px] text-slate-500">
+                          <div className="text-[11px] text-slate-400">
                             {new Date(inquiry.created_at).toLocaleDateString(undefined, {
                               month: 'short',
                               day: 'numeric',
@@ -672,28 +666,28 @@ export default function EnquiriesPage() {
                           <div className="flex items-center justify-end gap-1">
                             <button
                               onClick={() => setSelectedInquiry(inquiry)}
-                              className="p-2 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
+                              className="p-2 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
                               title="View Full Details"
                             >
                               <Eye className="w-4 h-4" />
                             </button>
                             <a
                               href={`mailto:${inquiry.email}?subject=Regarding Your Inquiry with DOER`}
-                              className="p-2 text-slate-400 hover:text-[#FF3D00] hover:bg-[#FF3D00]/10 rounded-lg transition-colors"
+                              className="p-2 text-slate-500 hover:text-[#FF3D00] hover:bg-[#FF3D00]/10 rounded-lg transition-colors"
                               title="Send Email"
                             >
                               <Mail className="w-4 h-4" />
                             </a>
                             <a
                               href={`tel:${inquiry.phone}`}
-                              className="p-2 text-slate-400 hover:text-emerald-400 hover:bg-emerald-500/10 rounded-lg transition-colors"
+                              className="p-2 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-lg transition-colors"
                               title="Call Client"
                             >
                               <Phone className="w-4 h-4" />
                             </a>
                             <button
                               onClick={() => handleDelete(inquiry.id)}
-                              className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-950/40 rounded-lg transition-colors"
+                              className="p-2 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
                               title="Delete Record"
                             >
                               <Trash2 className="w-4 h-4" />
@@ -707,24 +701,24 @@ export default function EnquiriesPage() {
               </table>
             </div>
 
-            {/* Mobile Cards View (Displayed on screens < lg) */}
-            <div className="lg:hidden divide-y divide-slate-800">
+            {/* Mobile Cards View */}
+            <div className="lg:hidden divide-y divide-slate-200">
               {filteredInquiries.map((inquiry) => {
                 const badge = getStatusBadge(inquiry.status);
 
                 return (
-                  <div key={inquiry.id} className="p-4 space-y-3 hover:bg-slate-800/30 transition-colors">
+                  <div key={inquiry.id} className="p-4 space-y-3 hover:bg-slate-50 transition-colors">
                     <div className="flex items-start justify-between gap-2">
                       <div>
-                        <div className="font-bold text-white text-base flex items-center gap-2">
+                        <div className="font-bold text-slate-900 text-base flex items-center gap-2">
                           <span>{inquiry.full_name}</span>
                           {inquiry.status === 'new' && (
                             <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse" />
                           )}
                         </div>
                         {inquiry.company_name && (
-                          <div className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
-                            <Building2 className="w-3.5 h-3.5 text-slate-500" />
+                          <div className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
+                            <Building2 className="w-3.5 h-3.5 text-slate-400" />
                             <span>{inquiry.company_name}</span>
                           </div>
                         )}
@@ -734,48 +728,48 @@ export default function EnquiriesPage() {
                       </span>
                     </div>
 
-                    <div className="text-xs space-y-1 bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/60">
-                      <div className="flex items-center gap-2 text-slate-300">
+                    <div className="text-xs space-y-1 bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                      <div className="flex items-center gap-2 text-slate-700">
                         <Mail className="w-3.5 h-3.5 text-[#FF3D00]" />
-                        <a href={`mailto:${inquiry.email}`} className="hover:text-white truncate">
+                        <a href={`mailto:${inquiry.email}`} className="hover:text-slate-900 truncate">
                           {inquiry.email}
                         </a>
                       </div>
-                      <div className="flex items-center gap-2 text-slate-400">
-                        <Phone className="w-3.5 h-3.5 text-slate-500" />
-                        <a href={`tel:${inquiry.phone}`} className="hover:text-white">
+                      <div className="flex items-center gap-2 text-slate-600">
+                        <Phone className="w-3.5 h-3.5 text-slate-400" />
+                        <a href={`tel:${inquiry.phone}`} className="hover:text-slate-900">
                           {inquiry.phone}
                         </a>
                       </div>
                       {inquiry.project_location && (
-                        <div className="flex items-center gap-2 text-slate-400">
-                          <MapPin className="w-3.5 h-3.5 text-slate-500" />
+                        <div className="flex items-center gap-2 text-slate-500">
+                          <MapPin className="w-3.5 h-3.5 text-slate-400" />
                           <span>{inquiry.project_location}</span>
                         </div>
                       )}
                     </div>
 
                     <div>
-                      <span className="inline-block px-2 py-0.5 bg-slate-800 text-slate-200 text-[11px] font-semibold rounded mb-1 border border-slate-700/60">
+                      <span className="inline-block px-2 py-0.5 bg-slate-100 text-slate-800 text-[11px] font-semibold rounded mb-1 border border-slate-200">
                         {inquiry.service_interested}
                       </span>
-                      <p className="text-xs text-slate-300 line-clamp-2">{inquiry.project_details}</p>
+                      <p className="text-xs text-slate-600 line-clamp-2">{inquiry.project_details}</p>
                     </div>
 
-                    <div className="pt-2 flex items-center justify-between text-xs border-t border-slate-800/60">
+                    <div className="pt-2 flex items-center justify-between text-xs border-t border-slate-100">
                       <span className="text-slate-500 text-[11px]">
                         {formatRelativeTime(inquiry.created_at)}
                       </span>
                       <div className="flex items-center gap-2">
                         <button
                           onClick={() => setSelectedInquiry(inquiry)}
-                          className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-white rounded-lg text-xs font-semibold"
+                          className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-semibold"
                         >
                           View Details
                         </button>
                         <button
                           onClick={() => handleDelete(inquiry.id)}
-                          className="p-1.5 text-slate-400 hover:text-red-400"
+                          className="p-1.5 text-slate-400 hover:text-red-600"
                         >
                           <Trash2 className="w-4 h-4" />
                         </button>
@@ -791,10 +785,10 @@ export default function EnquiriesPage() {
 
       {/* Comprehensive Inquiry Detail Modal */}
       {selectedInquiry && (
-        <div className="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-slate-900 border border-slate-800 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-6 relative animate-in zoom-in-95 duration-200 my-8">
+        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="bg-white border border-slate-200 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-6 relative animate-in zoom-in-95 duration-200 my-8">
             {/* Modal Header */}
-            <div className="flex items-start justify-between pb-4 border-b border-slate-800">
+            <div className="flex items-start justify-between pb-4 border-b border-slate-200">
               <div>
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-bold uppercase tracking-wider text-[#FF3D00]">
@@ -804,26 +798,26 @@ export default function EnquiriesPage() {
                     {getStatusBadge(selectedInquiry.status).label}
                   </span>
                 </div>
-                <h3 className="text-xl font-bold text-white mt-1">
+                <h3 className="text-xl font-bold text-slate-900 mt-1">
                   {selectedInquiry.full_name}
                 </h3>
                 {selectedInquiry.company_name && (
-                  <p className="text-xs text-slate-400 flex items-center gap-1.5 mt-1">
-                    <Building2 className="w-3.5 h-3.5 text-slate-500" />
+                  <p className="text-xs text-slate-500 flex items-center gap-1.5 mt-1">
+                    <Building2 className="w-3.5 h-3.5 text-slate-400" />
                     <span>{selectedInquiry.company_name}</span>
                   </p>
                 )}
               </div>
               <button
                 onClick={() => setSelectedInquiry(null)}
-                className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+                className="p-2 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-100 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Quick Actions Bar */}
-            <div className="flex flex-wrap items-center gap-2.5 p-3 bg-slate-950 rounded-xl border border-slate-800/80">
+            <div className="flex flex-wrap items-center gap-2.5 p-3 bg-slate-50 rounded-xl border border-slate-200">
               <a
                 href={`tel:${selectedInquiry.phone}`}
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold transition-colors"
@@ -847,7 +841,7 @@ export default function EnquiriesPage() {
                     'full-lead'
                   )
                 }
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-lg text-xs font-medium transition-colors ml-auto"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition-colors ml-auto cursor-pointer"
               >
                 <Copy className="w-3.5 h-3.5" />
                 <span>Copy Summary</span>
@@ -856,24 +850,24 @@ export default function EnquiriesPage() {
 
             {/* Details Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
-              <div className="p-3 bg-slate-950 rounded-xl border border-slate-800/80">
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
                 <span className="text-slate-500 uppercase tracking-wider font-semibold block mb-1">
                   Email Address
                 </span>
                 <div className="flex items-center justify-between">
                   <a
                     href={`mailto:${selectedInquiry.email}`}
-                    className="text-white hover:text-[#FF3D00] font-medium flex items-center gap-1.5 truncate"
+                    className="text-slate-900 hover:text-[#FF3D00] font-semibold flex items-center gap-1.5 truncate"
                   >
                     <Mail className="w-3.5 h-3.5 text-[#FF3D00] shrink-0" />
                     <span>{selectedInquiry.email}</span>
                   </a>
                   <button
                     onClick={() => copyToClipboard(selectedInquiry.email, 'modal-email')}
-                    className="text-slate-500 hover:text-white ml-2"
+                    className="text-slate-400 hover:text-slate-700 ml-2"
                   >
                     {copiedKey === 'modal-email' ? (
-                      <Check className="w-3 h-3 text-emerald-400" />
+                      <Check className="w-3 h-3 text-emerald-600" />
                     ) : (
                       <Copy className="w-3 h-3" />
                     )}
@@ -881,24 +875,24 @@ export default function EnquiriesPage() {
                 </div>
               </div>
 
-              <div className="p-3 bg-slate-950 rounded-xl border border-slate-800/80">
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
                 <span className="text-slate-500 uppercase tracking-wider font-semibold block mb-1">
                   Phone Number
                 </span>
                 <div className="flex items-center justify-between">
                   <a
                     href={`tel:${selectedInquiry.phone}`}
-                    className="text-white hover:text-[#FF3D00] font-medium flex items-center gap-1.5"
+                    className="text-slate-900 hover:text-[#FF3D00] font-semibold flex items-center gap-1.5"
                   >
                     <Phone className="w-3.5 h-3.5 text-[#FF3D00] shrink-0" />
                     <span>{selectedInquiry.phone}</span>
                   </a>
                   <button
                     onClick={() => copyToClipboard(selectedInquiry.phone, 'modal-phone')}
-                    className="text-slate-500 hover:text-white ml-2"
+                    className="text-slate-400 hover:text-slate-700 ml-2"
                   >
                     {copiedKey === 'modal-phone' ? (
-                      <Check className="w-3 h-3 text-emerald-400" />
+                      <Check className="w-3 h-3 text-emerald-600" />
                     ) : (
                       <Copy className="w-3 h-3" />
                     )}
@@ -906,20 +900,20 @@ export default function EnquiriesPage() {
                 </div>
               </div>
 
-              <div className="p-3 bg-slate-950 rounded-xl border border-slate-800/80">
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
                 <span className="text-slate-500 uppercase tracking-wider font-semibold block mb-1">
                   Service Interested In
                 </span>
-                <span className="text-white font-medium">
+                <span className="text-slate-900 font-semibold">
                   {selectedInquiry.service_interested}
                 </span>
               </div>
 
-              <div className="p-3 bg-slate-950 rounded-xl border border-slate-800/80">
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
                 <span className="text-slate-500 uppercase tracking-wider font-semibold block mb-1">
                   Project Location
                 </span>
-                <span className="text-white font-medium flex items-center gap-1.5">
+                <span className="text-slate-900 font-semibold flex items-center gap-1.5">
                   <MapPin className="w-3.5 h-3.5 text-slate-400" />
                   <span>{selectedInquiry.project_location || 'Not specified'}</span>
                 </span>
@@ -928,27 +922,27 @@ export default function EnquiriesPage() {
 
             {/* Project Details */}
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-2">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-2">
                 Project Requirements & Description:
               </span>
-              <div className="p-4 bg-slate-950 rounded-xl border border-slate-800 text-sm text-slate-200 leading-relaxed whitespace-pre-wrap max-h-60 overflow-y-auto select-text">
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm text-slate-800 leading-relaxed whitespace-pre-wrap max-h-60 overflow-y-auto select-text">
                 {selectedInquiry.project_details}
               </div>
             </div>
 
             {/* Modal Footer */}
-            <div className="pt-4 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-              <div className="flex items-center gap-2 text-slate-400">
-                <Calendar className="w-3.5 h-3.5 text-slate-500" />
+            <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2 text-slate-500">
+                <Calendar className="w-3.5 h-3.5 text-slate-400" />
                 <span>Submitted: {new Date(selectedInquiry.created_at).toLocaleString()}</span>
               </div>
 
               <div className="flex items-center gap-2.5 w-full sm:w-auto">
-                <span className="text-slate-400 text-xs">Update Status:</span>
+                <span className="text-slate-500 text-xs font-medium">Update Status:</span>
                 <select
                   value={selectedInquiry.status}
                   onChange={(e) => handleStatusChange(selectedInquiry.id, e.target.value)}
-                  className="bg-slate-950 border border-slate-800 rounded-lg text-xs font-semibold py-2 px-3 text-white focus:outline-none cursor-pointer"
+                  className="bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold py-2 px-3 text-slate-800 focus:outline-none cursor-pointer"
                 >
                   <option value="new">● New</option>
                   <option value="contacted">● Contacted</option>
@@ -958,7 +952,7 @@ export default function EnquiriesPage() {
 
                 <button
                   onClick={() => handleDelete(selectedInquiry.id)}
-                  className="p-2 text-slate-400 hover:text-red-400 hover:bg-red-950/40 rounded-lg transition-colors"
+                  className="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                   title="Delete Inquiry"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -971,4 +965,3 @@ export default function EnquiriesPage() {
     </div>
   );
 }
-

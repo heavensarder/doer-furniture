@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { constructMetadata } from '@/lib/metadata';
 
 export const metadata: Metadata = constructMetadata({
-  title: 'Products & Bespoke Furniture – DOER Manufacturing & Consoles',
+  title: 'Our Products – DOER',
   description:
-    'Explore DOER bespoke commercial furniture, high-end console tables, smart modular workstations, conference boardroom tables, and precision joinery crafted in our Khilkhet facility.',
+    'Explore and order from the official DOER product catalog.',
   path: '/products',
 });
 
@@ -15,4 +15,3 @@ export default function ProductsLayout({
 }) {
   return <>{children}</>;
 }
-
