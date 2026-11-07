@@ -98,7 +98,7 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative h-screen min-h-[100vh] min-h-[100dvh] flex items-center text-white overflow-hidden px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 bg-slate-950 select-none"
+      className="relative min-h-[100svh] min-h-[100dvh] flex items-center text-white overflow-hidden px-3.5 sm:px-6 lg:px-8 pt-20 pb-8 sm:pt-24 sm:pb-12 lg:py-0 bg-slate-950 select-none"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       aria-roledescription="carousel"
@@ -115,13 +115,14 @@ export default function HeroSlider() {
         }
       `}</style>
 
-      {/* 01. FULL-BLEED BACKGROUND SLIDER WITH SMOOTH CROSSFADE (NO OVERLAY) */}
+      {/* 01. FULL-BLEED BACKGROUND SLIDER WITH SMOOTH CROSSFADE */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         {SLIDES.map((slide, idx) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === activeSlide ? 'opacity-100 z-0' : 'opacity-0 -z-10'
-              }`}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              idx === activeSlide ? 'opacity-100 z-0' : 'opacity-0 -z-10'
+            }`}
           >
             <Image
               src={slide.image}
@@ -132,51 +133,53 @@ export default function HeroSlider() {
             />
           </div>
         ))}
+        {/* Subtle cinematic gradient overlay for mobile clarity and contrast */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/70 sm:via-transparent sm:to-black/30 pointer-events-none" />
       </div>
 
       {/* 02. MAIN CONTENT STACK WITH TRANSLUCENT OVERLAY BOX BEHIND TEXT */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full py-8 sm:py-10 md:py-12 flex flex-col items-start justify-center">
-        <div className="max-w-xl lg:max-w-2xl text-left space-y-4 sm:space-y-6 p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl bg-slate-950/80 sm:bg-slate-950/75 backdrop-blur-md border border-white/15 shadow-2xl">
+      <div className="relative z-10 max-w-7xl mx-auto w-full py-4 sm:py-8 md:py-12 flex flex-col items-start justify-center">
+        <div className="w-full max-w-xl lg:max-w-2xl text-left space-y-3.5 sm:space-y-5 md:space-y-6 p-4 sm:p-7 md:p-10 rounded-2xl sm:rounded-3xl bg-slate-950/85 sm:bg-slate-950/75 backdrop-blur-xl border border-white/15 shadow-2xl">
           {/* Studio Category Badge */}
-          <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-slate-900/90 border border-white/20 backdrop-blur-md text-[10px] sm:text-xs font-semibold tracking-wider uppercase text-white shadow-sm transition-all duration-500">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-slate-900/90 border border-white/20 backdrop-blur-md text-[10px] sm:text-xs font-semibold tracking-wider uppercase text-white shadow-sm transition-all duration-500 max-w-full">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF3D00] animate-pulse shrink-0" />
-            <span>{current.tag}</span>
+            <span className="truncate">{current.tag}</span>
           </div>
 
-          {/* Main Headline with Smooth Text Transition */}
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight drop-shadow-md min-h-[2.4em] sm:min-h-[2.3em] flex flex-col justify-center transition-all duration-500">
-            <span>{current.titleLight}</span>
-            <span className="text-[#FF3D00] block mt-1">
+          {/* Main Headline */}
+          <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight drop-shadow-md transition-all duration-500">
+            <span className="block">{current.titleLight}</span>
+            <span className="text-[#FF3D00] block mt-0.5 sm:mt-1">
               {current.titleHighlight}
             </span>
           </h1>
 
           {/* Subheading */}
-          <p className="text-xs sm:text-sm md:text-base text-slate-200/95 leading-relaxed font-normal drop-shadow-sm max-w-xl min-h-[3.6em] transition-all duration-500">
+          <p className="text-xs sm:text-sm md:text-base text-slate-200/90 leading-relaxed font-normal drop-shadow-sm max-w-xl transition-all duration-500 line-clamp-4 sm:line-clamp-none">
             {current.description}
           </p>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-2.5 sm:gap-3.5 pt-1 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-2 sm:gap-3.5 pt-1 w-full sm:w-auto">
             <Link
               href={current.primaryBtnHref}
-              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-[#FF3D00] hover:bg-[#eb3800] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-[#FF3D00]/25 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-[#FF3D00]/25 transition-all text-center"
             >
               <span>{current.primaryBtnText}</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 shrink-0" />
             </Link>
 
             <Link
               href={current.secondaryBtnHref}
-              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 bg-white/10 hover:bg-white/20 text-white font-bold text-xs uppercase tracking-wider rounded-xl border border-white/25 backdrop-blur-md transition-all duration-300 hover:border-white/40"
+              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-white/10 hover:bg-white/20 active:scale-[0.98] text-white font-bold text-xs uppercase tracking-wider rounded-xl border border-white/20 backdrop-blur-md transition-all hover:border-white/40 text-center"
             >
               <span>{current.secondaryBtnText}</span>
-              <ArrowUpRight className="w-4 h-4 text-[#FF3D00]" />
+              <ArrowUpRight className="w-4 h-4 text-[#FF3D00] shrink-0" />
             </Link>
           </div>
 
-          {/* 03. SIMPLE SLIDER INDICATOR LINES */}
-          <div className="pt-3 sm:pt-4 flex items-center gap-3 border-t border-white/10">
+          {/* 03. SLIDER INDICATORS & TOUCH-FRIENDLY CONTROLS */}
+          <div className="pt-2.5 sm:pt-4 flex items-center justify-between gap-3 border-t border-white/10">
             <div className="flex items-center gap-2">
               {SLIDES.map((slide, idx) => {
                 const isActive = idx === activeSlide;
@@ -188,10 +191,11 @@ export default function HeroSlider() {
                     aria-label={`Go to slide ${idx + 1}`}
                   >
                     <div
-                      className={`h-1 sm:h-1.5 rounded-full overflow-hidden transition-all duration-300 relative ${isActive
-                          ? 'w-16 sm:w-24 bg-white/25'
-                          : 'w-6 sm:w-8 bg-white/35 hover:bg-white/60'
-                        }`}
+                      className={`h-1.5 rounded-full overflow-hidden transition-all duration-300 relative ${
+                        isActive
+                          ? 'w-12 sm:w-20 md:w-24 bg-white/25'
+                          : 'w-5 sm:w-7 md:w-8 bg-white/35 hover:bg-white/60'
+                      }`}
                     >
                       {isActive && (
                         <div
@@ -208,11 +212,33 @@ export default function HeroSlider() {
               })}
             </div>
 
-            {/* Micro Slide Indicator */}
-            <div className="text-[11px] font-bold tracking-wider text-slate-300/80 pl-1 select-none flex items-center gap-1.5">
-              <span className="text-[#FF3D00] font-black">{`0${activeSlide + 1}`}</span>
-              <span className="text-white/30">/</span>
-              <span>{`0${SLIDES.length}`}</span>
+            {/* Micro Controls & Numbering */}
+            <div className="flex items-center gap-2">
+              <div className="text-[11px] font-bold tracking-wider text-slate-300/80 select-none flex items-center gap-1">
+                <span className="text-[#FF3D00] font-black">{`0${activeSlide + 1}`}</span>
+                <span className="text-white/30">/</span>
+                <span>{`0${SLIDES.length}`}</span>
+              </div>
+
+              {/* Mobile Prev / Next Arrows */}
+              <div className="flex items-center gap-1 sm:hidden ml-1">
+                <button
+                  type="button"
+                  onClick={prevSlide}
+                  className="w-7 h-7 rounded-lg bg-white/10 active:scale-95 text-white flex items-center justify-center border border-white/15"
+                  aria-label="Previous slide"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  type="button"
+                  onClick={nextSlide}
+                  className="w-7 h-7 rounded-lg bg-white/10 active:scale-95 text-white flex items-center justify-center border border-white/15"
+                  aria-label="Next slide"
+                >
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
