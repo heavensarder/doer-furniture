@@ -9,7 +9,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Phone,
-  MessageCircle,
   Send,
   ShoppingBag,
   Share2,
@@ -587,7 +586,13 @@ export default function SingleProductPage() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl bg-[#66CC66] hover:bg-[#55b855] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider transition-all"
                     >
-                      <MessageCircle className="w-4 h-4 shrink-0" />
+                      <Image
+                        src="/whatsapp.png"
+                        alt="WhatsApp"
+                        width={16}
+                        height={16}
+                        className="w-4 h-4 object-contain shrink-0"
+                      />
                       <span className="truncate">WhatsApp</span>
                     </a>
 
@@ -617,7 +622,13 @@ export default function SingleProductPage() {
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl bg-[#66CC66] hover:bg-[#55b855] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm"
                     >
-                      <MessageCircle className="w-4 h-4 shrink-0" />
+                      <Image
+                        src="/whatsapp.png"
+                        alt="WhatsApp"
+                        width={16}
+                        height={16}
+                        className="w-4 h-4 object-contain shrink-0"
+                      />
                       <span className="truncate">WhatsApp</span>
                     </a>
                   </div>
@@ -855,7 +866,13 @@ export default function SingleProductPage() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3.5 rounded-xl bg-[#66CC66] active:scale-95 text-white text-xs font-bold uppercase"
               >
-                <MessageCircle className="w-4 h-4" />
+                <Image
+                  src="/whatsapp.png"
+                  alt="WhatsApp"
+                  width={16}
+                  height={16}
+                  className="w-4 h-4 object-contain shrink-0"
+                />
                 <span>WhatsApp</span>
               </a>
 
@@ -882,9 +899,15 @@ export default function SingleProductPage() {
               href={getWhatsAppLink()}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-1 py-2.5 px-2 rounded-xl bg-[#66CC66] active:scale-95 text-white text-[11px] font-bold uppercase"
+              className="inline-flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-[#66CC66] active:scale-95 text-white text-[11px] font-bold uppercase"
             >
-              <MessageCircle className="w-3.5 h-3.5" />
+              <Image
+                src="/whatsapp.png"
+                alt="WhatsApp"
+                width={16}
+                height={16}
+                className="w-3.5 h-3.5 object-contain shrink-0"
+              />
               <span>WhatsApp</span>
             </a>
 

@@ -9,7 +9,6 @@ import {
   ArrowLeft,
   CheckCircle2,
   Phone,
-  MessageCircle,
   Loader2,
   ShieldCheck,
   MapPin,
@@ -186,7 +185,13 @@ function CheckoutContent() {
               rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#66CC66] hover:bg-[#55b855] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider shadow-md transition-all"
             >
-              <MessageCircle className="w-4 h-4" />
+              <Image
+                src="/whatsapp.png"
+                alt="WhatsApp"
+                width={16}
+                height={16}
+                className="w-4 h-4 object-contain shrink-0"
+              />
               <span>Confirm on WhatsApp</span>
             </a>
 

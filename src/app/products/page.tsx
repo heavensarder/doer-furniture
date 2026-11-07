@@ -7,7 +7,6 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import {
   Sparkles,
   Phone,
-  MessageCircle,
   Send,
   ShoppingBag,
   ArrowRight,
@@ -551,7 +550,13 @@ function ShopContent() {
                     rel="noopener noreferrer"
                     className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-[#66CC66] hover:bg-[#55b855] text-white text-xs font-bold uppercase tracking-wider transition-all"
                   >
-                    <MessageCircle className="w-3.5 h-3.5" />
+                    <Image
+                      src="/whatsapp.png"
+                      alt="WhatsApp"
+                      width={16}
+                      height={16}
+                      className="w-4 h-4 object-contain shrink-0"
+                    />
                     <span>WhatsApp Chat</span>
                   </a>
                 </div>
@@ -816,7 +821,13 @@ function ShopContent() {
                                           rel="noopener noreferrer"
                                           className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#66CC66] hover:bg-[#55b855] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider transition-all"
                                         >
-                                          <MessageCircle className="w-3.5 h-3.5 shrink-0" />
+                                          <Image
+                                            src="/whatsapp.png"
+                                            alt="WhatsApp"
+                                            width={16}
+                                            height={16}
+                                            className="w-4 h-4 object-contain shrink-0"
+                                          />
                                           <span>WhatsApp</span>
                                         </a>
                                       </div>
@@ -835,9 +846,15 @@ function ShopContent() {
                                             href={getWhatsAppUrl(product)}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center justify-center gap-1 py-2.5 px-2.5 rounded-xl bg-[#66CC66] hover:bg-[#55b855] active:scale-[0.98] text-white text-[11px] font-bold uppercase tracking-wider transition-all"
+                                            className="inline-flex items-center justify-center gap-1.5 py-2.5 px-2.5 rounded-xl bg-[#66CC66] hover:bg-[#55b855] active:scale-[0.98] text-white text-[11px] font-bold uppercase tracking-wider transition-all"
                                           >
-                                            <MessageCircle className="w-3 h-3 shrink-0" />
+                                            <Image
+                                              src="/whatsapp.png"
+                                              alt="WhatsApp"
+                                              width={16}
+                                              height={16}
+                                              className="w-3.5 h-3.5 object-contain shrink-0"
+                                            />
                                             <span>Ask Price</span>
                                           </a>
                                         </div>
@@ -977,7 +994,13 @@ function ShopContent() {
                                           rel="noopener noreferrer"
                                           className="w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-[#66CC66] hover:bg-[#55b855] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider transition-all"
                                         >
-                                          <MessageCircle className="w-3.5 h-3.5" />
+                                          <Image
+                                            src="/whatsapp.png"
+                                            alt="WhatsApp"
+                                            width={16}
+                                            height={16}
+                                            className="w-4 h-4 object-contain shrink-0"
+                                          />
                                           <span>WhatsApp</span>
                                         </a>
                                       </div>
@@ -995,9 +1018,15 @@ function ShopContent() {
                                             href={getWhatsAppUrl(product)}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="inline-flex items-center justify-center gap-1 py-2.5 px-2 rounded-xl bg-[#66CC66] hover:bg-[#55b855] text-white text-[11px] font-bold uppercase transition-colors"
+                                            className="inline-flex items-center justify-center gap-1.5 py-2.5 px-2 rounded-xl bg-[#66CC66] hover:bg-[#55b855] text-white text-[11px] font-bold uppercase transition-colors"
                                           >
-                                            <MessageCircle className="w-3 h-3" />
+                                            <Image
+                                              src="/whatsapp.png"
+                                              alt="WhatsApp"
+                                              width={16}
+                                              height={16}
+                                              className="w-3.5 h-3.5 object-contain shrink-0"
+                                            />
                                             <span>WhatsApp</span>
                                           </a>
                                         </div>
