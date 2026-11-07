@@ -42,6 +42,21 @@ const DB_NAME = process.env.DB_NAME || 'doer-furniture';
 const ADMIN_USER = process.env.ADMIN_DEFAULT_USER || 'doer-admin';
 const ADMIN_PASS = process.env.ADMIN_DEFAULT_PASS || 'V2gU*k)v7v8drHIsvT';
 
+/**
+ * Helper for safe live-server schema migrations:
+ * Ensures a column exists on an existing table without dropping data.
+ */
+async function ensureColumn(db, tableName, columnName, columnDef) {
+  const [cols] = await db.query(
+    `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = ? AND TABLE_NAME = ? AND COLUMN_NAME = ?`,
+    [DB_NAME, tableName, columnName]
+  );
+  if (cols.length === 0) {
+    await db.query(`ALTER TABLE \`${tableName}\` ADD COLUMN \`${columnName}\` ${columnDef}`);
+    console.log(`Added missing column \`${columnName}\` to \`${tableName}\`.`);
+  }
+}
+
 async function init() {
   console.log(`Connecting to MySQL at ${DB_HOST}:${DB_PORT} as ${DB_USER}...`);
 
