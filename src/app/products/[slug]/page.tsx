@@ -16,6 +16,7 @@ import {
   Copy,
   Check,
   Play,
+  X,
   ShieldCheck,
   Factory,
   Ruler,
@@ -68,7 +69,7 @@ function extractYouTubeId(input: string): string | null {
 function getYouTubeEmbedUrl(url: string): string | null {
   const id = extractYouTubeId(url);
   if (id) {
-    return `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&rel=0`;
+    return `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
   }
   return url || null;
 }
@@ -82,6 +83,7 @@ export default function SingleProductPage() {
   const [loading, setLoading] = useState(true);
   const [activeSlide, setActiveSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [videoLightboxSlide, setVideoLightboxSlide] = useState<MediaSlide | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [copied, setCopied] = useState(false);
 
@@ -152,18 +154,26 @@ export default function SingleProductPage() {
     return list;
   }, [product]);
 
-  // Auto-slide every 4.5s unless paused or on a video slide
+  // Auto-slide every 4.5s across all thumbnails (including video thumbnail) unless paused or lightbox is open
   useEffect(() => {
-    if (slides.length <= 1 || isPaused) return;
-    const currentSlide = slides[activeSlide];
-    if (currentSlide?.type !== 'image') return;
+    if (slides.length <= 1 || isPaused || videoLightboxSlide !== null) return;
 
     const timer = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % slides.length);
     }, 4500);
 
     return () => clearInterval(timer);
-  }, [slides, activeSlide, isPaused]);
+  }, [slides, activeSlide, isPaused, videoLightboxSlide]);
+
+  // Close video lightbox on Escape key
+  useEffect(() => {
+    if (!videoLightboxSlide) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setVideoLightboxSlide(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [videoLightboxSlide]);
 
   const getShareUrl = () => {
     if (typeof window !== 'undefined') {
@@ -328,27 +338,47 @@ export default function SingleProductPage() {
                 />
               )}
 
-              {currentMedia.type === 'upload-video' && (
-                <video
-                  src={currentMedia.url}
-                  controls
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-contain bg-black"
-                />
-              )}
+              {(currentMedia.type === 'upload-video' || currentMedia.type === 'youtube') && (
+                <div
+                  onClick={() => setVideoLightboxSlide(currentMedia)}
+                  className="relative w-full h-full cursor-pointer group select-none"
+                >
+                  {/* Video Poster / Thumbnail Backdrop (Does NOT auto-play) */}
+                  {currentMedia.type === 'youtube' && currentMedia.youtubeId ? (
+                    <Image
+                      src={`https://img.youtube.com/vi/${currentMedia.youtubeId}/hqdefault.jpg`}
+                      alt={product.name}
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                  ) : (
+                    <>
+                      <Image
+                        src={product.main_image}
+                        alt={product.name}
+                        fill
+                        className="object-cover opacity-50"
+                      />
+                      <video
+                        src={`${currentMedia.url}#t=0.5`}
+                        preload="metadata"
+                        muted
+                        playsInline
+                        className="relative z-10 w-full h-full object-cover pointer-events-none"
+                      />
+                    </>
+                  )}
 
-              {currentMedia.type === 'youtube' && (
-                <iframe
-                  src={currentMedia.embedUrl}
-                  title={product.name}
-                  className="w-full h-full border-0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  referrerPolicy="strict-origin-when-cross-origin"
-                  allowFullScreen
-                />
+                  {/* Dark Overlay + Manual Play Button */}
+                  <div className="absolute inset-0 z-20 bg-slate-950/45 group-hover:bg-slate-950/35 transition-colors flex flex-col items-center justify-center gap-3 p-4 text-center">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#FF3D00] text-white flex items-center justify-center shadow-2xl shadow-[#FF3D00]/50 ring-8 ring-white/20 group-hover:scale-110 active:scale-95 transition-all">
+                      <Play className="w-7 h-7 sm:w-9 sm:h-9 fill-white ml-1" />
+                    </div>
+                    <span className="px-3.5 py-1.5 rounded-full bg-slate-950/85 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-bold tracking-wide shadow-lg">
+                      Click to Watch Video
+                    </span>
+                  </div>
+                </div>
               )}
 
               {/* Prev / Next Controls */}
@@ -356,18 +386,22 @@ export default function SingleProductPage() {
                 <>
                   <button
                     type="button"
-                    onClick={() =>
-                      setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length)
-                    }
-                    className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-950/75 hover:bg-[#FF3D00] active:scale-90 text-white flex items-center justify-center backdrop-blur-md border border-white/15 transition-all cursor-pointer z-10"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length);
+                    }}
+                    className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-950/75 hover:bg-[#FF3D00] active:scale-90 text-white flex items-center justify-center backdrop-blur-md border border-white/15 transition-all cursor-pointer z-30"
                     aria-label="Previous Media"
                   >
                     <ChevronLeft className="w-5 h-5" />
                   </button>
                   <button
                     type="button"
-                    onClick={() => setActiveSlide((prev) => (prev + 1) % slides.length)}
-                    className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-950/75 hover:bg-[#FF3D00] active:scale-90 text-white flex items-center justify-center backdrop-blur-md border border-white/15 transition-all cursor-pointer z-10"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setActiveSlide((prev) => (prev + 1) % slides.length);
+                    }}
+                    className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-950/75 hover:bg-[#FF3D00] active:scale-90 text-white flex items-center justify-center backdrop-blur-md border border-white/15 transition-all cursor-pointer z-30"
                     aria-label="Next Media"
                   >
                     <ChevronRight className="w-5 h-5" />
@@ -377,7 +411,7 @@ export default function SingleProductPage() {
 
               {/* Slide Counter Pill */}
               {slides.length > 1 && (
-                <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md text-white text-[11px] font-mono font-bold border border-white/15">
+                <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md text-white text-[11px] font-mono font-bold border border-white/15 z-30">
                   {activeSlide + 1} / {slides.length}
                 </div>
               )}
@@ -388,11 +422,18 @@ export default function SingleProductPage() {
               <div className="flex items-center gap-2.5 sm:gap-3 overflow-x-auto pb-1 snap-x snap-mandatory no-scrollbar">
                 {slides.map((slide, idx) => {
                   const isActive = idx === activeSlide;
+                  const isVideoSlide = slide.type === 'upload-video' || slide.type === 'youtube';
                   return (
                     <button
                       key={`${slide.url}-${idx}`}
                       type="button"
-                      onClick={() => setActiveSlide(idx)}
+                      onClick={() => {
+                        if (isVideoSlide && isActive) {
+                          setVideoLightboxSlide(slide);
+                        } else {
+                          setActiveSlide(idx);
+                        }
+                      }}
                       className={`relative w-16 h-16 sm:w-20 sm:h-20 aspect-square rounded-xl overflow-hidden shrink-0 snap-start border-2 transition-all cursor-pointer ${
                         isActive
                           ? 'border-[#FF3D00] scale-105 shadow-md'
@@ -412,17 +453,32 @@ export default function SingleProductPage() {
                             src={`https://img.youtube.com/vi/${slide.youtubeId}/hqdefault.jpg`}
                             alt="YouTube Video Thumbnail"
                             fill
-                            className="object-cover opacity-75"
+                            className="object-cover opacity-80"
                           />
-                          <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black/30">
+                          <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black/35">
                             <Play className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF3D00] fill-[#FF3D00]" />
-                            <span className="text-[8px] sm:text-[9px] font-bold uppercase">YouTube</span>
+                            <span className="text-[8px] sm:text-[9px] font-bold uppercase">Video</span>
                           </div>
                         </div>
                       ) : (
-                        <div className="w-full h-full bg-slate-900 flex flex-col items-center justify-center text-white gap-0.5">
-                          <Play className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF3D00] fill-[#FF3D00]" />
-                          <span className="text-[9px] sm:text-[10px] font-bold uppercase">Video</span>
+                        <div className="relative w-full h-full bg-slate-900">
+                          <Image
+                            src={product.main_image}
+                            alt="Video Thumbnail"
+                            fill
+                            className="object-cover opacity-50"
+                          />
+                          <video
+                            src={`${slide.url}#t=0.5`}
+                            preload="metadata"
+                            muted
+                            playsInline
+                            className="relative z-10 w-full h-full object-cover pointer-events-none opacity-85"
+                          />
+                          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-white bg-black/35 gap-0.5">
+                            <Play className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF3D00] fill-[#FF3D00]" />
+                            <span className="text-[8px] sm:text-[9px] font-bold uppercase">Video</span>
+                          </div>
                         </div>
                       )}
                     </button>
@@ -721,6 +777,63 @@ export default function SingleProductPage() {
           </div>
         )}
       </div>
+
+      {/* MOBILE-RESPONSIVE VIDEO LIGHTBOX MODAL */}
+      {videoLightboxSlide && (
+        <div
+          className="fixed inset-0 z-[70] bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200"
+          onClick={() => setVideoLightboxSlide(null)}
+        >
+          <div
+            className="relative w-full max-w-4xl space-y-3"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Lightbox Header */}
+            <div className="flex items-center justify-between gap-3 text-white px-1">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="px-2.5 py-1 rounded-md bg-[#FF3D00] text-white text-[10px] font-bold uppercase tracking-wider shrink-0">
+                  Product Video
+                </span>
+                <h3 className="text-xs sm:text-sm font-bold text-white truncate">
+                  {product.name}
+                </h3>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setVideoLightboxSlide(null)}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/15 hover:bg-[#FF3D00] active:scale-95 text-white text-xs font-bold transition-colors cursor-pointer shrink-0"
+                aria-label="Close Video Lightbox"
+              >
+                <span>Close</span>
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Video Player Container */}
+            <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-black border border-white/15 shadow-2xl">
+              {videoLightboxSlide.type === 'youtube' ? (
+                <iframe
+                  src={videoLightboxSlide.embedUrl}
+                  title={product.name}
+                  className="w-full h-full border-0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
+                />
+              ) : (
+                <video
+                  src={videoLightboxSlide.url}
+                  controls
+                  autoPlay
+                  playsInline
+                  className="w-full h-full object-contain bg-black"
+                />
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* MOBILE STICKY BOTTOM APP ACTION BAR (< sm) */}
       <div className="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-xl border-t border-slate-200 px-3.5 py-2.5 shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
