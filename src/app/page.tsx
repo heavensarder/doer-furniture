@@ -22,6 +22,8 @@ import {
   Cpu,
   Layers,
   Utensils,
+  Monitor,
+  Lightbulb,
 } from 'lucide-react';
 import { constructMetadata } from '@/lib/metadata';
 
@@ -36,69 +38,63 @@ export default function HomePage() {
   const services = [
     {
       number: '01',
-      title: 'Commercial Space Design',
-      tagline: 'Brand Identity & Retail Spaces',
+      title: 'Console Tables',
+      tagline: 'Mission-Critical & Command Desks',
       description:
-        'Creative and functional interior solutions for commercial environments, designed to enhance business identity and customer experience.',
-      icon: Building,
-      image: '/images/services/commercial-space-design.jpg',
-      badge: 'Commercial',
-      scope: ['Space Planning', '3D Visualization', 'Customer Experience'],
+        'Custom modular command consoles, 24/7 ergonomic workstations, motorized height-adjustable desks, and multi-screen monitoring setups.',
+      icon: Monitor,
+      image: '/images/products/04-hg-b1-executive-modular-control-console.jpg',
+      badge: 'Console',
+      href: '/products',
+      scope: ['24/7 Ergonomics', 'Multi-Display Mounting', 'Cable Raceways'],
     },
     {
       number: '02',
-      title: 'Corporate Office Interior',
-      tagline: 'Ergonomic Workplaces & Suites',
+      title: 'Interior Materials',
+      tagline: 'Architectural Finishes & Patinas',
       description:
-        'Modern and professional office interiors that encourage productivity and create comfortable, collaborative working environments.',
-      icon: Briefcase,
-      image: '/images/services/corporate-office-interior.jpg',
-      badge: 'Corporate',
-      scope: ['Executive Suites', 'Acoustic Partitioning', 'Power Routing'],
+        'Curated architectural surfaces, water bubble stainless steel, oxidized metallic patinas, acoustic panels, and premium wood veneers.',
+      icon: Layers,
+      image: '/images/materials/showcase/luxury-gold-black-texture-showcase.jpg',
+      badge: 'Materials',
+      href: '/#materials',
+      scope: ['Water Bubble SS', 'Custom Patinas', 'Acoustic Panels'],
     },
     {
       number: '03',
-      title: 'Furniture Customization & Fabrication',
-      tagline: 'In-House Khilkhet Workshop',
+      title: 'Project Lights',
+      tagline: 'Commercial & Ambient Lumination',
       description:
-        'Custom-designed furniture manufactured to match your space, requirements, and corporate identity with precision joinery.',
-      icon: Armchair,
-      image: '/images/services/furniture-customization-fabrication.jpg',
-      badge: 'Fabrication',
-      scope: ['Modular Workstations', 'Solid Hardwoods', 'Steel Sub-Frames'],
+        'Architectural, circadian, and decorative lighting solutions engineered for control rooms, corporate suites, retail, and commercial spaces.',
+      icon: Lightbulb,
+      image: '/images/light-categories.png',
+      badge: 'Lighting',
+      href: '/services',
+      scope: ['Circadian LED', 'Architectural Linear', 'Accent Fixtures'],
     },
     {
       number: '04',
-      title: 'Interior Project Execution',
-      tagline: 'Turnkey Civil & Fit-Out Delivery',
+      title: 'Tools and Machines',
+      tagline: 'CNC, Fabrication & Precision Gear',
       description:
-        'End-to-end project execution, including civil, electrical, fabrication, HVAC, and final interior fit-out under one accountable roof.',
-      icon: Hammer,
-      image: '/images/services/interior-project-execution.jpg',
-      badge: 'Turnkey Fit-Out',
-      scope: ['Civil Works', 'Electrical Engineering', 'Site Supervision'],
+        'Advanced CNC routing, edge banding, precision multi-axis cutting, and specialized industrial joinery and metalworking machinery.',
+      icon: Cpu,
+      image: '/images/cnc-machinery.png',
+      badge: 'Machinery',
+      href: '/workshop',
+      scope: ['CNC Routers', 'Automated Edge Banding', 'Metal Fabrication'],
     },
     {
       number: '05',
-      title: 'Remodeling & Renovation',
-      tagline: 'Space Reconfiguration',
+      title: 'Commercial Space Interior Design',
+      tagline: 'Retail, Corporate & Turnkey Space',
       description:
-        'Transforming existing spaces through thoughtful redesign, modern materials, acoustic optimization, and efficient fast-track execution.',
-      icon: RotateCcw,
-      image: '/images/services/remodeling-renovation.jpg',
-      badge: 'Renovation',
-      scope: ['Layout Redesign', 'Facade Refresh', 'Acoustic Upgrades'],
-    },
-    {
-      number: '06',
-      title: 'Restaurant & Café Interior',
-      tagline: 'Atmospheric Dining & Lounges',
-      description:
-        'Unique and welcoming dining environments with creative layouts, customized furniture, decorative lighting, and premium finishes.',
-      icon: Utensils,
-      image: '/images/services/restaurant-cafe-interior.jpg',
-      badge: 'Hospitality',
-      scope: ['Mood Illumination', 'Bar & Counter Joinery', 'Dining Tables'],
+        'End-to-end design and interior fit-out for corporate headquarters, retail stores, flagship showrooms, hospitality, and modern workplaces.',
+      icon: Building,
+      image: '/images/services/commercial-space-design.jpg',
+      badge: 'Interior',
+      href: '/services',
+      scope: ['Space Planning', 'Turnkey Execution', '3D Visualization'],
     },
   ];
 
@@ -189,59 +185,69 @@ export default function HomePage() {
       {/* 01. HERO SLIDER SECTION */}
       <HeroSlider />
 
-      {/* 02. INTRODUCTION SECTION */}
-      <section className="py-16 sm:py-20 lg:py-28 bg-white relative bg-architectural-grid">
+      {/* 02. INTRODUCTION SECTION - CONTROL ROOM SETUP & CONSOLE WORKSTATIONS */}
+      <section className="py-12 sm:py-16 lg:py-24 bg-white relative bg-architectural-grid">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
             
             {/* Left Content */}
             <div className="lg:col-span-6 space-y-4 sm:space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-orange-50 border border-orange-200 text-[#FF3D00] text-xs font-bold uppercase tracking-wider">
-                <span>Introduction</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-[#FF3D00] text-xs font-bold uppercase tracking-wider">
+                <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse" />
+                <span>Mission-Critical Control Room Solutions</span>
               </div>
 
-              <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-                Turning Ideas Into Exceptional Spaces
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+                Turnkey Control Room Setup & High-Performance Consoles
               </h2>
 
               <p className="text-sm sm:text-base lg:text-lg text-slate-700 leading-relaxed font-normal">
-                At DOER, we believe every space has a purpose and a story to tell. We bring creativity, technical expertise, and precision craftsmanship together to create interiors that reflect your vision and meet your functional needs.
+                DOER specializes in complete, end-to-end control room design, custom engineering, and turnkey interior fit-outs. From 24/7 mission-critical operations centers to emergency response and security hubs, we deliver ergonomic environments built for uninterrupted operational command.
               </p>
 
-              <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal">
-                From initial concept and 3D visualization to manufacturing, installation, and final execution, we provide complete solutions under one roof.
+              <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed font-normal">
+                Every facility is engineered under one roof at our Khilkhet workshop—combining precision-fabricated modular console tables, multi-display video wall mounting, acoustic wall cladding, anti-static raised access flooring, thermal cable routing, and operator-centric circadian lighting.
               </p>
 
-              <div className="pt-2 sm:pt-4 flex flex-wrap items-center gap-4">
+              {/* Single CTA Button to Contact Page */}
+              <div className="pt-2 sm:pt-4">
                 <Link
-                  href="/about"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-950 hover:bg-[#FF3D00] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-sm"
+                  href="/contact"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-lg shadow-[#FF3D00]/25 group cursor-pointer"
                 >
-                  <span>Learn More About DOER</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <span>Contact with Expert</span>
+                  <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
             </div>
 
-            {/* Right Architectural Image Showcase */}
-            <div className="lg:col-span-6 relative">
-              <div className="relative h-[280px] sm:h-[400px] lg:h-[480px] rounded-2xl overflow-hidden shadow-2xl border border-slate-200 group">
+            {/* Right Architectural Image Showcase (Strict 1:1 Square Size, Fully Mobile Responsive) */}
+            <div className="lg:col-span-6 relative flex items-center justify-center mt-2 sm:mt-0">
+              <div className="relative aspect-square w-full max-w-[560px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl border border-slate-200 group">
                 <Image
-                  src="/images/modern-interior-design-studio-showcase.jpg"
-                  alt="Modern Interior Design Studio Showcase"
+                  src="/images/introduction-image.png"
+                  alt="DOER Mission-Critical Control Room Setup & Console Systems"
                   fill
+                  priority
                   className="object-cover img-zoom"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent" />
                 
                 {/* Floating Studio Badge */}
-                <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6 p-3.5 sm:p-5 rounded-xl bg-slate-950/90 backdrop-blur-md border border-white/10 text-white">
-                  <div className="flex items-center gap-2 sm:gap-3 mb-1.5 sm:mb-2">
-                    <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#FF3D00]" />
-                    <span className="text-[11px] sm:text-xs uppercase tracking-widest font-bold text-[#FF3D00]">Integrated Studio</span>
+                <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-5 sm:left-5 sm:right-5 p-3 sm:p-5 rounded-xl sm:rounded-2xl bg-slate-950/90 backdrop-blur-md border border-white/10 text-white shadow-xl">
+                  <div className="flex items-center justify-between gap-2 mb-1 sm:mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#FF3D00] animate-pulse" />
+                      <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold text-[#FF3D00]">
+                        Integrated Command Center
+                      </span>
+                    </div>
+                    <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/10 text-white/80 shrink-0">
+                      24/7 Heavy Duty
+                    </span>
                   </div>
-                  <p className="text-xs sm:text-sm font-semibold leading-relaxed">
-                    Concept development, woodworking, CNC cutting, and on-site fit-out seamlessly orchestrated.
+                  <p className="text-[11px] sm:text-xs lg:text-sm font-medium leading-relaxed text-slate-200 line-clamp-2 sm:line-clamp-none">
+                    Engineered console workstations, video wall integration, acoustic cladding, and thermal airflow management.
                   </p>
                 </div>
               </div>
@@ -276,14 +282,14 @@ export default function HomePage() {
             </Link>
           </div>
 
-          {/* 6-Column Single Row on Desktop (Small Square Cards, Fits in One Screen) */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3 lg:gap-3.5">
+          {/* 5-Column Single Row on Desktop (Small Square Cards, Fits in One Screen) */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 lg:gap-3.5">
             {services.map((service) => {
               const Icon = service.icon;
               return (
                 <Link
                   key={service.number}
-                  href="/services"
+                  href={service.href || '/services'}
                   className="group bg-white rounded-2xl border border-slate-200/90 hover:border-[#FF3D00] p-2.5 sm:p-3 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
                 >
                   <div>

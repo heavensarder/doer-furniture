@@ -22,14 +22,16 @@ export default function Footer() {
           
           {/* Brand & Purpose */}
           <div className="space-y-5">
-            <div className="relative w-40 h-10 bg-white p-1.5 rounded-lg inline-block shadow-sm">
-              <Image
-                src="/images/logo.webp"
-                alt="DOER Logo"
-                fill
-                className="object-contain p-1"
-              />
-            </div>
+            <Link href="/" className="inline-block">
+              <div className="relative w-36 sm:w-40 h-10">
+                <Image
+                  src="/logo-white.png"
+                  alt="DOER Logo"
+                  fill
+                  className="object-contain object-left"
+                />
+              </div>
+            </Link>
             <h3 className="text-white font-bold text-lg tracking-tight">
               Designing Spaces. Creating Experiences.
             </h3>
