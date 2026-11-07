@@ -44,17 +44,33 @@ interface MediaSlide {
   type: 'image' | 'upload-video' | 'youtube';
   url: string;
   embedUrl?: string;
+  youtubeId?: string;
+}
+
+function extractYouTubeId(input: string): string | null {
+  if (!input) return null;
+  const trimmed = input.trim();
+  const iframeSrcMatch = trimmed.match(/src=["']([^"']+)["']/i);
+  const target = iframeSrcMatch ? iframeSrcMatch[1] : trimmed;
+
+  const regExp =
+    /(?:youtube(?:-nocookie)?\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?|shorts|live)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i;
+  const match = target.match(regExp);
+  if (match && match[1]) {
+    return match[1];
+  }
+  if (/^[a-zA-Z0-9_-]{11}$/.test(target)) {
+    return target;
+  }
+  return null;
 }
 
 function getYouTubeEmbedUrl(url: string): string | null {
-  if (!url) return null;
-  const regExp =
-    /(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?|shorts)\/|.*[?&]v=)|youtu\.be\/)([^"&?/\s]{11})/i;
-  const match = url.match(regExp);
-  if (match && match[1]) {
-    return `https://www.youtube.com/embed/${match[1]}?autoplay=1&mute=1&rel=0`;
+  const id = extractYouTubeId(url);
+  if (id) {
+    return `https://www.youtube.com/embed/${id}?autoplay=1&mute=1&rel=0`;
   }
-  return url;
+  return url || null;
 }
 
 export default function SingleProductPage() {
@@ -120,14 +136,18 @@ export default function SingleProductPage() {
         }
       });
     }
-    if (product.video_type === 'upload' && product.video_url) {
-      list.push({ type: 'upload-video', url: product.video_url });
-    } else if (product.video_type === 'youtube' && product.video_url) {
-      list.push({
-        type: 'youtube',
-        url: product.video_url,
-        embedUrl: getYouTubeEmbedUrl(product.video_url) || product.video_url,
-      });
+    if (product.video_type !== 'none' && product.video_url) {
+      const ytId = extractYouTubeId(product.video_url);
+      if (product.video_type === 'youtube' || ytId) {
+        list.push({
+          type: 'youtube',
+          url: product.video_url,
+          youtubeId: ytId || undefined,
+          embedUrl: getYouTubeEmbedUrl(product.video_url) || product.video_url,
+        });
+      } else {
+        list.push({ type: 'upload-video', url: product.video_url });
+      }
     }
     return list;
   }, [product]);
@@ -325,7 +345,8 @@ export default function SingleProductPage() {
                   src={currentMedia.embedUrl}
                   title={product.name}
                   className="w-full h-full border-0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
                   allowFullScreen
                 />
               )}
@@ -385,6 +406,19 @@ export default function SingleProductPage() {
                           fill
                           className="object-cover"
                         />
+                      ) : slide.type === 'youtube' && slide.youtubeId ? (
+                        <div className="relative w-full h-full bg-slate-900">
+                          <Image
+                            src={`https://img.youtube.com/vi/${slide.youtubeId}/hqdefault.jpg`}
+                            alt="YouTube Video Thumbnail"
+                            fill
+                            className="object-cover opacity-75"
+                          />
+                          <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black/30">
+                            <Play className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF3D00] fill-[#FF3D00]" />
+                            <span className="text-[8px] sm:text-[9px] font-bold uppercase">YouTube</span>
+                          </div>
+                        </div>
                       ) : (
                         <div className="w-full h-full bg-slate-900 flex flex-col items-center justify-center text-white gap-0.5">
                           <Play className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF3D00] fill-[#FF3D00]" />

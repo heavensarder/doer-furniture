@@ -58,6 +58,24 @@ function toSlug(val: string): string {
     .replace(/^-+|-+$/g, '');
 }
 
+function extractYouTubeId(input: string): string | null {
+  if (!input) return null;
+  const trimmed = input.trim();
+  const iframeSrcMatch = trimmed.match(/src=["']([^"']+)["']/i);
+  const target = iframeSrcMatch ? iframeSrcMatch[1] : trimmed;
+
+  const regExp =
+    /(?:youtube(?:-nocookie)?\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?|shorts|live)\/|.*[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i;
+  const match = target.match(regExp);
+  if (match && match[1]) {
+    return match[1];
+  }
+  if (/^[a-zA-Z0-9_-]{11}$/.test(target)) {
+    return target;
+  }
+  return null;
+}
+
 export default function AdminProductsPage() {
   const [products, setProducts] = useState<ProductItem[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
@@ -86,6 +104,7 @@ export default function AdminProductsPage() {
   const [uploadingMain, setUploadingMain] = useState(false);
   const [uploadingGallery, setUploadingGallery] = useState(false);
   const [uploadingVideo, setUploadingVideo] = useState(false);
+  const [videoUploadProgress, setVideoUploadProgress] = useState(0);
   const [submitting, setSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; msg: string } | null>(null);
 
@@ -180,6 +199,128 @@ export default function AdminProductsPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Compress large images on the client so photos upload fast and stay crisp
+  const compressImageIfNeeded = async (file: File): Promise<{ blob: Blob; fileName: string; mimeType: string }> => {
+    if (!file.type.startsWith('image/') || file.type === 'image/svg+xml' || file.type === 'image/gif') {
+      return { blob: file, fileName: file.name, mimeType: file.type };
+    }
+
+    // If image is already under 500KB, no compression needed
+    if (file.size <= 500 * 1024) {
+      return { blob: file, fileName: file.name, mimeType: file.type };
+    }
+
+    return new Promise((resolve) => {
+      const img = new window.Image();
+      const objectUrl = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(objectUrl);
+        const MAX_DIM = 1600;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > MAX_DIM || height > MAX_DIM) {
+          if (width > height) {
+            height = Math.round((height * MAX_DIM) / width);
+            width = MAX_DIM;
+          } else {
+            width = Math.round((width * MAX_DIM) / height);
+            height = MAX_DIM;
+          }
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          resolve({ blob: file, fileName: file.name, mimeType: file.type });
+          return;
+        }
+        ctx.drawImage(img, 0, 0, width, height);
+
+        const outMime = file.type === 'image/png' ? 'image/webp' : 'image/jpeg';
+        const outExt = outMime === 'image/webp' ? '.webp' : '.jpg';
+        const base = file.name.replace(/\.[^.]+$/, '');
+
+        canvas.toBlob(
+          (blob) => {
+            if (blob && blob.size < file.size) {
+              resolve({ blob, fileName: `${base}${outExt}`, mimeType: outMime });
+            } else {
+              resolve({ blob: file, fileName: file.name, mimeType: file.type });
+            }
+          },
+          outMime,
+          0.86
+        );
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(objectUrl);
+        resolve({ blob: file, fileName: file.name, mimeType: file.type });
+      };
+      img.src = objectUrl;
+    });
+  };
+
+  // Upload any file (image or video) in 500KB chunks so Nginx 1MB client_max_body_size never blocks it
+  const uploadSingleFileSafely = async (
+    rawFile: File,
+    onProgress?: (pct: number) => void
+  ): Promise<string> => {
+    const { blob, fileName, mimeType } = await compressImageIfNeeded(rawFile);
+    const CHUNK_SIZE = 500 * 1024; // 500 KB per request (safe under default 1MB Nginx limit)
+    const totalChunks = Math.max(1, Math.ceil(blob.size / CHUNK_SIZE));
+
+    let targetName = '';
+    let finalUrl = '';
+
+    for (let chunkIndex = 0; chunkIndex < totalChunks; chunkIndex++) {
+      const start = chunkIndex * CHUNK_SIZE;
+      const end = Math.min(start + CHUNK_SIZE, blob.size);
+      const chunkSlice = blob.slice(start, end);
+
+      const formData = new FormData();
+      formData.append('chunk', chunkSlice, fileName);
+      formData.append('fileName', fileName);
+      formData.append('mimeType', mimeType);
+      formData.append('chunkIndex', String(chunkIndex));
+      formData.append('totalChunks', String(totalChunks));
+      if (targetName) {
+        formData.append('targetName', targetName);
+      }
+
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const rawText = await res.text();
+      let data: any = null;
+      try {
+        data = JSON.parse(rawText);
+      } catch {
+        throw new Error(
+          res.status === 413
+            ? 'Server upload limit reached (413). Please try a smaller file.'
+            : `Upload error (${res.status}): Server returned an unexpected response.`
+        );
+      }
+
+      if (!res.ok) {
+        throw new Error(data?.error || 'Upload failed');
+      }
+
+      targetName = data.targetName || targetName;
+      finalUrl = data.url;
+      if (onProgress) {
+        onProgress(Math.round(((chunkIndex + 1) / totalChunks) * 100));
+      }
+    }
+
+    return finalUrl;
+  };
+
   // Upload Main Image
   const handleMainImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -187,17 +328,8 @@ export default function AdminProductsPage() {
 
     try {
       setUploadingMain(true);
-      const formData = new FormData();
-      formData.append('file', file);
-
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Upload failed');
-
-      setMainImage(data.url);
+      const url = await uploadSingleFileSafely(file);
+      setMainImage(url);
     } catch (err: any) {
       showToast('error', err.message || 'Failed to upload main image');
     } finally {
@@ -206,24 +338,20 @@ export default function AdminProductsPage() {
     }
   };
 
-  // Upload Multiple Gallery Images
+  // Upload Multiple Gallery Images (Sequential + Chunked to bypass Nginx 1MB limit)
   const handleGalleryUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0) return;
 
     try {
       setUploadingGallery(true);
-      const formData = new FormData();
-      Array.from(files).forEach((f) => formData.append('files', f));
-
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Gallery upload failed');
-
-      setGalleryImages((prev) => [...prev, ...(data.urls || [])]);
+      const fileList = Array.from(files);
+      for (const file of fileList) {
+        const uploadedUrl = await uploadSingleFileSafely(file);
+        if (uploadedUrl) {
+          setGalleryImages((prev) => [...prev, uploadedUrl]);
+        }
+      }
     } catch (err: any) {
       showToast('error', err.message || 'Failed to upload gallery images');
     } finally {
@@ -232,29 +360,24 @@ export default function AdminProductsPage() {
     }
   };
 
-  // Upload Video File
+  // Upload Video File (Chunked to bypass Nginx 1MB limit)
   const handleVideoFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     try {
       setUploadingVideo(true);
-      const formData = new FormData();
-      formData.append('file', file);
-
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Video upload failed');
-
+      setVideoUploadProgress(0);
+      const uploadedUrl = await uploadSingleFileSafely(file, (pct) =>
+        setVideoUploadProgress(pct)
+      );
       setVideoType('upload');
-      setVideoUrl(data.url);
+      setVideoUrl(uploadedUrl);
     } catch (err: any) {
       showToast('error', err.message || 'Failed to upload video');
     } finally {
       setUploadingVideo(false);
+      setVideoUploadProgress(0);
       e.target.value = '';
     }
   };
@@ -275,6 +398,24 @@ export default function AdminProductsPage() {
     }
 
     const finalSlug = slug.trim() ? toSlug(slug) : toSlug(name);
+
+    // Normalize video type & URL (supports YouTube watch, youtu.be, shorts, embed, or <iframe>)
+    let resolvedVideoType = videoType;
+    let resolvedVideoUrl = videoUrl.trim();
+    if (!resolvedVideoUrl || resolvedVideoType === 'none') {
+      resolvedVideoType = 'none';
+      resolvedVideoUrl = '';
+    } else {
+      const detectedYtId = extractYouTubeId(resolvedVideoUrl);
+      if (resolvedVideoType === 'youtube' || detectedYtId) {
+        if (!detectedYtId) {
+          showToast('error', 'Please enter a valid YouTube video link.');
+          return;
+        }
+        resolvedVideoType = 'youtube';
+        resolvedVideoUrl = `https://www.youtube.com/watch?v=${detectedYtId}`;
+      }
+    }
 
     try {
       setSubmitting(true);
@@ -301,8 +442,8 @@ export default function AdminProductsPage() {
           is_call_for_price: isCallForPrice || numericPrice === null,
           main_image: mainImage.trim(),
           gallery_images: galleryImages,
-          video_type: videoType,
-          video_url: videoType === 'none' ? '' : videoUrl.trim(),
+          video_type: resolvedVideoType,
+          video_url: resolvedVideoUrl,
           status,
         }),
       });
@@ -750,7 +891,10 @@ export default function AdminProductsPage() {
                         {uploadingVideo ? (
                           <>
                             <Loader2 className="w-4 h-4 animate-spin text-[#FF3D00]" />
-                            <span>Uploading Video File...</span>
+                            <span>
+                              Uploading Video File...{' '}
+                              {videoUploadProgress > 0 ? `${videoUploadProgress}%` : ''}
+                            </span>
                           </>
                         ) : (
                           <>
@@ -760,7 +904,7 @@ export default function AdminProductsPage() {
                         )}
                         <input
                           type="file"
-                          accept="video/mp4,video/webm,video/ogg"
+                          accept="video/mp4,video/webm,video/ogg,video/quicktime"
                           onChange={handleVideoFileUpload}
                           className="hidden"
                         />
@@ -769,24 +913,55 @@ export default function AdminProductsPage() {
                         type="text"
                         value={videoUrl}
                         onChange={(e) => setVideoUrl(e.target.value)}
-                        placeholder="Uploaded video URL: /uploads/videos/..."
+                        placeholder="Uploaded video URL: /api/uploads/videos/..."
                         className="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs text-slate-700"
                       />
+                      {videoUrl && !extractYouTubeId(videoUrl) && (
+                        <div className="rounded-xl overflow-hidden border border-slate-200 bg-black">
+                          <video
+                            src={videoUrl}
+                            controls
+                            playsInline
+                            className="w-full max-h-48 object-contain"
+                          />
+                        </div>
+                      )}
                     </div>
                   )}
 
                   {videoType === 'youtube' && (
-                    <div className="space-y-1.5 pt-1">
+                    <div className="space-y-2 pt-1">
                       <input
                         type="text"
                         value={videoUrl}
                         onChange={(e) => setVideoUrl(e.target.value)}
-                        placeholder="Paste YouTube URL (e.g. https://www.youtube.com/watch?v=...)"
+                        placeholder="Paste YouTube URL (watch, youtu.be, shorts, or embed link)"
                         className="w-full px-3 py-2.5 rounded-lg bg-white border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-[#FF3D00]"
                       />
                       <p className="text-[11px] text-slate-500">
-                        Supports standard watch links, shortened youtu.be links, or embed URLs.
+                        Supports standard watch links, shortened youtu.be links, YouTube Shorts, or embed URLs.
                       </p>
+
+                      {videoUrl.trim() && (
+                        extractYouTubeId(videoUrl) ? (
+                          <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-slate-200 bg-black">
+                            <iframe
+                              src={`https://www.youtube.com/embed/${extractYouTubeId(
+                                videoUrl
+                              )}?rel=0`}
+                              title="YouTube video preview"
+                              className="w-full h-full border-0"
+                              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                              referrerPolicy="strict-origin-when-cross-origin"
+                              allowFullScreen
+                            />
+                          </div>
+                        ) : (
+                          <p className="text-[11px] font-semibold text-amber-600">
+                            Could not detect a valid 11-character YouTube Video ID from this link.
+                          </p>
+                        )
+                      )}
                     </div>
                   )}
                 </div>
