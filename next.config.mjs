@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   optimizeFonts: false,
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
@@ -32,6 +33,10 @@ const nextConfig = {
       {
         source: '/favicon.ico',
         destination: '/favicon.svg',
+      },
+      {
+        source: '/uploads/:path*',
+        destination: '/api/uploads/:path*',
       },
     ];
   },

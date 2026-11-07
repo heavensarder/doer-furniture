@@ -36,13 +36,10 @@ export async function POST(request: Request) {
 
       const isVideo = file.type.startsWith('video/');
       const subDir = isVideo ? 'videos' : 'products';
-      const uploadDir = path.join(process.cwd(), 'public', 'uploads', subDir);
 
-      await mkdir(uploadDir, { recursive: true });
-
-      const ext = path.extname(file.name) || (isVideo ? '.mp4' : '.jpg');
+      const ext = (path.extname(file.name) || (isVideo ? '.mp4' : '.jpg')).toLowerCase();
       const baseName = path
-        .basename(file.name, ext)
+        .basename(file.name, path.extname(file.name))
         .toLowerCase()
         .replace(/[^a-z0-9-_]/g, '-')
         .replace(/-+/g, '-')
@@ -51,10 +48,21 @@ export async function POST(request: Request) {
       const uniqueName = `${baseName || 'media'}-${Date.now()}-${Math.round(
         Math.random() * 10000
       )}${ext}`;
-      const filePath = path.join(uploadDir, uniqueName);
 
-      await writeFile(filePath, buffer);
-      uploadedUrls.push(`/uploads/${subDir}/${uniqueName}`);
+      // Save to public/uploads/<subDir> (with automatic fallback to <root>/uploads/<subDir> if needed)
+      const primaryDir = path.join(process.cwd(), 'public', 'uploads', subDir);
+      const fallbackDir = path.join(process.cwd(), 'uploads', subDir);
+
+      try {
+        await mkdir(primaryDir, { recursive: true, mode: 0o775 });
+        await writeFile(path.join(primaryDir, uniqueName), buffer, { mode: 0o644 });
+      } catch {
+        await mkdir(fallbackDir, { recursive: true, mode: 0o775 });
+        await writeFile(path.join(fallbackDir, uniqueName), buffer, { mode: 0o644 });
+      }
+
+      // Return dynamic API route URL so Next.js production (`next start`) serves runtime uploads immediately
+      uploadedUrls.push(`/api/uploads/${subDir}/${uniqueName}`);
     }
 
     return NextResponse.json({

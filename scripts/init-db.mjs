@@ -469,6 +469,45 @@ Key Features:
     console.log(`Product categories already exist (${catCount[0].count} categories). Skipping seed.`);
   }
 
+  // 11. Ensure VPS local upload directories exist with proper read/write permissions
+  const uploadDirs = [
+    path.join(process.cwd(), 'public', 'uploads', 'products'),
+    path.join(process.cwd(), 'public', 'uploads', 'videos'),
+    path.join(process.cwd(), 'uploads', 'products'),
+    path.join(process.cwd(), 'uploads', 'videos'),
+  ];
+  for (const dir of uploadDirs) {
+    try {
+      fs.mkdirSync(dir, { recursive: true, mode: 0o775 });
+    } catch {
+      // Ignore permission warning if already exists
+    }
+  }
+  console.log('VPS local upload directories verified.');
+
+  // 12. Normalize any existing `/uploads/` URLs in products/orders to `/api/uploads/` for Next.js production
+  await db.query(`
+    UPDATE products
+    SET main_image = REPLACE(main_image, '/uploads/', '/api/uploads/')
+    WHERE main_image LIKE '/uploads/%'
+  `);
+  await db.query(`
+    UPDATE products
+    SET gallery_images = REPLACE(gallery_images, '"/uploads/', '"/api/uploads/')
+    WHERE gallery_images LIKE '%"/uploads/%'
+  `);
+  await db.query(`
+    UPDATE products
+    SET video_url = REPLACE(video_url, '/uploads/', '/api/uploads/')
+    WHERE video_url LIKE '/uploads/%'
+  `);
+  await db.query(`
+    UPDATE orders
+    SET product_image = REPLACE(product_image, '/uploads/', '/api/uploads/')
+    WHERE product_image LIKE '/uploads/%'
+  `);
+  console.log('Existing uploaded media URLs normalized for production.');
+
   await db.end();
   console.log('All database tables and migrations completed successfully!');
 }
