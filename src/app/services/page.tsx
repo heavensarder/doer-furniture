@@ -173,8 +173,8 @@ export default function ServicesPage() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3 sm:space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(0,240,255,0.25)]">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.25)]">
+            <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse" />
             <span>Industrial Fit-Out Capabilities</span>
           </div>
           <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
@@ -224,7 +224,7 @@ export default function ServicesPage() {
                       className="object-cover img-zoom"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#05070B]/80 via-transparent to-transparent" />
-                    <div className="absolute top-3 left-3 sm:top-5 sm:left-5 px-3 sm:px-3.5 py-1 sm:py-1.5 bg-[#080C16]/90 backdrop-blur-md rounded-lg text-cyan-300 font-mono text-[10px] sm:text-xs font-bold border border-cyan-500/30">
+                    <div className="absolute top-3 left-3 sm:top-5 sm:left-5 px-3 sm:px-3.5 py-1 sm:py-1.5 bg-[#080C16]/90 backdrop-blur-md rounded-lg text-[#FF3D00] font-mono text-[10px] sm:text-xs font-bold border border-[#FF3D00]/30">
                       Service {service.number}
                     </div>
                   </div>
@@ -232,7 +232,7 @@ export default function ServicesPage() {
 
                 {/* Content */}
                 <div className={`lg:col-span-6 space-y-4 sm:space-y-6 ${isEven ? 'lg:order-1' : ''}`}>
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.25)]">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center shadow-[0_0_15px_rgba(255,61,0,0.25)]">
                     <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
 
@@ -256,7 +256,7 @@ export default function ServicesPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
                       {service.solutions.map((item) => (
                         <div key={item} className="flex items-center gap-2 text-xs sm:text-sm text-slate-300 font-medium">
-                          <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400 shrink-0" />
+                          <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FF3D00] shrink-0" />
                           <span className="leading-snug">{item}</span>
                         </div>
                       ))}
@@ -286,7 +286,7 @@ export default function ServicesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4 mb-12 sm:mb-16 lg:mb-20">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
               <span>Sectors</span>
             </div>
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
@@ -311,7 +311,7 @@ export default function ServicesPage() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0B101D] via-[#0B101D]/40 to-transparent" />
                     <div className="absolute bottom-3 left-3 right-3 sm:left-4 sm:right-4 flex items-center gap-2">
-                      <Icon className="w-4 h-4 text-cyan-400 shrink-0" />
+                      <Icon className="w-4 h-4 text-[#FF3D00] shrink-0" />
                       <span className="font-bold text-xs sm:text-sm tracking-tight truncate">{item.title}</span>
                     </div>
                   </div>

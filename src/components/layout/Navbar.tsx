@@ -88,7 +88,7 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5 text-slate-200 font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00F0FF]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF3D00] animate-pulse shadow-[0_0_8px_#FF3D00]" />
               <span>DOER Interior Architecture & Manufacturing Studio</span>
             </span>
             <span className="text-white/20">|</span>

@@ -139,7 +139,7 @@ export default function WorkshopPage() {
         <div className="neon-line-v-cyan absolute top-0 bottom-0 right-0 z-20" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto space-y-3 mb-10 sm:mb-16 lg:mb-20">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
               <span>Production Facilities</span>
             </div>
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
@@ -199,7 +199,7 @@ export default function WorkshopPage() {
                 key={m.name}
                 className="p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-[#0B101D]/90 border border-white/10 hover:border-[#FF3D00]/60 hover:shadow-[0_0_20px_rgba(255,61,0,0.3)] transition-all flex items-start gap-3.5 sm:gap-4 group cyber-corner text-white"
               >
-                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 group-hover:bg-[#FF3D00] group-hover:border-[#FF3D00] group-hover:text-white transition-colors">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center shrink-0 group-hover:bg-[#FF3D00] group-hover:border-[#FF3D00] group-hover:text-white transition-all shadow-[0_0_12px_rgba(255,61,0,0.2)]">
                   <Cpu className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div className="space-y-1 min-w-0">
@@ -224,7 +224,7 @@ export default function WorkshopPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-center">
             
             <div className="lg:col-span-5 space-y-3 sm:space-y-4">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
                 <span>CAD & Workflow</span>
               </div>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
@@ -237,7 +237,7 @@ export default function WorkshopPage() {
 
             <div className="lg:col-span-7 grid grid-cols-1 xs:grid-cols-3 sm:grid-cols-3 gap-3 sm:gap-5">
               <div className="p-4 sm:p-7 rounded-xl sm:rounded-2xl bg-[#0B101D]/90 border border-white/10 text-center space-y-1.5 sm:space-y-2 hover:border-[#FF3D00]/60 transition-colors cyber-corner">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center mx-auto mb-2 sm:mb-3 shadow-[0_0_15px_rgba(0,240,255,0.25)]">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center mx-auto mb-2 sm:mb-3 shadow-[0_0_15px_rgba(255,61,0,0.25)]">
                   <Monitor className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <h3 className="font-bold text-white text-sm sm:text-base">AutoCAD</h3>
@@ -245,7 +245,7 @@ export default function WorkshopPage() {
               </div>
 
               <div className="p-4 sm:p-7 rounded-xl sm:rounded-2xl bg-[#0B101D]/90 border border-white/10 text-center space-y-1.5 sm:space-y-2 hover:border-[#FF3D00]/60 transition-colors cyber-corner">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center mx-auto mb-2 sm:mb-3 shadow-[0_0_15px_rgba(0,240,255,0.25)]">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center mx-auto mb-2 sm:mb-3 shadow-[0_0_15px_rgba(255,61,0,0.25)]">
                   <Layers className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <h3 className="font-bold text-white text-sm sm:text-base">SketchUp</h3>
@@ -271,7 +271,7 @@ export default function WorkshopPage() {
         <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto space-y-2.5 sm:space-y-3 mb-10 sm:mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
               <span>Human Craftsmanship</span>
             </div>
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
@@ -292,7 +292,7 @@ export default function WorkshopPage() {
                 key={w.role}
                 className="bg-[#0B101D]/90 border border-white/10 rounded-xl sm:rounded-2xl p-4 sm:p-6 text-center hover:border-[#FF3D00]/60 hover:shadow-[0_0_20px_rgba(255,61,0,0.3)] transition-all cyber-corner"
               >
-                <span className="text-2xl sm:text-4xl font-black text-cyan-400 drop-shadow-[0_0_8px_rgba(0,240,255,0.5)] block mb-1">
+                <span className="text-2xl sm:text-4xl font-black text-[#FF3D00] drop-shadow-[0_0_12px_rgba(255,61,0,0.5)] block mb-1">
                   {w.count}
                 </span>
                 <span className="text-[11px] sm:text-xs font-bold text-slate-300 uppercase tracking-wider block leading-tight">
@@ -335,13 +335,13 @@ export default function WorkshopPage() {
               </p>
 
               <div className="space-y-2.5 sm:space-y-3 pt-1 sm:pt-2 bg-[#0B101D]/90 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-white/10 cyber-corner">
-                <h4 className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-cyan-300">
+                <h4 className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#FF3D00]">
                   Applications:
                 </h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
                   {bubbleSteelApplications.map((app) => (
                     <div key={app} className="flex items-center gap-2 text-xs text-slate-300 font-medium">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FF3D00] shrink-0" />
                       <span>{app}</span>
                     </div>
                   ))}
@@ -380,7 +380,7 @@ export default function WorkshopPage() {
         <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6 sm:space-y-8 relative z-10">
           <div className="space-y-2.5 sm:space-y-3 max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
               <span>Alliances</span>
             </div>
             <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">

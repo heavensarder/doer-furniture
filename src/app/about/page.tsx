@@ -51,7 +51,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-20 items-center">
             
             <div className="lg:col-span-6 space-y-4 sm:space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
                 <span>Who We Are</span>
               </div>
 
@@ -108,7 +108,7 @@ export default function AboutPage() {
             {/* Vision */}
             <div className="bg-[#0B101D]/90 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 border border-white/10 flex flex-col justify-between hover:border-[#FF3D00]/60 hover:shadow-[0_0_25px_rgba(255,61,0,0.35)] transition-all shadow-2xl cyber-corner">
               <div className="space-y-4 sm:space-y-5">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.25)]">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center shadow-[0_0_15px_rgba(255,61,0,0.25)]">
                   <Compass className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
                 <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight">
@@ -164,7 +164,7 @@ export default function AboutPage() {
 
             <div className="relative z-10 space-y-6 sm:space-y-8">
               <div className="space-y-2">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
                   <span>Leadership</span>
                 </div>
                 <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
@@ -173,7 +173,7 @@ export default function AboutPage() {
               </div>
 
               <div className="space-y-3.5 sm:space-y-4 text-slate-300 text-xs sm:text-base lg:text-lg leading-relaxed font-normal">
-                <p className="text-cyan-300 font-semibold italic text-sm sm:text-lg lg:text-xl border-l-4 border-cyan-400 bg-[#0E1526]/80 pl-3 sm:pl-4 py-2 rounded-r-xl">
+                <p className="text-[#FF3D00] font-semibold italic text-sm sm:text-lg lg:text-xl border-l-4 border-[#FF3D00] bg-[#0E1526]/80 pl-3 sm:pl-4 py-2 rounded-r-xl">
                   &ldquo;Every great achievement begins with a simple idea.&rdquo;
                 </p>
                 <p>

@@ -107,8 +107,8 @@ export default function ContactPage() {
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3 sm:space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(0,240,255,0.25)]">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.25)]">
+            <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse" />
             <span>Connect With Us</span>
           </div>
           <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
@@ -130,7 +130,7 @@ export default function ContactPage() {
             {/* Left: Contact Information */}
             <div className="lg:col-span-5 space-y-6 sm:space-y-8">
               <div className="space-y-3 sm:space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
                   <span>Get in Touch</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
@@ -148,13 +148,13 @@ export default function ContactPage() {
               <div className="bg-[#0B101D]/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-white/10 shadow-2xl space-y-5 sm:space-y-6 cyber-corner text-white">
                 <h3 className="text-lg sm:text-xl font-black text-white border-b border-white/10 pb-3 sm:pb-4 flex items-center justify-between">
                   <span>DOER</span>
-                  <span className="text-[11px] sm:text-xs uppercase tracking-widest text-cyan-400 font-bold">Studio Office</span>
+                  <span className="text-[11px] sm:text-xs uppercase tracking-widest text-[#FF3D00] font-bold">Studio Office</span>
                 </h3>
 
                 <ul className="space-y-4 sm:space-y-5 text-xs sm:text-sm">
                   {/* Address */}
                   <li className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_15px_rgba(0,240,255,0.25)]">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_15px_rgba(255,61,0,0.25)]">
                       <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                     <div>
@@ -187,7 +187,7 @@ export default function ContactPage() {
 
                   {/* Email */}
                   <li className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_15px_rgba(0,240,255,0.25)]">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_15px_rgba(255,61,0,0.25)]">
                       <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                     <div>
@@ -205,7 +205,7 @@ export default function ContactPage() {
 
                   {/* Website */}
                   <li className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_15px_rgba(0,240,255,0.25)]">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_15px_rgba(255,61,0,0.25)]">
                       <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                     <div>
@@ -241,7 +241,7 @@ export default function ContactPage() {
             <div className="lg:col-span-7">
               <div className="bg-[#0B101D]/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-12 border border-white/10 shadow-2xl cyber-corner text-white">
                 <div className="mb-6 sm:mb-8 space-y-1.5 sm:space-y-2">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
                     <span>Project Form</span>
                   </div>
                   <h3 className="text-xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
@@ -349,7 +349,7 @@ export default function ContactPage() {
                         name="serviceInterested"
                         value={formData.serviceInterested}
                         onChange={handleChange}
-                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-[#0E1526] border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:bg-[#121B30] focus:border-cyan-400 transition-colors font-medium"
+                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-[#0E1526] border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:bg-[#121B30] focus:border-[#FF3D00] transition-colors font-medium"
                       >
                         {servicesList.map((srv) => (
                           <option key={srv} value={srv} className="bg-[#0E1526] text-white">

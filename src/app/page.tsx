@@ -4,6 +4,7 @@ import Image from 'next/image';
 import FeaturedProjectsShowcase from '@/components/home/FeaturedProjectsShowcase';
 import MaterialsShowcase from '@/components/home/MaterialsShowcase';
 import HeroSlider from '@/components/home/HeroSlider';
+import FeaturedCategoryProducts from '@/components/home/FeaturedCategoryProducts';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -194,7 +195,7 @@ export default function HomePage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-            
+
             {/* Left Content */}
             <div className="lg:col-span-6 space-y-4 sm:space-y-6">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/40 text-[#FF3D00] text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.3)]">
@@ -237,7 +238,7 @@ export default function HomePage() {
                   className="object-cover img-zoom"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#05070B] via-slate-950/30 to-transparent" />
-                
+
                 {/* Floating Studio Badge */}
                 <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-5 sm:left-5 sm:right-5 p-3.5 sm:p-5 rounded-xl sm:rounded-2xl bg-[#090D18]/90 backdrop-blur-xl border border-white/15 text-white shadow-2xl">
                   <div className="flex items-center justify-between gap-2 mb-1 sm:mb-2">
@@ -247,7 +248,7 @@ export default function HomePage() {
                         Integrated Command Center
                       </span>
                     </div>
-                    <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 shrink-0">
+                    <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#FF3D00]/15 text-[#FF3D00] border border-[#FF3D00]/30 shrink-0">
                       24/7 Heavy Duty
                     </span>
                   </div>
@@ -269,16 +270,16 @@ export default function HomePage() {
         <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20" />
 
         <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 relative z-10">
-          
+
           {/* Section Header */}
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6 lg:mb-8">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] font-bold uppercase tracking-wider mb-2 shadow-[0_0_12px_rgba(0,240,255,0.25)]">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] font-bold uppercase tracking-wider mb-2 shadow-[0_0_12px_rgba(255,61,0,0.25)]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FF3D00] animate-pulse" />
                 <span>Our Core Services</span>
               </div>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight leading-tight">
-                Complete Solutions for <span className="text-[#FF3D00] drop-shadow-[0_0_15px_rgba(255,61,0,0.5)]">Every Space</span>
+                We provide <span className="text-[#FF3D00] drop-shadow-[0_0_15px_rgba(255,61,0,0.5)]">Specialised Services</span>
               </h2>
             </div>
 
@@ -354,6 +355,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* 03B. FEATURED PRODUCT CATEGORY - CONSOLE TABLES & WORKSTATIONS */}
+      <FeaturedCategoryProducts />
+
       {/* 03C. MATERIALS - ARCHITECTURAL PATINAS & SURFACE TEXTURES */}
       <div id="materials" className="scroll-mt-20">
         <MaterialsShowcase />
@@ -372,13 +376,13 @@ export default function HomePage() {
         <div className="absolute bottom-10 right-10 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] bg-[#00F0FF]/10 rounded-full blur-[140px] sm:blur-[180px] pointer-events-none" />
 
         <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 relative z-10">
-          
+
           {/* Section Header */}
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8 mb-12 sm:mb-16 lg:mb-20">
             <div className="space-y-3 sm:space-y-4 max-w-3xl">
-              <div className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-white text-[11px] sm:text-xs font-semibold uppercase tracking-wider backdrop-blur-md">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00F0FF]" />
-                <span className="text-cyan-400 font-bold">Industrial Capabilities</span>
+              <div className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-white text-[11px] sm:text-xs font-semibold uppercase tracking-wider backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse shadow-[0_0_8px_#FF3D00]" />
+                <span className="text-[#FF3D00] font-bold">Industrial Capabilities</span>
                 <span className="text-white/20">|</span>
                 <span className="text-slate-300">Khilkhet, Dhaka Factory</span>
               </div>
@@ -424,7 +428,7 @@ export default function HomePage() {
 
                   {/* Top Bar Badges */}
                   <div className="relative z-10 flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-cyan-300 px-2.5 py-1 rounded-md bg-[#080C16]/90 backdrop-blur-md border border-cyan-500/30">
+                    <span className="font-mono text-xs font-bold text-[#FF3D00] px-2.5 py-1 rounded-md bg-[#080C16]/90 backdrop-blur-md border border-[#FF3D00]/30">
                       {pillar.number}
                     </span>
                     <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#FF3D00] text-white flex items-center justify-center shadow-lg shadow-[#FF3D00]/30">
@@ -444,7 +448,7 @@ export default function HomePage() {
                       {pillar.desc}
                     </p>
                     <div className="pt-2 flex items-center gap-1.5 text-[10px] font-mono text-slate-400 border-t border-white/10">
-                      <Cpu className="w-3 h-3 text-cyan-400" />
+                      <Cpu className="w-3 h-3 text-[#FF3D00]" />
                       <span className="truncate">{pillar.machinery}</span>
                     </div>
                   </div>
@@ -455,12 +459,12 @@ export default function HomePage() {
 
           {/* Row 2: Capabilities Matrix + Craft Workforce Spotlight */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
-            
+
             {/* Left Column: 7 Integrated Capabilities (7 cols) */}
             <div className="lg:col-span-7 space-y-3 sm:space-y-4">
               <div className="flex items-center justify-between pb-2 px-1 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-white/10">
                 <span>Integrated Technical Capabilities</span>
-                <span className="text-cyan-400 font-mono">7 Disciplines</span>
+                <span className="text-[#FF3D00] font-mono">7 Disciplines</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3.5">
@@ -472,7 +476,7 @@ export default function HomePage() {
                       className="p-3.5 sm:p-5 rounded-2xl bg-[#0B101D]/90 backdrop-blur-md border border-white/10 hover:border-[#FF3D00]/60 hover:shadow-[0_0_20px_rgba(255,61,0,0.3)] transition-all duration-300 flex items-start justify-between gap-3 group cyber-corner text-white"
                     >
                       <div className="flex items-start gap-3 sm:gap-3.5 min-w-0">
-                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 group-hover:bg-[#FF3D00] group-hover:border-[#FF3D00] group-hover:text-white transition-colors shadow-sm">
+                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center shrink-0 group-hover:bg-[#FF3D00] group-hover:border-[#FF3D00] group-hover:text-white transition-all shadow-[0_0_15px_rgba(255,61,0,0.25)]">
                           <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                         </div>
                         <div className="space-y-0.5 sm:space-y-1 min-w-0">
@@ -480,7 +484,7 @@ export default function HomePage() {
                             {cap.title}
                           </h4>
                           <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-medium text-slate-400">
-                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0 shadow-[0_0_6px_#00F0FF]" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#FF3D00] shrink-0 shadow-[0_0_6px_#FF3D00]" />
                             <span className="truncate">{cap.tag}</span>
                           </span>
                         </div>
@@ -504,8 +508,8 @@ export default function HomePage() {
             {/* Right Column: Workforce & Material Spotlight Card (5 cols) */}
             <div className="lg:col-span-5 p-5 sm:p-7 lg:p-8 rounded-2xl sm:rounded-3xl bg-[#0B101D]/90 border border-white/10 backdrop-blur-xl shadow-2xl space-y-5 sm:space-y-6 cyber-corner text-white">
               <div className="space-y-1.5 sm:space-y-2">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-cyan-300">
-                  <Users className="w-3.5 h-3.5 text-cyan-400" />
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#FF3D00]">
+                  <Users className="w-3.5 h-3.5 text-[#FF3D00]" />
                   <span>Permanent Factory Team</span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
@@ -533,7 +537,7 @@ export default function HomePage() {
                     className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-[#0E1526] border border-white/10 flex items-center justify-between text-[11px] sm:text-xs"
                   >
                     <span className="text-slate-300 truncate">{item.role}</span>
-                    <span className="font-mono font-bold text-cyan-400 pl-1.5 shrink-0">{item.count}</span>
+                    <span className="font-mono font-bold text-[#FF3D00] pl-1.5 shrink-0">{item.count}</span>
                   </div>
                 ))}
               </div>
@@ -621,7 +625,7 @@ export default function HomePage() {
         <div className="absolute top-1/3 right-0 w-80 h-80 bg-[#FF3D00]/10 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
+
           <div className="text-center max-w-2xl mx-auto space-y-2.5 sm:space-y-3 mb-12 sm:mb-16">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/40 text-[#FF3D00] text-xs font-bold uppercase tracking-wider shadow-[0_0_12px_rgba(255,61,0,0.3)]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#FF3D00] animate-pulse" />

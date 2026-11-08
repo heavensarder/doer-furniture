@@ -225,7 +225,7 @@ export default function FeaturedProjectsShowcase() {
             <div className="space-y-2.5 sm:space-y-3">
               <div className="flex items-center justify-between pb-2 px-1 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-white/10">
                 <span>Selected Project Index</span>
-                <span className="font-mono text-cyan-400">0{activeIndex + 1} / 0{projects.length}</span>
+                <span className="font-mono text-[#FF3D00]">0{activeIndex + 1} / 0{projects.length}</span>
               </div>
 
               {projects.map((item, idx) => {
@@ -242,13 +242,13 @@ export default function FeaturedProjectsShowcase() {
                   >
                     {/* Active Left Indicator Strip */}
                     {isActive && (
-                      <span className="absolute left-0 top-0 bottom-0 w-1.5 bg-cyan-400 shadow-[0_0_10px_#00F0FF]" />
+                      <span className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#FF3D00] shadow-[0_0_10px_#FF3D00]" />
                     )}
 
                     <div className="flex items-center gap-3 sm:gap-5 min-w-0 pr-2">
                       <span
                         className={`font-mono text-sm sm:text-base lg:text-lg font-black transition-colors shrink-0 ${
-                          isActive ? 'text-cyan-400' : 'text-slate-500 group-hover:text-slate-300'
+                          isActive ? 'text-[#FF3D00]' : 'text-slate-500 group-hover:text-slate-300'
                         }`}
                       >
                         {item.number}
@@ -274,7 +274,7 @@ export default function FeaturedProjectsShowcase() {
                     <div
                       className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-300 shrink-0 ${
                         isActive
-                          ? 'bg-cyan-500 text-black shadow-[0_0_12px_#00F0FF]'
+                          ? 'bg-[#FF3D00] text-white shadow-[0_0_12px_rgba(255,61,0,0.5)]'
                           : 'bg-white/5 text-slate-400 group-hover:bg-white/10 group-hover:text-white'
                       }`}
                     >
@@ -330,7 +330,7 @@ export default function FeaturedProjectsShowcase() {
                     onClick={() => setActiveIndex(idx)}
                     className={`h-2 rounded-full transition-all duration-300 ${
                       idx === activeIndex
-                        ? 'w-6 sm:w-7 bg-cyan-400 shadow-[0_0_8px_#00F0FF]'
+                        ? 'w-6 sm:w-7 bg-[#FF3D00] shadow-[0_0_8px_#FF3D00]'
                         : 'w-2 bg-white/20 hover:bg-white/40'
                     }`}
                     aria-label={`Go to slide ${idx + 1}`}
@@ -493,7 +493,7 @@ export default function FeaturedProjectsShowcase() {
           </div>
 
           <div className="flex items-center gap-3 sm:gap-3.5">
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(0,240,255,0.3)]">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#FF3D00]/20 text-[#FF3D00] flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(255,61,0,0.3)]">
               <Users className="w-5 h-5" />
             </div>
             <div>

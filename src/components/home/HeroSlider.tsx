@@ -142,9 +142,9 @@ export default function HeroSlider() {
 
       {/* 02. MAIN CONTENT STACK WITH TRANSLUCENT OVERLAY BOX BEHIND TEXT */}
       <div className="relative z-10 max-w-7xl mx-auto w-full flex-1 flex flex-col items-start justify-center my-auto">
-        <div className="w-full max-w-xl lg:max-w-2xl text-left space-y-3.5 sm:space-y-5 md:space-y-6 p-4 sm:p-7 md:p-10 rounded-2xl sm:rounded-3xl bg-[#090D18]/90 sm:bg-[#070A12]/85 backdrop-blur-xl border border-cyan-500/25 shadow-2xl cyber-corner">
+        <div className="w-full max-w-xl lg:max-w-2xl text-left space-y-3.5 sm:space-y-5 md:space-y-6 p-4 sm:p-7 md:p-10 rounded-2xl sm:rounded-3xl bg-[#090D18]/90 sm:bg-[#070A12]/85 backdrop-blur-xl border border-white/10 shadow-2xl cyber-corner">
           {/* Studio Category Badge */}
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#0E1526]/90 border border-cyan-500/30 backdrop-blur-md text-[10px] sm:text-xs font-semibold tracking-wider uppercase text-cyan-300 shadow-sm transition-all duration-500 max-w-full">
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#0E1526]/90 border border-[#FF3D00]/30 backdrop-blur-md text-[10px] sm:text-xs font-semibold tracking-wider uppercase text-[#FF3D00] shadow-sm transition-all duration-500 max-w-full">
             <span className="w-1.5 h-1.5 rounded-full bg-[#FF3D00] animate-pulse shrink-0 shadow-[0_0_8px_#FF3D00]" />
             <span className="truncate">{current.tag}</span>
           </div>

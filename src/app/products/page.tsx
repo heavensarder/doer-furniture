@@ -301,7 +301,7 @@ function ShopContent() {
               }`}
             >
               <div className="flex items-center gap-2 min-w-0">
-                <Filter className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                <Filter className="w-3.5 h-3.5 text-[#FF3D00] shrink-0" />
                 <span className="text-slate-400 font-semibold shrink-0">Category:</span>
                 <span className="truncate font-bold text-white">
                   {activeCategory === 'all'
@@ -332,7 +332,7 @@ function ShopContent() {
                 )}
                 <ChevronDown
                   className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
-                    mobileFilterOpen ? 'rotate-180 text-cyan-400' : ''
+                    mobileFilterOpen ? 'rotate-180 text-[#FF3D00]' : ''
                   }`}
                 />
               </div>
@@ -442,7 +442,7 @@ function ShopContent() {
               <div className="bg-[#0A0F1D]/90 rounded-2xl border border-white/10 p-5 shadow-xl space-y-4 cyber-corner text-white">
                 <div className="flex items-center justify-between border-b border-white/10 pb-3.5">
                   <div className="flex items-center gap-2">
-                    <div className="w-7 h-7 rounded-lg bg-cyan-500/15 text-cyan-400 border border-cyan-500/30 flex items-center justify-center">
+                    <div className="w-7 h-7 rounded-lg bg-[#FF3D00]/15 text-[#FF3D00] border border-[#FF3D00]/30 flex items-center justify-center">
                       <Filter className="w-3.5 h-3.5" />
                     </div>
                     <h3 className="text-xs sm:text-sm font-black uppercase tracking-wider text-white">
@@ -530,7 +530,7 @@ function ShopContent() {
               {/* Direct Support Card */}
               <div className="relative overflow-hidden bg-[#070A14] text-white rounded-2xl p-5 border border-cyan-500/25 shadow-2xl space-y-3.5 cyber-corner">
                 <div className="absolute -right-8 -top-8 w-28 h-28 rounded-full bg-[#FF3D00]/15 blur-xl pointer-events-none" />
-                <span className="inline-block px-2.5 py-1 rounded-md bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[10px] font-bold uppercase tracking-wider">
+                <span className="inline-block px-2.5 py-1 rounded-md bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[10px] font-bold uppercase tracking-wider">
                   Direct Support
                 </span>
                 <h4 className="text-base font-black leading-snug text-white">

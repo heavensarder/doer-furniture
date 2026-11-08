@@ -91,9 +91,9 @@ export default function MaterialsShowcase() {
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16 lg:mb-20">
           <div className="space-y-3 sm:space-y-4 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-semibold uppercase tracking-wider shadow-[0_0_12px_rgba(0,240,255,0.25)]">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-              <span className="text-cyan-400 font-bold">Architectural Materials</span>
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-semibold uppercase tracking-wider shadow-[0_0_12px_rgba(255,61,0,0.25)]">
+              <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse" />
+              <span className="text-[#FF3D00] font-bold">Architectural Materials</span>
             </div>
             <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.12)]">
               Architectural Patinas & <br className="hidden sm:inline" />
@@ -152,7 +152,7 @@ export default function MaterialsShowcase() {
                     key={app}
                     className="flex items-center gap-2 text-xs font-semibold text-slate-200 p-2.5 sm:p-3 rounded-xl bg-[#0B101D]/80 border border-white/10 shadow-sm hover:border-[#FF3D00]/50 hover:shadow-[0_0_15px_rgba(255,61,0,0.25)] transition-all"
                   >
-                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#FF3D00] shrink-0" />
                     <span>{app}</span>
                   </div>
                 ))}
@@ -229,7 +229,7 @@ export default function MaterialsShowcase() {
               {/* Bottom Scrim Content - Glassmorphic Title Bar */}
               <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 px-3.5 sm:px-5 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl bg-[#090D18]/90 backdrop-blur-md border border-white/15 text-white flex items-center justify-between z-20 shadow-xl gap-2">
                 <h4 className="text-sm sm:text-lg font-black text-white truncate">{current.name}</h4>
-                <span className="text-[10px] sm:text-xs font-mono text-cyan-400 font-semibold shrink-0">{current.spec}</span>
+                <span className="text-[10px] sm:text-xs font-mono text-[#FF3D00] font-semibold shrink-0">{current.spec}</span>
               </div>
             </div>
 
@@ -240,7 +240,7 @@ export default function MaterialsShowcase() {
                   <Sparkles className="w-3.5 h-3.5 text-[#FF3D00]" />
                   <span>Select Pattern Swatch:</span>
                 </p>
-                <span className="text-[11px] sm:text-xs font-bold text-cyan-400 truncate max-w-[180px] sm:max-w-none">
+                <span className="text-[11px] sm:text-xs font-bold text-[#FF3D00] truncate max-w-[180px] sm:max-w-none">
                   {current.name}
                 </span>
               </div>
