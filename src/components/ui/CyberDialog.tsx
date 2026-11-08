@@ -93,7 +93,7 @@ export function CyberDialogProvider({ children }: { children: React.ReactNode })
           type: 'danger',
           title: 'Confirm Action',
           message: options,
-          confirmText: 'Confirm',
+          confirmText: 'Delete',
           cancelText: 'Cancel',
           badge: 'SYSTEM CONFIRMATION',
         });
@@ -104,7 +104,7 @@ export function CyberDialogProvider({ children }: { children: React.ReactNode })
           type: options.type || 'danger',
           title: options.title || (options.type === 'danger' ? 'Confirm Deletion' : 'Confirm Action'),
           message: options.message,
-          confirmText: options.confirmText || (options.type === 'danger' ? 'Delete Permanently' : 'Confirm'),
+          confirmText: options.confirmText || (options.type === 'danger' ? 'Delete' : 'Confirm'),
           cancelText: options.cancelText || 'Cancel',
           badge: options.badge || (options.type === 'danger' ? 'DESTRUCTIVE ACTION' : 'SYSTEM CONFIRMATION'),
         });
@@ -187,23 +187,27 @@ export function CyberDialogProvider({ children }: { children: React.ReactNode })
   }, [dialog.isOpen, dialog.mode]);
 
   const handleConfirm = () => {
+    const resolver = resolverRef.current;
+    resolverRef.current = null;
     if (dialog.mode === 'prompt') {
-      resolverRef.current?.(dialog.promptValue || '');
+      resolver?.(dialog.promptValue || '');
     } else if (dialog.mode === 'confirm') {
-      resolverRef.current?.(true);
+      resolver?.(true);
     } else {
-      resolverRef.current?.(undefined);
+      resolver?.(undefined);
     }
     setDialog((prev) => ({ ...prev, isOpen: false }));
   };
 
   const handleCancel = () => {
+    const resolver = resolverRef.current;
+    resolverRef.current = null;
     if (dialog.mode === 'confirm') {
-      resolverRef.current?.(false);
+      resolver?.(false);
     } else if (dialog.mode === 'prompt') {
-      resolverRef.current?.(null);
+      resolver?.(null);
     } else {
-      resolverRef.current?.(undefined);
+      resolver?.(undefined);
     }
     setDialog((prev) => ({ ...prev, isOpen: false }));
   };
@@ -297,11 +301,15 @@ export function CyberDialogProvider({ children }: { children: React.ReactNode })
             {/* Close Button */}
             <button
               type="button"
-              onClick={handleCancel}
-              className="absolute top-4 right-4 sm:top-5 sm:right-5 w-8 h-8 rounded-xl bg-white/5 hover:bg-white/10 text-slate-400 hover:text-white flex items-center justify-center transition-colors border border-white/5"
+              onClick={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                handleCancel();
+              }}
+              className="absolute top-3.5 right-3.5 sm:top-5 sm:right-5 z-50 w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/5 hover:bg-white/15 active:bg-white/25 text-slate-400 hover:text-white flex items-center justify-center transition-all cursor-pointer border border-white/10 hover:border-white/20 shadow-md group"
               aria-label="Close dialog"
             >
-              <X className="w-4 h-4" />
+              <X className="w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform" />
             </button>
 
             {/* Dialog Content */}

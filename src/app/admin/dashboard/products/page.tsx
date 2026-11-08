@@ -472,7 +472,7 @@ export default function AdminProductsPage() {
     const confirmed = await dialog.confirm({
       title: 'Delete Product',
       message: `Are you sure you want to permanently delete "${prod.name}"? All associated gallery images and records will be deleted from the database.`,
-      confirmText: 'Delete Product',
+      confirmText: 'Delete',
       cancelText: 'Cancel',
       type: 'danger',
       badge: 'PRODUCT CATALOG REMOVAL',
@@ -585,7 +585,8 @@ export default function AdminProductsPage() {
             <button
               type="button"
               onClick={() => setIsFormOpen(false)}
-              className="p-2 rounded-xl bg-[#0E1526] text-slate-400 hover:text-white hover:bg-white/10 border border-white/10 transition-colors shrink-0"
+              className="p-2 rounded-xl bg-[#0E1526] text-slate-400 hover:text-white hover:bg-white/10 border border-white/10 transition-colors shrink-0 cursor-pointer"
+              aria-label="Close form"
             >
               <X className="w-5 h-5" />
             </button>

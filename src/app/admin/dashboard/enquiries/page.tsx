@@ -133,7 +133,7 @@ export default function EnquiriesPage() {
       message: inq
         ? `Are you sure you want to permanently remove inquiry #${id} from ${inq.full_name}? This will purge the record from MySQL.`
         : 'Are you sure you want to permanently remove this inquiry record from MySQL?',
-      confirmText: 'Delete Permanently',
+      confirmText: 'Delete',
       cancelText: 'Cancel',
       type: 'danger',
       badge: 'DATABASE RECORD DELETION',
@@ -807,7 +807,12 @@ export default function EnquiriesPage() {
 
       {/* Comprehensive Inquiry Detail Modal */}
       {selectedInquiry && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 overflow-y-auto">
+        <div
+          className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4 overflow-y-auto"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setSelectedInquiry(null);
+          }}
+        >
           <div className="bg-[#0B101D] border border-cyan-500/30 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-6 relative animate-in zoom-in-95 duration-200 my-8 cyber-corner text-white">
             {/* Modal Header */}
             <div className="flex items-start justify-between pb-4 border-b border-white/10">
@@ -831,8 +836,14 @@ export default function EnquiriesPage() {
                 )}
               </div>
               <button
-                onClick={() => setSelectedInquiry(null)}
-                className="p-2 text-slate-400 hover:text-white rounded-xl hover:bg-white/10 transition-colors"
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setSelectedInquiry(null);
+                }}
+                className="p-2 text-slate-400 hover:text-white rounded-xl hover:bg-white/10 transition-colors cursor-pointer"
+                aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
               </button>

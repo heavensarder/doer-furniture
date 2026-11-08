@@ -161,7 +161,7 @@ export default function AdminCategoriesPage() {
     const confirmed = await dialog.confirm({
       title: 'Delete Category',
       message: `Are you sure you want to delete category "${cat.name}"? Products currently inside this category will be preserved as uncategorized.`,
-      confirmText: 'Delete Category',
+      confirmText: 'Delete',
       cancelText: 'Cancel',
       type: 'danger',
       badge: 'CATEGORY REMOVAL',

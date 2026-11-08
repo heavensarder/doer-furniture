@@ -98,7 +98,7 @@ export default function AdminOrdersPage() {
     const confirmed = await dialog.confirm({
       title: 'Delete Order Record',
       message: `Are you sure you want to permanently delete order ${order.order_number} for customer "${order.customer_name}"? This action cannot be undone.`,
-      confirmText: 'Delete Order',
+      confirmText: 'Delete',
       cancelText: 'Cancel',
       type: 'danger',
       badge: 'ORDER RECORD DELETION',

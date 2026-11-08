@@ -627,8 +627,9 @@ export default function ConsoleTableShowcase() {
               </div>
 
               <button
+                type="button"
                 onClick={() => setQuickViewProduct(null)}
-                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-[#FF3D00] hover:text-white text-slate-700 flex items-center justify-center transition-colors shrink-0"
+                className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-[#FF3D00] hover:text-white text-slate-700 flex items-center justify-center transition-colors shrink-0 cursor-pointer"
                 aria-label="Close modal"
               >
                 <X className="w-4 h-4 sm:w-5 sm:h-5" />
