@@ -30,9 +30,7 @@ export default function ProjectsPage() {
   const [galleryViews, setGalleryViews] = useState<Record<string, 'completed' | 'design'>>({
     'south-pole': 'completed',
     'door-lock': 'completed',
-    'cdpl': 'completed',
     'walton': 'completed',
-    'conference': 'completed',
   });
 
   const projects: ProjectItem[] = [
@@ -67,23 +65,8 @@ export default function ProjectsPage() {
         '/images/projects/door-lock-bangladesh-completed.jpg',
     },
     {
-      id: 'cdpl',
-      number: '03',
-      title: 'CDPL Control Rooms',
-      category: 'Government Project',
-      categoryFilter: 'government',
-      location: 'Rupganj, Narayanganj, Cumilla & Chittagong',
-      scope: ['Electrical solutions', 'Interior solutions'],
-      description:
-        'DOER delivered electrical and interior solutions for CDPL control room projects across multiple locations, focusing on functional layouts and professional working environments.',
-      designImage:
-        '/images/projects/cdpl-control-rooms-visualization.jpg',
-      completedImage:
-        '/images/projects/cdpl-control-rooms-completed.jpg',
-    },
-    {
       id: 'walton',
-      number: '04',
+      number: '03',
       title: 'Walton Signature Showrooms',
       category: 'Showroom Project',
       categoryFilter: 'showroom',
@@ -95,6 +78,22 @@ export default function ProjectsPage() {
         '/images/projects/walton-signature-showrooms-visualization.jpg',
       completedImage:
         '/images/projects/walton-signature-showrooms-completed.jpg',
+    },
+    /* Hidden for now:
+    {
+      id: 'cdpl',
+      number: '04',
+      title: 'CDPL Control Rooms',
+      category: 'Government Project',
+      categoryFilter: 'government',
+      location: 'Rupganj, Narayanganj, Cumilla & Chittagong',
+      scope: ['Electrical solutions', 'Interior solutions'],
+      description:
+        'DOER delivered electrical and interior solutions for CDPL control room projects across multiple locations, focusing on functional layouts and professional working environments.',
+      designImage:
+        '/images/projects/cdpl-control-rooms-visualization.jpg',
+      completedImage:
+        '/images/projects/cdpl-control-rooms-completed.jpg',
     },
     {
       id: 'conference',
@@ -118,6 +117,7 @@ export default function ProjectsPage() {
       completedImage:
         '/images/projects/custom-conference-table-completed.jpg',
     },
+    */
   ];
 
   const filteredProjects =
@@ -179,7 +179,9 @@ export default function ProjectsPage() {
               { label: 'Retail & Showrooms', value: 'showroom' },
               { label: 'Government', value: 'government' },
               { label: 'Custom Furniture', value: 'furniture' },
-            ].map((tab) => (
+            ]
+              .filter((tab) => tab.value === 'all' || projects.some((p) => p.categoryFilter === tab.value))
+              .map((tab) => (
               <button
                 key={tab.value}
                 onClick={() => setActiveTab(tab.value as any)}

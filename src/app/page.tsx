@@ -263,8 +263,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 03. OUR SERVICES SECTION - COMPACT SINGLE-SCREEN SHOWCASE */}
-      <section className="py-10 lg:py-14 bg-[#05070B] border-b border-cyan-500/20 w-full overflow-hidden relative bg-circuit-grid">
+      {/* 03. OUR SERVICES SECTION - COMPACT SINGLE-SCREEN SHOWCASE (HIDDEN FOR NOW) */}
+      <section
+        className="hidden py-10 lg:py-14 bg-[#05070B] border-b border-cyan-500/20 w-full overflow-hidden relative bg-circuit-grid"
+        style={{ display: 'none' }}
+      >
         {/* Vertical Neon Laser Lines */}
         <div className="neon-line-v-cyan absolute top-0 bottom-0 left-0 z-20" />
         <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20" />

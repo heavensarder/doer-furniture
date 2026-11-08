@@ -64,6 +64,20 @@ const projects: Project[] = [
   },
   {
     number: '03',
+    title: 'Walton Signature Showrooms',
+    tagline: 'Experiential Brand Display Architecture',
+    category: 'Brand Showroom',
+    location: 'Rupganj & Beldi',
+    scope: ['Modular Display Units', 'Commercial Electrical', 'Brand Architecture'],
+    description:
+      'Designed and executed comprehensive commercial showroom environments featuring bespoke illumination zones, premium product podiums, and seamless brand journey flow.',
+    keyFeature: 'Turnkey Commercial Showroom Delivery',
+    image: '/images/projects/walton-signature-showrooms-completed.jpg',
+    href: '/projects',
+  },
+  /* Hidden for now:
+  {
+    number: '04',
     title: '40-Person Conference Suite',
     tagline: 'Monumental Custom Executive Boardroom Table',
     category: 'Custom Millwork Fabrication',
@@ -76,7 +90,7 @@ const projects: Project[] = [
     href: '/projects',
   },
   {
-    number: '04',
+    number: '05',
     title: 'CDPL Control Rooms',
     tagline: 'Mission-Critical Government Command Infrastructure',
     category: 'Government Project',
@@ -88,19 +102,7 @@ const projects: Project[] = [
     image: '/images/projects/cdpl-control-rooms-completed.jpg',
     href: '/projects',
   },
-  {
-    number: '05',
-    title: 'Walton Signature Showrooms',
-    tagline: 'Experiential Brand Display Architecture',
-    category: 'Brand Showroom',
-    location: 'Rupganj & Beldi',
-    scope: ['Modular Display Units', 'Commercial Electrical', 'Brand Architecture'],
-    description:
-      'Designed and executed comprehensive commercial showroom environments featuring bespoke illumination zones, premium product podiums, and seamless brand journey flow.',
-    keyFeature: 'Turnkey Commercial Showroom Delivery',
-    image: '/images/projects/walton-signature-showrooms-completed.jpg',
-    href: '/projects',
-  },
+  */
 ];
 
 export default function FeaturedProjectsShowcase() {
