@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   Cpu,
 } from 'lucide-react';
+import { stripHtml } from '@/components/admin/RichTextEditor';
 
 export interface ProductCardItem {
   id: number;
@@ -160,12 +161,13 @@ export default function FeaturedCategoryProducts({
             categorySlug: p.category_slug || data.categorySlug,
             image: p.main_image || '/images/products/03-office-control-console-yq-dz-01.jpg',
             shortDesc:
-              p.short_description ||
-              (p.description ? p.description.replace(/<[^>]+>/g, '').slice(0, 110) : ''),
+              p.short_description
+                ? stripHtml(p.short_description).slice(0, 110)
+                : (p.description ? stripHtml(p.description).slice(0, 110) : ''),
             price: p.price,
             isCallForPrice: Boolean(p.is_call_for_price),
             specs: p.short_description
-              ? p.short_description.replace(/<[^>]+>/g, '').slice(0, 40)
+              ? stripHtml(p.short_description).slice(0, 40)
               : 'Precision Modular Console',
             badge: p.is_call_for_price ? 'Quote on Demand' : '24/7 Heavy Duty',
           }));

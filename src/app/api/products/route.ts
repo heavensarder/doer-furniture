@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getCurrentAdmin } from '@/lib/auth';
 import { ensureEcommerceTables } from '@/lib/ecommerce-db';
+import { cleanHtmlStyles } from '@/components/admin/RichTextEditor';
 
 export const dynamic = 'force-dynamic';
 
@@ -103,8 +104,8 @@ export async function POST(request: Request) {
 
     const body = await request.json();
     const name = (body.name || '').trim();
-    const shortDescription = (body.short_description || '').trim();
-    const description = (body.description || '').trim();
+    const shortDescription = cleanHtmlStyles((body.short_description || '').trim());
+    const description = cleanHtmlStyles((body.description || '').trim());
     const categoryId = body.category_id ? Number(body.category_id) : null;
     const mainImage = (body.main_image || '').trim();
     const galleryImages: string[] = Array.isArray(body.gallery_images) ? body.gallery_images : [];

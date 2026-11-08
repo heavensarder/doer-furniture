@@ -510,7 +510,8 @@ export default function SingleProductPage() {
               {product.short_description && (
                 <div
                   className="text-xs sm:text-base text-slate-300 leading-relaxed
-                    [&_p]:mb-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1 [&_strong]:text-white"
+                    [&_*]:!text-slate-300 [&_strong]:!text-white [&_b]:!text-white [&_a]:!text-cyan-400
+                    [&_p]:mb-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1"
                   dangerouslySetInnerHTML={{
                     __html: normalizeToHtml(product.short_description),
                   }}
@@ -719,17 +720,19 @@ export default function SingleProductPage() {
 
             <div
               className="max-w-none text-slate-300 text-xs sm:text-base leading-relaxed bg-[#0A0F1D]/90 p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/10 overflow-x-auto cyber-corner
-                [&_h2]:text-lg [&_h2]:sm:text-2xl [&_h2]:font-black [&_h2]:text-white [&_h2]:mt-5 [&_h2]:mb-2.5 [&_h2:first-child]:mt-0
-                [&_h3]:text-base [&_h3]:sm:text-lg [&_h3]:font-bold [&_h3]:text-white [&_h3]:mt-4 [&_h3]:mb-2 [&_h3:first-child]:mt-0
+                [&_*]:!text-slate-300
+                [&_h2]:text-lg [&_h2]:sm:text-2xl [&_h2]:font-black [&_h2]:!text-white [&_h2]:mt-5 [&_h2]:mb-2.5 [&_h2:first-child]:mt-0
+                [&_h3]:text-base [&_h3]:sm:text-lg [&_h3]:font-bold [&_h3]:!text-white [&_h3]:mt-4 [&_h3]:mb-2 [&_h3:first-child]:mt-0
+                [&_strong]:!text-white [&_b]:!text-white
                 [&_p]:mb-3 [&_p:last-child]:mb-0
                 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:sm:pl-6 [&_ul]:mb-4 [&_ul]:space-y-1.5
                 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:sm:pl-6 [&_ol]:mb-4 [&_ol]:space-y-1.5
-                [&_blockquote]:border-l-4 [&_blockquote]:border-[#FF3D00] [&_blockquote]:bg-[#0E1526] [&_blockquote]:pl-3.5 [&_blockquote]:py-2 [&_blockquote]:my-3.5 [&_blockquote]:italic [&_blockquote]:text-slate-300 [&_blockquote]:rounded-r-xl
+                [&_blockquote]:border-l-4 [&_blockquote]:border-[#FF3D00] [&_blockquote]:bg-[#0E1526] [&_blockquote]:pl-3.5 [&_blockquote]:py-2 [&_blockquote]:my-3.5 [&_blockquote]:italic [&_blockquote]:!text-slate-300 [&_blockquote]:rounded-r-xl
                 [&_hr]:my-4 [&_hr]:border-white/10
-                [&_a]:text-cyan-400 [&_a]:font-semibold [&_a]:underline
+                [&_a]:!text-cyan-400 [&_a]:font-semibold [&_a]:underline
                 [&_table]:w-full [&_table]:border-collapse [&_table]:my-4 [&_table]:bg-[#070A12] [&_table]:rounded-xl [&_table]:overflow-hidden [&_table]:text-xs [&_table]:sm:text-sm
-                [&_th]:bg-[#0E1526] [&_th]:text-cyan-300 [&_th]:font-bold [&_th]:text-left [&_th]:p-2.5 [&_th]:sm:p-3.5 [&_th]:border [&_th]:border-white/10
-                [&_td]:p-2.5 [&_td]:sm:p-3.5 [&_td]:border [&_td]:border-white/10 [&_td]:text-slate-300"
+                [&_th]:bg-[#0E1526] [&_th]:!text-cyan-300 [&_th]:font-bold [&_th]:text-left [&_th]:p-2.5 [&_th]:sm:p-3.5 [&_th]:border [&_th]:border-white/10
+                [&_td]:p-2.5 [&_td]:sm:p-3.5 [&_td]:border [&_td]:border-white/10 [&_td]:!text-slate-300"
               dangerouslySetInnerHTML={{
                 __html: normalizeToHtml(product.description || product.short_description),
               }}

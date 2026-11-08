@@ -31,14 +31,43 @@ interface RichTextEditorProps {
 }
 
 /**
+ * Helper to clean out inline colors, backgrounds, and font families
+ * (typically injected when copying text from external sites, Word, or Google Docs).
+ */
+export function cleanHtmlStyles(content: string): string {
+  if (!content) return '';
+  return content
+    .replace(/<\/?font[^>]*>/gi, '')
+    .replace(/style\s*=\s*["']([^"']*)["']/gi, (match, styleBody) => {
+      const cleaned = styleBody
+        .split(';')
+        .map((rule: string) => rule.trim())
+        .filter((rule: string) => {
+          if (!rule) return false;
+          const lower = rule.toLowerCase();
+          return (
+            !lower.startsWith('color') &&
+            !lower.startsWith('background') &&
+            !lower.startsWith('font-family')
+          );
+        })
+        .join('; ');
+      return cleaned ? `style="${cleaned}"` : '';
+    })
+    .replace(/<span\s*>([\s\S]*?)<\/span>/gi, '$1')
+    .replace(/\s{2,}/g, ' ');
+}
+
+/**
  * Helper to normalize plain text (from older records) into HTML paragraphs
- * if it doesn't contain HTML tags yet.
+ * if it doesn't contain HTML tags yet, and strip any harmful inline dark colors.
  */
 export function normalizeToHtml(content: string): string {
   if (!content) return '';
-  const hasHtmlTags = /<\/?[a-z][\s\S]*>/i.test(content);
-  if (hasHtmlTags) return content;
-  return content
+  const cleaned = cleanHtmlStyles(content);
+  const hasHtmlTags = /<\/?[a-z][\s\S]*>/i.test(cleaned);
+  if (hasHtmlTags) return cleaned;
+  return cleaned
     .split(/\n\n+/)
     .map((para) => `<p>${para.replace(/\n/g, '<br/>')}</p>`)
     .join('');
@@ -98,8 +127,22 @@ export default function RichTextEditor({
     if (html === '<br>' || html === '<p><br></p>') {
       onChange('');
     } else {
-      onChange(html);
+      onChange(cleanHtmlStyles(html));
     }
+  };
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const textHtml = e.clipboardData.getData('text/html');
+    const textPlain = e.clipboardData.getData('text/plain');
+
+    if (textHtml) {
+      const cleaned = cleanHtmlStyles(textHtml);
+      document.execCommand('insertHTML', false, cleaned);
+    } else if (textPlain) {
+      document.execCommand('insertText', false, textPlain);
+    }
+    triggerChange();
   };
 
   const execCommand = (command: string, arg: string = '') => {
@@ -402,19 +445,22 @@ export default function RichTextEditor({
             suppressContentEditableWarning
             onInput={triggerChange}
             onBlur={triggerChange}
+            onPaste={handlePaste}
             style={{ minHeight }}
-            className="w-full p-3.5 text-sm text-slate-100 focus:outline-none overflow-y-auto leading-relaxed
-              [&_h2]:text-lg [&_h2]:font-black [&_h2]:text-white [&_h2]:mt-3 [&_h2]:mb-1.5
-              [&_h3]:text-base [&_h3]:font-bold [&_h3]:text-white [&_h3]:mt-2.5 [&_h3]:mb-1
-              [&_p]:mb-2 [&_p]:text-slate-200
-              [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-2 [&_ul]:space-y-1 [&_ul]:text-slate-200
-              [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-2 [&_ol]:space-y-1 [&_ol]:text-slate-200
-              [&_blockquote]:border-l-4 [&_blockquote]:border-[#FF3D00] [&_blockquote]:bg-[#0B101D] [&_blockquote]:pl-3 [&_blockquote]:py-1.5 [&_blockquote]:my-2 [&_blockquote]:italic [&_blockquote]:text-slate-300
+            className="w-full p-3.5 text-sm !text-slate-100 focus:outline-none overflow-y-auto leading-relaxed
+              [&_*]:!text-slate-200
+              [&_h2]:!text-lg [&_h2]:!font-black [&_h2]:!text-white [&_h2]:mt-3 [&_h2]:mb-1.5
+              [&_h3]:!text-base [&_h3]:!font-bold [&_h3]:!text-white [&_h3]:mt-2.5 [&_h3]:mb-1
+              [&_strong]:!text-white [&_b]:!text-white
+              [&_p]:mb-2 [&_p]:!text-slate-200
+              [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-2 [&_ul]:space-y-1 [&_ul]:!text-slate-200
+              [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-2 [&_ol]:space-y-1 [&_ol]:!text-slate-200
+              [&_blockquote]:border-l-4 [&_blockquote]:border-[#FF3D00] [&_blockquote]:bg-[#0B101D] [&_blockquote]:pl-3 [&_blockquote]:py-1.5 [&_blockquote]:my-2 [&_blockquote]:italic [&_blockquote]:!text-slate-300
               [&_hr]:my-3 [&_hr]:border-white/10
-              [&_a]:text-[#FF3D00] [&_a]:underline
+              [&_a]:!text-[#FF3D00] [&_a]:underline
               [&_table]:w-full [&_table]:border-collapse [&_table]:my-3 [&_table]:text-xs
-              [&_th]:bg-[#080C16] [&_th]:text-white [&_th]:font-bold [&_th]:text-left [&_th]:p-2.5 [&_th]:border [&_th]:border-white/10
-              [&_td]:p-2.5 [&_td]:border [&_td]:border-white/10 [&_td]:text-slate-300"
+              [&_th]:bg-[#080C16] [&_th]:!text-white [&_th]:font-bold [&_th]:text-left [&_th]:p-2.5 [&_th]:border [&_th]:border-white/10
+              [&_td]:p-2.5 [&_td]:border [&_td]:border-white/10 [&_td]:!text-slate-300"
           />
         </div>
       )}
