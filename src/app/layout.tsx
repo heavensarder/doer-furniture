@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import { constructMetadata } from '@/lib/metadata';
+import { CyberDialogProvider } from '@/components/ui/CyberDialog';
 
 export const metadata: Metadata = constructMetadata();
 
@@ -33,9 +34,11 @@ export default function RootLayout({
           className="neon-line-v-orange fixed top-[56px] sm:top-[64px] bottom-0 right-2 sm:right-4 lg:right-6 w-[1px] z-40 pointer-events-none opacity-40 sm:opacity-65"
         />
 
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <CyberDialogProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </CyberDialogProvider>
       </body>
     </html>
   );

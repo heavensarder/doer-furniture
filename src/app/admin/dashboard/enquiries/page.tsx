@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { useCyberDialog } from '@/components/ui/CyberDialog';
 import {
   Inbox,
   Clock,
@@ -38,6 +39,7 @@ interface Inquiry {
 }
 
 export default function EnquiriesPage() {
+  const dialog = useCyberDialog();
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -113,7 +115,11 @@ export default function EnquiriesPage() {
 
       showToast(`Status updated to "${newStatus.replace('_', ' ').toUpperCase()}" in MySQL`);
     } catch (err: any) {
-      alert(err.message || 'Error updating status');
+      dialog.alert({
+        title: 'Status Update Failed',
+        message: err.message || 'Error updating status in database',
+        type: 'error',
+      });
     } finally {
       setUpdatingId(null);
     }
@@ -121,7 +127,19 @@ export default function EnquiriesPage() {
 
   // Delete inquiry
   const handleDelete = async (id: number) => {
-    if (!confirm('Are you sure you want to permanently remove this inquiry record from MySQL?')) {
+    const inq = inquiries.find((item) => item.id === id);
+    const confirmed = await dialog.confirm({
+      title: 'Delete Inquiry Record',
+      message: inq
+        ? `Are you sure you want to permanently remove inquiry #${id} from ${inq.full_name}? This will purge the record from MySQL.`
+        : 'Are you sure you want to permanently remove this inquiry record from MySQL?',
+      confirmText: 'Delete Permanently',
+      cancelText: 'Cancel',
+      type: 'danger',
+      badge: 'DATABASE RECORD DELETION',
+    });
+
+    if (!confirmed) {
       return;
     }
 
@@ -134,7 +152,11 @@ export default function EnquiriesPage() {
 
       showToast('Inquiry record deleted from MySQL database');
     } catch (err: any) {
-      alert(err.message || 'Error deleting inquiry');
+      dialog.alert({
+        title: 'Deletion Failed',
+        message: err.message || 'Error deleting inquiry from database',
+        type: 'error',
+      });
     }
   };
 

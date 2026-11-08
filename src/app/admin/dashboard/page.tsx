@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { useCyberDialog } from '@/components/ui/CyberDialog';
 import {
   Inbox,
   Clock,
@@ -37,6 +38,7 @@ interface Inquiry {
 }
 
 export default function AdminDashboardPage() {
+  const dialog = useCyberDialog();
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -93,7 +95,11 @@ export default function AdminDashboardPage() {
       setActionMessage('Status updated successfully in MySQL');
       setTimeout(() => setActionMessage(null), 3000);
     } catch (err: any) {
-      alert(err.message || 'Error updating status');
+      dialog.alert({
+        title: 'Status Update Failed',
+        message: err.message || 'Error updating status in database',
+        type: 'error',
+      });
     } finally {
       setUpdatingId(null);
     }
@@ -101,7 +107,19 @@ export default function AdminDashboardPage() {
 
   // Delete inquiry
   const handleDelete = async (id: number) => {
-    if (!confirm('Are you sure you want to delete this inquiry record?')) return;
+    const inq = inquiries.find((item) => item.id === id);
+    const confirmed = await dialog.confirm({
+      title: 'Delete Inquiry Record',
+      message: inq
+        ? `Are you sure you want to delete inquiry #${id} from ${inq.full_name}? This action will permanently remove the record from MySQL.`
+        : 'Are you sure you want to delete this inquiry record?',
+      confirmText: 'Delete Record',
+      cancelText: 'Cancel',
+      type: 'danger',
+      badge: 'DATABASE RECORD DELETION',
+    });
+
+    if (!confirmed) return;
 
     try {
       const res = await fetch(`/api/inquiries/${id}`, { method: 'DELETE' });
@@ -113,7 +131,11 @@ export default function AdminDashboardPage() {
       setActionMessage('Inquiry deleted from database');
       setTimeout(() => setActionMessage(null), 3000);
     } catch (err: any) {
-      alert(err.message || 'Error deleting inquiry');
+      dialog.alert({
+        title: 'Deletion Failed',
+        message: err.message || 'Error deleting inquiry from database',
+        type: 'error',
+      });
     }
   };
 

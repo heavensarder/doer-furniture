@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useEffect, useState } from 'react';
+import { useCyberDialog } from '@/components/ui/CyberDialog';
 import {
   Bold,
   Italic,
@@ -69,6 +70,7 @@ export default function RichTextEditor({
   minHeight = '180px',
   compact = false,
 }: RichTextEditorProps) {
+  const dialog = useCyberDialog();
   const editorRef = useRef<HTMLDivElement>(null);
   const isInternalChange = useRef(false);
   const [sourceMode, setSourceMode] = useState(false);
@@ -114,8 +116,15 @@ export default function RichTextEditor({
     triggerChange();
   };
 
-  const handleInsertLink = () => {
-    const url = window.prompt('Enter URL (e.g. https://...):', 'https://');
+  const handleInsertLink = async () => {
+    const url = await dialog.prompt({
+      title: 'Insert Hyperlink',
+      message: 'Enter destination URL (e.g. https://...):',
+      defaultValue: 'https://',
+      placeholder: 'https://example.com',
+      confirmText: 'Insert Link',
+      badge: 'RICH TEXT EDITOR',
+    });
     if (url && url.trim()) {
       execCommand('createLink', url.trim());
     }

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useCyberDialog } from '@/components/ui/CyberDialog';
 import {
   FolderTree,
   Plus,
@@ -38,6 +39,7 @@ function toSlug(val: string): string {
 }
 
 export default function AdminCategoriesPage() {
+  const dialog = useCyberDialog();
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [savingOrder, setSavingOrder] = useState(false);
@@ -156,11 +158,16 @@ export default function AdminCategoriesPage() {
   };
 
   const handleDelete = async (cat: Category) => {
-    if (
-      !window.confirm(
-        `Delete category "${cat.name}"? Products inside this category will be kept as uncategorized.`
-      )
-    ) {
+    const confirmed = await dialog.confirm({
+      title: 'Delete Category',
+      message: `Are you sure you want to delete category "${cat.name}"? Products currently inside this category will be preserved as uncategorized.`,
+      confirmText: 'Delete Category',
+      cancelText: 'Cancel',
+      type: 'danger',
+      badge: 'CATEGORY REMOVAL',
+    });
+
+    if (!confirmed) {
       return;
     }
 

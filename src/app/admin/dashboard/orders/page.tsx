@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useCyberDialog } from '@/components/ui/CyberDialog';
 import {
   ClipboardList,
   Search,
@@ -47,6 +48,7 @@ const STATUS_OPTIONS = [
 ];
 
 export default function AdminOrdersPage() {
+  const dialog = useCyberDialog();
   const [orders, setOrders] = useState<OrderItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState('all');
@@ -93,7 +95,16 @@ export default function AdminOrdersPage() {
   };
 
   const handleDelete = async (order: OrderItem) => {
-    if (!window.confirm(`Delete order ${order.order_number} from ${order.customer_name}?`)) {
+    const confirmed = await dialog.confirm({
+      title: 'Delete Order Record',
+      message: `Are you sure you want to permanently delete order ${order.order_number} for customer "${order.customer_name}"? This action cannot be undone.`,
+      confirmText: 'Delete Order',
+      cancelText: 'Cancel',
+      type: 'danger',
+      badge: 'ORDER RECORD DELETION',
+    });
+
+    if (!confirmed) {
       return;
     }
 

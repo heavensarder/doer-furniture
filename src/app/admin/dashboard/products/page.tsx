@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useCyberDialog } from '@/components/ui/CyberDialog';
 import {
   Package,
   Plus,
@@ -77,6 +78,7 @@ function extractYouTubeId(input: string): string | null {
 }
 
 export default function AdminProductsPage() {
+  const dialog = useCyberDialog();
   const [products, setProducts] = useState<ProductItem[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -467,7 +469,16 @@ export default function AdminProductsPage() {
   };
 
   const handleDelete = async (prod: ProductItem) => {
-    if (!window.confirm(`Are you sure you want to delete "${prod.name}"?`)) return;
+    const confirmed = await dialog.confirm({
+      title: 'Delete Product',
+      message: `Are you sure you want to permanently delete "${prod.name}"? All associated gallery images and records will be deleted from the database.`,
+      confirmText: 'Delete Product',
+      cancelText: 'Cancel',
+      type: 'danger',
+      badge: 'PRODUCT CATALOG REMOVAL',
+    });
+
+    if (!confirmed) return;
 
     try {
       const res = await fetch(`/api/products/${prod.id}`, { method: 'DELETE' });
