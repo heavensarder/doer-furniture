@@ -251,14 +251,14 @@ export default function SingleProductPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#05070B] text-slate-100 bg-cyber-grid pt-20 sm:pt-28 pb-28 sm:pb-20 relative overflow-hidden">
+    <div className="min-h-screen bg-[#05070B] text-slate-100 bg-cyber-grid pt-16 sm:pt-28 pb-28 sm:pb-20 relative overflow-hidden">
       {/* Vertical Neon Laser Lines */}
       <div className="neon-line-v-cyan absolute top-0 bottom-0 left-0 z-20" />
       <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20" />
 
       {/* Top App Navigation / Breadcrumb Bar */}
-      <div className="sticky top-[60px] sm:static z-20 border-b border-cyan-500/20 bg-[#080C16]/90 backdrop-blur-xl sm:bg-transparent">
-        <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 flex items-center justify-between gap-3">
+      <div className="relative z-10 border-b border-white/10 sm:border-cyan-500/20 bg-[#080C16]/80 backdrop-blur-md sm:bg-transparent">
+        <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-2 sm:py-3.5 flex items-center justify-between gap-3">
           {/* Mobile Back Button + Category */}
           <div className="flex items-center gap-2 min-w-0">
             <Link
@@ -322,7 +322,7 @@ export default function SingleProductPage() {
       </div>
 
       {/* Main Product Showcase Grid */}
-      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 pt-4 sm:pt-10 lg:pt-12">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 pt-2 sm:pt-10 lg:pt-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-12 items-start">
           {/* LEFT 6 COLS: AUTO-SLIDING MEDIA GALLERY (1:1 SQUARE IMAGES + VIDEO) */}
           <div

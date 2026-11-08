@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -120,7 +120,74 @@ export default function FeaturedCategoryProducts({
   config,
 }: FeaturedCategoryProductsProps) {
   const data = { ...DEFAULT_CONSOLE_CATEGORY, ...config };
+  // Strictly enforce a maximum of the latest 4 products
+  const [displayedProducts, setDisplayedProducts] = useState<ProductCardItem[]>(
+    () => (data.products || []).slice(0, 4)
+  );
+
   const whatsappNumber = '8801976535654';
+
+  // Fetch the latest 4 console tables from the database dynamically
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchLatestConsoleTables = async () => {
+      try {
+        const res = await fetch('/api/products?status=published', { cache: 'no-store' });
+        if (!res.ok) return;
+        const json = await res.json();
+        const allProducts = json.products || [];
+
+        // Filter products that belong to Control Room Consoles / Console Tables
+        const consoleProducts = allProducts.filter((p: any) => {
+          const slug = (p.category_slug || '').toLowerCase();
+          const catName = (p.category_name || '').toLowerCase();
+          const prodName = (p.name || '').toLowerCase();
+          return (
+            slug === 'control-room-consoles' ||
+            slug.includes('console') ||
+            catName.includes('console') ||
+            prodName.includes('console')
+          );
+        });
+
+        if (consoleProducts.length > 0 && isMounted) {
+          const mapped: ProductCardItem[] = consoleProducts.map((p: any) => ({
+            id: p.id,
+            name: p.name,
+            slug: p.slug,
+            categoryName: p.category_name || data.categoryName,
+            categorySlug: p.category_slug || data.categorySlug,
+            image: p.main_image || '/images/products/03-office-control-console-yq-dz-01.jpg',
+            shortDesc:
+              p.short_description ||
+              (p.description ? p.description.replace(/<[^>]+>/g, '').slice(0, 110) : ''),
+            price: p.price,
+            isCallForPrice: Boolean(p.is_call_for_price),
+            specs: p.short_description
+              ? p.short_description.replace(/<[^>]+>/g, '').slice(0, 40)
+              : 'Precision Modular Console',
+            badge: p.is_call_for_price ? 'Quote on Demand' : '24/7 Heavy Duty',
+          }));
+
+          // Strictly limit to the latest 4 console tables, no more
+          setDisplayedProducts(mapped.slice(0, 4));
+        }
+      } catch (err) {
+        // Fall back safely to default initial 4 tables
+      }
+    };
+
+    fetchLatestConsoleTables();
+
+    // Listen for live product updates from admin panel
+    const handleUpdate = () => fetchLatestConsoleTables();
+    window.addEventListener('products-updated', handleUpdate);
+    return () => {
+      isMounted = false;
+      window.removeEventListener('products-updated', handleUpdate);
+    };
+  }, [data.categorySlug, data.categoryName]);
 
   const getWhatsAppUrl = (product: ProductCardItem) => {
     const text = encodeURIComponent(
@@ -144,14 +211,6 @@ export default function FeaturedCategoryProducts({
         {/* Section Header: Title, Subtitle, and View All Link */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10 sm:mb-14">
           <div className="space-y-3 max-w-3xl">
-            {/* Category / Section Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/35 text-[#FF3D00] text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.3)]">
-              <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse shadow-[0_0_8px_#FF3D00]" />
-              <span>{data.badge}</span>
-              <span className="text-white/20">|</span>
-              <span className="text-[#FF3D00] font-mono text-[11px] font-semibold">{data.categoryName}</span>
-            </div>
-
             {/* Section Heading */}
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
               {data.titlePrefix}{' '}
@@ -183,9 +242,9 @@ export default function FeaturedCategoryProducts({
           </div>
         </div>
 
-        {/* 4-Column Responsive Product Grid */}
+        {/* 4-Column Responsive Product Grid — STRICTLY LATEST 4 TABLES */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {data.products.map((product) => {
+          {displayedProducts.slice(0, 4).map((product) => {
             const hasPrice = !product.isCallForPrice && product.price && Number(product.price) > 0;
 
             return (
