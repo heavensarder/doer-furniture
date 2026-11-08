@@ -13,7 +13,6 @@ import {
   Layers,
   CheckCircle2,
   ArrowRight,
-  ArrowUpRight,
 } from 'lucide-react';
 import { constructMetadata } from '@/lib/metadata';
 
@@ -156,48 +155,54 @@ export default function ServicesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Page Banner */}
-      <section className="relative pt-28 sm:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-28 bg-slate-950 text-white overflow-hidden bg-architectural-grid-dark">
+    <div className="min-h-screen bg-[#05070B] text-slate-100 selection:bg-[#FF3D00] selection:text-white relative overflow-hidden">
+      {/* 01. Page Banner */}
+      <section className="relative pt-28 sm:pt-36 lg:pt-40 pb-16 sm:pb-20 lg:pb-28 bg-[#05070B] text-white overflow-hidden bg-circuit-grid border-b border-cyan-500/20">
+        <div className="neon-line-v-cyan absolute top-0 bottom-0 left-0 z-20" />
+        <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20" />
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2000&q=80"
             alt="DOER Services Banner"
             fill
             priority
-            className="object-cover opacity-20"
+            className="object-cover opacity-15"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#05070B] via-[#05070B]/80 to-transparent" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#00F0FF]/10 rounded-full blur-[140px] pointer-events-none" />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3 sm:space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
-            <span>Our Services</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(0,240,255,0.25)]">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <span>Industrial Fit-Out Capabilities</span>
           </div>
-          <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
+          <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
             Our Services
           </h1>
-          <p className="max-w-2xl mx-auto text-sm sm:text-lg lg:text-xl text-slate-300 font-light px-2 sm:px-0 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-sm sm:text-lg lg:text-xl text-slate-300 font-normal px-2 sm:px-0 leading-relaxed">
             Complete Interior Design, Manufacturing & Execution Solutions.
           </p>
         </div>
       </section>
 
-      {/* Introduction */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-white border-b border-slate-100 bg-architectural-grid">
+      {/* 02. Introduction */}
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#070A12] border-b border-cyan-500/20 bg-cyber-grid text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3 sm:space-y-4">
-          <p className="text-lg sm:text-xl lg:text-2xl text-slate-900 font-bold leading-relaxed">
+          <p className="text-lg sm:text-xl lg:text-2xl text-white font-bold leading-relaxed">
             At DOER, we provide integrated solutions for commercial interiors, corporate spaces, customized furniture, and renovation projects.
           </p>
-          <p className="text-xs sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal">
+          <p className="text-xs sm:text-base lg:text-lg text-slate-400 leading-relaxed font-normal">
             Our multidisciplinary capabilities allow us to manage projects from initial planning and design through manufacturing, installation, and final delivery.
           </p>
         </div>
       </section>
 
-      {/* Main 6 Core Services */}
-      <section className="py-16 sm:py-20 lg:py-28 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-20 lg:space-y-24">
+      {/* 03. Main 6 Core Services */}
+      <section className="py-16 sm:py-20 lg:py-28 bg-[#05070B] bg-circuit-grid relative border-b border-cyan-500/20">
+        <div className="neon-line-v-orange absolute top-0 bottom-0 left-0 z-20" />
+        <div className="neon-line-v-cyan absolute top-0 bottom-0 right-0 z-20" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-20 lg:space-y-24 relative z-10">
           {mainServices.map((service, index) => {
             const isEven = index % 2 === 1;
             const Icon = service.icon;
@@ -211,14 +216,15 @@ export default function ServicesPage() {
               >
                 {/* Image Showcase */}
                 <div className={`lg:col-span-6 ${isEven ? 'lg:order-2' : ''}`}>
-                  <div className="relative h-[260px] xs:h-[300px] sm:h-[400px] lg:h-[450px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-200 group">
+                  <div className="relative h-[260px] xs:h-[300px] sm:h-[400px] lg:h-[450px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_0_35px_rgba(0,0,0,0.8)] border border-cyan-500/30 group cyber-corner">
                     <Image
                       src={service.image}
                       alt={service.title}
                       fill
                       className="object-cover img-zoom"
                     />
-                    <div className="absolute top-3 left-3 sm:top-5 sm:left-5 px-3 sm:px-3.5 py-1 sm:py-1.5 bg-slate-950/85 backdrop-blur-md rounded-lg text-white font-mono text-[10px] sm:text-xs font-bold border border-white/10">
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#05070B]/80 via-transparent to-transparent" />
+                    <div className="absolute top-3 left-3 sm:top-5 sm:left-5 px-3 sm:px-3.5 py-1 sm:py-1.5 bg-[#080C16]/90 backdrop-blur-md rounded-lg text-cyan-300 font-mono text-[10px] sm:text-xs font-bold border border-cyan-500/30">
                       Service {service.number}
                     </div>
                   </div>
@@ -226,7 +232,7 @@ export default function ServicesPage() {
 
                 {/* Content */}
                 <div className={`lg:col-span-6 space-y-4 sm:space-y-6 ${isEven ? 'lg:order-1' : ''}`}>
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-[#FF3D00]/10 text-[#FF3D00] flex items-center justify-center">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shadow-[0_0_15px_rgba(0,240,255,0.25)]">
                     <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
 
@@ -234,23 +240,23 @@ export default function ServicesPage() {
                     <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-[#FF3D00] block mb-1">
                       Service {service.number}
                     </span>
-                    <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+                    <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
                       {service.title}
                     </h2>
                   </div>
 
-                  <p className="text-slate-600 leading-relaxed text-xs sm:text-sm lg:text-base font-normal">
+                  <p className="text-slate-300 leading-relaxed text-xs sm:text-sm lg:text-base font-normal">
                     {service.description}
                   </p>
 
-                  <div className="space-y-2.5 sm:space-y-3 pt-1 sm:pt-2 bg-white p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-200 shadow-sm">
-                    <h4 className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-900">
+                  <div className="space-y-2.5 sm:space-y-3 pt-1 sm:pt-2 bg-[#0B101D]/90 p-4 sm:p-6 rounded-xl sm:rounded-2xl border border-white/10 shadow-xl cyber-corner text-white">
+                    <h4 className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-300">
                       Our solutions include:
                     </h4>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
                       {service.solutions.map((item) => (
-                        <div key={item} className="flex items-center gap-2 text-xs sm:text-sm text-slate-700 font-medium">
-                          <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#FF3D00] shrink-0" />
+                        <div key={item} className="flex items-center gap-2 text-xs sm:text-sm text-slate-300 font-medium">
+                          <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-400 shrink-0" />
                           <span className="leading-snug">{item}</span>
                         </div>
                       ))}
@@ -260,7 +266,7 @@ export default function ServicesPage() {
                   <div className="pt-1 sm:pt-2">
                     <Link
                       href="/contact"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-md shadow-[#FF3D00]/25 transition-all"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(255,61,0,0.4)] border border-[#FF3D00] transition-all"
                     >
                       <span>Inquire About This Service</span>
                       <ArrowRight className="w-4 h-4" />
@@ -273,15 +279,17 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Additional Commercial Interior Solutions */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-white bg-architectural-grid">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 04. Additional Commercial Interior Solutions */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#070A12] bg-cyber-grid border-b border-cyan-500/20 relative text-white">
+        <div className="neon-line-v-cyan absolute top-0 bottom-0 left-0 z-20" />
+        <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20" />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           <div className="text-center max-w-3xl mx-auto space-y-3 sm:space-y-4 mb-12 sm:mb-16 lg:mb-20">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-orange-50 border border-orange-200 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
               <span>Sectors</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
               Additional Commercial Interior Solutions
             </h2>
           </div>
@@ -292,7 +300,7 @@ export default function ServicesPage() {
               return (
                 <div
                   key={item.title}
-                  className="bg-slate-950 text-white rounded-2xl overflow-hidden shadow-xl border border-slate-800 flex flex-col justify-between group hover:border-[#FF3D00]/50 transition-all duration-300"
+                  className="bg-[#0B101D]/90 text-white rounded-2xl overflow-hidden shadow-2xl border border-white/10 flex flex-col justify-between group hover:border-[#FF3D00]/60 hover:shadow-[0_0_25px_rgba(255,61,0,0.35)] transition-all duration-300 cyber-corner"
                 >
                   <div className="relative h-40 sm:h-48 w-full overflow-hidden">
                     <Image
@@ -301,9 +309,9 @@ export default function ServicesPage() {
                       fill
                       className="object-cover img-zoom"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B101D] via-[#0B101D]/40 to-transparent" />
                     <div className="absolute bottom-3 left-3 right-3 sm:left-4 sm:right-4 flex items-center gap-2">
-                      <Icon className="w-4 h-4 text-[#FF3D00] shrink-0" />
+                      <Icon className="w-4 h-4 text-cyan-400 shrink-0" />
                       <span className="font-bold text-xs sm:text-sm tracking-tight truncate">{item.title}</span>
                     </div>
                   </div>
@@ -319,8 +327,10 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-slate-950 text-white text-center relative overflow-hidden bg-architectural-grid-dark">
+      {/* 05. Call to Action */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#05070B] text-white text-center relative overflow-hidden bg-circuit-grid">
+        <div className="neon-line-v-orange absolute top-0 bottom-0 left-0 z-20" />
+        <div className="neon-line-v-cyan absolute top-0 bottom-0 right-0 z-20" />
         <div className="absolute inset-0 bg-[#FF3D00]/10 pointer-events-none" />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4 sm:space-y-6">
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
@@ -332,7 +342,7 @@ export default function ServicesPage() {
           <div className="pt-2 sm:pt-4">
             <Link
               href="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-9 py-3.5 sm:py-4 bg-[#FF3D00] hover:bg-[#eb3800] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-xl shadow-[#FF3D00]/30 transition-all transform hover:-translate-y-1"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-9 py-3.5 sm:py-4 bg-[#FF3D00] hover:bg-[#eb3800] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-[0_0_25px_rgba(255,61,0,0.45)] border border-[#FF3D00] transition-all transform hover:-translate-y-1"
             >
               <span>Discuss Your Project</span>
               <ArrowRight className="w-4 h-4" />

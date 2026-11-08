@@ -86,13 +86,13 @@ export default function AdminDashboardLayout({
     pathname?.startsWith('/admin/dashboard/categories');
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col md:flex-row">
+    <div className="min-h-screen bg-[#05070B] text-slate-100 flex flex-col md:flex-row selection:bg-[#FF3D00] selection:text-white">
       {/* Mobile Top App Bar */}
-      <div className="md:hidden sticky top-0 z-40 flex items-center justify-between px-4 py-3 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-2xs">
+      <div className="md:hidden sticky top-0 z-40 flex items-center justify-between px-4 py-3 bg-[#080C16]/95 backdrop-blur-md border-b border-white/10 shadow-lg text-white">
         <div className="flex items-center gap-2.5">
           <button
             onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
-            className="p-2 -ml-1 text-slate-700 hover:text-slate-900 rounded-xl bg-slate-100/80 active:scale-95 transition-all"
+            className="p-2 -ml-1 text-slate-300 hover:text-white rounded-xl bg-[#0E1526] border border-white/10 active:scale-95 transition-all"
             aria-label="Toggle Menu"
           >
             {mobileSidebarOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -102,7 +102,7 @@ export default function AdminDashboardLayout({
               src="/images/logo.webp"
               alt="DOER Logo"
               fill
-              className="object-contain object-left"
+              className="object-contain object-left drop-shadow-[0_0_10px_rgba(255,61,0,0.35)]"
             />
           </div>
         </div>
@@ -111,14 +111,14 @@ export default function AdminDashboardLayout({
           <Link
             href="/products"
             target="_blank"
-            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-700 text-[11px] font-bold"
+            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#0E1526] border border-white/10 text-slate-300 hover:text-white text-[11px] font-bold transition-colors"
           >
             <span>Shop</span>
             <ExternalLink className="w-3 h-3 text-[#FF3D00]" />
           </Link>
           <button
             onClick={handleLogout}
-            className="p-2 rounded-lg bg-slate-100 text-slate-600 hover:text-red-600"
+            className="p-2 rounded-lg bg-[#0E1526] border border-white/10 text-slate-400 hover:text-red-400 transition-colors"
             aria-label="Logout"
           >
             <LogOut className="w-4 h-4" />
@@ -129,33 +129,33 @@ export default function AdminDashboardLayout({
       {/* Mobile Drawer Backdrop */}
       {mobileSidebarOpen && (
         <div
-          className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-40 md:hidden animate-in fade-in duration-200"
+          className="fixed inset-0 bg-black/70 backdrop-blur-xs z-40 md:hidden animate-in fade-in duration-200"
           onClick={() => setMobileSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar (Desktop & Mobile Drawer) */}
       <aside
-        className={`fixed md:sticky top-0 h-screen w-72 bg-white border-r border-slate-200 z-50 flex flex-col justify-between transition-transform duration-300 overflow-y-auto shadow-xl md:shadow-none ${
+        className={`fixed md:sticky top-0 h-screen w-72 bg-[#080C16] border-r border-white/10 z-50 flex flex-col justify-between transition-transform duration-300 overflow-y-auto shadow-2xl md:shadow-none text-white ${
           mobileSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
         <div>
           {/* Logo Brand Box */}
-          <div className="p-6 border-b border-slate-200">
+          <div className="p-6 border-b border-white/10">
             <Link href="/" className="inline-block">
               <div className="relative w-32 h-8">
                 <Image
                   src="/images/logo.webp"
                   alt="DOER Logo"
                   fill
-                  className="object-contain"
+                  className="object-contain drop-shadow-[0_0_12px_rgba(255,61,0,0.35)]"
                 />
               </div>
             </Link>
             <div className="mt-3 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_#10B981]" />
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">
                 Admin Control Center
               </span>
             </div>
@@ -163,17 +163,17 @@ export default function AdminDashboardLayout({
 
           {/* Navigation Menu */}
           <div className="p-4">
-            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400 px-3 mb-2">
+            <div className="text-[11px] font-bold uppercase tracking-wider text-slate-500 px-3 mb-2 font-mono">
               Main Menu
             </div>
             <nav className="space-y-1.5">
               <Link
                 href="/admin/dashboard"
                 onClick={() => setMobileSidebarOpen(false)}
-                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all border ${
                   pathname === '/admin/dashboard'
-                    ? 'bg-[#FF3D00] text-white shadow-md shadow-[#FF3D00]/20 font-semibold'
-                    : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
+                    ? 'bg-[#FF3D00] text-white shadow-[0_0_15px_rgba(255,61,0,0.4)] border-[#FF3D00]'
+                    : 'text-slate-300 hover:bg-white/5 hover:text-white border-transparent hover:border-white/10'
                 }`}
               >
                 <LayoutDashboard className="w-5 h-5 shrink-0" />
@@ -183,11 +183,11 @@ export default function AdminDashboardLayout({
               <Link
                 href="/admin/dashboard/enquiries"
                 onClick={() => setMobileSidebarOpen(false)}
-                className={`flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                className={`flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all border ${
                   pathname?.startsWith('/admin/dashboard/enquiries') ||
                   pathname?.startsWith('/admin/dashboard/inquiries')
-                    ? 'bg-[#FF3D00] text-white shadow-md shadow-[#FF3D00]/20 font-semibold'
-                    : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
+                    ? 'bg-[#FF3D00] text-white shadow-[0_0_15px_rgba(255,61,0,0.4)] border-[#FF3D00]'
+                    : 'text-slate-300 hover:bg-white/5 hover:text-white border-transparent hover:border-white/10'
                 }`}
               >
                 <div className="flex items-center gap-3">
@@ -200,7 +200,7 @@ export default function AdminDashboardLayout({
                       pathname?.startsWith('/admin/dashboard/enquiries') ||
                       pathname?.startsWith('/admin/dashboard/inquiries')
                         ? 'bg-white text-[#FF3D00]'
-                        : 'bg-[#FF3D00] text-white animate-pulse'
+                        : 'bg-[#FF3D00] text-white animate-pulse shadow-[0_0_8px_#FF3D00]'
                     }`}
                   >
                     {newCount}
@@ -213,23 +213,23 @@ export default function AdminDashboardLayout({
                 <button
                   type="button"
                   onClick={() => setEcommerceOpen(!ecommerceOpen)}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg text-sm font-medium transition-all cursor-pointer ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer border ${
                     isEcommerceRoute
-                      ? 'bg-slate-100 text-slate-900 font-semibold border border-slate-200'
-                      : 'text-slate-700 hover:bg-slate-100 hover:text-slate-900'
+                      ? 'bg-[#0E1526] text-white border-white/15'
+                      : 'text-slate-300 hover:bg-white/5 hover:text-white border-transparent hover:border-white/10'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <ShoppingBag
                       className={`w-5 h-5 shrink-0 ${
-                        isEcommerceRoute ? 'text-[#FF3D00]' : 'text-slate-500'
+                        isEcommerceRoute ? 'text-[#FF3D00]' : 'text-slate-400'
                       }`}
                     />
                     <span>Ecommerce</span>
                   </div>
                   <div className="flex items-center gap-2">
                     {pendingOrdersCount > 0 && !ecommerceOpen && (
-                      <span className="px-1.5 py-0.5 text-[10px] font-bold rounded-full bg-[#FF3D00] text-white">
+                      <span className="px-1.5 py-0.5 text-[10px] font-bold rounded-full bg-[#FF3D00] text-white shadow-[0_0_8px_#FF3D00]">
                         {pendingOrdersCount}
                       </span>
                     )}
@@ -242,15 +242,15 @@ export default function AdminDashboardLayout({
                 </button>
 
                 {ecommerceOpen && (
-                  <div className="mt-1.5 ml-4 pl-3 border-l-2 border-slate-200 space-y-1">
+                  <div className="mt-1.5 ml-4 pl-3 border-l-2 border-white/10 space-y-1">
                     {/* Sub-item: Orders */}
                     <Link
                       href="/admin/dashboard/orders"
                       onClick={() => setMobileSidebarOpen(false)}
-                      className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                      className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold transition-all border ${
                         pathname?.startsWith('/admin/dashboard/orders')
-                          ? 'bg-[#FF3D00] text-white shadow-md shadow-[#FF3D00]/20 font-semibold'
-                          : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                          ? 'bg-[#FF3D00] text-white shadow-[0_0_12px_rgba(255,61,0,0.35)] border-[#FF3D00]'
+                          : 'text-slate-400 hover:bg-white/5 hover:text-white border-transparent'
                       }`}
                     >
                       <div className="flex items-center gap-2.5">
@@ -262,7 +262,7 @@ export default function AdminDashboardLayout({
                           className={`px-1.5 py-0.5 text-[10px] font-bold rounded-full ${
                             pathname?.startsWith('/admin/dashboard/orders')
                               ? 'bg-white text-[#FF3D00]'
-                              : 'bg-[#FF3D00] text-white animate-pulse'
+                              : 'bg-[#FF3D00] text-white animate-pulse shadow-[0_0_8px_#FF3D00]'
                           }`}
                         >
                           {pendingOrdersCount}
@@ -274,10 +274,10 @@ export default function AdminDashboardLayout({
                     <Link
                       href="/admin/dashboard/products"
                       onClick={() => setMobileSidebarOpen(false)}
-                      className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                      className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all border ${
                         pathname?.startsWith('/admin/dashboard/products')
-                          ? 'bg-[#FF3D00] text-white shadow-md shadow-[#FF3D00]/20 font-semibold'
-                          : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                          ? 'bg-[#FF3D00] text-white shadow-[0_0_12px_rgba(255,61,0,0.35)] border-[#FF3D00]'
+                          : 'text-slate-400 hover:bg-white/5 hover:text-white border-transparent'
                       }`}
                     >
                       <Package className="w-4 h-4 shrink-0" />
@@ -288,10 +288,10 @@ export default function AdminDashboardLayout({
                     <Link
                       href="/admin/dashboard/categories"
                       onClick={() => setMobileSidebarOpen(false)}
-                      className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-all ${
+                      className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all border ${
                         pathname?.startsWith('/admin/dashboard/categories')
-                          ? 'bg-[#FF3D00] text-white shadow-md shadow-[#FF3D00]/20 font-semibold'
-                          : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                          ? 'bg-[#FF3D00] text-white shadow-[0_0_12px_rgba(255,61,0,0.35)] border-[#FF3D00]'
+                          : 'text-slate-400 hover:bg-white/5 hover:text-white border-transparent'
                       }`}
                     >
                       <FolderTree className="w-4 h-4 shrink-0" />
@@ -305,22 +305,22 @@ export default function AdminDashboardLayout({
         </div>
 
         {/* Bottom Section: DB Status & Profile & Logout */}
-        <div className="p-4 border-t border-slate-200 space-y-4 bg-slate-50/50">
+        <div className="p-4 border-t border-white/10 space-y-4 bg-[#05070B]">
           {/* Database Info Card */}
-          <div className="p-3 bg-white rounded-xl border border-slate-200 text-xs shadow-2xs">
-            <div className="flex items-center gap-2 text-slate-800 font-semibold mb-1">
+          <div className="p-3 bg-[#0B101D] rounded-xl border border-white/10 text-xs shadow-md cyber-corner">
+            <div className="flex items-center gap-2 text-white font-bold mb-1">
               <Database className="w-4 h-4 text-[#FF3D00]" />
               <span>MySQL Database</span>
             </div>
-            <div className="text-slate-500 flex flex-col gap-0.5">
+            <div className="text-slate-400 flex flex-col gap-0.5">
               <span>
-                Database: <strong className="text-slate-800">doer-furniture</strong>
+                Database: <strong className="text-slate-200">doer-furniture</strong>
               </span>
               <span>
-                Host: <strong className="text-slate-800">127.0.0.1:3306</strong>
+                Host: <strong className="text-slate-200">127.0.0.1:3306</strong>
               </span>
-              <span className="flex items-center gap-1.5 text-emerald-600 font-medium text-[11px] mt-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <span className="flex items-center gap-1.5 text-emerald-400 font-medium text-[11px] mt-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_#10B981]" />
                 Connected (Native Driver)
               </span>
             </div>
@@ -329,12 +329,12 @@ export default function AdminDashboardLayout({
           {/* Admin Identity */}
           <div className="flex items-center justify-between px-1">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 flex items-center justify-center text-[#FF3D00]">
+              <div className="w-8 h-8 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/30 flex items-center justify-center text-[#FF3D00]">
                 <UserCheck className="w-4 h-4" />
               </div>
               <div className="text-xs">
-                <p className="font-bold text-slate-800">doer-admin</p>
-                <p className="text-[11px] text-slate-500">Super Administrator</p>
+                <p className="font-bold text-white">doer-admin</p>
+                <p className="text-[11px] text-slate-400">Super Administrator</p>
               </div>
             </div>
           </div>
@@ -343,7 +343,7 @@ export default function AdminDashboardLayout({
           <button
             onClick={handleLogout}
             disabled={isLoggingOut}
-            className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-white hover:bg-red-50 hover:text-red-600 border border-slate-200 hover:border-red-200 text-slate-700 text-xs font-semibold transition-all cursor-pointer shadow-2xs"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-[#0E1526] hover:bg-red-500/20 hover:text-red-400 border border-white/10 hover:border-red-500/40 text-slate-300 text-xs font-semibold transition-all cursor-pointer shadow-sm"
           >
             <LogOut className="w-4 h-4" />
             <span>{isLoggingOut ? 'Logging out...' : 'Sign Out'}</span>
@@ -352,15 +352,15 @@ export default function AdminDashboardLayout({
       </aside>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 bg-[#05070B]">
         {/* Top Navbar (Desktop & Tablet) */}
-        <header className="hidden md:flex h-16 bg-white/90 backdrop-blur border-b border-slate-200 px-6 items-center justify-between sticky top-0 z-30">
+        <header className="hidden md:flex h-16 bg-[#080C16]/90 backdrop-blur-xl border-b border-white/10 px-6 items-center justify-between sticky top-0 z-30">
           <div className="flex items-center gap-3">
-            <h1 className="text-lg font-bold text-slate-900 tracking-tight">
+            <h1 className="text-lg font-bold text-white tracking-tight">
               DOER Administration
             </h1>
-            <span className="hidden sm:inline-flex px-2 py-0.5 text-[11px] font-semibold bg-[#FF3D00]/10 text-[#FF3D00] border border-[#FF3D00]/20 rounded">
-              v2.0 eCommerce
+            <span className="hidden sm:inline-flex px-2 py-0.5 text-[11px] font-bold bg-[#FF3D00]/15 text-[#FF3D00] border border-[#FF3D00]/30 rounded-full font-mono">
+              v2.0 Command Center
             </span>
           </div>
 
@@ -368,7 +368,7 @@ export default function AdminDashboardLayout({
             <Link
               href="/products"
               target="_blank"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-700 hover:text-slate-900 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-[#FF3D00]/50 bg-slate-50 hover:bg-white transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white px-3 py-1.5 rounded-lg border border-white/10 hover:border-[#FF3D00]/60 bg-[#0E1526] transition-colors"
             >
               <span>View Shop</span>
               <ExternalLink className="w-3.5 h-3.5 text-[#FF3D00]" />
@@ -377,7 +377,7 @@ export default function AdminDashboardLayout({
             <Link
               href="/"
               target="_blank"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-slate-900 px-3 py-1.5 rounded-lg border border-slate-200 hover:border-slate-300 bg-slate-50 hover:bg-white transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white px-3 py-1.5 rounded-lg border border-white/10 hover:border-white/25 bg-[#0E1526] transition-colors"
             >
               <span>Live Site</span>
               <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
@@ -385,7 +385,7 @@ export default function AdminDashboardLayout({
 
             <button
               onClick={handleLogout}
-              className="text-xs font-semibold text-slate-500 hover:text-red-600 flex items-center gap-1 transition-colors cursor-pointer ml-1"
+              className="text-xs font-semibold text-slate-400 hover:text-red-400 flex items-center gap-1 transition-colors cursor-pointer ml-1"
             >
               <LogOut className="w-3.5 h-3.5" />
               <span className="hidden sm:inline">Logout</span>

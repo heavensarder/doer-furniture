@@ -215,23 +215,23 @@ export default function SingleProductPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 pt-24 gap-3">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#05070B] pt-24 gap-3 text-slate-200">
         <Loader2 className="w-9 h-9 animate-spin text-[#FF3D00]" />
-        <p className="text-sm font-medium text-slate-600">Loading product details...</p>
+        <p className="text-sm font-medium text-slate-400">Loading product details...</p>
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-slate-50 pt-24 px-4 text-center space-y-4">
-        <h1 className="text-2xl sm:text-3xl font-black text-slate-900">Product Not Found</h1>
-        <p className="text-xs sm:text-sm text-slate-600 max-w-md">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#05070B] pt-24 px-4 text-center space-y-4 text-white">
+        <h1 className="text-2xl sm:text-3xl font-black text-white">Product Not Found</h1>
+        <p className="text-xs sm:text-sm text-slate-400 max-w-md">
           The product you are looking for may have been moved or removed.
         </p>
         <Link
           href="/products"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#FF3D00] text-white text-xs font-bold uppercase tracking-wider"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.35)]"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Shop</span>
@@ -251,46 +251,50 @@ export default function SingleProductPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white pt-20 sm:pt-28 pb-28 sm:pb-20">
+    <div className="min-h-screen bg-[#05070B] text-slate-100 bg-cyber-grid pt-20 sm:pt-28 pb-28 sm:pb-20 relative overflow-hidden">
+      {/* Vertical Neon Laser Lines */}
+      <div className="neon-line-v-cyan absolute top-0 bottom-0 left-0 z-20" />
+      <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20" />
+
       {/* Top App Navigation / Breadcrumb Bar */}
-      <div className="sticky top-[60px] sm:static z-20 border-b border-slate-100 bg-white/95 sm:bg-slate-50/70 backdrop-blur-md sm:backdrop-blur-none">
+      <div className="sticky top-[60px] sm:static z-20 border-b border-cyan-500/20 bg-[#080C16]/90 backdrop-blur-xl sm:bg-transparent">
         <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 flex items-center justify-between gap-3">
           {/* Mobile Back Button + Category */}
           <div className="flex items-center gap-2 min-w-0">
             <Link
               href="/products"
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-0 sm:py-0 rounded-lg bg-slate-100 sm:bg-transparent text-xs font-bold text-slate-800 hover:text-[#FF3D00] transition-colors shrink-0"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 sm:px-0 sm:py-0 rounded-lg bg-[#0E1526] border border-white/10 sm:border-0 sm:bg-transparent text-xs font-bold text-white hover:text-[#FF3D00] transition-colors shrink-0"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span className="sm:hidden">Shop</span>
             </Link>
 
-            <div className="hidden sm:flex items-center gap-2 text-xs text-slate-500 min-w-0">
+            <div className="hidden sm:flex items-center gap-2 text-xs text-slate-400 min-w-0">
               <Link href="/" className="hover:text-[#FF3D00]">
                 Home
               </Link>
-              <span>/</span>
+              <span className="text-white/20">/</span>
               <Link href="/products" className="hover:text-[#FF3D00]">
                 Products
               </Link>
               {product.category_name && (
                 <>
-                  <span>/</span>
+                  <span className="text-white/20">/</span>
                   <Link
                     href={`/products?category=${product.category_slug}`}
-                    className="hover:text-[#FF3D00] font-medium text-slate-700 truncate max-w-[160px]"
+                    className="hover:text-[#FF3D00] font-medium text-slate-300 truncate max-w-[160px]"
                   >
                     {product.category_name}
                   </Link>
                 </>
               )}
-              <span>/</span>
-              <span className="font-bold text-slate-900 truncate max-w-[200px] lg:max-w-xs">
+              <span className="text-white/20">/</span>
+              <span className="font-bold text-white truncate max-w-[200px] lg:max-w-xs">
                 {product.name}
               </span>
             </div>
 
-            <span className="sm:hidden text-xs font-bold text-slate-700 truncate">
+            <span className="sm:hidden text-xs font-bold text-white truncate">
               {product.name}
             </span>
           </div>
@@ -299,7 +303,7 @@ export default function SingleProductPage() {
             <button
               type="button"
               onClick={handleNativeShare}
-              className="sm:hidden inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-100 text-slate-700 text-xs font-bold active:scale-95"
+              className="sm:hidden inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#0E1526] border border-white/10 text-white text-xs font-bold active:scale-95"
               aria-label="Share product"
             >
               <Share2 className="w-3.5 h-3.5 text-[#FF3D00]" />
@@ -308,7 +312,7 @@ export default function SingleProductPage() {
 
             <Link
               href="/products"
-              className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-700 hover:text-[#FF3D00] transition-colors"
+              className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-[#FF3D00] transition-colors"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back to All Products</span>
@@ -326,7 +330,7 @@ export default function SingleProductPage() {
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            <div className="relative aspect-square w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 border border-slate-200 shadow-lg sm:shadow-xl">
+            <div className="relative aspect-square w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#070A12] border border-white/10 shadow-2xl cyber-corner">
               {currentMedia.type === 'image' && (
                 <Image
                   src={currentMedia.url}
@@ -370,10 +374,10 @@ export default function SingleProductPage() {
 
                   {/* Dark Overlay + Manual Play Button */}
                   <div className="absolute inset-0 z-20 bg-slate-950/45 group-hover:bg-slate-950/35 transition-colors flex flex-col items-center justify-center gap-3 p-4 text-center">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#FF3D00] text-white flex items-center justify-center shadow-2xl shadow-[#FF3D00]/50 ring-8 ring-white/20 group-hover:scale-110 active:scale-95 transition-all">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#FF3D00] text-white flex items-center justify-center shadow-[0_0_25px_rgba(255,61,0,0.5)] ring-8 ring-white/10 group-hover:scale-110 active:scale-95 transition-all">
                       <Play className="w-7 h-7 sm:w-9 sm:h-9 fill-white ml-1" />
                     </div>
-                    <span className="px-3.5 py-1.5 rounded-full bg-slate-950/85 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-bold tracking-wide shadow-lg">
+                    <span className="px-3.5 py-1.5 rounded-full bg-[#080C16]/90 backdrop-blur-md border border-white/20 text-white text-xs sm:text-sm font-bold tracking-wide shadow-lg">
                       Click to Watch Video
                     </span>
                   </div>
@@ -389,7 +393,7 @@ export default function SingleProductPage() {
                       e.stopPropagation();
                       setActiveSlide((prev) => (prev - 1 + slides.length) % slides.length);
                     }}
-                    className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-950/75 hover:bg-[#FF3D00] active:scale-90 text-white flex items-center justify-center backdrop-blur-md border border-white/15 transition-all cursor-pointer z-30"
+                    className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#0E1526]/85 hover:bg-[#FF3D00] active:scale-90 text-white flex items-center justify-center backdrop-blur-md border border-white/15 transition-all cursor-pointer z-30"
                     aria-label="Previous Media"
                   >
                     <ChevronLeft className="w-5 h-5" />
@@ -400,7 +404,7 @@ export default function SingleProductPage() {
                       e.stopPropagation();
                       setActiveSlide((prev) => (prev + 1) % slides.length);
                     }}
-                    className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-950/75 hover:bg-[#FF3D00] active:scale-90 text-white flex items-center justify-center backdrop-blur-md border border-white/15 transition-all cursor-pointer z-30"
+                    className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#0E1526]/85 hover:bg-[#FF3D00] active:scale-90 text-white flex items-center justify-center backdrop-blur-md border border-white/15 transition-all cursor-pointer z-30"
                     aria-label="Next Media"
                   >
                     <ChevronRight className="w-5 h-5" />
@@ -410,7 +414,7 @@ export default function SingleProductPage() {
 
               {/* Slide Counter Pill */}
               {slides.length > 1 && (
-                <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md text-white text-[11px] font-mono font-bold border border-white/15 z-30">
+                <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 px-2.5 py-1 rounded-full bg-[#0E1526]/90 backdrop-blur-md text-cyan-300 text-[11px] font-mono font-bold border border-cyan-500/30 z-30">
                   {activeSlide + 1} / {slides.length}
                 </div>
               )}
@@ -433,10 +437,10 @@ export default function SingleProductPage() {
                           setActiveSlide(idx);
                         }
                       }}
-                      className={`relative w-16 h-16 sm:w-20 sm:h-20 aspect-square rounded-xl overflow-hidden shrink-0 snap-start border-2 transition-all cursor-pointer ${
+                      className={`relative w-16 h-16 sm:w-20 sm:h-20 aspect-square rounded-xl overflow-hidden shrink-0 snap-start border-2 transition-all cursor-pointer bg-[#070A12] ${
                         isActive
-                          ? 'border-[#FF3D00] scale-105 shadow-md'
-                          : 'border-slate-200 opacity-70 hover:opacity-100'
+                          ? 'border-cyan-400 scale-105 shadow-[0_0_15px_rgba(0,240,255,0.4)]'
+                          : 'border-white/10 opacity-70 hover:opacity-100 hover:border-white/30'
                       }`}
                     >
                       {slide.type === 'image' ? (
@@ -447,20 +451,20 @@ export default function SingleProductPage() {
                           className="object-cover"
                         />
                       ) : slide.type === 'youtube' && slide.youtubeId ? (
-                        <div className="relative w-full h-full bg-slate-900">
+                        <div className="relative w-full h-full bg-[#070A12]">
                           <Image
                             src={`https://img.youtube.com/vi/${slide.youtubeId}/hqdefault.jpg`}
                             alt="YouTube Video Thumbnail"
                             fill
                             className="object-cover opacity-80"
                           />
-                          <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black/35">
-                            <Play className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF3D00] fill-[#FF3D00]" />
-                            <span className="text-[8px] sm:text-[9px] font-bold uppercase">Video</span>
+                          <div className="absolute inset-0 flex flex-col items-center justify-center text-white bg-black/40">
+                            <Play className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 fill-cyan-400" />
+                            <span className="text-[8px] sm:text-[9px] font-bold uppercase text-cyan-300">Video</span>
                           </div>
                         </div>
                       ) : (
-                        <div className="relative w-full h-full bg-slate-900">
+                        <div className="relative w-full h-full bg-[#070A12]">
                           <Image
                             src={product.main_image}
                             alt="Video Thumbnail"
@@ -474,9 +478,9 @@ export default function SingleProductPage() {
                             playsInline
                             className="relative z-10 w-full h-full object-cover pointer-events-none opacity-85"
                           />
-                          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-white bg-black/35 gap-0.5">
-                            <Play className="w-4 h-4 sm:w-5 sm:h-5 text-[#FF3D00] fill-[#FF3D00]" />
-                            <span className="text-[8px] sm:text-[9px] font-bold uppercase">Video</span>
+                          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-white bg-black/40 gap-0.5">
+                            <Play className="w-4 h-4 sm:w-5 sm:h-5 text-cyan-400 fill-cyan-400" />
+                            <span className="text-[8px] sm:text-[9px] font-bold uppercase text-cyan-300">Video</span>
                           </div>
                         </div>
                       )}
@@ -493,20 +497,20 @@ export default function SingleProductPage() {
               {product.category_name && (
                 <Link
                   href={`/products?category=${product.category_slug}`}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider"
                 >
                   <span>{product.category_name}</span>
                 </Link>
               )}
 
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight leading-tight">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                 {product.name}
               </h1>
 
               {product.short_description && (
                 <div
-                  className="text-xs sm:text-base text-slate-600 leading-relaxed
-                    [&_p]:mb-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1 [&_strong]:text-slate-900"
+                  className="text-xs sm:text-base text-slate-300 leading-relaxed
+                    [&_p]:mb-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1 [&_strong]:text-white"
                   dangerouslySetInnerHTML={{
                     __html: normalizeToHtml(product.short_description),
                   }}
@@ -515,30 +519,30 @@ export default function SingleProductPage() {
             </div>
 
             {/* Pricing Card */}
-            <div className="p-4 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-4 sm:space-y-5">
+            <div className="p-4 sm:p-6 rounded-2xl bg-[#0A0F1D]/95 border border-cyan-500/25 space-y-4 sm:space-y-5 shadow-2xl cyber-corner text-white">
               {hasPrice ? (
-                <div className="flex items-baseline justify-between gap-2 border-b border-slate-200 pb-3.5 sm:pb-4">
+                <div className="flex items-baseline justify-between gap-2 border-b border-white/10 pb-3.5 sm:pb-4">
                   <div>
                     <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 block">
                       Unit Price
                     </span>
-                    <span className="text-2xl sm:text-4xl font-black text-slate-900">
+                    <span className="text-2xl sm:text-4xl font-black text-white">
                       ৳ {Number(product.price).toLocaleString()}
                     </span>
                   </div>
-                  <span className="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 text-[11px] sm:text-xs font-bold shrink-0">
+                  <span className="px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[11px] sm:text-xs font-bold shrink-0">
                     Available for Order
                   </span>
                 </div>
               ) : (
-                <div className="border-b border-slate-200 pb-3.5 sm:pb-4">
+                <div className="border-b border-white/10 pb-3.5 sm:pb-4">
                   <span className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-[#FF3D00] block">
                     Custom Engineered Configuration
                   </span>
-                  <span className="text-xl sm:text-3xl font-black text-slate-900 mt-0.5 block">
+                  <span className="text-xl sm:text-3xl font-black text-white mt-0.5 block">
                     Call for Price
                   </span>
-                  <p className="text-xs text-slate-500 mt-1">
+                  <p className="text-xs text-slate-400 mt-1">
                     Contact our team directly via phone, WhatsApp, or send a query for instant quotation.
                   </p>
                 </div>
@@ -549,21 +553,21 @@ export default function SingleProductPage() {
                 <div className="space-y-3">
                   {/* Quantity + Order Now */}
                   <div className="flex items-center gap-2.5 sm:gap-3">
-                    <div className="flex items-center border border-slate-300 rounded-xl bg-white shrink-0">
+                    <div className="flex items-center border border-white/10 rounded-xl bg-[#0E1526] shrink-0">
                       <button
                         type="button"
                         onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                        className="px-3 sm:px-3.5 py-2.5 sm:py-3 text-slate-700 hover:text-[#FF3D00] font-bold"
+                        className="px-3 sm:px-3.5 py-2.5 sm:py-3 text-slate-300 hover:text-[#FF3D00] font-bold"
                       >
                         -
                       </button>
-                      <span className="px-2.5 sm:px-3 py-2.5 sm:py-3 text-sm font-bold text-slate-900 min-w-[2.25rem] text-center">
+                      <span className="px-2.5 sm:px-3 py-2.5 sm:py-3 text-sm font-bold text-white min-w-[2.25rem] text-center">
                         {quantity}
                       </span>
                       <button
                         type="button"
                         onClick={() => setQuantity((q) => q + 1)}
-                        className="px-3 sm:px-3.5 py-2.5 sm:py-3 text-slate-700 hover:text-[#FF3D00] font-bold"
+                        className="px-3 sm:px-3.5 py-2.5 sm:py-3 text-slate-300 hover:text-[#FF3D00] font-bold"
                       >
                         +
                       </button>
@@ -571,7 +575,7 @@ export default function SingleProductPage() {
 
                     <Link
                       href={`/checkout?product=${product.slug}&qty=${quantity}`}
-                      className="flex-1 inline-flex items-center justify-center gap-2 py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white text-xs sm:text-sm font-bold uppercase tracking-wider shadow-lg shadow-[#FF3D00]/25 transition-all"
+                      className="flex-1 inline-flex items-center justify-center gap-2 py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white text-xs sm:text-sm font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(255,61,0,0.4)] transition-all"
                     >
                       <ShoppingBag className="w-4 h-4 shrink-0" />
                       <span>Order Now</span>
@@ -598,7 +602,7 @@ export default function SingleProductPage() {
 
                     <a
                       href="tel:+8801976535654"
-                      className="inline-flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl bg-slate-900 hover:bg-slate-800 active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider transition-all"
+                      className="inline-flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl bg-[#0E1526] hover:bg-[#FF3D00]/20 active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider border border-white/10 hover:border-[#FF3D00]/50 transition-all"
                     >
                       <Phone className="w-4 h-4 text-[#FF3D00] shrink-0" />
                       <span className="truncate">+8801976535654</span>
@@ -610,7 +614,7 @@ export default function SingleProductPage() {
                   <div className="grid grid-cols-2 gap-2.5">
                     <a
                       href="tel:+8801976535654"
-                      className="inline-flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl bg-slate-950 hover:bg-[#FF3D00] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm"
+                      className="inline-flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl bg-[#0E1526] hover:bg-[#FF3D00]/20 active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider border border-white/10 hover:border-[#FF3D00]/50 transition-all"
                     >
                       <Phone className="w-4 h-4 text-[#FF3D00] shrink-0" />
                       <span className="truncate">Call Price</span>
@@ -620,7 +624,7 @@ export default function SingleProductPage() {
                       href={getWhatsAppLink()}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl bg-[#66CC66] hover:bg-[#55b855] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm"
+                      className="inline-flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl bg-[#66CC66] hover:bg-[#55b855] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider transition-all"
                     >
                       <Image
                         src="/whatsapp.png"
@@ -635,7 +639,7 @@ export default function SingleProductPage() {
 
                   <Link
                     href={`/checkout?product=${product.slug}&qty=1`}
-                    className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-[#FF3D00]/25 transition-all"
+                    className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(255,61,0,0.4)] transition-all"
                   >
                     <Send className="w-4 h-4 shrink-0" />
                     <span>Send Query</span>
@@ -645,9 +649,9 @@ export default function SingleProductPage() {
             </div>
 
             {/* Share Product Link Box */}
-            <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200 flex items-center justify-between gap-2 flex-wrap">
-              <div className="flex items-center gap-2 text-xs font-bold text-slate-700">
-                <Share2 className="w-4 h-4 text-[#FF3D00]" />
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-[#0A0F1D]/90 border border-white/10 flex items-center justify-between gap-2 flex-wrap cyber-corner text-white">
+              <div className="flex items-center gap-2 text-xs font-bold text-slate-300">
+                <Share2 className="w-4 h-4 text-cyan-400" />
                 <span>Share Product:</span>
               </div>
 
@@ -655,16 +659,16 @@ export default function SingleProductPage() {
                 <button
                   type="button"
                   onClick={handleCopyShareLink}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0E1526] hover:bg-[#131d33] border border-white/10 text-slate-200 text-xs font-semibold transition-colors cursor-pointer"
                 >
                   {copied ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-emerald-600" />
-                      <span className="text-emerald-700">Copied!</span>
+                      <Check className="w-3.5 h-3.5 text-emerald-400" />
+                      <span className="text-emerald-400">Copied!</span>
                     </>
                   ) : (
                     <>
-                      <Copy className="w-3.5 h-3.5" />
+                      <Copy className="w-3.5 h-3.5 text-slate-400" />
                       <span>Copy Link</span>
                     </>
                   )}
@@ -673,7 +677,7 @@ export default function SingleProductPage() {
                 <button
                   type="button"
                   onClick={handleNativeShare}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF3D00]/10 hover:bg-[#FF3D00] text-[#FF3D00] hover:text-white text-xs font-semibold transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-[#FF3D00]/20 border border-white/10 hover:border-[#FF3D00]/50 text-slate-300 hover:text-[#FF3D00] text-xs font-semibold transition-colors cursor-pointer"
                 >
                   <Share2 className="w-3.5 h-3.5" />
                   <span>Share</span>
@@ -683,49 +687,49 @@ export default function SingleProductPage() {
 
             {/* Studio Manufacturing Guarantees */}
             <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-1">
-              <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-center space-y-1">
-                <Factory className="w-4 h-4 text-[#FF3D00] mx-auto" />
-                <p className="text-[10px] sm:text-[11px] font-bold text-slate-800">In-House Built</p>
-                <p className="text-[9px] sm:text-[10px] text-slate-500">Khilkhet Facility</p>
+              <div className="p-2.5 sm:p-3 rounded-xl bg-[#0A0F1D]/90 border border-white/10 text-center space-y-1 cyber-corner">
+                <Factory className="w-4 h-4 text-cyan-400 mx-auto" />
+                <p className="text-[10px] sm:text-[11px] font-bold text-white">In-House Built</p>
+                <p className="text-[9px] sm:text-[10px] text-slate-400">Khilkhet Facility</p>
               </div>
-              <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-center space-y-1">
-                <Ruler className="w-4 h-4 text-[#FF3D00] mx-auto" />
-                <p className="text-[10px] sm:text-[11px] font-bold text-slate-800">Custom Sizing</p>
-                <p className="text-[9px] sm:text-[10px] text-slate-500">CAD Millimeter Fit</p>
+              <div className="p-2.5 sm:p-3 rounded-xl bg-[#0A0F1D]/90 border border-white/10 text-center space-y-1 cyber-corner">
+                <Ruler className="w-4 h-4 text-cyan-400 mx-auto" />
+                <p className="text-[10px] sm:text-[11px] font-bold text-white">Custom Sizing</p>
+                <p className="text-[9px] sm:text-[10px] text-slate-400">CAD Millimeter Fit</p>
               </div>
-              <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-200/80 text-center space-y-1">
-                <ShieldCheck className="w-4 h-4 text-[#FF3D00] mx-auto" />
-                <p className="text-[10px] sm:text-[11px] font-bold text-slate-800">Heavy-Duty</p>
-                <p className="text-[9px] sm:text-[10px] text-slate-500">Structural Warranty</p>
+              <div className="p-2.5 sm:p-3 rounded-xl bg-[#0A0F1D]/90 border border-white/10 text-center space-y-1 cyber-corner">
+                <ShieldCheck className="w-4 h-4 text-cyan-400 mx-auto" />
+                <p className="text-[10px] sm:text-[11px] font-bold text-white">Heavy-Duty</p>
+                <p className="text-[9px] sm:text-[10px] text-slate-400">Structural Warranty</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* FULL PRODUCT DESCRIPTION SECTION */}
-        <div className="mt-10 sm:mt-20 border-t border-slate-200 pt-8 sm:pt-14">
+        <div className="mt-10 sm:mt-20 border-t border-cyan-500/20 pt-8 sm:pt-14 relative">
           <div className="max-w-4xl space-y-4 sm:space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 text-slate-800 text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
               <span>Product Description & Technical Specifications</span>
             </div>
 
-            <h2 className="text-xl sm:text-3xl font-black text-slate-900">
+            <h2 className="text-xl sm:text-3xl font-black text-white">
               Overview & Engineering Details
             </h2>
 
             <div
-              className="max-w-none text-slate-700 text-xs sm:text-base leading-relaxed bg-slate-50/70 p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-slate-200/90 overflow-x-auto
-                [&_h2]:text-lg [&_h2]:sm:text-2xl [&_h2]:font-black [&_h2]:text-slate-900 [&_h2]:mt-5 [&_h2]:mb-2.5 [&_h2:first-child]:mt-0
-                [&_h3]:text-base [&_h3]:sm:text-lg [&_h3]:font-bold [&_h3]:text-slate-900 [&_h3]:mt-4 [&_h3]:mb-2 [&_h3:first-child]:mt-0
+              className="max-w-none text-slate-300 text-xs sm:text-base leading-relaxed bg-[#0A0F1D]/90 p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-white/10 overflow-x-auto cyber-corner
+                [&_h2]:text-lg [&_h2]:sm:text-2xl [&_h2]:font-black [&_h2]:text-white [&_h2]:mt-5 [&_h2]:mb-2.5 [&_h2:first-child]:mt-0
+                [&_h3]:text-base [&_h3]:sm:text-lg [&_h3]:font-bold [&_h3]:text-white [&_h3]:mt-4 [&_h3]:mb-2 [&_h3:first-child]:mt-0
                 [&_p]:mb-3 [&_p:last-child]:mb-0
                 [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:sm:pl-6 [&_ul]:mb-4 [&_ul]:space-y-1.5
                 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:sm:pl-6 [&_ol]:mb-4 [&_ol]:space-y-1.5
-                [&_blockquote]:border-l-4 [&_blockquote]:border-[#FF3D00] [&_blockquote]:bg-white [&_blockquote]:pl-3.5 [&_blockquote]:py-2 [&_blockquote]:my-3.5 [&_blockquote]:italic [&_blockquote]:text-slate-700 [&_blockquote]:rounded-r-xl
-                [&_hr]:my-4 [&_hr]:border-slate-200
-                [&_a]:text-[#FF3D00] [&_a]:font-semibold [&_a]:underline
-                [&_table]:w-full [&_table]:border-collapse [&_table]:my-4 [&_table]:bg-white [&_table]:rounded-xl [&_table]:overflow-hidden [&_table]:text-xs [&_table]:sm:text-sm
-                [&_th]:bg-slate-900 [&_th]:text-white [&_th]:font-bold [&_th]:text-left [&_th]:p-2.5 [&_th]:sm:p-3.5 [&_th]:border [&_th]:border-slate-800
-                [&_td]:p-2.5 [&_td]:sm:p-3.5 [&_td]:border [&_td]:border-slate-200 [&_td]:text-slate-700"
+                [&_blockquote]:border-l-4 [&_blockquote]:border-[#FF3D00] [&_blockquote]:bg-[#0E1526] [&_blockquote]:pl-3.5 [&_blockquote]:py-2 [&_blockquote]:my-3.5 [&_blockquote]:italic [&_blockquote]:text-slate-300 [&_blockquote]:rounded-r-xl
+                [&_hr]:my-4 [&_hr]:border-white/10
+                [&_a]:text-cyan-400 [&_a]:font-semibold [&_a]:underline
+                [&_table]:w-full [&_table]:border-collapse [&_table]:my-4 [&_table]:bg-[#070A12] [&_table]:rounded-xl [&_table]:overflow-hidden [&_table]:text-xs [&_table]:sm:text-sm
+                [&_th]:bg-[#0E1526] [&_th]:text-cyan-300 [&_th]:font-bold [&_th]:text-left [&_th]:p-2.5 [&_th]:sm:p-3.5 [&_th]:border [&_th]:border-white/10
+                [&_td]:p-2.5 [&_td]:sm:p-3.5 [&_td]:border [&_td]:border-white/10 [&_td]:text-slate-300"
               dangerouslySetInnerHTML={{
                 __html: normalizeToHtml(product.description || product.short_description),
               }}
@@ -735,12 +739,12 @@ export default function SingleProductPage() {
 
         {/* RELATED PRODUCTS */}
         {relatedProducts.length > 0 && (
-          <div className="mt-12 sm:mt-24 border-t border-slate-200 pt-10 sm:pt-12">
+          <div className="mt-12 sm:mt-24 border-t border-cyan-500/20 pt-10 sm:pt-12 relative">
             <div className="flex items-center justify-between mb-6 sm:mb-8">
-              <h2 className="text-xl sm:text-2xl font-black text-slate-900">More Products from DOER</h2>
+              <h2 className="text-xl sm:text-2xl font-black text-white">More Products from DOER</h2>
               <Link
                 href="/products"
-                className="text-xs font-bold uppercase tracking-wider text-[#FF3D00] hover:underline"
+                className="text-xs font-bold uppercase tracking-wider text-[#FF3D00] hover:text-[#eb3800] hover:underline"
               >
                 View All →
               </Link>
@@ -751,10 +755,10 @@ export default function SingleProductPage() {
                 <Link
                   key={rel.id}
                   href={`/products/${rel.slug}`}
-                  className="group bg-white rounded-2xl border border-slate-200 hover:border-[#FF3D00] overflow-hidden shadow-xs hover:shadow-xl transition-all flex flex-col justify-between"
+                  className="group bg-[#0B101D]/90 rounded-2xl border border-white/10 hover:border-[#FF3D00]/60 overflow-hidden shadow-xl hover:shadow-[0_0_25px_rgba(255,61,0,0.35)] transition-all flex flex-col justify-between cyber-corner text-white"
                 >
                   <div>
-                    <div className="relative aspect-square w-full bg-slate-100 overflow-hidden">
+                    <div className="relative aspect-square w-full bg-[#070A12] overflow-hidden">
                       <Image
                         src={rel.main_image}
                         alt={rel.name}
@@ -766,21 +770,21 @@ export default function SingleProductPage() {
                       <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF3D00]">
                         {rel.category_name}
                       </span>
-                      <h3 className="text-base font-bold text-slate-900 group-hover:text-[#FF3D00] line-clamp-1">
+                      <h3 className="text-base font-bold text-white group-hover:text-[#FF3D00] line-clamp-1 transition-colors">
                         {rel.name}
                       </h3>
-                      <p className="text-xs text-slate-600 line-clamp-2">
+                      <p className="text-xs text-slate-400 line-clamp-2">
                         {stripHtml(rel.short_description)}
                       </p>
                     </div>
                   </div>
-                  <div className="px-4 sm:px-5 pb-4 sm:pb-5 pt-2 flex items-center justify-between border-t border-slate-100">
-                    <span className="text-sm font-black text-slate-900">
+                  <div className="px-4 sm:px-5 pb-4 sm:pb-5 pt-2 flex items-center justify-between border-t border-white/10">
+                    <span className="text-sm font-black text-white">
                       {!rel.is_call_for_price && rel.price
                         ? `৳ ${Number(rel.price).toLocaleString()}`
                         : 'Call for Price'}
                     </span>
-                    <span className="text-xs font-bold text-[#FF3D00]">View →</span>
+                    <span className="text-xs font-bold text-cyan-400 group-hover:translate-x-1 transition-transform">View →</span>
                   </div>
                 </Link>
               ))}
@@ -847,14 +851,14 @@ export default function SingleProductPage() {
       )}
 
       {/* MOBILE STICKY BOTTOM APP ACTION BAR (< sm) */}
-      <div className="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur-xl border-t border-slate-200 px-3.5 py-2.5 shadow-[0_-8px_30px_rgba(0,0,0,0.08)]">
+      <div className="sm:hidden fixed bottom-0 inset-x-0 z-40 bg-[#080C16]/95 backdrop-blur-xl border-t border-cyan-500/20 px-3.5 py-2.5 text-white shadow-2xl">
         {hasPrice ? (
           <div className="flex items-center justify-between gap-2.5">
             <div className="min-w-0">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
                 Total ({quantity}x)
               </span>
-              <span className="text-base font-black text-slate-900 truncate block">
+              <span className="text-base font-black text-white truncate block">
                 ৳ {(Number(product.price) * quantity).toLocaleString()}
               </span>
             </div>
@@ -889,7 +893,7 @@ export default function SingleProductPage() {
           <div className="grid grid-cols-3 gap-2">
             <a
               href="tel:+8801976535654"
-              className="inline-flex items-center justify-center gap-1 py-2.5 px-2 rounded-xl bg-slate-950 active:scale-95 text-white text-[11px] font-bold uppercase"
+              className="inline-flex items-center justify-center gap-1 py-2.5 px-2 rounded-xl bg-[#0E1526] border border-white/10 active:scale-95 text-white text-[11px] font-bold uppercase"
             >
               <Phone className="w-3.5 h-3.5 text-[#FF3D00]" />
               <span>Call</span>

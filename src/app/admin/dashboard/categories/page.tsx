@@ -246,24 +246,24 @@ export default function AdminCategoriesPage() {
   return (
     <div className="space-y-6 sm:space-y-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-5 sm:pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5 sm:pb-6">
         <div>
           <div className="inline-flex items-center gap-2 text-[#FF3D00] text-xs font-bold uppercase tracking-wider mb-1">
             <FolderTree className="w-4 h-4" />
             <span>eCommerce • Category Hierarchy</span>
           </div>
-          <h1 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-xl sm:text-3xl font-black text-white tracking-tight">
             Product Categories
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Categories added here automatically appear under the <strong>Products</strong> menu in the Navbar. Drag and drop rows or tap arrows to change display order.
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+            Categories added here automatically appear under the <strong className="text-white">Products</strong> menu in the Navbar. Drag and drop rows or tap arrows to change display order.
           </p>
         </div>
 
         <Link
           href="/products"
           target="_blank"
-          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider transition-all shrink-0 w-full sm:w-auto shadow-2xs"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#0B101D] hover:bg-[#0E1526] border border-white/10 text-slate-200 hover:text-white text-xs font-bold uppercase tracking-wider transition-all shrink-0 w-full sm:w-auto shadow-lg cyber-corner"
         >
           <span>Preview Shop Page</span>
           <ExternalLink className="w-4 h-4 text-[#FF3D00]" />
@@ -275,19 +275,19 @@ export default function AdminCategoriesPage() {
         <div
           className={`p-3.5 sm:p-4 rounded-xl border flex items-center justify-between gap-2 ${
             feedback.type === 'success'
-              ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
-              : 'bg-red-50 border-red-200 text-red-800'
+              ? 'bg-[#0B101D] border-emerald-500/40 text-emerald-400'
+              : 'bg-[#0B101D] border-red-500/40 text-red-400'
           }`}
         >
           <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium">
             {feedback.type === 'success' ? (
-              <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+              <Check className="w-4 h-4 text-emerald-400 shrink-0" />
             ) : (
-              <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+              <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
             )}
             <span>{feedback.msg}</span>
           </div>
-          <button onClick={() => setFeedback(null)} className="text-slate-400 hover:text-slate-700">
+          <button onClick={() => setFeedback(null)} className="text-slate-400 hover:text-white">
             <X className="w-4 h-4" />
           </button>
         </div>
@@ -295,9 +295,9 @@ export default function AdminCategoriesPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
         {/* LEFT: Create / Edit Category Form */}
-        <div className="lg:col-span-4 bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-xs">
+        <div className="lg:col-span-4 bg-[#0B101D] border border-white/10 rounded-2xl p-4 sm:p-6 shadow-xl cyber-corner">
           <div className="flex items-center justify-between mb-4 sm:mb-5">
-            <h2 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+            <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
               {editingId ? (
                 <>
                   <Edit3 className="w-4 h-4 text-[#FF3D00]" />
@@ -313,7 +313,7 @@ export default function AdminCategoriesPage() {
             {editingId && (
               <button
                 onClick={resetForm}
-                className="text-xs font-semibold text-slate-500 hover:text-slate-800 flex items-center gap-1"
+                className="text-xs font-semibold text-slate-400 hover:text-white flex items-center gap-1"
               >
                 <X className="w-3.5 h-3.5" />
                 <span>Cancel</span>
@@ -323,7 +323,7 @@ export default function AdminCategoriesPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
                 Category Name *
               </label>
               <input
@@ -332,13 +332,13 @@ export default function AdminCategoriesPage() {
                 value={name}
                 onChange={(e) => handleNameChange(e.target.value)}
                 placeholder="e.g. Control Room Consoles"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-base sm:text-sm focus:outline-none focus:bg-white focus:border-[#FF3D00]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#0E1526] border border-white/10 text-white placeholder-slate-500 text-base sm:text-sm focus:outline-none focus:bg-[#121B30] focus:border-[#FF3D00]"
               />
             </div>
 
             <div>
               <div className="flex items-center justify-between gap-2 h-5 mb-1.5">
-                <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 whitespace-nowrap">
                   Category Slug
                 </label>
                 <button
@@ -347,7 +347,7 @@ export default function AdminCategoriesPage() {
                     setSlug(toSlug(name));
                     setSlugManuallyEdited(false);
                   }}
-                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-orange-50 hover:bg-[#FF3D00] text-[#FF3D00] hover:text-white border border-orange-200 text-[10px] font-bold whitespace-nowrap shrink-0 transition-colors cursor-pointer"
+                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#FF3D00]/15 hover:bg-[#FF3D00] text-[#FF3D00] hover:text-white border border-[#FF3D00]/30 text-[10px] font-bold whitespace-nowrap shrink-0 transition-colors cursor-pointer"
                 >
                   <Sparkles className="w-3 h-3 shrink-0" />
                   <span>Auto-Generate</span>
@@ -358,15 +358,15 @@ export default function AdminCategoriesPage() {
                 value={slug}
                 onChange={(e) => handleSlugChange(e.target.value)}
                 placeholder="control-room-consoles"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-mono text-sm sm:text-xs focus:outline-none focus:bg-white focus:border-[#FF3D00]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#0E1526] border border-white/10 text-white font-mono text-sm sm:text-xs focus:outline-none focus:bg-[#121B30] focus:border-[#FF3D00]"
               />
               <p className="text-[11px] text-slate-400 mt-1 truncate">
-                Used in filter URL: <code>/products?category={slug || 'slug'}</code>
+                Used in filter URL: <code className="text-cyan-400">/products?category={slug || 'slug'}</code>
               </p>
             </div>
 
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
                 Description (Optional)
               </label>
               <textarea
@@ -374,14 +374,14 @@ export default function AdminCategoriesPage() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Brief category subtitle shown on the Shop page section header..."
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-base sm:text-sm focus:outline-none focus:bg-white focus:border-[#FF3D00]"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-[#0E1526] border border-white/10 text-white placeholder-slate-500 text-base sm:text-sm focus:outline-none focus:bg-[#121B30] focus:border-[#FF3D00]"
               />
             </div>
 
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3 px-5 bg-[#FF3D00] hover:bg-[#eb3800] disabled:opacity-50 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-md shadow-[#FF3D00]/20 transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
+              className="w-full py-3 px-5 bg-[#FF3D00] hover:bg-[#eb3800] disabled:opacity-50 text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-[0_0_15px_rgba(255,61,0,0.35)] transition-all flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]"
             >
               {submitting ? (
                 <>
@@ -404,10 +404,10 @@ export default function AdminCategoriesPage() {
         </div>
 
         {/* RIGHT: Drag-and-Drop Category List */}
-        <div className="lg:col-span-8 bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 shadow-xs">
+        <div className="lg:col-span-8 bg-[#0B101D] border border-white/10 rounded-2xl p-4 sm:p-6 shadow-xl cyber-corner">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 sm:mb-5">
             <div>
-              <h2 className="text-base sm:text-lg font-bold text-slate-900 flex items-center gap-2">
+              <h2 className="text-base sm:text-lg font-bold text-white flex items-center gap-2">
                 <span>Category Display Order</span>
                 {savingOrder && (
                   <span className="inline-flex items-center gap-1.5 text-xs font-normal text-[#FF3D00]">
@@ -416,22 +416,22 @@ export default function AdminCategoriesPage() {
                   </span>
                 )}
               </h2>
-              <p className="text-xs text-slate-500">
-                Drag any row by the handle <GripVertical className="w-3.5 h-3.5 inline text-slate-400" /> or use the arrow buttons to reorder.
+              <p className="text-xs text-slate-400">
+                Drag any row by the handle <GripVertical className="w-3.5 h-3.5 inline text-slate-500" /> or use the arrow buttons to reorder.
               </p>
             </div>
-            <span className="px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold self-start sm:self-auto">
+            <span className="px-3 py-1 rounded-full bg-[#0E1526] border border-white/10 text-slate-300 text-xs font-bold self-start sm:self-auto">
               {categories.length} Categories
             </span>
           </div>
 
           {loading ? (
-            <div className="py-16 flex flex-col items-center justify-center text-slate-500 gap-3">
+            <div className="py-16 flex flex-col items-center justify-center text-slate-400 gap-3">
               <Loader2 className="w-7 h-7 animate-spin text-[#FF3D00]" />
               <span className="text-sm font-medium">Loading categories...</span>
             </div>
           ) : categories.length === 0 ? (
-            <div className="py-16 text-center text-slate-500 border border-dashed border-slate-200 rounded-xl">
+            <div className="py-16 text-center text-slate-400 border border-dashed border-white/15 rounded-xl">
               <p className="text-sm">No categories found. Add your first category above.</p>
             </div>
           ) : (
@@ -448,42 +448,42 @@ export default function AdminCategoriesPage() {
                     onDragOver={(e) => handleDragOver(e, idx)}
                     onDrop={(e) => handleDrop(e, idx)}
                     onDragEnd={handleDragEnd}
-                    className={`group flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-4 rounded-xl border transition-all select-none ${
+                    className={`group flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 sm:p-4 rounded-xl border transition-all select-none cyber-corner ${
                       isDragged
-                        ? 'opacity-40 bg-slate-100 border-[#FF3D00]'
+                        ? 'opacity-40 bg-[#070A12] border-[#FF3D00]'
                         : isDragOver
-                        ? 'bg-orange-50/60 border-[#FF3D00] scale-[1.01] shadow-md'
-                        : 'bg-slate-50/70 border-slate-200 hover:border-slate-300 hover:bg-slate-50'
+                        ? 'bg-[#FF3D00]/10 border-[#FF3D00] scale-[1.01] shadow-xl'
+                        : 'bg-[#0E1526] border-white/10 hover:border-[#FF3D00]/50 hover:bg-[#121B30]'
                     }`}
                   >
                     <div className="flex items-start sm:items-center gap-2.5 sm:gap-3.5 min-w-0">
                       {/* Drag Handle */}
                       <div
-                        className="cursor-grab active:cursor-grabbing p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-white border border-transparent hover:border-slate-200 transition-colors shrink-0 mt-0.5 sm:mt-0"
+                        className="cursor-grab active:cursor-grabbing p-1.5 rounded-lg text-slate-500 hover:text-slate-300 hover:bg-white/5 border border-transparent transition-colors shrink-0 mt-0.5 sm:mt-0"
                         title="Drag to reorder"
                       >
                         <GripVertical className="w-5 h-5" />
                       </div>
 
                       {/* Order Badge */}
-                      <div className="w-7 h-7 rounded-lg bg-[#FF3D00]/10 border border-[#FF3D00]/25 text-[#FF3D00] font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
+                      <div className="w-7 h-7 rounded-lg bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
                         {String(idx + 1).padStart(2, '0')}
                       </div>
 
                       <div className="min-w-0 flex-1">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <h3 className="font-bold text-slate-900 text-sm sm:text-base break-words">
+                          <h3 className="font-bold text-white text-sm sm:text-base break-words">
                             {cat.name}
                           </h3>
-                          <span className="px-2 py-0.5 rounded-md bg-white border border-slate-200 text-slate-500 font-mono text-[11px] truncate max-w-[180px]">
+                          <span className="px-2 py-0.5 rounded-md bg-[#070A12] border border-white/10 text-cyan-400 font-mono text-[11px] truncate max-w-[180px]">
                             /{cat.slug}
                           </span>
-                          <span className="px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] font-bold">
+                          <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[11px] font-bold">
                             {cat.product_count || 0} Products
                           </span>
                         </div>
                         {cat.description && (
-                          <p className="text-xs text-slate-500 line-clamp-1 mt-1">
+                          <p className="text-xs text-slate-400 line-clamp-1 mt-1">
                             {cat.description}
                           </p>
                         )}
@@ -491,13 +491,13 @@ export default function AdminCategoriesPage() {
                     </div>
 
                     {/* Right Controls: Up/Down + Edit/Delete */}
-                    <div className="flex items-center justify-between sm:justify-end gap-1.5 shrink-0 pt-2.5 sm:pt-0 border-t sm:border-t-0 border-slate-200/70">
+                    <div className="flex items-center justify-between sm:justify-end gap-1.5 shrink-0 pt-2.5 sm:pt-0 border-t sm:border-t-0 border-white/10">
                       <div className="flex items-center gap-1.5">
                         <button
                           type="button"
                           onClick={() => moveItem(idx, 'up')}
                           disabled={idx === 0}
-                          className="p-2 rounded-lg bg-white hover:bg-slate-100 disabled:opacity-30 text-slate-600 hover:text-slate-900 border border-slate-200 transition-colors cursor-pointer shadow-2xs active:scale-95"
+                          className="p-2 rounded-xl bg-[#070A12] hover:bg-white/10 disabled:opacity-30 text-slate-300 hover:text-white border border-white/10 transition-colors cursor-pointer shadow-sm active:scale-95"
                           title="Move Up"
                         >
                           <ArrowUp className="w-3.5 h-3.5" />
@@ -506,7 +506,7 @@ export default function AdminCategoriesPage() {
                           type="button"
                           onClick={() => moveItem(idx, 'down')}
                           disabled={idx === categories.length - 1}
-                          className="p-2 rounded-lg bg-white hover:bg-slate-100 disabled:opacity-30 text-slate-600 hover:text-slate-900 border border-slate-200 transition-colors cursor-pointer shadow-2xs active:scale-95"
+                          className="p-2 rounded-xl bg-[#070A12] hover:bg-white/10 disabled:opacity-30 text-slate-300 hover:text-white border border-white/10 transition-colors cursor-pointer shadow-sm active:scale-95"
                           title="Move Down"
                         >
                           <ArrowDown className="w-3.5 h-3.5" />
@@ -517,7 +517,7 @@ export default function AdminCategoriesPage() {
                         <button
                           type="button"
                           onClick={() => startEdit(cat)}
-                          className="inline-flex items-center gap-1 px-2.5 sm:p-2 py-1.5 rounded-lg bg-white hover:bg-blue-50 text-slate-600 hover:text-blue-600 border border-slate-200 hover:border-blue-200 transition-colors cursor-pointer sm:ml-1 shadow-2xs text-xs font-semibold"
+                          className="inline-flex items-center gap-1 px-2.5 sm:p-2 py-1.5 rounded-xl bg-[#070A12] hover:bg-[#FF3D00]/15 text-slate-300 hover:text-[#FF3D00] border border-white/10 hover:border-[#FF3D00]/30 transition-colors cursor-pointer sm:ml-1 shadow-sm text-xs font-semibold"
                           title="Edit Category"
                         >
                           <Edit3 className="w-3.5 h-3.5" />
@@ -526,7 +526,7 @@ export default function AdminCategoriesPage() {
                         <button
                           type="button"
                           onClick={() => handleDelete(cat)}
-                          className="p-2 rounded-lg bg-white hover:bg-red-50 text-slate-600 hover:text-red-600 border border-slate-200 hover:border-red-200 transition-colors cursor-pointer shadow-2xs"
+                          className="p-2 rounded-xl bg-[#070A12] hover:bg-red-500/15 text-slate-300 hover:text-red-400 border border-white/10 hover:border-red-500/30 transition-colors cursor-pointer shadow-sm"
                           title="Delete Category"
                         >
                           <Trash2 className="w-3.5 h-3.5" />

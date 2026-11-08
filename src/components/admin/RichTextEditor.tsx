@@ -168,15 +168,15 @@ export default function RichTextEditor({
   };
 
   return (
-    <div className="rounded-xl border border-slate-200 bg-white overflow-hidden focus-within:border-[#FF3D00] focus-within:ring-1 focus-within:ring-[#FF3D00]/20 transition-all">
+    <div className="rounded-xl border border-white/10 bg-[#0E1526] overflow-hidden focus-within:border-[#FF3D00] focus-within:ring-1 focus-within:ring-[#FF3D00]/30 transition-all">
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-1 px-2.5 py-2 bg-slate-50 border-b border-slate-200">
+      <div className="flex flex-wrap items-center gap-1 px-2.5 py-2 bg-[#080C16] border-b border-white/10">
         {/* Headings / Paragraph */}
         <button
           type="button"
           onClick={() => execCommand('formatBlock', 'P')}
           disabled={sourceMode}
-          className="px-2 py-1 rounded-md text-xs font-bold text-slate-700 hover:bg-slate-200/80 disabled:opacity-40 cursor-pointer"
+          className="px-2 py-1 rounded-md text-xs font-bold text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 cursor-pointer"
           title="Normal Paragraph"
         >
           P
@@ -185,7 +185,7 @@ export default function RichTextEditor({
           type="button"
           onClick={() => execCommand('formatBlock', 'H2')}
           disabled={sourceMode}
-          className="p-1.5 rounded-md text-slate-700 hover:bg-slate-200/80 disabled:opacity-40 cursor-pointer"
+          className="p-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 cursor-pointer"
           title="Heading 2"
         >
           <Heading2 className="w-4 h-4" />
@@ -194,20 +194,20 @@ export default function RichTextEditor({
           type="button"
           onClick={() => execCommand('formatBlock', 'H3')}
           disabled={sourceMode}
-          className="p-1.5 rounded-md text-slate-700 hover:bg-slate-200/80 disabled:opacity-40 cursor-pointer"
+          className="p-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 cursor-pointer"
           title="Heading 3"
         >
           <Heading3 className="w-4 h-4" />
         </button>
 
-        <span className="w-px h-4 bg-slate-300 mx-1" />
+        <span className="w-px h-4 bg-white/10 mx-1" />
 
         {/* Inline Styles */}
         <button
           type="button"
           onClick={() => execCommand('bold')}
           disabled={sourceMode}
-          className="p-1.5 rounded-md text-slate-700 hover:bg-slate-200/80 disabled:opacity-40 cursor-pointer"
+          className="p-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 cursor-pointer"
           title="Bold"
         >
           <Bold className="w-4 h-4" />
@@ -216,7 +216,7 @@ export default function RichTextEditor({
           type="button"
           onClick={() => execCommand('italic')}
           disabled={sourceMode}
-          className="p-1.5 rounded-md text-slate-700 hover:bg-slate-200/80 disabled:opacity-40 cursor-pointer"
+          className="p-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 cursor-pointer"
           title="Italic"
         >
           <Italic className="w-4 h-4" />
@@ -225,20 +225,20 @@ export default function RichTextEditor({
           type="button"
           onClick={() => execCommand('underline')}
           disabled={sourceMode}
-          className="p-1.5 rounded-md text-slate-700 hover:bg-slate-200/80 disabled:opacity-40 cursor-pointer"
+          className="p-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 cursor-pointer"
           title="Underline"
         >
           <Underline className="w-4 h-4" />
         </button>
 
-        <span className="w-px h-4 bg-slate-300 mx-1" />
+        <span className="w-px h-4 bg-white/10 mx-1" />
 
         {/* Lists */}
         <button
           type="button"
           onClick={() => execCommand('insertUnorderedList')}
           disabled={sourceMode}
-          className="p-1.5 rounded-md text-slate-700 hover:bg-slate-200/80 disabled:opacity-40 cursor-pointer"
+          className="p-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 cursor-pointer"
           title="Bullet List"
         >
           <List className="w-4 h-4" />
@@ -247,7 +247,7 @@ export default function RichTextEditor({
           type="button"
           onClick={() => execCommand('insertOrderedList')}
           disabled={sourceMode}
-          className="p-1.5 rounded-md text-slate-700 hover:bg-slate-200/80 disabled:opacity-40 cursor-pointer"
+          className="p-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 cursor-pointer"
           title="Numbered List"
         >
           <ListOrdered className="w-4 h-4" />
@@ -255,14 +255,14 @@ export default function RichTextEditor({
 
         {!compact && (
           <>
-            <span className="w-px h-4 bg-slate-300 mx-1" />
+            <span className="w-px h-4 bg-white/10 mx-1" />
 
             {/* Alignment */}
             <button
               type="button"
               onClick={() => execCommand('justifyLeft')}
               disabled={sourceMode}
-              className="p-1.5 rounded-md text-slate-700 hover:bg-slate-200/80 disabled:opacity-40 cursor-pointer"
+              className="p-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 cursor-pointer"
               title="Align Left"
             >
               <AlignLeft className="w-4 h-4" />
@@ -271,20 +271,20 @@ export default function RichTextEditor({
               type="button"
               onClick={() => execCommand('justifyCenter')}
               disabled={sourceMode}
-              className="p-1.5 rounded-md text-slate-700 hover:bg-slate-200/80 disabled:opacity-40 cursor-pointer"
+              className="p-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 cursor-pointer"
               title="Align Center"
             >
               <AlignCenter className="w-4 h-4" />
             </button>
 
-            <span className="w-px h-4 bg-slate-300 mx-1" />
+            <span className="w-px h-4 bg-white/10 mx-1" />
 
             {/* Quote, Divider, Link */}
             <button
               type="button"
               onClick={() => execCommand('formatBlock', 'BLOCKQUOTE')}
               disabled={sourceMode}
-              className="p-1.5 rounded-md text-slate-700 hover:bg-slate-200/80 disabled:opacity-40 cursor-pointer"
+              className="p-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 cursor-pointer"
               title="Highlight Quote"
             >
               <Quote className="w-4 h-4" />
@@ -293,7 +293,7 @@ export default function RichTextEditor({
               type="button"
               onClick={() => execCommand('insertHorizontalRule')}
               disabled={sourceMode}
-              className="p-1.5 rounded-md text-slate-700 hover:bg-slate-200/80 disabled:opacity-40 cursor-pointer"
+              className="p-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 cursor-pointer"
               title="Horizontal Divider"
             >
               <Minus className="w-4 h-4" />
@@ -302,20 +302,20 @@ export default function RichTextEditor({
               type="button"
               onClick={handleInsertLink}
               disabled={sourceMode}
-              className="p-1.5 rounded-md text-slate-700 hover:bg-slate-200/80 disabled:opacity-40 cursor-pointer"
+              className="p-1.5 rounded-md text-slate-300 hover:text-white hover:bg-white/10 disabled:opacity-40 cursor-pointer"
               title="Insert Link"
             >
               <LinkIcon className="w-4 h-4" />
             </button>
 
-            <span className="w-px h-4 bg-slate-300 mx-1" />
+            <span className="w-px h-4 bg-white/10 mx-1" />
 
             {/* Quick Structured Templates */}
             <button
               type="button"
               onClick={handleInsertSpecTable}
               disabled={sourceMode}
-              className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-white border border-slate-200 hover:border-[#FF3D00] text-[11px] font-bold text-slate-700 hover:text-[#FF3D00] disabled:opacity-40 cursor-pointer shadow-2xs"
+              className="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-[#0B101D] border border-white/10 hover:border-[#FF3D00] text-[11px] font-bold text-slate-300 hover:text-[#FF3D00] disabled:opacity-40 cursor-pointer shadow-sm transition-colors"
               title="Insert Technical Specification Table"
             >
               <Table className="w-3.5 h-3.5 text-[#FF3D00]" />
@@ -326,7 +326,7 @@ export default function RichTextEditor({
               type="button"
               onClick={handleInsertFeaturesList}
               disabled={sourceMode}
-              className="inline-flex items-center gap-1 px-2 py-1 rounded-md bg-white border border-slate-200 hover:border-[#FF3D00] text-[11px] font-bold text-slate-700 hover:text-[#FF3D00] disabled:opacity-40 cursor-pointer shadow-2xs"
+              className="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-[#0B101D] border border-white/10 hover:border-[#FF3D00] text-[11px] font-bold text-slate-300 hover:text-[#FF3D00] disabled:opacity-40 cursor-pointer shadow-sm transition-colors"
               title="Insert Key Features List"
             >
               <CheckSquare className="w-3.5 h-3.5 text-[#FF3D00]" />
@@ -340,7 +340,7 @@ export default function RichTextEditor({
             type="button"
             onClick={() => execCommand('removeFormat')}
             disabled={sourceMode}
-            className="p-1.5 rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-200/80 disabled:opacity-40 cursor-pointer"
+            className="p-1.5 rounded-md text-slate-400 hover:text-white hover:bg-white/10 disabled:opacity-40 cursor-pointer"
             title="Clear Formatting"
           >
             <RemoveFormatting className="w-4 h-4" />
@@ -351,8 +351,8 @@ export default function RichTextEditor({
             onClick={() => setSourceMode(!sourceMode)}
             className={`inline-flex items-center gap-1 px-2 py-1 rounded-md text-[11px] font-bold cursor-pointer transition-colors ${
               sourceMode
-                ? 'bg-[#FF3D00] text-white'
-                : 'text-slate-600 hover:bg-slate-200/80'
+                ? 'bg-[#FF3D00] text-white shadow-[0_0_10px_rgba(255,61,0,0.5)]'
+                : 'text-slate-300 hover:bg-white/10'
             }`}
             title="Toggle HTML Source / Visual Editor"
           >
@@ -378,12 +378,12 @@ export default function RichTextEditor({
           onChange={(e) => onChange(e.target.value)}
           style={{ minHeight }}
           placeholder={placeholder}
-          className="w-full p-3.5 bg-slate-900 text-slate-100 font-mono text-xs focus:outline-none resize-y"
+          className="w-full p-3.5 bg-[#070A12] text-slate-100 font-mono text-xs focus:outline-none resize-y"
         />
       ) : (
-        <div className="relative">
+        <div className="relative bg-[#070A12]">
           {!value && (
-            <div className="absolute top-3.5 left-3.5 text-slate-400 text-sm pointer-events-none select-none">
+            <div className="absolute top-3.5 left-3.5 text-slate-500 text-sm pointer-events-none select-none">
               {placeholder}
             </div>
           )}
@@ -394,18 +394,18 @@ export default function RichTextEditor({
             onInput={triggerChange}
             onBlur={triggerChange}
             style={{ minHeight }}
-            className="w-full p-3.5 text-sm text-slate-900 focus:outline-none overflow-y-auto leading-relaxed
-              [&_h2]:text-lg [&_h2]:font-black [&_h2]:text-slate-900 [&_h2]:mt-3 [&_h2]:mb-1.5
-              [&_h3]:text-base [&_h3]:font-bold [&_h3]:text-slate-900 [&_h3]:mt-2.5 [&_h3]:mb-1
-              [&_p]:mb-2
-              [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-2 [&_ul]:space-y-1
-              [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-2 [&_ol]:space-y-1
-              [&_blockquote]:border-l-4 [&_blockquote]:border-[#FF3D00] [&_blockquote]:bg-slate-50 [&_blockquote]:pl-3 [&_blockquote]:py-1.5 [&_blockquote]:my-2 [&_blockquote]:italic [&_blockquote]:text-slate-700
-              [&_hr]:my-3 [&_hr]:border-slate-200
+            className="w-full p-3.5 text-sm text-slate-100 focus:outline-none overflow-y-auto leading-relaxed
+              [&_h2]:text-lg [&_h2]:font-black [&_h2]:text-white [&_h2]:mt-3 [&_h2]:mb-1.5
+              [&_h3]:text-base [&_h3]:font-bold [&_h3]:text-white [&_h3]:mt-2.5 [&_h3]:mb-1
+              [&_p]:mb-2 [&_p]:text-slate-200
+              [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-2 [&_ul]:space-y-1 [&_ul]:text-slate-200
+              [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-2 [&_ol]:space-y-1 [&_ol]:text-slate-200
+              [&_blockquote]:border-l-4 [&_blockquote]:border-[#FF3D00] [&_blockquote]:bg-[#0B101D] [&_blockquote]:pl-3 [&_blockquote]:py-1.5 [&_blockquote]:my-2 [&_blockquote]:italic [&_blockquote]:text-slate-300
+              [&_hr]:my-3 [&_hr]:border-white/10
               [&_a]:text-[#FF3D00] [&_a]:underline
               [&_table]:w-full [&_table]:border-collapse [&_table]:my-3 [&_table]:text-xs
-              [&_th]:bg-slate-100 [&_th]:text-slate-800 [&_th]:font-bold [&_th]:text-left [&_th]:p-2.5 [&_th]:border [&_th]:border-slate-200
-              [&_td]:p-2.5 [&_td]:border [&_td]:border-slate-200 [&_td]:text-slate-700"
+              [&_th]:bg-[#080C16] [&_th]:text-white [&_th]:font-bold [&_th]:text-left [&_th]:p-2.5 [&_th]:border [&_th]:border-white/10
+              [&_td]:p-2.5 [&_td]:border [&_td]:border-white/10 [&_td]:text-slate-300"
           />
         </div>
       )}

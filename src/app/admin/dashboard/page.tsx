@@ -155,14 +155,14 @@ export default function AdminDashboardPage() {
       {/* Top Banner */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-2">
         <div>
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/20 text-[#FF3D00] text-xs font-semibold mb-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] text-xs font-semibold mb-2">
             <Sparkles className="w-3.5 h-3.5" />
             <span>DOER Project & Inquiry Management</span>
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900">
+          <h2 className="text-2xl font-black tracking-tight text-white">
             Administrative Dashboard
           </h2>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-400 mt-1">
             Real-time inquiries, project leads, and client requirements stored in MySQL.
           </p>
         </div>
@@ -170,7 +170,7 @@ export default function AdminDashboardPage() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => fetchInquiries()}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 hover:border-slate-300 text-slate-700 rounded-lg text-sm font-medium transition-colors shadow-2xs cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#0B101D] border border-white/10 hover:border-white/20 text-slate-200 hover:text-white rounded-xl text-sm font-medium transition-all shadow-sm cursor-pointer"
           >
             <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-[#FF3D00]' : ''}`} />
             <span>Refresh</span>
@@ -178,7 +178,7 @@ export default function AdminDashboardPage() {
 
           <button
             onClick={handleExportCSV}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF3D00] hover:bg-[#e63700] text-white rounded-lg text-sm font-semibold shadow-sm transition-colors cursor-pointer"
+            className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF3D00] hover:bg-[#eb3800] text-white rounded-xl text-sm font-bold shadow-[0_0_15px_rgba(255,61,0,0.35)] transition-all cursor-pointer"
           >
             <Download className="w-4 h-4" />
             <span>Export CSV</span>
@@ -187,30 +187,30 @@ export default function AdminDashboardPage() {
       </div>
 
       {actionMessage && (
-        <div className="p-3 bg-white border border-[#FF3D00]/40 text-[#FF3D00] text-xs font-semibold rounded-lg flex items-center justify-between animate-in fade-in shadow-2xs">
+        <div className="p-3 bg-[#0B101D] border border-[#FF3D00]/40 text-[#FF3D00] text-xs font-semibold rounded-xl flex items-center justify-between animate-in fade-in shadow-lg">
           <span>{actionMessage}</span>
-          <button onClick={() => setActionMessage(null)} className="text-slate-400 hover:text-slate-700">
+          <button onClick={() => setActionMessage(null)} className="text-slate-400 hover:text-white">
             <X className="w-4 h-4" />
           </button>
         </div>
       )}
 
       {newInquiries > 0 && (
-        <div className="p-4 bg-gradient-to-r from-[#FF3D00]/10 via-white to-white border border-[#FF3D00]/25 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in shadow-2xs">
+        <div className="p-4 bg-gradient-to-r from-[#FF3D00]/20 via-[#0B101D] to-[#0B101D] border border-[#FF3D00]/40 rounded-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-3 animate-in fade-in shadow-xl cyber-corner">
           <div className="flex items-center gap-3">
             <span className="w-2.5 h-2.5 rounded-full bg-[#FF3D00] animate-ping shrink-0" />
             <div>
-              <p className="text-sm font-bold text-slate-900">
+              <p className="text-sm font-bold text-white">
                 You have {newInquiries} new website {newInquiries === 1 ? 'enquiry' : 'enquiries'} waiting for review
               </p>
-              <p className="text-xs text-slate-500">
+              <p className="text-xs text-slate-400">
                 Prospective clients have submitted project briefs through the contact form.
               </p>
             </div>
           </div>
           <Link
             href="/admin/dashboard/enquiries"
-            className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-[#FF3D00] hover:bg-[#e63700] text-white text-xs font-bold rounded-lg shadow-sm transition-colors shrink-0"
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2 bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold rounded-xl shadow-[0_0_15px_rgba(255,61,0,0.4)] transition-all shrink-0"
           >
             <span>Open Enquiries Center</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -223,19 +223,19 @@ export default function AdminDashboardPage() {
         {/* Total Inquiries */}
         <Link
           href="/admin/dashboard/enquiries"
-          className="bg-white border border-slate-200 rounded-xl p-5 hover:border-[#FF3D00]/60 transition-all group block shadow-2xs"
+          className="bg-[#0B101D] border border-white/10 rounded-2xl p-5 hover:border-[#FF3D00]/60 hover:shadow-[0_0_20px_rgba(255,61,0,0.25)] transition-all group block shadow-xl cyber-corner"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 group-hover:text-slate-700">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 group-hover:text-slate-200">
               Total Inquiries
             </span>
-            <div className="w-9 h-9 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+            <div className="w-9 h-9 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center group-hover:scale-110 transition-transform">
               <Inbox className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-4 flex items-baseline justify-between">
-            <span className="text-3xl font-extrabold text-slate-900">{totalInquiries}</span>
-            <span className="text-xs text-slate-500 group-hover:text-[#FF3D00] flex items-center gap-1">
+            <span className="text-3xl font-black text-white">{totalInquiries}</span>
+            <span className="text-xs text-slate-400 group-hover:text-[#FF3D00] flex items-center gap-1 font-semibold">
               View all <ArrowUpRight className="w-3 h-3" />
             </span>
           </div>
@@ -244,19 +244,19 @@ export default function AdminDashboardPage() {
         {/* New / Pending */}
         <Link
           href="/admin/dashboard/enquiries"
-          className="bg-white border border-slate-200 rounded-xl p-5 hover:border-red-500/60 transition-all group block shadow-2xs"
+          className="bg-[#0B101D] border border-white/10 rounded-2xl p-5 hover:border-[#FF3D00]/60 hover:shadow-[0_0_20px_rgba(255,61,0,0.25)] transition-all group block shadow-xl cyber-corner"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 group-hover:text-slate-700">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 group-hover:text-slate-200">
               New Leads
             </span>
-            <div className="w-9 h-9 rounded-lg bg-[#FF3D00]/10 text-[#FF3D00] flex items-center justify-center group-hover:scale-110 transition-transform">
+            <div className="w-9 h-9 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center group-hover:scale-110 transition-transform">
               <AlertCircle className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-4 flex items-baseline justify-between">
-            <span className="text-3xl font-extrabold text-[#FF3D00]">{newInquiries}</span>
-            <span className="text-xs text-slate-500 group-hover:text-[#FF3D00] flex items-center gap-1">
+            <span className="text-3xl font-black text-[#FF3D00]">{newInquiries}</span>
+            <span className="text-xs text-slate-400 group-hover:text-[#FF3D00] flex items-center gap-1 font-semibold">
               Review new <ArrowUpRight className="w-3 h-3" />
             </span>
           </div>
@@ -265,19 +265,19 @@ export default function AdminDashboardPage() {
         {/* In Progress */}
         <Link
           href="/admin/dashboard/enquiries"
-          className="bg-white border border-slate-200 rounded-xl p-5 hover:border-amber-500/60 transition-all group block shadow-2xs"
+          className="bg-[#0B101D] border border-white/10 rounded-2xl p-5 hover:border-amber-500/60 hover:shadow-[0_0_20px_rgba(245,158,11,0.25)] transition-all group block shadow-xl cyber-corner"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 group-hover:text-slate-700">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 group-hover:text-slate-200">
               In Progress / Contacted
             </span>
-            <div className="w-9 h-9 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+            <div className="w-9 h-9 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 flex items-center justify-center group-hover:scale-110 transition-transform">
               <Clock className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-4 flex items-baseline justify-between">
-            <span className="text-3xl font-extrabold text-amber-600">{inProgressInquiries}</span>
-            <span className="text-xs text-slate-500 group-hover:text-amber-600 flex items-center gap-1">
+            <span className="text-3xl font-black text-amber-400">{inProgressInquiries}</span>
+            <span className="text-xs text-slate-400 group-hover:text-amber-400 flex items-center gap-1 font-semibold">
               Active leads <ArrowUpRight className="w-3 h-3" />
             </span>
           </div>
@@ -286,19 +286,19 @@ export default function AdminDashboardPage() {
         {/* Completed */}
         <Link
           href="/admin/dashboard/enquiries"
-          className="bg-white border border-slate-200 rounded-xl p-5 hover:border-emerald-500/60 transition-all group block shadow-2xs"
+          className="bg-[#0B101D] border border-white/10 rounded-2xl p-5 hover:border-emerald-500/60 hover:shadow-[0_0_20px_rgba(16,185,129,0.25)] transition-all group block shadow-xl cyber-corner"
         >
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 group-hover:text-slate-700">
+            <span className="text-xs font-bold uppercase tracking-wider text-slate-400 group-hover:text-slate-200">
               Converted / Completed
             </span>
-            <div className="w-9 h-9 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform">
+            <div className="w-9 h-9 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
               <CheckCircle2 className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-4 flex items-baseline justify-between">
-            <span className="text-3xl font-extrabold text-emerald-600">{completedInquiries}</span>
-            <span className="text-xs text-slate-500 group-hover:text-emerald-600 flex items-center gap-1">
+            <span className="text-3xl font-black text-emerald-400">{completedInquiries}</span>
+            <span className="text-xs text-slate-400 group-hover:text-emerald-400 flex items-center gap-1 font-semibold">
               Finalized <ArrowUpRight className="w-3 h-3" />
             </span>
           </div>
@@ -306,19 +306,19 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Main Table Section */}
-      <div className="bg-white border border-slate-200 rounded-2xl shadow-xs overflow-hidden">
+      <div className="bg-[#0B101D] border border-white/10 rounded-2xl shadow-2xl overflow-hidden cyber-corner">
         {/* Table Top Header with link to dedicated Enquiries */}
-        <div className="px-5 py-4 border-b border-slate-200 flex items-center justify-between bg-slate-50/70">
+        <div className="px-5 py-4 border-b border-white/10 flex items-center justify-between bg-[#080C16]">
           <div>
-            <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
+            <h3 className="text-sm font-bold text-white flex items-center gap-2">
               <span>Website Enquiries</span>
-              <span className="text-[11px] font-normal text-slate-500">({inquiries.length} total)</span>
+              <span className="text-[11px] font-normal text-slate-400">({inquiries.length} total)</span>
             </h3>
-            <p className="text-xs text-slate-500 mt-0.5">Quick overview of website leads directly from MySQL</p>
+            <p className="text-xs text-slate-400 mt-0.5">Quick overview of website leads directly from MySQL</p>
           </div>
           <Link
             href="/admin/dashboard/enquiries"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF3D00] hover:bg-[#e63700] text-xs font-bold text-white transition-all shadow-sm shadow-[#FF3D00]/20"
+            className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] text-xs font-bold text-white transition-all shadow-[0_0_15px_rgba(255,61,0,0.3)]"
           >
             <span>Full Enquiries Manager</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -326,33 +326,33 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Table Filters & Search Bar */}
-        <div className="p-5 border-b border-slate-200 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="p-5 border-b border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 bg-[#090D18]">
           <div className="relative w-full md:w-96">
-            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search by name, company, email, service..."
-              className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm text-slate-900 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-1 focus:ring-[#FF3D00] focus:border-[#FF3D00]"
+              className="w-full pl-10 pr-4 py-2 bg-[#0E1526] border border-white/10 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:bg-[#121B30] focus:ring-1 focus:ring-[#FF3D00] focus:border-[#FF3D00]"
             />
           </div>
 
           <div className="flex items-center gap-3 w-full md:w-auto">
-            <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
+            <div className="flex items-center gap-2 text-xs text-slate-400 font-medium">
               <Filter className="w-3.5 h-3.5 text-slate-400" />
               <span>Filter Status:</span>
             </div>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 py-2 px-3 focus:outline-none focus:bg-white focus:ring-1 focus:ring-[#FF3D00]"
+              className="bg-[#0E1526] border border-white/10 rounded-xl text-xs font-semibold text-slate-200 py-2 px-3 focus:outline-none focus:bg-[#121B30] focus:border-[#FF3D00]"
             >
-              <option value="all">All Inquiries</option>
-              <option value="new">New</option>
-              <option value="contacted">Contacted</option>
-              <option value="in_progress">In Progress</option>
-              <option value="completed">Completed</option>
+              <option value="all" className="bg-[#0E1526] text-white">All Inquiries</option>
+              <option value="new" className="bg-[#0E1526] text-white">New</option>
+              <option value="contacted" className="bg-[#0E1526] text-white">Contacted</option>
+              <option value="in_progress" className="bg-[#0E1526] text-white">In Progress</option>
+              <option value="completed" className="bg-[#0E1526] text-white">Completed</option>
             </select>
           </div>
         </div>
@@ -361,7 +361,7 @@ export default function AdminDashboardPage() {
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-slate-50 border-b border-slate-200 text-[11px] font-bold uppercase tracking-wider text-slate-500">
+              <tr className="bg-[#080C16] border-b border-white/10 text-[11px] font-bold uppercase tracking-wider text-slate-400">
                 <th className="py-3.5 px-4">Client / Company</th>
                 <th className="py-3.5 px-4">Contact</th>
                 <th className="py-3.5 px-4">Service Required</th>
@@ -370,10 +370,10 @@ export default function AdminDashboardPage() {
                 <th className="py-3.5 px-4 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200 text-sm">
+            <tbody className="divide-y divide-white/5 text-sm">
               {loading && inquiries.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-slate-500">
+                  <td colSpan={6} className="py-12 text-center text-slate-400">
                     <div className="inline-flex items-center gap-2">
                       <div className="w-4 h-4 border-2 border-[#FF3D00] border-t-transparent rounded-full animate-spin" />
                       <span>Loading inquiries from MySQL...</span>
@@ -382,52 +382,52 @@ export default function AdminDashboardPage() {
                 </tr>
               ) : inquiries.length === 0 ? (
                 <tr>
-                  <td colSpan={6} className="py-12 text-center text-slate-500">
-                    <Inbox className="w-8 h-8 mx-auto mb-2 text-slate-400" />
-                    <p className="font-semibold text-slate-700">No inquiries found</p>
-                    <p className="text-xs mt-1">When prospective clients fill out the contact form, submissions appear here.</p>
+                  <td colSpan={6} className="py-12 text-center text-slate-400">
+                    <Inbox className="w-8 h-8 mx-auto mb-2 text-slate-600" />
+                    <p className="font-semibold text-slate-300">No inquiries found</p>
+                    <p className="text-xs mt-1 text-slate-500">When prospective clients fill out the contact form, submissions appear here.</p>
                   </td>
                 </tr>
               ) : (
                 inquiries.map((inquiry) => {
                   const statusColors: Record<string, string> = {
-                    new: 'bg-red-50 text-red-700 border-red-200',
-                    contacted: 'bg-blue-50 text-blue-700 border-blue-200',
-                    in_progress: 'bg-amber-50 text-amber-700 border-amber-200',
-                    completed: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+                    new: 'bg-red-500/15 text-red-400 border-red-500/30',
+                    contacted: 'bg-cyan-500/15 text-cyan-400 border-cyan-500/30',
+                    in_progress: 'bg-amber-500/15 text-amber-400 border-amber-500/30',
+                    completed: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30',
                   };
 
                   return (
                     <tr
                       key={inquiry.id}
-                      className="hover:bg-slate-50 transition-colors group"
+                      className="hover:bg-white/[0.03] transition-colors group"
                     >
                       {/* Name & Company */}
                       <td className="py-3.5 px-4">
-                        <div className="font-bold text-slate-900">
+                        <div className="font-bold text-white">
                           {inquiry.full_name}
                         </div>
                         {inquiry.company_name ? (
-                          <div className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
-                            <Building2 className="w-3 h-3 text-slate-400" />
+                          <div className="text-xs text-slate-400 flex items-center gap-1 mt-0.5">
+                            <Building2 className="w-3 h-3 text-slate-500" />
                             <span>{inquiry.company_name}</span>
                           </div>
                         ) : (
-                          <span className="text-[11px] text-slate-400 italic">Individual client</span>
+                          <span className="text-[11px] text-slate-500 italic">Individual client</span>
                         )}
                       </td>
 
                       {/* Contact */}
                       <td className="py-3.5 px-4 text-xs space-y-1">
-                        <div className="flex items-center gap-1.5 text-slate-600">
-                          <Mail className="w-3 h-3 text-slate-400" />
+                        <div className="flex items-center gap-1.5 text-slate-300">
+                          <Mail className="w-3 h-3 text-slate-500" />
                           <a href={`mailto:${inquiry.email}`} className="hover:text-[#FF3D00] transition-colors">
                             {inquiry.email}
                           </a>
                         </div>
-                        <div className="flex items-center gap-1.5 text-slate-500">
-                          <Phone className="w-3 h-3 text-slate-400" />
-                          <a href={`tel:${inquiry.phone}`} className="hover:text-slate-900 transition-colors">
+                        <div className="flex items-center gap-1.5 text-slate-400">
+                          <Phone className="w-3 h-3 text-slate-500" />
+                          <a href={`tel:${inquiry.phone}`} className="hover:text-white transition-colors">
                             {inquiry.phone}
                           </a>
                         </div>
@@ -435,12 +435,12 @@ export default function AdminDashboardPage() {
 
                       {/* Service */}
                       <td className="py-3.5 px-4">
-                        <span className="text-xs font-semibold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200 inline-block">
+                        <span className="text-xs font-semibold text-cyan-300 bg-cyan-500/10 px-2.5 py-1 rounded-lg border border-cyan-500/20 inline-block">
                           {inquiry.service_interested}
                         </span>
                         {inquiry.project_location && (
-                          <div className="text-[11px] text-slate-500 flex items-center gap-1 mt-1">
-                            <MapPin className="w-3 h-3 text-slate-400" />
+                          <div className="text-[11px] text-slate-400 flex items-center gap-1 mt-1">
+                            <MapPin className="w-3 h-3 text-slate-500" />
                             <span>{inquiry.project_location}</span>
                           </div>
                         )}
@@ -452,19 +452,19 @@ export default function AdminDashboardPage() {
                           disabled={updatingId === inquiry.id}
                           value={inquiry.status}
                           onChange={(e) => handleStatusChange(inquiry.id, e.target.value)}
-                          className={`text-xs font-bold px-2.5 py-1 rounded-full border focus:outline-none cursor-pointer ${
-                            statusColors[inquiry.status] || 'bg-slate-100 text-slate-700 border-slate-200'
+                          className={`text-xs font-bold px-2.5 py-1 rounded-full border focus:outline-none cursor-pointer bg-[#0B101D] ${
+                            statusColors[inquiry.status] || 'bg-[#0E1526] text-slate-300 border-white/10'
                           }`}
                         >
-                          <option value="new">● New</option>
-                          <option value="contacted">● Contacted</option>
-                          <option value="in_progress">● In Progress</option>
-                          <option value="completed">● Completed</option>
+                          <option value="new" className="bg-[#0B101D] text-red-400">● New</option>
+                          <option value="contacted" className="bg-[#0B101D] text-cyan-400">● Contacted</option>
+                          <option value="in_progress" className="bg-[#0B101D] text-amber-400">● In Progress</option>
+                          <option value="completed" className="bg-[#0B101D] text-emerald-400">● Completed</option>
                         </select>
                       </td>
 
                       {/* Date */}
-                      <td className="py-3.5 px-4 text-xs text-slate-500">
+                      <td className="py-3.5 px-4 text-xs text-slate-400">
                         {new Date(inquiry.created_at).toLocaleDateString(undefined, {
                           month: 'short',
                           day: 'numeric',
@@ -477,14 +477,14 @@ export default function AdminDashboardPage() {
                         <div className="flex items-center justify-end gap-1.5">
                           <button
                             onClick={() => setSelectedInquiry(inquiry)}
-                            className="p-1.5 text-slate-500 hover:text-slate-900 hover:bg-slate-100 rounded-md transition-colors cursor-pointer"
+                            className="p-1.5 text-slate-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
                             title="View Full Details"
                           >
                             <Eye className="w-4 h-4" />
                           </button>
                           <button
                             onClick={() => handleDelete(inquiry.id)}
-                            className="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors cursor-pointer"
+                            className="p-1.5 text-slate-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors cursor-pointer"
                             title="Delete Inquiry"
                           >
                             <Trash2 className="w-4 h-4" />
@@ -502,27 +502,27 @@ export default function AdminDashboardPage() {
 
       {/* Inquiry Detail Drawer / Modal */}
       {selectedInquiry && (
-        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 flex items-center justify-center p-4">
-          <div className="bg-white border border-slate-200 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-6 relative animate-in zoom-in-95 duration-200">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+          <div className="bg-[#0B101D] border border-cyan-500/30 rounded-2xl max-w-2xl w-full p-6 shadow-2xl space-y-6 relative animate-in zoom-in-95 duration-200 cyber-corner">
             {/* Modal Header */}
-            <div className="flex items-start justify-between pb-4 border-b border-slate-200">
+            <div className="flex items-start justify-between pb-4 border-b border-white/10">
               <div>
                 <span className="text-xs font-bold uppercase tracking-wider text-[#FF3D00]">
                   Inquiry #{selectedInquiry.id}
                 </span>
-                <h3 className="text-xl font-bold text-slate-900 mt-1">
+                <h3 className="text-xl font-bold text-white mt-1">
                   {selectedInquiry.full_name}
                 </h3>
                 {selectedInquiry.company_name && (
-                  <p className="text-xs text-slate-500 flex items-center gap-1.5 mt-1">
-                    <Building2 className="w-3.5 h-3.5 text-slate-400" />
+                  <p className="text-xs text-slate-400 flex items-center gap-1.5 mt-1">
+                    <Building2 className="w-3.5 h-3.5 text-slate-500" />
                     <span>{selectedInquiry.company_name}</span>
                   </p>
                 )}
               </div>
               <button
                 onClick={() => setSelectedInquiry(null)}
-                className="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-100 transition-colors"
+                className="p-1.5 text-slate-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -530,47 +530,47 @@ export default function AdminDashboardPage() {
 
             {/* Modal Body */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-              <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                <span className="text-slate-500 uppercase tracking-wider font-semibold block mb-1">
+              <div className="p-3 bg-[#0E1526] rounded-xl border border-white/10">
+                <span className="text-slate-400 uppercase tracking-wider font-semibold block mb-1">
                   Email Address
                 </span>
                 <a
                   href={`mailto:${selectedInquiry.email}`}
-                  className="text-slate-900 hover:text-[#FF3D00] font-semibold flex items-center gap-1.5"
+                  className="text-white hover:text-[#FF3D00] font-semibold flex items-center gap-1.5"
                 >
                   <Mail className="w-3.5 h-3.5 text-[#FF3D00]" />
                   <span>{selectedInquiry.email}</span>
                 </a>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                <span className="text-slate-500 uppercase tracking-wider font-semibold block mb-1">
+              <div className="p-3 bg-[#0E1526] rounded-xl border border-white/10">
+                <span className="text-slate-400 uppercase tracking-wider font-semibold block mb-1">
                   Phone Number
                 </span>
                 <a
                   href={`tel:${selectedInquiry.phone}`}
-                  className="text-slate-900 hover:text-[#FF3D00] font-semibold flex items-center gap-1.5"
+                  className="text-white hover:text-[#FF3D00] font-semibold flex items-center gap-1.5"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#FF3D00]" />
                   <span>{selectedInquiry.phone}</span>
                 </a>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                <span className="text-slate-500 uppercase tracking-wider font-semibold block mb-1">
+              <div className="p-3 bg-[#0E1526] rounded-xl border border-white/10">
+                <span className="text-slate-400 uppercase tracking-wider font-semibold block mb-1">
                   Service Interested In
                 </span>
-                <span className="text-slate-900 font-semibold">
+                <span className="text-white font-semibold">
                   {selectedInquiry.service_interested}
                 </span>
               </div>
 
-              <div className="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                <span className="text-slate-500 uppercase tracking-wider font-semibold block mb-1">
+              <div className="p-3 bg-[#0E1526] rounded-xl border border-white/10">
+                <span className="text-slate-400 uppercase tracking-wider font-semibold block mb-1">
                   Project Location
                 </span>
-                <span className="text-slate-900 font-semibold flex items-center gap-1.5">
-                  <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                <span className="text-white font-semibold flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-slate-500" />
                   <span>{selectedInquiry.project_location || 'Not specified'}</span>
                 </span>
               </div>
@@ -578,18 +578,18 @@ export default function AdminDashboardPage() {
 
             {/* Project Details */}
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 block mb-2">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-2">
                 Project Requirements & Details:
               </span>
-              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 text-sm text-slate-800 leading-relaxed whitespace-pre-wrap max-h-56 overflow-y-auto">
+              <div className="p-4 bg-[#070A12] rounded-xl border border-white/10 text-sm text-slate-200 leading-relaxed whitespace-pre-wrap max-h-56 overflow-y-auto">
                 {selectedInquiry.project_details}
               </div>
             </div>
 
             {/* Modal Footer */}
-            <div className="pt-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-              <div className="flex items-center gap-2 text-slate-500">
-                <Calendar className="w-3.5 h-3.5 text-slate-400" />
+            <div className="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2 text-slate-400">
+                <Calendar className="w-3.5 h-3.5 text-slate-500" />
                 <span>Submitted: {new Date(selectedInquiry.created_at).toLocaleString()}</span>
               </div>
 
@@ -597,17 +597,17 @@ export default function AdminDashboardPage() {
                 <select
                   value={selectedInquiry.status}
                   onChange={(e) => handleStatusChange(selectedInquiry.id, e.target.value)}
-                  className="bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold py-2 px-3 text-slate-800 focus:outline-none"
+                  className="bg-[#0E1526] border border-white/10 rounded-xl text-xs font-semibold py-2 px-3 text-white focus:outline-none focus:border-[#FF3D00]"
                 >
-                  <option value="new">Status: New</option>
-                  <option value="contacted">Status: Contacted</option>
-                  <option value="in_progress">Status: In Progress</option>
-                  <option value="completed">Status: Completed</option>
+                  <option value="new" className="bg-[#0E1526] text-white">Status: New</option>
+                  <option value="contacted" className="bg-[#0E1526] text-white">Status: Contacted</option>
+                  <option value="in_progress" className="bg-[#0E1526] text-white">Status: In Progress</option>
+                  <option value="completed" className="bg-[#0E1526] text-white">Status: Completed</option>
                 </select>
 
                 <a
                   href={`mailto:${selectedInquiry.email}?subject=Regarding Your Inquiry at DOER Interior`}
-                  className="px-4 py-2 bg-[#FF3D00] hover:bg-[#e63700] text-white font-semibold rounded-lg text-xs transition-colors"
+                  className="px-4 py-2 bg-[#FF3D00] hover:bg-[#eb3800] text-white font-bold rounded-xl text-xs transition-colors shadow-[0_0_15px_rgba(255,61,0,0.35)]"
                 >
                   Reply via Email
                 </a>

@@ -39,11 +39,11 @@ interface OrderItem {
 }
 
 const STATUS_OPTIONS = [
-  { value: 'pending', label: 'Pending', badge: 'bg-amber-50 text-amber-700 border-amber-200' },
-  { value: 'confirmed', label: 'Confirmed', badge: 'bg-blue-50 text-blue-700 border-blue-200' },
-  { value: 'processing', label: 'Processing', badge: 'bg-purple-50 text-purple-700 border-purple-200' },
-  { value: 'completed', label: 'Completed', badge: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-  { value: 'cancelled', label: 'Cancelled', badge: 'bg-red-50 text-red-700 border-red-200' },
+  { value: 'pending', label: 'Pending', badge: 'bg-amber-500/15 text-amber-400 border-amber-500/30' },
+  { value: 'confirmed', label: 'Confirmed', badge: 'bg-cyan-500/15 text-cyan-400 border-cyan-500/30' },
+  { value: 'processing', label: 'Processing', badge: 'bg-purple-500/15 text-purple-400 border-purple-500/30' },
+  { value: 'completed', label: 'Completed', badge: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' },
+  { value: 'cancelled', label: 'Cancelled', badge: 'bg-red-500/15 text-red-400 border-red-500/30' },
 ];
 
 export default function AdminOrdersPage() {
@@ -132,46 +132,46 @@ export default function AdminOrdersPage() {
   return (
     <div className="space-y-6 sm:space-y-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-5 sm:pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5 sm:pb-6">
         <div>
           <div className="inline-flex items-center gap-2 text-[#FF3D00] text-xs font-bold uppercase tracking-wider mb-1">
             <ClipboardList className="w-4 h-4" />
             <span>eCommerce • Direct Customer Orders</span>
           </div>
-          <h1 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-xl sm:text-3xl font-black text-white tracking-tight">
             Orders Management
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
             View and manage all orders and queries submitted through the direct product checkout form.
           </p>
         </div>
 
         <div className="grid grid-cols-2 sm:flex items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
-          <div className="px-3.5 sm:px-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-600 flex items-center justify-center sm:justify-start gap-2 shadow-2xs">
+          <div className="px-3.5 sm:px-4 py-2 rounded-xl bg-[#0B101D] border border-white/10 text-xs font-semibold text-slate-300 flex items-center justify-center sm:justify-start gap-2 shadow-lg cyber-corner">
             <Clock className="w-4 h-4 text-[#FF3D00] shrink-0" />
             <span>
-              Pending: <strong className="text-slate-900">{orders.filter((o) => o.status === 'pending').length}</strong>
+              Pending: <strong className="text-white">{orders.filter((o) => o.status === 'pending').length}</strong>
             </span>
           </div>
-          <div className="px-3.5 sm:px-4 py-2 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-600 flex items-center justify-center sm:justify-start gap-2 shadow-2xs">
-            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+          <div className="px-3.5 sm:px-4 py-2 rounded-xl bg-[#0B101D] border border-white/10 text-xs font-semibold text-slate-300 flex items-center justify-center sm:justify-start gap-2 shadow-lg cyber-corner">
+            <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
             <span>
-              Total: <strong className="text-slate-900">{orders.length}</strong>
+              Total: <strong className="text-white">{orders.length}</strong>
             </span>
           </div>
         </div>
       </div>
 
       {/* Filters & Search */}
-      <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3.5 sm:gap-4 bg-white border border-slate-200 p-3.5 sm:p-4 rounded-2xl shadow-xs">
+      <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3.5 sm:gap-4 bg-[#0B101D] border border-white/10 p-3.5 sm:p-4 rounded-2xl shadow-xl cyber-corner">
         <div className="relative flex-1">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search by Order #, Customer Name, Phone, Email, Company, or Product..."
-            className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-[#FF3D00]"
+            className="w-full pl-10 pr-4 py-2 rounded-xl bg-[#0E1526] border border-white/10 text-base sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:bg-[#121B30] focus:ring-1 focus:ring-[#FF3D00] focus:border-[#FF3D00]"
           />
         </div>
 
@@ -180,13 +180,13 @@ export default function AdminOrdersPage() {
           <select
             value={statusFilter}
             onChange={(e) => setStatusFilter(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#FF3D00]"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-[#0E1526] border border-white/10 text-xs font-bold text-white focus:outline-none focus:border-[#FF3D00]"
           >
-            <option value="all">Status: All Orders ({orders.length})</option>
+            <option value="all" className="bg-[#0E1526] text-white">Status: All Orders ({orders.length})</option>
             {STATUS_OPTIONS.map((st) => {
               const count = orders.filter((o) => o.status === st.value).length;
               return (
-                <option key={st.value} value={st.value}>
+                <option key={st.value} value={st.value} className="bg-[#0E1526] text-white">
                   Status: {st.label} ({count})
                 </option>
               );
@@ -200,8 +200,8 @@ export default function AdminOrdersPage() {
             onClick={() => setStatusFilter('all')}
             className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
               statusFilter === 'all'
-                ? 'bg-[#FF3D00] text-white shadow-xs'
-                : 'bg-slate-50 text-slate-600 hover:text-slate-900 border border-slate-200'
+                ? 'bg-[#FF3D00] text-white shadow-[0_0_15px_rgba(255,61,0,0.35)]'
+                : 'bg-[#0E1526] text-slate-300 hover:text-white border border-white/10'
             }`}
           >
             All ({orders.length})
@@ -214,8 +214,8 @@ export default function AdminOrdersPage() {
                 onClick={() => setStatusFilter(st.value)}
                 className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
                   statusFilter === st.value
-                    ? 'bg-[#FF3D00] text-white shadow-xs'
-                    : 'bg-slate-50 text-slate-600 hover:text-slate-900 border border-slate-200'
+                    ? 'bg-[#FF3D00] text-white shadow-[0_0_15px_rgba(255,61,0,0.35)]'
+                    : 'bg-[#0E1526] text-slate-300 hover:text-white border border-white/10'
                 }`}
               >
                 {st.label} ({count})
@@ -227,15 +227,15 @@ export default function AdminOrdersPage() {
 
       {/* Orders List */}
       {loading ? (
-        <div className="py-20 flex flex-col items-center justify-center text-slate-500 gap-3">
+        <div className="py-20 flex flex-col items-center justify-center text-slate-400 gap-3">
           <Loader2 className="w-8 h-8 animate-spin text-[#FF3D00]" />
           <span className="text-sm font-medium">Loading customer orders...</span>
         </div>
       ) : filteredOrders.length === 0 ? (
-        <div className="py-16 text-center bg-white border border-dashed border-slate-300 rounded-2xl space-y-3">
-          <ClipboardList className="w-10 h-10 text-slate-400 mx-auto" />
-          <p className="text-base font-bold text-slate-800">No orders found</p>
-          <p className="text-xs text-slate-500 max-w-md mx-auto">
+        <div className="py-16 text-center bg-[#0B101D] border border-dashed border-white/15 rounded-2xl space-y-3 cyber-corner">
+          <ClipboardList className="w-10 h-10 text-slate-600 mx-auto" />
+          <p className="text-base font-bold text-white">No orders found</p>
+          <p className="text-xs text-slate-400 max-w-md mx-auto">
             Orders placed via the product checkout form will appear here immediately.
           </p>
         </div>
@@ -244,12 +244,12 @@ export default function AdminOrdersPage() {
           {filteredOrders.map((order) => (
             <div
               key={order.id}
-              className="bg-white border border-slate-200 hover:border-slate-300 rounded-2xl p-5 sm:p-6 shadow-xs transition-all"
+              className="bg-[#0B101D] border border-white/10 hover:border-[#FF3D00]/50 rounded-2xl p-5 sm:p-6 shadow-xl transition-all cyber-corner"
             >
               {/* Top Row: Order Number, Date, Status Control */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10">
                 <div className="flex items-center gap-3 flex-wrap">
-                  <span className="px-3 py-1 rounded-lg bg-[#FF3D00]/10 border border-[#FF3D00]/25 font-mono text-xs font-bold text-[#FF3D00]">
+                  <span className="px-3 py-1 rounded-lg bg-[#FF3D00]/15 border border-[#FF3D00]/30 font-mono text-xs font-bold text-[#FF3D00]">
                     {order.order_number}
                   </span>
                   <span
@@ -259,7 +259,7 @@ export default function AdminOrdersPage() {
                   >
                     {order.status}
                   </span>
-                  <span className="text-xs text-slate-500">
+                  <span className="text-xs text-slate-400">
                     Placed on{' '}
                     {new Date(order.created_at).toLocaleDateString('en-US', {
                       year: 'numeric',
@@ -272,15 +272,15 @@ export default function AdminOrdersPage() {
                 </div>
 
                 <div className="flex items-center gap-2.5">
-                  <label className="text-xs text-slate-500 font-semibold">Status:</label>
+                  <label className="text-xs text-slate-400 font-semibold">Status:</label>
                   <select
                     value={order.status}
                     disabled={updatingId === order.id}
                     onChange={(e) => handleStatusChange(order.id, e.target.value)}
-                    className="px-3 py-1.5 rounded-lg bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#FF3D00]"
+                    className="px-3 py-1.5 rounded-xl bg-[#0E1526] border border-white/10 text-xs font-bold text-white focus:outline-none focus:border-[#FF3D00]"
                   >
                     {STATUS_OPTIONS.map((st) => (
-                      <option key={st.value} value={st.value}>
+                      <option key={st.value} value={st.value} className="bg-[#0E1526] text-white">
                         {st.label}
                       </option>
                     ))}
@@ -288,7 +288,7 @@ export default function AdminOrdersPage() {
 
                   <button
                     onClick={() => handleDelete(order)}
-                    className="p-2 rounded-lg bg-slate-50 hover:bg-red-50 text-slate-500 hover:text-red-600 border border-slate-200 hover:border-red-200 transition-colors cursor-pointer"
+                    className="p-2 rounded-xl bg-[#0E1526] hover:bg-red-500/15 text-slate-400 hover:text-red-400 border border-white/10 hover:border-red-500/30 transition-colors cursor-pointer"
                     title="Delete Order"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -299,8 +299,8 @@ export default function AdminOrdersPage() {
               {/* Body Grid: Ordered Product + Customer Info */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-4 items-start">
                 {/* Ordered Product Card */}
-                <div className="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center gap-4">
-                  <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-white border border-slate-200 shrink-0">
+                <div className="lg:col-span-5 bg-[#0E1526] border border-white/10 rounded-xl p-4 flex items-center gap-4">
+                  <div className="relative w-20 h-20 rounded-lg overflow-hidden bg-[#070A12] border border-white/10 shrink-0">
                     {order.product_image ? (
                       <Image
                         src={order.product_image}
@@ -309,7 +309,7 @@ export default function AdminOrdersPage() {
                         className="object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-slate-400">
+                      <div className="w-full h-full flex items-center justify-center text-slate-500">
                         <Package className="w-6 h-6" />
                       </div>
                     )}
@@ -319,11 +319,11 @@ export default function AdminOrdersPage() {
                     <div className="text-[10px] font-bold uppercase tracking-wider text-[#FF3D00]">
                       Ordered Item (Qty: {order.quantity})
                     </div>
-                    <h3 className="text-sm font-bold text-slate-900 line-clamp-2">
+                    <h3 className="text-sm font-bold text-white line-clamp-2">
                       {order.product_name}
                     </h3>
                     <div className="flex items-center justify-between pt-1">
-                      <span className="text-xs font-bold text-slate-700">
+                      <span className="text-xs font-bold text-slate-200">
                         {order.product_price && Number(order.product_price) > 0
                           ? `৳ ${(Number(order.product_price) * order.quantity).toLocaleString()}`
                           : 'Price on Request / Custom Quote'}
@@ -348,20 +348,20 @@ export default function AdminOrdersPage() {
                     <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
                       Customer Details
                     </p>
-                    <p className="text-sm font-bold text-slate-900">{order.customer_name}</p>
+                    <p className="text-sm font-bold text-white">{order.customer_name}</p>
                     {order.company_name && (
-                      <p className="text-slate-600 flex items-center gap-1.5">
+                      <p className="text-slate-300 flex items-center gap-1.5">
                         <Building2 className="w-3.5 h-3.5 text-[#FF3D00] shrink-0" />
                         <span>{order.company_name}</span>
                       </p>
                     )}
-                    <p className="text-slate-600 flex items-center gap-1.5">
+                    <p className="text-slate-300 flex items-center gap-1.5">
                       <Phone className="w-3.5 h-3.5 text-[#FF3D00] shrink-0" />
                       <a href={`tel:${order.phone}`} className="hover:text-[#FF3D00] font-semibold">
                         {order.phone}
                       </a>
                     </p>
-                    <p className="text-slate-600 flex items-center gap-1.5">
+                    <p className="text-slate-300 flex items-center gap-1.5">
                       <Mail className="w-3.5 h-3.5 text-[#FF3D00] shrink-0" />
                       <a href={`mailto:${order.email}`} className="hover:text-[#FF3D00]">
                         {order.email}
@@ -373,12 +373,12 @@ export default function AdminOrdersPage() {
                     <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
                       Delivery / Site Address
                     </p>
-                    <p className="text-slate-700 flex items-start gap-1.5 leading-relaxed">
+                    <p className="text-slate-300 flex items-start gap-1.5 leading-relaxed">
                       <MapPin className="w-3.5 h-3.5 text-[#FF3D00] shrink-0 mt-0.5" />
                       <span>{order.delivery_address}</span>
                     </p>
                     {order.notes && (
-                      <div className="mt-2 p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-slate-700 flex items-start gap-1.5">
+                      <div className="mt-2 p-2.5 rounded-xl bg-[#070A12] border border-white/10 text-slate-300 flex items-start gap-1.5">
                         <MessageSquare className="w-3.5 h-3.5 text-[#FF3D00] shrink-0 mt-0.5" />
                         <span>{order.notes}</span>
                       </div>

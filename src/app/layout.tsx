@@ -12,17 +12,27 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth bg-[#05070B] dark">
       <head>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-white text-slate-900 antialiased selection:bg-[#FF3D00] selection:text-white font-sans">
+      <body className="min-h-screen flex flex-col bg-[#05070B] text-slate-100 antialiased selection:bg-[#FF3D00] selection:text-white font-sans relative overflow-x-hidden">
+        {/* Vertical Neon Laser Lines Streaming Downward From Navbar */}
+        <div
+          aria-hidden="true"
+          className="neon-line-v-cyan fixed top-[56px] sm:top-[64px] bottom-0 left-2 sm:left-4 lg:left-6 w-[1px] z-40 pointer-events-none opacity-40 sm:opacity-65"
+        />
+        <div
+          aria-hidden="true"
+          className="neon-line-v-orange fixed top-[56px] sm:top-[64px] bottom-0 right-2 sm:right-4 lg:right-6 w-[1px] z-40 pointer-events-none opacity-40 sm:opacity-65"
+        />
+
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

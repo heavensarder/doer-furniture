@@ -177,23 +177,28 @@ export default function FeaturedProjectsShowcase() {
   }, [isPlaying, activeIndex, isLightboxOpen]);
 
   return (
-    <section className="py-16 sm:py-24 lg:py-32 bg-slate-50/80 text-slate-900 border-y border-slate-200/80 w-full overflow-hidden relative">
+    <section className="py-16 sm:py-24 lg:py-32 bg-[#05070E] text-white border-y border-cyan-500/20 w-full overflow-hidden relative bg-circuit-grid">
+      {/* Vertical Neon Laser Lines */}
+      <div className="neon-line-v-orange absolute top-0 bottom-0 left-0 z-20" />
+      <div className="neon-line-v-cyan absolute top-0 bottom-0 right-0 z-20" />
+      <div className="absolute top-1/4 -left-20 w-[400px] h-[400px] bg-[#FF3D00]/10 rounded-full blur-[160px] pointer-events-none" />
+
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 relative z-10">
         
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16 lg:mb-20">
           <div className="space-y-3 sm:space-y-4 max-w-3xl">
-            <div className="inline-flex items-center gap-2.5 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-orange-50 border border-orange-200 text-slate-800 text-[11px] sm:text-xs font-semibold uppercase tracking-wider shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse" />
-              <span className="text-[#FF3D00] font-bold">Featured Portfolio</span>
-              <span className="text-slate-300">|</span>
-              <span className="text-slate-600">Interactive Monograph</span>
+            <div className="inline-flex items-center gap-2.5 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/40 text-[#FF3D00] text-[11px] sm:text-xs font-semibold uppercase tracking-wider shadow-[0_0_12px_rgba(255,61,0,0.3)]">
+              <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse shadow-[0_0_8px_#FF3D00]" />
+              <span className="font-bold">Featured Portfolio</span>
+              <span className="text-white/20">|</span>
+              <span className="text-slate-300">Interactive Monograph</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.12)]">
               Spaces Designed with Vision. <br className="hidden sm:inline" />
-              <span className="text-[#FF3D00]">Executed with Precision.</span>
+              <span className="text-[#FF3D00] drop-shadow-[0_0_15px_rgba(255,61,0,0.5)]">Executed with Precision.</span>
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base lg:text-lg font-normal max-w-2xl leading-relaxed">
+            <p className="text-slate-300 text-sm sm:text-base lg:text-lg font-normal max-w-2xl leading-relaxed">
               Explore our landmark commercial fit-outs, specialized retail showrooms, mission-critical installations, and bespoke furniture built in our factory.
             </p>
           </div>
@@ -201,7 +206,7 @@ export default function FeaturedProjectsShowcase() {
           <div className="flex items-center gap-4">
             <Link
               href="/projects"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-slate-950 hover:bg-[#FF3D00] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 group shadow-md"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 group shadow-[0_0_25px_rgba(255,61,0,0.45)] border border-[#FF3D00]"
             >
               <span>Explore Complete Archive (15+ Works)</span>
               <ArrowUpRight className="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -218,9 +223,9 @@ export default function FeaturedProjectsShowcase() {
           {/* Left Column: Interactive Monograph Directory (5 cols) */}
           <div className="lg:col-span-5 flex flex-col justify-between space-y-3">
             <div className="space-y-2.5 sm:space-y-3">
-              <div className="flex items-center justify-between pb-2 px-1 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-slate-200">
+              <div className="flex items-center justify-between pb-2 px-1 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-white/10">
                 <span>Selected Project Index</span>
-                <span className="font-mono text-slate-500">0{activeIndex + 1} / 0{projects.length}</span>
+                <span className="font-mono text-cyan-400">0{activeIndex + 1} / 0{projects.length}</span>
               </div>
 
               {projects.map((item, idx) => {
@@ -231,19 +236,19 @@ export default function FeaturedProjectsShowcase() {
                     onClick={() => handleSelectProject(idx)}
                     className={`w-full text-left p-3.5 sm:p-5 lg:p-6 rounded-2xl transition-all duration-300 flex items-center justify-between group relative overflow-hidden border ${
                       isActive
-                        ? 'bg-white border-[#FF3D00] shadow-xl translate-x-1 sm:translate-x-2'
-                        : 'bg-white/60 hover:bg-white border-slate-200 hover:border-slate-300 text-slate-600 shadow-sm'
+                        ? 'bg-[#0E162B] border-[#FF3D00] shadow-[0_0_25px_rgba(255,61,0,0.35)] text-white translate-x-1 sm:translate-x-2'
+                        : 'bg-[#0B101D]/75 hover:bg-[#0E1527] border-white/10 hover:border-[#FF3D00]/60 text-slate-300 shadow-[0_8px_20px_rgba(0,0,0,0.6)]'
                     }`}
                   >
                     {/* Active Left Indicator Strip */}
                     {isActive && (
-                      <span className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#FF3D00]" />
+                      <span className="absolute left-0 top-0 bottom-0 w-1.5 bg-cyan-400 shadow-[0_0_10px_#00F0FF]" />
                     )}
 
                     <div className="flex items-center gap-3 sm:gap-5 min-w-0 pr-2">
                       <span
                         className={`font-mono text-sm sm:text-base lg:text-lg font-black transition-colors shrink-0 ${
-                          isActive ? 'text-[#FF3D00]' : 'text-slate-400 group-hover:text-slate-600'
+                          isActive ? 'text-cyan-400' : 'text-slate-500 group-hover:text-slate-300'
                         }`}
                       >
                         {item.number}
@@ -253,13 +258,13 @@ export default function FeaturedProjectsShowcase() {
                         <div className="flex items-center gap-2">
                           <h4
                             className={`text-sm sm:text-lg lg:text-xl font-black transition-colors truncate ${
-                              isActive ? 'text-slate-900' : 'text-slate-700 group-hover:text-slate-900'
+                              isActive ? 'text-white' : 'text-slate-200 group-hover:text-white'
                             }`}
                           >
                             {item.title}
                           </h4>
                         </div>
-                        <p className="text-[11px] sm:text-xs text-slate-500 font-medium flex items-center gap-1.5">
+                        <p className="text-[11px] sm:text-xs text-slate-400 font-medium flex items-center gap-1.5">
                           <MapPin className="w-3 h-3 text-[#FF3D00] shrink-0" />
                           <span className="truncate">{item.location}</span>
                         </p>
@@ -269,8 +274,8 @@ export default function FeaturedProjectsShowcase() {
                     <div
                       className={`w-8 h-8 sm:w-9 sm:h-9 rounded-full flex items-center justify-center transition-all duration-300 shrink-0 ${
                         isActive
-                          ? 'bg-[#FF3D00] text-white shadow-md'
-                          : 'bg-slate-100 text-slate-400 group-hover:bg-slate-200 group-hover:text-slate-700'
+                          ? 'bg-cyan-500 text-black shadow-[0_0_12px_#00F0FF]'
+                          : 'bg-white/5 text-slate-400 group-hover:bg-white/10 group-hover:text-white'
                       }`}
                     >
                       <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -285,14 +290,14 @@ export default function FeaturedProjectsShowcase() {
               <div className="flex items-center gap-2 sm:gap-3">
                 <button
                   onClick={handlePrev}
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border border-slate-200 hover:border-[#FF3D00] hover:text-[#FF3D00] text-slate-700 flex items-center justify-center shadow-sm transition-all"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/5 border border-white/10 hover:border-[#FF3D00] hover:text-[#FF3D00] text-slate-300 flex items-center justify-center shadow-sm transition-all"
                   aria-label="Previous Project"
                 >
                   <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
                 </button>
                 <button
                   onClick={handleNext}
-                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border border-slate-200 hover:border-[#FF3D00] hover:text-[#FF3D00] text-slate-700 flex items-center justify-center shadow-sm transition-all"
+                  className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/5 border border-white/10 hover:border-[#FF3D00] hover:text-[#FF3D00] text-slate-300 flex items-center justify-center shadow-sm transition-all"
                   aria-label="Next Project"
                 >
                   <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -300,7 +305,7 @@ export default function FeaturedProjectsShowcase() {
 
                 <button
                   onClick={() => setIsPlaying(!isPlaying)}
-                  className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-white border border-slate-200 text-slate-500 text-[11px] sm:text-xs font-semibold hover:border-slate-300 transition-all shadow-sm"
+                  className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-white/5 border border-white/10 text-slate-300 text-[11px] sm:text-xs font-semibold hover:border-[#FF3D00]/60 hover:text-[#FF3D00] transition-all shadow-sm"
                   title={isPlaying ? 'Pause slideshow' : 'Play slideshow'}
                 >
                   {isPlaying ? (
@@ -325,8 +330,8 @@ export default function FeaturedProjectsShowcase() {
                     onClick={() => setActiveIndex(idx)}
                     className={`h-2 rounded-full transition-all duration-300 ${
                       idx === activeIndex
-                        ? 'w-6 sm:w-7 bg-[#FF3D00]'
-                        : 'w-2 bg-slate-300 hover:bg-slate-400'
+                        ? 'w-6 sm:w-7 bg-cyan-400 shadow-[0_0_8px_#00F0FF]'
+                        : 'w-2 bg-white/20 hover:bg-white/40'
                     }`}
                     aria-label={`Go to slide ${idx + 1}`}
                   />
@@ -339,7 +344,7 @@ export default function FeaturedProjectsShowcase() {
           <div className="lg:col-span-7 flex flex-col justify-between" ref={imageStageRef}>
             <div
               onClick={() => setIsLightboxOpen(true)}
-              className="relative w-full h-[320px] sm:h-[460px] lg:h-[580px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 group bg-slate-900 cursor-pointer"
+              className="relative w-full h-[320px] sm:h-[460px] lg:h-[580px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(0,0,0,0.95)] border border-cyan-500/30 group bg-slate-950 cursor-pointer cyber-corner"
             >
               {/* Active Image - Unobstructed Full View */}
               <Image
@@ -476,41 +481,41 @@ export default function FeaturedProjectsShowcase() {
         )}
 
         {/* Bottom Architectural Credibility Strip */}
-        <div className="mt-12 sm:mt-16 lg:mt-20 p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl bg-white border border-slate-200 shadow-sm grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-center">
+        <div className="mt-12 sm:mt-16 lg:mt-20 p-5 sm:p-8 lg:p-10 rounded-2xl sm:rounded-3xl bg-[#090D18]/90 border border-white/10 shadow-[0_15px_35px_rgba(0,0,0,0.8)] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 items-center">
           <div className="flex items-center gap-3 sm:gap-3.5">
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#FF3D00]/10 text-[#FF3D00] flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#FF3D00]/20 text-[#FF3D00] flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(255,61,0,0.3)]">
               <Factory className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-slate-900 text-xs sm:text-sm font-bold">In-House Manufacturing</p>
-              <p className="text-slate-500 text-[11px] sm:text-xs">Direct woodworking & metal factory</p>
+              <p className="text-white text-xs sm:text-sm font-bold">In-House Manufacturing</p>
+              <p className="text-slate-400 text-[11px] sm:text-xs">Direct woodworking & metal factory</p>
             </div>
           </div>
 
           <div className="flex items-center gap-3 sm:gap-3.5">
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#FF3D00]/10 text-[#FF3D00] flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(0,240,255,0.3)]">
               <Users className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-slate-900 text-xs sm:text-sm font-bold">33+ Dedicated Craftsmen</p>
-              <p className="text-slate-500 text-[11px] sm:text-xs">Master joiners, technicians & engineers</p>
+              <p className="text-white text-xs sm:text-sm font-bold">33+ Dedicated Craftsmen</p>
+              <p className="text-slate-400 text-[11px] sm:text-xs">Master joiners, technicians & engineers</p>
             </div>
           </div>
 
           <div className="flex items-center gap-3 sm:gap-3.5">
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#FF3D00]/10 text-[#FF3D00] flex items-center justify-center shrink-0">
+            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#FF3D00]/20 text-[#FF3D00] flex items-center justify-center shrink-0 shadow-[0_0_12px_rgba(255,61,0,0.3)]">
               <Cpu className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-slate-900 text-xs sm:text-sm font-bold">Precision CNC & Machinery</p>
-              <p className="text-slate-500 text-[11px] sm:text-xs">Laser, edging & cold press tech</p>
+              <p className="text-white text-xs sm:text-sm font-bold">Precision CNC & Machinery</p>
+              <p className="text-slate-400 text-[11px] sm:text-xs">Laser, edging & cold press tech</p>
             </div>
           </div>
 
           <div className="flex items-center sm:justify-end pt-2 sm:pt-0">
             <Link
               href="/projects"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-lg shadow-[#FF3D00]/25"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-[0_0_25px_rgba(255,61,0,0.45)] border border-[#FF3D00]"
             >
               <span>View All Projects</span>
               <ArrowRight className="w-4 h-4" />

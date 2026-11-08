@@ -84,16 +84,16 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       {/* Top Studio Micro Bar */}
-      <div className="bg-[#FF3D00] text-white text-[11px] font-medium py-1.5 px-4 hidden sm:block shadow-sm">
+      <div className="bg-[#070A10] border-b border-white/10 text-slate-300 text-[11px] font-mono py-1 px-4 hidden sm:block">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5 text-white font-medium">
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+            <span className="flex items-center gap-1.5 text-slate-200 font-medium">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00F0FF]" />
               <span>DOER Interior Architecture & Manufacturing Studio</span>
             </span>
-            <span className="text-white/40">|</span>
-            <span className="flex items-center gap-1 text-white/95">
-              <MapPin className="w-3 h-3 text-white" />
+            <span className="text-white/20">|</span>
+            <span className="flex items-center gap-1 text-slate-400">
+              <MapPin className="w-3 h-3 text-[#FF3D00]" />
               <span>Khilkhet, Dhaka</span>
             </span>
           </div>
@@ -101,13 +101,13 @@ export default function Navbar() {
           <div className="flex items-center gap-5">
             <a
               href="tel:+8801976535654"
-              className="flex items-center gap-1.5 text-white hover:text-white/85 transition-colors font-semibold"
+              className="flex items-center gap-1.5 text-slate-200 hover:text-[#FF3D00] transition-colors font-semibold"
             >
-              <Phone className="w-3 h-3 text-white" />
+              <Phone className="w-3 h-3 text-[#FF3D00]" />
               <span>Hotline: 01976535654</span>
             </a>
 
-            <span className="text-white/40">•</span>
+            <span className="text-white/20">•</span>
 
             {/* Social Media Links */}
             <div className="flex items-center gap-2">
@@ -115,7 +115,7 @@ export default function Navbar() {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-5 h-5 rounded-full bg-white/15 hover:bg-white hover:text-[#FF3D00] text-white flex items-center justify-center transition-all duration-200"
+                className="w-5 h-5 rounded-full bg-white/5 hover:bg-[#FF3D00] text-slate-400 hover:text-white flex items-center justify-center transition-all duration-200 border border-white/10"
                 aria-label="Facebook"
               >
                 <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
@@ -126,7 +126,7 @@ export default function Navbar() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-5 h-5 rounded-full bg-white/15 hover:bg-white hover:text-[#FF3D00] text-white flex items-center justify-center transition-all duration-200"
+                className="w-5 h-5 rounded-full bg-white/5 hover:bg-[#FF3D00] text-slate-400 hover:text-white flex items-center justify-center transition-all duration-200 border border-white/10"
                 aria-label="Instagram"
               >
                 <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
@@ -137,7 +137,7 @@ export default function Navbar() {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-5 h-5 rounded-full bg-white/15 hover:bg-white hover:text-[#FF3D00] text-white flex items-center justify-center transition-all duration-200"
+                className="w-5 h-5 rounded-full bg-white/5 hover:bg-[#FF3D00] text-slate-400 hover:text-white flex items-center justify-center transition-all duration-200 border border-white/10"
                 aria-label="LinkedIn"
               >
                 <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
@@ -148,7 +148,7 @@ export default function Navbar() {
                 href="https://wa.me/8801976535654"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-5 h-5 rounded-full bg-white/15 hover:bg-white hover:text-[#FF3D00] text-white flex items-center justify-center transition-all duration-200"
+                className="w-5 h-5 rounded-full bg-white/5 hover:bg-[#66CC66] text-slate-400 hover:text-white flex items-center justify-center transition-all duration-200 border border-white/10"
                 aria-label="WhatsApp"
               >
                 <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 24 24">
@@ -160,14 +160,25 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Main Navigation Bar */}
+      {/* Main Navigation Bar - Technological Command Center Glass */}
       <div
-        className={`transition-all duration-300 ${
+        className={`transition-all duration-300 relative ${
           scrolled
-            ? 'glass-nav shadow-lg shadow-slate-900/5 py-3'
-            : 'bg-white/95 backdrop-blur-md border-b border-slate-100 py-4'
+            ? 'bg-[#05070B]/92 backdrop-blur-xl border-b border-cyan-500/25 shadow-[0_10px_35px_rgba(0,0,0,0.85)] py-2.5 sm:py-3'
+            : 'bg-[#05070B]/80 backdrop-blur-md border-b border-white/10 py-3 sm:py-4'
         }`}
       >
+        {/* Vertical Neon Laser Lines (On Navbar and Streaming Downward) */}
+        <div className="neon-line-v-cyan absolute top-0 bottom-0 left-0 z-30" />
+        <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-30" />
+        <div className="neon-line-v-cyan absolute top-full left-4 sm:left-10 w-[1px] h-24 sm:h-36 pointer-events-none z-30 opacity-75" />
+        <div className="neon-line-v-orange absolute top-full right-4 sm:right-10 w-[1px] h-24 sm:h-36 pointer-events-none z-30 opacity-75" />
+        <div className="neon-line-v-cyan absolute top-full left-1/3 w-[1px] h-16 sm:h-24 pointer-events-none z-30 opacity-40 hidden md:block" />
+        <div className="neon-line-v-orange absolute top-full right-1/3 w-[1px] h-16 sm:h-24 pointer-events-none z-30 opacity-40 hidden md:block" />
+
+        {/* Static Cyber Edge Border */}
+        <div className="absolute bottom-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/25 to-transparent pointer-events-none z-20" />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-2 xl:gap-4">
             {/* Logo */}
@@ -178,7 +189,7 @@ export default function Navbar() {
                   alt="DOER Logo"
                   fill
                   priority
-                  className="object-contain object-left"
+                  className="object-contain object-left drop-shadow-[0_0_15px_rgba(255,61,0,0.35)]"
                 />
               </div>
             </Link>
@@ -196,19 +207,19 @@ export default function Navbar() {
                     <div key={item.href} className="relative group shrink-0">
                       <Link
                         href={item.href}
-                        className={`inline-flex items-center gap-1 whitespace-nowrap text-[11px] xl:text-[13px] tracking-wide uppercase font-bold px-2 xl:px-3 py-2 rounded-lg transition-all duration-200 ${
+                        className={`inline-flex items-center gap-1 whitespace-nowrap text-[11px] xl:text-[13px] tracking-wide uppercase font-bold px-2.5 xl:px-3 py-2 rounded-lg transition-all duration-200 border ${
                           isActive
-                            ? 'bg-[#FF3D00] text-white shadow-md shadow-[#FF3D00]/25'
-                            : 'text-slate-700 hover:bg-[#FF3D00] hover:text-white'
+                            ? 'bg-[#FF3D00] text-white border-[#FF3D00] shadow-[0_0_15px_rgba(255,61,0,0.5)]'
+                            : 'text-slate-300 hover:text-white hover:bg-white/10 border-transparent hover:border-white/15'
                         }`}
                       >
                         <span>{item.label}</span>
                         <ChevronDown className="w-3.5 h-3.5 opacity-80 transition-transform duration-200 group-hover:rotate-180" />
                       </Link>
 
-                      {/* Dynamic Submenu Dropdown (Synced with Admin Category Drag-and-Drop Order) */}
+                      {/* Dynamic Submenu Dropdown */}
                       <div className="absolute left-0 top-full pt-2 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                        <div className="bg-slate-950 text-white rounded-2xl border border-slate-800 shadow-2xl p-2 space-y-1">
+                        <div className="bg-[#090D16]/95 backdrop-blur-2xl text-white rounded-2xl border border-cyan-500/30 shadow-[0_15px_40px_rgba(0,0,0,0.85)] p-2 space-y-1">
                           <Link
                             href="/products"
                             className="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-white bg-white/5 hover:bg-[#FF3D00] transition-colors"
@@ -217,7 +228,7 @@ export default function Navbar() {
                             <ChevronRight className="w-3.5 h-3.5" />
                           </Link>
 
-                          <div className="h-px bg-slate-800/80 my-1" />
+                          <div className="h-px bg-white/10 my-1" />
 
                           {categories.map((cat) => (
                             <Link
@@ -227,7 +238,7 @@ export default function Navbar() {
                             >
                               <span className="truncate">{cat.name}</span>
                               {cat.product_count !== undefined && cat.product_count > 0 && (
-                                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 group-hover/sub:bg-white/20 text-slate-300 group-hover/sub:text-white">
+                                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-800 border border-white/10 group-hover/sub:bg-white/20 text-slate-300 group-hover/sub:text-white font-mono">
                                   {cat.product_count}
                                 </span>
                               )}
@@ -243,10 +254,10 @@ export default function Navbar() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`whitespace-nowrap text-[11px] xl:text-[13px] tracking-wide uppercase font-bold px-2 xl:px-3 py-2 rounded-lg transition-all duration-200 shrink-0 ${
+                    className={`whitespace-nowrap text-[11px] xl:text-[13px] tracking-wide uppercase font-bold px-2.5 xl:px-3 py-2 rounded-lg transition-all duration-200 shrink-0 border ${
                       isActive
-                        ? 'bg-[#FF3D00] text-white shadow-md shadow-[#FF3D00]/25'
-                        : 'text-slate-700 hover:bg-[#FF3D00] hover:text-white'
+                        ? 'bg-[#FF3D00] text-white border-[#FF3D00] shadow-[0_0_15px_rgba(255,61,0,0.5)]'
+                        : 'text-slate-300 hover:text-white hover:bg-white/10 border-transparent hover:border-white/15'
                     }`}
                   >
                     {item.shortLabel ? (
@@ -266,7 +277,7 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center shrink-0">
               <Link
                 href="/contact"
-                className="group relative inline-flex items-center gap-1.5 xl:gap-2 px-3.5 xl:px-5 py-2 xl:py-2.5 bg-[#FF3D00] hover:bg-[#eb3800] text-white text-[11px] xl:text-xs font-bold uppercase tracking-wider rounded-lg shadow-md shadow-[#FF3D00]/25 hover:shadow-lg hover:shadow-[#FF3D00]/35 transition-all duration-200 whitespace-nowrap shrink-0"
+                className="group relative inline-flex items-center gap-1.5 xl:gap-2 px-3.5 xl:px-5 py-2 xl:py-2.5 bg-[#FF3D00] hover:bg-[#eb3800] text-white text-[11px] xl:text-xs font-bold uppercase tracking-wider rounded-lg shadow-[0_0_20px_rgba(255,61,0,0.45)] hover:shadow-[0_0_28px_rgba(255,61,0,0.6)] border border-[#FF3D00] transition-all duration-200 whitespace-nowrap shrink-0"
               >
                 <span>Start Your Project</span>
                 <ArrowUpRight className="w-3.5 h-3.5 xl:w-4 xl:h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
@@ -277,13 +288,13 @@ export default function Navbar() {
             <div className="flex items-center gap-3 lg:hidden">
               <Link
                 href="/contact"
-                className="px-3.5 py-1.5 bg-[#FF3D00] text-white text-xs font-bold uppercase rounded-md shadow-sm"
+                className="px-3.5 py-1.5 bg-[#FF3D00] text-white text-xs font-bold uppercase rounded-md shadow-[0_0_12px_rgba(255,61,0,0.4)]"
               >
                 Quote
               </Link>
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-2 text-slate-800 hover:text-[#FF3D00] transition-colors focus:outline-none"
+                className="p-2 text-slate-200 hover:text-[#FF3D00] transition-colors focus:outline-none"
                 aria-label="Toggle Navigation Menu"
               >
                 {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -295,7 +306,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {isOpen && (
-        <div className="lg:hidden bg-slate-950 text-white border-b border-slate-800 shadow-2xl animate-in slide-in-from-top duration-300 max-h-[85vh] overflow-y-auto">
+        <div className="lg:hidden bg-[#05070B]/98 text-white border-b border-cyan-500/30 shadow-[0_20px_50px_rgba(0,0,0,0.95)] backdrop-blur-2xl animate-in slide-in-from-top duration-300 max-h-[85vh] overflow-y-auto">
           <div className="max-w-7xl mx-auto px-6 py-6 space-y-2.5">
             {NAV_ITEMS.map((item) => {
               const isProducts = item.href === '/products';
@@ -310,10 +321,10 @@ export default function Navbar() {
                       <Link
                         href="/products"
                         onClick={() => setIsOpen(false)}
-                        className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-semibold tracking-wide uppercase transition-colors ${
+                        className={`flex-1 py-2.5 px-3 rounded-lg text-sm font-semibold tracking-wide uppercase transition-colors border ${
                           isActive
-                            ? 'bg-[#FF3D00] text-white shadow-sm'
-                            : 'text-slate-300 hover:bg-[#FF3D00] hover:text-white'
+                            ? 'bg-[#FF3D00] text-white border-[#FF3D00] shadow-[0_0_12px_rgba(255,61,0,0.4)]'
+                            : 'text-slate-300 hover:bg-white/10 hover:text-white border-white/5'
                         }`}
                       >
                         {item.label}
@@ -321,7 +332,7 @@ export default function Navbar() {
                       <button
                         type="button"
                         onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
-                        className="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-300 hover:text-white"
+                        className="p-2.5 rounded-lg bg-[#0D121E] border border-white/10 text-slate-300 hover:text-white"
                         aria-label="Toggle Product Categories"
                       >
                         <ChevronDown
@@ -333,11 +344,11 @@ export default function Navbar() {
                     </div>
 
                     {mobileProductsOpen && (
-                      <div className="ml-4 pl-3 border-l border-slate-800 space-y-1">
+                      <div className="ml-4 pl-3 border-l border-cyan-500/30 space-y-1">
                         <Link
                           href="/products"
                           onClick={() => setIsOpen(false)}
-                          className="block py-2 px-3 rounded-lg text-xs font-bold uppercase text-[#FF3D00] hover:bg-slate-900"
+                          className="block py-2 px-3 rounded-lg text-xs font-bold uppercase text-[#FF3D00] hover:bg-white/5"
                         >
                           All Products
                         </Link>
@@ -346,7 +357,7 @@ export default function Navbar() {
                             key={cat.id}
                             href={`/products?category=${cat.slug}`}
                             onClick={() => setIsOpen(false)}
-                            className="block py-2 px-3 rounded-lg text-xs font-medium text-slate-300 hover:bg-slate-900 hover:text-white"
+                            className="block py-2 px-3 rounded-lg text-xs font-medium text-slate-300 hover:bg-white/5 hover:text-white"
                           >
                             {cat.name}
                           </Link>
@@ -362,10 +373,10 @@ export default function Navbar() {
                   key={item.href}
                   href={item.href}
                   onClick={() => setIsOpen(false)}
-                  className={`block py-2.5 px-3 rounded-lg text-sm font-semibold tracking-wide uppercase transition-colors ${
+                  className={`block py-2.5 px-3 rounded-lg text-sm font-semibold tracking-wide uppercase transition-colors border ${
                     isActive
-                      ? 'bg-[#FF3D00] text-white shadow-sm'
-                      : 'text-slate-300 hover:bg-[#FF3D00] hover:text-white'
+                      ? 'bg-[#FF3D00] text-white border-[#FF3D00] shadow-[0_0_12px_rgba(255,61,0,0.4)]'
+                      : 'text-slate-300 hover:bg-white/10 hover:text-white border-white/5'
                   }`}
                 >
                   {item.label}
@@ -373,8 +384,8 @@ export default function Navbar() {
               );
             })}
 
-            <div className="pt-4 border-t border-slate-800 flex flex-col gap-3">
-              <div className="flex items-center justify-center gap-2 text-xs text-slate-400 px-3 text-center">
+            <div className="pt-4 border-t border-white/10 flex flex-col gap-3">
+              <div className="flex items-center justify-center gap-2 text-xs text-slate-400 px-3 text-center font-mono">
                 <Phone className="w-4 h-4 text-[#FF3D00] shrink-0" />
                 <a href="tel:+8801976535654" className="hover:text-white transition-colors">
                   01976535654
@@ -387,7 +398,7 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 onClick={() => setIsOpen(false)}
-                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-lg shadow-[#FF3D00]/30"
+                className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider rounded-lg shadow-[0_0_20px_rgba(255,61,0,0.45)] border border-[#FF3D00]"
               >
                 <span>Start Your Project</span>
                 <ArrowUpRight className="w-4 h-4" />

@@ -80,21 +80,26 @@ export default function MaterialsShowcase() {
   ];
 
   return (
-    <section className="py-16 sm:py-24 lg:py-32 bg-slate-50/70 border-b border-slate-200/80 w-full overflow-hidden relative">
+    <section className="py-16 sm:py-24 lg:py-32 bg-[#060911] text-white border-b border-cyan-500/20 w-full overflow-hidden relative bg-cyber-grid">
+      {/* Vertical Neon Laser Lines */}
+      <div className="neon-line-v-cyan absolute top-0 bottom-0 left-0 z-20" />
+      <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20" />
+      <div className="absolute top-1/2 -right-20 w-[450px] h-[450px] bg-cyan-500/10 rounded-full blur-[160px] pointer-events-none" />
+
       <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 relative z-10">
         
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16 lg:mb-20">
           <div className="space-y-3 sm:space-y-4 max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-orange-50 border border-orange-200 text-slate-800 text-[11px] sm:text-xs font-semibold uppercase tracking-wider shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#FF3D00]" />
-              <span className="text-[#FF3D00] font-bold">Architectural Materials</span>
+            <div className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-semibold uppercase tracking-wider shadow-[0_0_12px_rgba(0,240,255,0.25)]">
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              <span className="text-cyan-400 font-bold">Architectural Materials</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.12)]">
               Architectural Patinas & <br className="hidden sm:inline" />
-              <span className="text-[#FF3D00]">Surface Textures.</span>
+              <span className="text-[#FF3D00] drop-shadow-[0_0_15px_rgba(255,61,0,0.5)]">Surface Textures.</span>
             </h2>
-            <p className="text-slate-600 text-sm sm:text-base lg:text-lg font-normal max-w-2xl leading-relaxed">
+            <p className="text-slate-300 text-sm sm:text-base lg:text-lg font-normal max-w-2xl leading-relaxed">
               A premium decorative material collection combining artistic textures with sophisticated metallic and mineral finishes to bring depth and character to modern interiors.
             </p>
           </div>
@@ -102,7 +107,7 @@ export default function MaterialsShowcase() {
           <div className="flex items-center gap-3">
             <Link
               href="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-slate-950 hover:bg-[#FF3D00] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md group"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_25px_rgba(255,61,0,0.45)] border border-[#FF3D00] group"
             >
               <span>Request Material Sample Kit</span>
               <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
@@ -120,24 +125,24 @@ export default function MaterialsShowcase() {
                 <Sparkles className="w-4 h-4" />
                 <span>Tactile Surface Engineering</span>
               </div>
-              <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 tracking-tight leading-tight">
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight leading-tight">
                 Artistic Patterns with a Sophisticated Metallic Finish
               </h3>
               
               {/* Exact Paragraph 1 from PDF */}
-              <p className="text-xs sm:text-sm lg:text-base text-slate-700 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm lg:text-base text-slate-300 leading-relaxed font-normal">
                 Our architectural materials collection is a premium decorative design solution combining artistic patterns with sophisticated metallic and mineral finishes. Featuring distinctive tactile textures and contemporary styling, it brings depth, character, and visual interest to interior spaces.
               </p>
 
               {/* Exact Paragraph 2 from PDF */}
-              <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm lg:text-base text-slate-400 leading-relaxed font-normal">
                 Designed for modern architectural and decorative applications, it offers an attractive solution for creating stylish partitions, feature walls, decorative panels, and statement interior elements. Its elegant appearance makes it an excellent choice for restaurants, hotels, commercial spaces, offices, and luxury residences.
               </p>
             </div>
 
             {/* Recommended Applications (Exact from PDF) */}
             <div className="space-y-2.5 sm:space-y-3 pt-1">
-              <p className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+              <p className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
                 <Layers className="w-3.5 h-3.5 text-[#FF3D00]" />
                 <span>Recommended Architectural Applications:</span>
               </p>
@@ -145,9 +150,9 @@ export default function MaterialsShowcase() {
                 {applications.map((app) => (
                   <div
                     key={app}
-                    className="flex items-center gap-2 text-xs font-semibold text-slate-800 p-2.5 sm:p-3 rounded-xl bg-white border border-slate-200/90 shadow-sm hover:border-[#FF3D00]/50 transition-colors"
+                    className="flex items-center gap-2 text-xs font-semibold text-slate-200 p-2.5 sm:p-3 rounded-xl bg-[#0B101D]/80 border border-white/10 shadow-sm hover:border-[#FF3D00]/50 hover:shadow-[0_0_15px_rgba(255,61,0,0.25)] transition-all"
                   >
-                    <CheckCircle2 className="w-3.5 h-3.5 text-[#FF3D00] shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
                     <span>{app}</span>
                   </div>
                 ))}
@@ -156,7 +161,7 @@ export default function MaterialsShowcase() {
 
             {/* Target Spaces (Exact from PDF) */}
             <div className="space-y-2.5 sm:space-y-3 pt-1">
-              <p className="text-xs font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+              <p className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
                 <Building className="w-3.5 h-3.5 text-[#FF3D00]" />
                 <span>Ideal Environments:</span>
               </p>
@@ -166,7 +171,7 @@ export default function MaterialsShowcase() {
                   return (
                     <span
                       key={sp.name}
-                      className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-white border border-slate-200 text-[11px] sm:text-xs font-medium text-slate-700 shadow-sm hover:border-[#FF3D00]/40 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-lg bg-[#0B101D]/80 border border-white/10 text-[11px] sm:text-xs font-medium text-slate-300 shadow-sm hover:border-[#FF3D00]/50 hover:text-white transition-colors"
                     >
                       <Icon className="w-3.5 h-3.5 text-[#FF3D00]" />
                       <span>{sp.name}</span>
@@ -178,17 +183,17 @@ export default function MaterialsShowcase() {
 
             {/* Material Engineering Badges */}
             <div className="grid grid-cols-3 gap-2 sm:gap-3 pt-1 sm:pt-2">
-              <div className="p-2.5 sm:p-3.5 rounded-xl bg-white border border-slate-200/90 shadow-sm">
+              <div className="p-2.5 sm:p-3.5 rounded-xl bg-[#0A0E18]/90 border border-white/10 shadow-sm">
                 <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-slate-400">Finish Spec</p>
-                <p className="text-[11px] sm:text-sm font-bold text-slate-900 pt-0.5 truncate">{current.spec}</p>
+                <p className="text-[11px] sm:text-sm font-bold text-white pt-0.5 truncate">{current.spec}</p>
               </div>
-              <div className="p-2.5 sm:p-3.5 rounded-xl bg-white border border-slate-200/90 shadow-sm">
+              <div className="p-2.5 sm:p-3.5 rounded-xl bg-[#0A0E18]/90 border border-white/10 shadow-sm">
                 <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-slate-400">Coating</p>
-                <p className="text-[11px] sm:text-sm font-bold text-slate-900 pt-0.5 truncate">Zero-VOC Seal</p>
+                <p className="text-[11px] sm:text-sm font-bold text-white pt-0.5 truncate">Zero-VOC Seal</p>
               </div>
-              <div className="p-2.5 sm:p-3.5 rounded-xl bg-white border border-slate-200/90 shadow-sm">
+              <div className="p-2.5 sm:p-3.5 rounded-xl bg-[#0A0E18]/90 border border-white/10 shadow-sm">
                 <p className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-slate-400">Workshop</p>
-                <p className="text-[11px] sm:text-sm font-bold text-slate-900 pt-0.5 truncate">Khilkhet, Dhaka</p>
+                <p className="text-[11px] sm:text-sm font-bold text-white pt-0.5 truncate">Khilkhet, Dhaka</p>
               </div>
             </div>
           </div>
@@ -197,7 +202,7 @@ export default function MaterialsShowcase() {
           <div className="lg:col-span-6 space-y-4">
             
             {/* Square Picture Stage Container (Aspect Square 1:1) */}
-            <div className="relative w-full aspect-square max-w-[540px] mx-auto rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-slate-200/90 bg-slate-950 group">
+            <div className="relative w-full aspect-square max-w-[540px] mx-auto rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_0_35px_rgba(0,0,0,0.9)] border border-cyan-500/30 bg-slate-950 group cyber-corner">
               <Image
                 key={current.image}
                 src={current.image}
@@ -222,20 +227,20 @@ export default function MaterialsShowcase() {
               </div>
 
               {/* Bottom Scrim Content - Glassmorphic Title Bar */}
-              <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 px-3.5 sm:px-5 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl bg-black/75 backdrop-blur-md border border-white/15 text-white flex items-center justify-between z-20 shadow-xl gap-2">
+              <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 px-3.5 sm:px-5 py-2.5 sm:py-3.5 rounded-xl sm:rounded-2xl bg-[#090D18]/90 backdrop-blur-md border border-white/15 text-white flex items-center justify-between z-20 shadow-xl gap-2">
                 <h4 className="text-sm sm:text-lg font-black text-white truncate">{current.name}</h4>
-                <span className="text-[10px] sm:text-xs font-mono text-[#FF3D00] font-semibold shrink-0">{current.spec}</span>
+                <span className="text-[10px] sm:text-xs font-mono text-cyan-400 font-semibold shrink-0">{current.spec}</span>
               </div>
             </div>
 
             {/* 4 Square Pattern Swatches */}
             <div className="space-y-2 max-w-[540px] mx-auto pt-1">
               <div className="flex items-center justify-between px-1">
-                <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                <p className="text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-[#FF3D00]" />
                   <span>Select Pattern Swatch:</span>
                 </p>
-                <span className="text-[11px] sm:text-xs font-bold text-[#FF3D00] truncate max-w-[180px] sm:max-w-none">
+                <span className="text-[11px] sm:text-xs font-bold text-cyan-400 truncate max-w-[180px] sm:max-w-none">
                   {current.name}
                 </span>
               </div>
@@ -249,8 +254,8 @@ export default function MaterialsShowcase() {
                       onClick={() => setActiveMaterial(mat.id)}
                       className={`group relative aspect-square rounded-xl sm:rounded-2xl overflow-hidden border-2 transition-all duration-300 focus:outline-none ${
                         isSelected
-                          ? 'border-[#FF3D00] ring-2 sm:ring-4 ring-[#FF3D00]/25 shadow-xl scale-[1.03]'
-                          : 'border-slate-200/90 hover:border-slate-400 opacity-80 hover:opacity-100 hover:scale-[1.02] shadow-sm'
+                          ? 'border-[#FF3D00] shadow-[0_0_20px_rgba(255,61,0,0.5)] scale-[1.03]'
+                          : 'border-white/15 hover:border-[#FF3D00]/60 opacity-80 hover:opacity-100 hover:scale-[1.02]'
                       }`}
                       aria-label={mat.name}
                     >

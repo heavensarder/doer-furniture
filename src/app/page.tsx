@@ -138,13 +138,13 @@ export default function HomePage() {
   ];
 
   const capabilities = [
-    { title: 'Woodworking and furniture manufacturing', icon: Armchair, tag: 'Joinery Atelier' },
-    { title: 'Board processing and fabrication', icon: Layers, tag: 'Automated Line' },
-    { title: 'Metal fabrication & steel structures', icon: Factory, tag: 'MIG/TIG & SS' },
-    { title: 'Glass and aluminium fabrication', icon: Building, tag: 'Acoustic Glazing' },
-    { title: 'CNC machining and precision cutting', icon: Cpu, tag: 'Automated Routing' },
-    { title: 'Electrical and civil works', icon: Hammer, tag: 'Licensed Engineers' },
-    { title: 'Installation and turnkey project execution', icon: CheckCircle2, tag: 'Zero Outsourcing' },
+    { title: 'Woodworking & Furniture Manufacturing', icon: Armchair, tag: 'Joinery Atelier' },
+    { title: 'Board Processing & Fabrication', icon: Layers, tag: 'Automated Line' },
+    { title: 'Metal Fabrication & Steel Structures', icon: Factory, tag: 'MIG/TIG & SS' },
+    { title: 'Glass & Aluminium Fabrication', icon: Building, tag: 'Acoustic Glazing' },
+    { title: 'CNC Machining & Precision Cutting', icon: Cpu, tag: 'Automated Routing' },
+    { title: 'Electrical & Civil Works', icon: Hammer, tag: 'Licensed Engineers' },
+    { title: 'Installation & Turnkey Project Execution', icon: CheckCircle2, tag: 'Zero Outsourcing' },
   ];
 
   const whyChooseUs = [
@@ -156,7 +156,7 @@ export default function HomePage() {
     },
     {
       num: '02',
-      title: 'In-house Manufacturing',
+      title: 'In-House Manufacturing',
       desc: 'Dedicated fabrication and production facilities.',
       icon: Factory,
     },
@@ -181,31 +181,36 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen bg-white">
+    <div className="flex flex-col min-h-screen bg-[#05070B] text-slate-100 selection:bg-[#FF3D00] selection:text-white">
       {/* 01. HERO SLIDER SECTION */}
       <HeroSlider />
 
       {/* 02. INTRODUCTION SECTION - CONTROL ROOM SETUP & CONSOLE WORKSTATIONS */}
-      <section className="py-12 sm:py-16 lg:py-24 bg-white relative bg-architectural-grid">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-14 sm:py-20 lg:py-24 bg-[#070A12] relative overflow-hidden bg-cyber-grid text-white border-y border-cyan-500/20">
+        {/* Vertical Neon Laser Lines */}
+        <div className="neon-line-v-orange absolute top-0 bottom-0 left-0 z-20" />
+        <div className="neon-line-v-cyan absolute top-0 bottom-0 right-0 z-20" />
+        <div className="absolute top-1/2 left-0 w-96 h-96 bg-[#FF3D00]/10 rounded-full blur-[140px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
             
             {/* Left Content */}
             <div className="lg:col-span-6 space-y-4 sm:space-y-6">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-[#FF3D00] text-xs font-bold uppercase tracking-wider">
-                <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/40 text-[#FF3D00] text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.3)]">
+                <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse shadow-[0_0_8px_#FF3D00]" />
                 <span>Mission-Critical Control Room Solutions</span>
               </div>
 
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.12)]">
                 Turnkey Control Room Setup & High-Performance Consoles
               </h2>
 
-              <p className="text-sm sm:text-base lg:text-lg text-slate-700 leading-relaxed font-normal">
+              <p className="text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed font-normal">
                 DOER specializes in complete, end-to-end control room design, custom engineering, and turnkey interior fit-outs. From 24/7 mission-critical operations centers to emergency response and security hubs, we deliver ergonomic environments built for uninterrupted operational command.
               </p>
 
-              <p className="text-xs sm:text-sm lg:text-base text-slate-600 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm lg:text-base text-slate-400 leading-relaxed font-normal">
                 Every facility is engineered under one roof at our Khilkhet workshop—combining precision-fabricated modular console tables, multi-display video wall mounting, acoustic wall cladding, anti-static raised access flooring, thermal cable routing, and operator-centric circadian lighting.
               </p>
 
@@ -213,7 +218,7 @@ export default function HomePage() {
               <div className="pt-2 sm:pt-4">
                 <Link
                   href="/contact"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-lg shadow-[#FF3D00]/25 group cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 sm:py-4 bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white text-xs sm:text-sm font-bold uppercase tracking-wider rounded-xl transition-all duration-300 shadow-[0_0_25px_rgba(255,61,0,0.45)] border border-[#FF3D00] group cursor-pointer"
                 >
                   <span>Contact with Expert</span>
                   <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
@@ -223,7 +228,7 @@ export default function HomePage() {
 
             {/* Right Architectural Image Showcase (Strict 1:1 Square Size, Fully Mobile Responsive) */}
             <div className="lg:col-span-6 relative flex items-center justify-center mt-2 sm:mt-0">
-              <div className="relative aspect-square w-full max-w-[560px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl border border-slate-200 group">
+              <div className="relative aspect-square w-full max-w-[560px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-[0_0_35px_rgba(0,0,0,0.9)] border border-cyan-500/30 group cyber-corner">
                 <Image
                   src="/images/introduction-image.png"
                   alt="DOER Mission-Critical Control Room Setup & Console Systems"
@@ -231,22 +236,22 @@ export default function HomePage() {
                   priority
                   className="object-cover img-zoom"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#05070B] via-slate-950/30 to-transparent" />
                 
                 {/* Floating Studio Badge */}
-                <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-5 sm:left-5 sm:right-5 p-3 sm:p-5 rounded-xl sm:rounded-2xl bg-slate-950/90 backdrop-blur-md border border-white/10 text-white shadow-xl">
+                <div className="absolute bottom-2.5 left-2.5 right-2.5 sm:bottom-5 sm:left-5 sm:right-5 p-3.5 sm:p-5 rounded-xl sm:rounded-2xl bg-[#090D18]/90 backdrop-blur-xl border border-white/15 text-white shadow-2xl">
                   <div className="flex items-center justify-between gap-2 mb-1 sm:mb-2">
                     <div className="flex items-center gap-2">
-                      <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#FF3D00] animate-pulse" />
+                      <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-[#FF3D00] animate-pulse shadow-[0_0_8px_#FF3D00]" />
                       <span className="text-[10px] sm:text-xs uppercase tracking-widest font-bold text-[#FF3D00]">
                         Integrated Command Center
                       </span>
                     </div>
-                    <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/10 text-white/80 shrink-0">
+                    <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 shrink-0">
                       24/7 Heavy Duty
                     </span>
                   </div>
-                  <p className="text-[11px] sm:text-xs lg:text-sm font-medium leading-relaxed text-slate-200 line-clamp-2 sm:line-clamp-none">
+                  <p className="text-[11px] sm:text-xs lg:text-sm font-medium leading-relaxed text-slate-300 line-clamp-2 sm:line-clamp-none">
                     Engineered console workstations, video wall integration, acoustic cladding, and thermal airflow management.
                   </p>
                 </div>
@@ -258,24 +263,28 @@ export default function HomePage() {
       </section>
 
       {/* 03. OUR SERVICES SECTION - COMPACT SINGLE-SCREEN SHOWCASE */}
-      <section className="py-8 lg:py-10 bg-slate-50/70 border-y border-slate-200/80 w-full overflow-hidden">
-        <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24">
+      <section className="py-10 lg:py-14 bg-[#05070B] border-b border-cyan-500/20 w-full overflow-hidden relative bg-circuit-grid">
+        {/* Vertical Neon Laser Lines */}
+        <div className="neon-line-v-cyan absolute top-0 bottom-0 left-0 z-20" />
+        <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20" />
+
+        <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 relative z-10">
           
           {/* Section Header */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-5 lg:mb-6">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 mb-6 lg:mb-8">
             <div>
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-orange-50 border border-orange-200 text-[#FF3D00] text-[11px] font-bold uppercase tracking-wider mb-1.5 shadow-sm">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#FF3D00]" />
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] font-bold uppercase tracking-wider mb-2 shadow-[0_0_12px_rgba(0,240,255,0.25)]">
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
                 <span>Our Core Services</span>
               </div>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 tracking-tight leading-tight">
-                Complete Solutions for <span className="text-[#FF3D00]">Every Space</span>
+              <h2 className="text-xl sm:text-2xl lg:text-3xl font-black text-white tracking-tight leading-tight">
+                Complete Solutions for <span className="text-[#FF3D00] drop-shadow-[0_0_15px_rgba(255,61,0,0.5)]">Every Space</span>
               </h2>
             </div>
 
             <Link
               href="/services"
-              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-700 hover:text-[#FF3D00] transition-colors self-start sm:self-end pb-0.5 group"
+              className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-slate-300 hover:text-[#FF3D00] transition-colors self-start sm:self-end pb-0.5 group"
             >
               <span>View All Services</span>
               <ArrowRight className="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" />
@@ -290,32 +299,32 @@ export default function HomePage() {
                 <Link
                   key={service.number}
                   href={service.href || '/services'}
-                  className="group bg-white rounded-2xl border border-slate-200/90 hover:border-[#FF3D00] p-2.5 sm:p-3 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+                  className="group bg-[#0A0F1D]/90 rounded-2xl border border-white/10 hover:border-[#FF3D00]/60 p-2.5 sm:p-3 shadow-[0_10px_25px_rgba(0,0,0,0.7)] hover:shadow-[0_0_25px_rgba(255,61,0,0.35)] transition-all duration-300 flex flex-col justify-between cyber-corner"
                 >
                   <div>
                     {/* Square Size Image Container */}
-                    <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-slate-100 mb-2.5">
+                    <div className="relative aspect-square w-full rounded-xl overflow-hidden bg-slate-900 mb-2.5 border border-white/5">
                       <Image
                         src={service.image}
                         alt={service.title}
                         fill
                         className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/30" />
 
                       {/* Micro Badges */}
                       <div className="absolute top-2 left-2 right-2 flex items-center justify-between z-10">
-                        <span className="px-1.5 py-0.5 rounded bg-black/75 backdrop-blur-md text-white font-mono text-[10px] font-bold border border-white/10">
+                        <span className="px-1.5 py-0.5 rounded bg-black/80 backdrop-blur-md text-white font-mono text-[10px] font-bold border border-white/15">
                           {service.number}
                         </span>
-                        <span className="px-1.5 py-0.5 rounded bg-[#FF3D00] text-white text-[9px] font-bold uppercase tracking-wider shadow-sm">
+                        <span className="px-1.5 py-0.5 rounded bg-[#FF3D00] text-white text-[9px] font-bold uppercase tracking-wider shadow-[0_0_8px_rgba(255,61,0,0.6)]">
                           {service.badge}
                         </span>
                       </div>
 
                       {/* Bottom Micro Icon */}
                       <div className="absolute bottom-2 right-2 z-10">
-                        <span className="w-6 h-6 rounded-md bg-black/75 backdrop-blur-md text-white flex items-center justify-center border border-white/10 group-hover:bg-[#FF3D00] group-hover:border-[#FF3D00] transition-colors">
+                        <span className="w-6 h-6 rounded-md bg-black/80 backdrop-blur-md text-white flex items-center justify-center border border-white/15 group-hover:bg-[#FF3D00] group-hover:border-[#FF3D00] group-hover:text-white transition-colors shadow-sm">
                           <Icon className="w-3 h-3" />
                         </span>
                       </div>
@@ -323,18 +332,18 @@ export default function HomePage() {
 
                     {/* Content Details */}
                     <div>
-                      <h3 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#FF3D00] transition-colors leading-snug line-clamp-1">
+                      <h3 className="text-xs sm:text-sm font-bold text-white group-hover:text-[#FF3D00] transition-colors leading-snug line-clamp-1">
                         {service.title}
                       </h3>
-                      <p className="text-[11px] text-slate-500 font-normal line-clamp-1 mt-0.5">
+                      <p className="text-[11px] text-slate-400 font-normal line-clamp-1 mt-0.5">
                         {service.tagline}
                       </p>
                     </div>
                   </div>
 
                   {/* Micro Footer Indicator */}
-                  <div className="pt-2 mt-2 border-t border-slate-100 flex items-center justify-between text-[10px] text-slate-400 group-hover:text-[#FF3D00] transition-colors">
-                    <span className="font-semibold">Explore</span>
+                  <div className="pt-2 mt-2 border-t border-white/10 flex items-center justify-between text-[10px] text-slate-400 group-hover:text-[#FF3D00] transition-colors">
+                    <span className="font-semibold uppercase tracking-wider">Explore</span>
                     <ArrowUpRight className="w-3 h-3 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </div>
                 </Link>
@@ -354,25 +363,28 @@ export default function HomePage() {
       <FeaturedProjectsShowcase />
 
       {/* 05. OUR CAPABILITIES SECTION - INDUSTRIAL LUXURY DARK SHOWCASE */}
-      <section className="py-16 sm:py-24 lg:py-32 bg-[#070A0F] text-white relative overflow-hidden border-y border-white/10 w-full bg-architectural-grid-dark">
+      <section className="py-16 sm:py-24 lg:py-32 bg-[#05070E] text-white relative overflow-hidden border-y border-cyan-500/20 w-full bg-circuit-grid">
+        {/* Vertical Neon Laser Lines */}
+        <div className="neon-line-v-cyan absolute top-0 bottom-0 left-0 z-20" />
+        <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20" />
         {/* Ambient Industrial Atmospheric Glows */}
         <div className="absolute top-1/4 -left-20 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-[#FF3D00]/12 rounded-full blur-[120px] sm:blur-[160px] pointer-events-none" />
-        <div className="absolute bottom-10 right-10 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] bg-blue-600/10 rounded-full blur-[140px] sm:blur-[180px] pointer-events-none" />
+        <div className="absolute bottom-10 right-10 w-[350px] sm:w-[600px] h-[350px] sm:h-[600px] bg-[#00F0FF]/10 rounded-full blur-[140px] sm:blur-[180px] pointer-events-none" />
 
         <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16 2xl:px-24 relative z-10">
           
           {/* Section Header */}
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 sm:gap-8 mb-12 sm:mb-16 lg:mb-20">
             <div className="space-y-3 sm:space-y-4 max-w-3xl">
-              <div className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/5 border border-white/10 text-white text-[11px] sm:text-xs font-semibold uppercase tracking-wider backdrop-blur-md">
-                <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse" />
-                <span className="text-[#FF3D00] font-bold">Industrial Capabilities</span>
-                <span className="text-white/40">|</span>
+              <div className="inline-flex items-center gap-2 sm:gap-2.5 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-white text-[11px] sm:text-xs font-semibold uppercase tracking-wider backdrop-blur-md">
+                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_8px_#00F0FF]" />
+                <span className="text-cyan-400 font-bold">Industrial Capabilities</span>
+                <span className="text-white/20">|</span>
                 <span className="text-slate-300">Khilkhet, Dhaka Factory</span>
               </div>
               <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
                 Design. Manufacture. Execute. <br className="hidden sm:inline" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-cyan-300">
                   Under One Roof.
                 </span>
               </h2>
@@ -384,7 +396,7 @@ export default function HomePage() {
             <div className="flex items-center gap-4">
               <Link
                 href="/workshop"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-xl shadow-[#FF3D00]/25 group"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-5 sm:px-6 py-3 sm:py-3.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-[0_0_20px_rgba(255,61,0,0.4)] border border-[#FF3D00] group"
               >
                 <span>Explore Facilities & Machinery</span>
                 <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
@@ -399,7 +411,7 @@ export default function HomePage() {
               return (
                 <div
                   key={pillar.title}
-                  className="group relative h-[340px] sm:h-[380px] lg:h-[400px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-slate-900 shadow-2xl hover:border-[#FF3D00] transition-all duration-500 flex flex-col justify-between p-5 sm:p-6 lg:p-7"
+                  className="group relative h-[340px] sm:h-[380px] lg:h-[400px] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 bg-[#0B101D] shadow-2xl hover:border-[#FF3D00]/60 hover:shadow-[0_0_25px_rgba(255,61,0,0.35)] transition-all duration-500 flex flex-col justify-between p-5 sm:p-6 lg:p-7 cyber-corner"
                 >
                   {/* Photo Background with Zoom */}
                   <Image
@@ -408,11 +420,11 @@ export default function HomePage() {
                     fill
                     className="object-cover img-zoom transition-transform duration-700 ease-out group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#070A0F] via-[#070A0F]/70 to-black/30" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#05070B] via-[#05070B]/75 to-black/30" />
 
                   {/* Top Bar Badges */}
                   <div className="relative z-10 flex items-center justify-between">
-                    <span className="font-mono text-xs font-bold text-white px-2.5 py-1 rounded-md bg-black/60 backdrop-blur-md border border-white/15">
+                    <span className="font-mono text-xs font-bold text-cyan-300 px-2.5 py-1 rounded-md bg-[#080C16]/90 backdrop-blur-md border border-cyan-500/30">
                       {pillar.number}
                     </span>
                     <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-[#FF3D00] text-white flex items-center justify-center shadow-lg shadow-[#FF3D00]/30">
@@ -425,14 +437,14 @@ export default function HomePage() {
                     <p className="text-[10px] sm:text-[11px] font-bold text-[#FF3D00] uppercase tracking-wider">
                       {pillar.subtitle}
                     </p>
-                    <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-white group-hover:text-white transition-colors">
+                    <h3 className="text-lg sm:text-xl lg:text-2xl font-black text-white group-hover:text-[#FF3D00] transition-colors">
                       {pillar.title}
                     </h3>
                     <p className="text-xs text-slate-300 leading-relaxed font-normal line-clamp-3">
                       {pillar.desc}
                     </p>
                     <div className="pt-2 flex items-center gap-1.5 text-[10px] font-mono text-slate-400 border-t border-white/10">
-                      <Cpu className="w-3 h-3 text-[#FF3D00]" />
+                      <Cpu className="w-3 h-3 text-cyan-400" />
                       <span className="truncate">{pillar.machinery}</span>
                     </div>
                   </div>
@@ -448,7 +460,7 @@ export default function HomePage() {
             <div className="lg:col-span-7 space-y-3 sm:space-y-4">
               <div className="flex items-center justify-between pb-2 px-1 text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-white/10">
                 <span>Integrated Technical Capabilities</span>
-                <span className="text-[#FF3D00] font-mono">7 Disciplines</span>
+                <span className="text-cyan-400 font-mono">7 Disciplines</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3.5">
@@ -457,10 +469,10 @@ export default function HomePage() {
                   return (
                     <div
                       key={cap.title}
-                      className="p-3.5 sm:p-5 rounded-2xl bg-white/[0.04] backdrop-blur-md border border-white/10 hover:border-[#FF3D00]/60 hover:bg-white/[0.08] transition-all duration-300 flex items-start justify-between gap-3 group"
+                      className="p-3.5 sm:p-5 rounded-2xl bg-[#0B101D]/90 backdrop-blur-md border border-white/10 hover:border-[#FF3D00]/60 hover:shadow-[0_0_20px_rgba(255,61,0,0.3)] transition-all duration-300 flex items-start justify-between gap-3 group cyber-corner text-white"
                     >
                       <div className="flex items-start gap-3 sm:gap-3.5 min-w-0">
-                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FF3D00]/15 text-[#FF3D00] flex items-center justify-center shrink-0 group-hover:bg-[#FF3D00] group-hover:text-white transition-colors shadow-sm">
+                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 group-hover:bg-[#FF3D00] group-hover:border-[#FF3D00] group-hover:text-white transition-colors shadow-sm">
                           <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                         </div>
                         <div className="space-y-0.5 sm:space-y-1 min-w-0">
@@ -468,7 +480,7 @@ export default function HomePage() {
                             {cap.title}
                           </h4>
                           <span className="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-medium text-slate-400">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0 shadow-[0_0_6px_#00F0FF]" />
                             <span className="truncate">{cap.tag}</span>
                           </span>
                         </div>
@@ -478,11 +490,11 @@ export default function HomePage() {
                 })}
 
                 {/* Additional Turnkey Value Card */}
-                <div className="p-3.5 sm:p-5 rounded-2xl bg-gradient-to-br from-[#FF3D00]/20 to-transparent border border-[#FF3D00]/40 flex items-center justify-between gap-3">
+                <div className="p-3.5 sm:p-5 rounded-2xl bg-gradient-to-br from-[#FF3D00]/20 to-transparent border border-[#FF3D00]/40 flex items-center justify-between gap-3 cyber-corner text-white">
                   <div className="space-y-0.5 sm:space-y-1 min-w-0">
                     <p className="text-[10px] sm:text-xs font-bold text-[#FF3D00] uppercase tracking-wider">Turnkey Guarantee</p>
                     <p className="text-xs sm:text-sm font-bold text-white truncate">Zero Third-Party Dependency</p>
-                    <p className="text-[10px] sm:text-[11px] text-slate-300 truncate">Concept to final site cleaning</p>
+                    <p className="text-[10px] sm:text-[11px] text-slate-300 truncate">Concept to Final Site Cleaning</p>
                   </div>
                   <CheckCircle2 className="w-5 h-5 sm:w-6 sm:h-6 text-[#FF3D00] shrink-0" />
                 </div>
@@ -490,10 +502,10 @@ export default function HomePage() {
             </div>
 
             {/* Right Column: Workforce & Material Spotlight Card (5 cols) */}
-            <div className="lg:col-span-5 p-5 sm:p-7 lg:p-8 rounded-2xl sm:rounded-3xl bg-slate-900/80 border border-white/10 backdrop-blur-xl shadow-2xl space-y-5 sm:space-y-6">
+            <div className="lg:col-span-5 p-5 sm:p-7 lg:p-8 rounded-2xl sm:rounded-3xl bg-[#0B101D]/90 border border-white/10 backdrop-blur-xl shadow-2xl space-y-5 sm:space-y-6 cyber-corner text-white">
               <div className="space-y-1.5 sm:space-y-2">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-300">
-                  <Users className="w-3.5 h-3.5 text-[#FF3D00]" />
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-cyan-300">
+                  <Users className="w-3.5 h-3.5 text-cyan-400" />
                   <span>Permanent Factory Team</span>
                 </div>
                 <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
@@ -518,10 +530,10 @@ export default function HomePage() {
                 ].map((item) => (
                   <div
                     key={item.role}
-                    className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-white/5 border border-white/10 flex items-center justify-between text-[11px] sm:text-xs"
+                    className="px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl bg-[#0E1526] border border-white/10 flex items-center justify-between text-[11px] sm:text-xs"
                   >
                     <span className="text-slate-300 truncate">{item.role}</span>
-                    <span className="font-mono font-bold text-[#FF3D00] pl-1.5 shrink-0">{item.count}</span>
+                    <span className="font-mono font-bold text-cyan-400 pl-1.5 shrink-0">{item.count}</span>
                   </div>
                 ))}
               </div>
@@ -602,16 +614,25 @@ export default function HomePage() {
       </section>
 
       {/* 06. WHY CHOOSE DOER? SECTION */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-white border-b border-slate-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 sm:py-20 lg:py-24 bg-[#070B14] border-b border-cyan-500/20 relative overflow-hidden bg-cyber-grid text-white">
+        {/* Vertical Neon Laser Lines */}
+        <div className="neon-line-v-orange absolute top-0 bottom-0 left-0 z-20" />
+        <div className="neon-line-v-cyan absolute top-0 bottom-0 right-0 z-20" />
+        <div className="absolute top-1/3 right-0 w-80 h-80 bg-[#FF3D00]/10 rounded-full blur-[140px] pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
-          <div className="text-center max-w-2xl mx-auto space-y-2.5 sm:space-y-3 mb-10 sm:mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-50 border border-orange-200 text-[#FF3D00] text-xs font-bold uppercase tracking-wider">
+          <div className="text-center max-w-2xl mx-auto space-y-2.5 sm:space-y-3 mb-12 sm:mb-16">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/40 text-[#FF3D00] text-xs font-bold uppercase tracking-wider shadow-[0_0_12px_rgba(255,61,0,0.3)]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF3D00] animate-pulse" />
               <span>Why Choose Us</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
               Why Choose DOER?
             </h2>
+            <p className="text-xs sm:text-sm text-slate-400">
+              Integrated engineering excellence with zero subcontracting risk.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5 sm:gap-5">
@@ -620,22 +641,22 @@ export default function HomePage() {
               return (
                 <div
                   key={item.title}
-                  className="p-4 sm:p-5 lg:p-6 rounded-2xl bg-slate-50/80 border border-slate-200/90 hover:border-[#FF3D00] hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
+                  className="p-4 sm:p-5 lg:p-6 rounded-2xl bg-[#0B101D]/85 border border-white/10 hover:border-[#FF3D00] shadow-[0_10px_25px_rgba(0,0,0,0.6)] hover:shadow-[0_0_30px_rgba(255,61,0,0.35)] transition-all duration-300 flex flex-col justify-between group cyber-corner"
                 >
                   <div className="space-y-3 sm:space-y-4">
                     <div className="flex items-center justify-between">
                       <span className="font-mono text-xs font-bold text-slate-400 group-hover:text-[#FF3D00] transition-colors">
                         {item.num}
                       </span>
-                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white border border-slate-200 text-[#FF3D00] group-hover:bg-[#FF3D00] group-hover:text-white group-hover:border-[#FF3D00] transition-all flex items-center justify-center shadow-sm">
+                      <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/5 border border-white/10 text-[#FF3D00] group-hover:bg-[#FF3D00] group-hover:text-white group-hover:border-[#FF3D00] transition-all flex items-center justify-center shadow-sm">
                         <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
                     </div>
                     <div>
-                      <h3 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-[#FF3D00] transition-colors leading-snug">
+                      <h3 className="text-sm sm:text-base font-bold text-white group-hover:text-[#FF3D00] transition-colors leading-snug">
                         {item.title}
                       </h3>
-                      <p className="text-xs text-slate-600 leading-relaxed pt-1.5 sm:pt-2 font-normal">
+                      <p className="text-xs text-slate-300 leading-relaxed pt-1.5 sm:pt-2 font-normal">
                         {item.desc}
                       </p>
                     </div>
@@ -648,10 +669,15 @@ export default function HomePage() {
       </section>
 
       {/* 07. FINAL CALL TO ACTION */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-slate-950 text-white relative overflow-hidden">
+      <section className="py-16 sm:py-20 lg:py-28 bg-[#05070B] text-white relative overflow-hidden border-t border-cyan-500/20 bg-circuit-grid">
+        {/* Vertical Neon Laser Lines */}
+        <div className="neon-line-v-cyan absolute top-0 bottom-0 left-0 z-20" />
+        <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20" />
         <div className="absolute inset-0 bg-[#FF3D00]/10 pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#FF3D00]/15 rounded-full blur-[140px] pointer-events-none" />
+
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-4 sm:space-y-6">
-          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-[0_0_25px_rgba(255,255,255,0.15)]">
             Let&apos;s Create Something Exceptional.
           </h2>
           <p className="max-w-2xl mx-auto text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed font-normal">
@@ -660,7 +686,7 @@ export default function HomePage() {
           <div className="pt-2 sm:pt-4">
             <Link
               href="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-9 py-3.5 sm:py-4 bg-[#FF3D00] hover:bg-[#eb3800] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-2xl shadow-[#FF3D00]/40 transition-all transform hover:-translate-y-1"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-9 py-3.5 sm:py-4 bg-[#FF3D00] hover:bg-[#eb3800] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-[0_0_35px_rgba(255,61,0,0.55)] border border-[#FF3D00] transition-all transform hover:-translate-y-1"
             >
               <span>Start Your Project</span>
               <ArrowRight className="w-4 h-4" />

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,13 +7,16 @@
 :root {
   --primary: #FF3D00;
   --primary-rgb: 255, 61, 0;
-  --foreground: #090d16;
-  --background: #ffffff;
+  --cyan-neon: #00F0FF;
+  --cyan-neon-rgb: 0, 240, 255;
+  --foreground: #f1f5f9;
+  --background: #05070B;
 }
 
 html {
   scroll-behavior: smooth;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color-scheme: dark;
 }
 
 body {
@@ -25,60 +28,195 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom scrollbars */
+/* Custom Cyberpunk / Dark Mode Scrollbars */
 ::-webkit-scrollbar {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #05070B;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: rgba(255, 61, 0, 0.4);
   border-radius: 9999px;
+  box-shadow: 0 0 10px rgba(255, 61, 0, 0.5);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #FF3D00;
+  box-shadow: 0 0 14px rgba(255, 61, 0, 0.85);
 }
 
-/* Architectural Subtle Grids & Backgrounds */
-.bg-architectural-grid {
+/* Technological & Architectural Grids */
+.bg-architectural-grid,
+.bg-cyber-grid {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(15, 23, 42, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
 }
 
-.bg-architectural-grid-dark {
+.bg-architectural-grid-dark,
+.bg-circuit-grid {
   background-size: 48px 48px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
 }
 
-/* Glassmorphism Classes */
+.bg-cyber-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Glassmorphism & Cyber Panels */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(13, 17, 28, 0.82);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-dark {
-  background: rgba(11, 15, 23, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(8, 12, 20, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-nav {
-  background: rgba(255, 255, 255, 0.94);
+  background: rgba(5, 7, 11, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+}
+
+/* Neon Blur & Laser Running Animations */
+@keyframes neonLaserVertical {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+/* Vertical Neon Laser Lines (Moving Vertically Top to Bottom) */
+.neon-line-v-cyan {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, rgba(0, 240, 255, 0.25), transparent);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.neon-line-v-cyan::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 35%;
+  min-height: 90px;
+  background: linear-gradient(180deg, transparent, #00F0FF, #a5f3fc, #00F0FF, transparent);
+  filter: blur(1.5px) drop-shadow(0 0 10px #00F0FF);
+  animation: neonLaserVertical 3.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.neon-line-v-orange {
+  position: absolute;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, rgba(255, 61, 0, 0.3), transparent);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.neon-line-v-orange::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 35%;
+  min-height: 90px;
+  background: linear-gradient(180deg, transparent, #FF3D00, #fdba74, #FF3D00, transparent);
+  filter: blur(1.5px) drop-shadow(0 0 10px #FF3D00);
+  animation: neonLaserVertical 3.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+/* Static Cyber Dividers (Strictly NO horizontal motion) */
+.neon-line-orange {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 61, 0, 0.35), transparent);
+}
+
+.neon-line-cyan {
+  position: relative;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.35), transparent);
+}
+
+/* Neon Glow Cards */
+.neon-card {
+  position: relative;
+  background: rgba(11, 16, 26, 0.85);
   backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.neon-card:hover {
+  border-color: rgba(255, 61, 0, 0.6);
+  box-shadow: 0 0 25px -4px rgba(255, 61, 0, 0.35), inset 0 0 20px -8px rgba(255, 61, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.neon-card-cyan:hover {
+  border-color: rgba(255, 61, 0, 0.6);
+  box-shadow: 0 0 25px -4px rgba(255, 61, 0, 0.35), inset 0 0 20px -8px rgba(255, 61, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+/* Technological Corner Brackets */
+.cyber-corner {
+  position: relative;
+}
+.cyber-corner::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid #FF3D00;
+  border-left: 2px solid #FF3D00;
+  filter: drop-shadow(0 0 4px #FF3D00);
+}
+.cyber-corner::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 8px;
+  height: 8px;
+  border-bottom: 2px solid #00F0FF;
+  border-right: 2px solid #00F0FF;
+  filter: drop-shadow(0 0 4px #00F0FF);
 }
 
 /* Card image zoom effect */

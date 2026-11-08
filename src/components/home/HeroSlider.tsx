@@ -98,12 +98,15 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="relative min-h-[100svh] min-h-[100dvh] flex items-center text-white overflow-hidden px-3.5 sm:px-6 lg:px-8 pt-20 pb-8 sm:pt-24 sm:pb-12 lg:py-0 bg-slate-950 select-none"
+      className="relative min-h-[100svh] min-h-[100dvh] flex flex-col justify-center text-white overflow-hidden px-3.5 sm:px-6 lg:px-8 pt-[60px] sm:pt-[84px] lg:pt-[88px] pb-4 sm:pb-6 bg-[#05070B] select-none"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       aria-roledescription="carousel"
       aria-label="DOER Featured Highlights"
     >
+      {/* Vertical Neon Laser Lines */}
+      <div className="neon-line-v-cyan absolute top-0 bottom-0 left-0 z-20" />
+      <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20" />
       <style jsx>{`
         @keyframes sliderLineFill {
           from {
@@ -138,24 +141,24 @@ export default function HeroSlider() {
       </div>
 
       {/* 02. MAIN CONTENT STACK WITH TRANSLUCENT OVERLAY BOX BEHIND TEXT */}
-      <div className="relative z-10 max-w-7xl mx-auto w-full py-4 sm:py-8 md:py-12 flex flex-col items-start justify-center">
-        <div className="w-full max-w-xl lg:max-w-2xl text-left space-y-3.5 sm:space-y-5 md:space-y-6 p-4 sm:p-7 md:p-10 rounded-2xl sm:rounded-3xl bg-slate-950/85 sm:bg-slate-950/75 backdrop-blur-xl border border-white/15 shadow-2xl">
+      <div className="relative z-10 max-w-7xl mx-auto w-full flex-1 flex flex-col items-start justify-center my-auto">
+        <div className="w-full max-w-xl lg:max-w-2xl text-left space-y-3.5 sm:space-y-5 md:space-y-6 p-4 sm:p-7 md:p-10 rounded-2xl sm:rounded-3xl bg-[#090D18]/90 sm:bg-[#070A12]/85 backdrop-blur-xl border border-cyan-500/25 shadow-2xl cyber-corner">
           {/* Studio Category Badge */}
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-slate-900/90 border border-white/20 backdrop-blur-md text-[10px] sm:text-xs font-semibold tracking-wider uppercase text-white shadow-sm transition-all duration-500 max-w-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF3D00] animate-pulse shrink-0" />
+          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#0E1526]/90 border border-cyan-500/30 backdrop-blur-md text-[10px] sm:text-xs font-semibold tracking-wider uppercase text-cyan-300 shadow-sm transition-all duration-500 max-w-full">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF3D00] animate-pulse shrink-0 shadow-[0_0_8px_#FF3D00]" />
             <span className="truncate">{current.tag}</span>
           </div>
 
           {/* Main Headline */}
           <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight drop-shadow-md transition-all duration-500">
             <span className="block">{current.titleLight}</span>
-            <span className="text-[#FF3D00] block mt-0.5 sm:mt-1">
+            <span className="text-[#FF3D00] block mt-0.5 sm:mt-1 drop-shadow-[0_0_15px_rgba(255,61,0,0.35)]">
               {current.titleHighlight}
             </span>
           </h1>
 
           {/* Subheading */}
-          <p className="text-xs sm:text-sm md:text-base text-slate-200/90 leading-relaxed font-normal drop-shadow-sm max-w-xl transition-all duration-500 line-clamp-4 sm:line-clamp-none">
+          <p className="text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed font-normal drop-shadow-sm max-w-xl transition-all duration-500 line-clamp-4 sm:line-clamp-none">
             {current.description}
           </p>
 
@@ -163,7 +166,7 @@ export default function HeroSlider() {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-2 sm:gap-3.5 pt-1 w-full sm:w-auto">
             <Link
               href={current.primaryBtnHref}
-              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-[#FF3D00]/25 transition-all text-center"
+              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(255,61,0,0.45)] border border-[#FF3D00] transition-all text-center"
             >
               <span>{current.primaryBtnText}</span>
               <ArrowRight className="w-4 h-4 shrink-0" />
@@ -171,10 +174,10 @@ export default function HeroSlider() {
 
             <Link
               href={current.secondaryBtnHref}
-              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-white/10 hover:bg-white/20 active:scale-[0.98] text-white font-bold text-xs uppercase tracking-wider rounded-xl border border-white/20 backdrop-blur-md transition-all hover:border-white/40 text-center"
+              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-[#0E1526]/80 hover:bg-[#131d33] active:scale-[0.98] text-white hover:text-[#FF3D00] font-bold text-xs uppercase tracking-wider rounded-xl border border-white/20 hover:border-[#FF3D00] backdrop-blur-md transition-all text-center group"
             >
               <span>{current.secondaryBtnText}</span>
-              <ArrowUpRight className="w-4 h-4 text-[#FF3D00] shrink-0" />
+              <ArrowUpRight className="w-4 h-4 text-slate-300 group-hover:text-[#FF3D00] shrink-0 transition-colors" />
             </Link>
           </div>
 
@@ -247,7 +250,7 @@ export default function HeroSlider() {
       {/* Sleek Floating Side Navigation Arrows (Desktop) */}
       <button
         onClick={prevSlide}
-        className="hidden lg:flex absolute left-4 xl:left-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-slate-900/40 hover:bg-[#FF3D00] text-white/70 hover:text-white items-center justify-center border border-white/10 hover:border-[#FF3D00] backdrop-blur-md transition-all duration-300 shadow-lg cursor-pointer"
+        className="hidden lg:flex absolute left-4 xl:left-8 top-[calc(50%+44px)] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#0E1526]/80 hover:bg-[#FF3D00] text-slate-300 hover:text-white items-center justify-center border border-white/15 hover:border-[#FF3D00] backdrop-blur-md transition-all duration-300 shadow-xl cursor-pointer"
         aria-label="Previous Slide"
       >
         <ChevronLeft className="w-5 h-5" />
@@ -255,7 +258,7 @@ export default function HeroSlider() {
 
       <button
         onClick={nextSlide}
-        className="hidden lg:flex absolute right-4 xl:right-8 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-slate-900/40 hover:bg-[#FF3D00] text-white/70 hover:text-white items-center justify-center border border-white/10 hover:border-[#FF3D00] backdrop-blur-md transition-all duration-300 shadow-lg cursor-pointer"
+        className="hidden lg:flex absolute right-4 xl:right-8 top-[calc(50%+44px)] -translate-y-1/2 z-20 w-11 h-11 rounded-full bg-[#0E1526]/80 hover:bg-[#FF3D00] text-slate-300 hover:text-white items-center justify-center border border-white/15 hover:border-[#FF3D00] backdrop-blur-md transition-all duration-300 shadow-xl cursor-pointer"
         aria-label="Next Slide"
       >
         <ChevronRight className="w-5 h-5" />

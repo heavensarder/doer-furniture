@@ -494,16 +494,16 @@ export default function AdminProductsPage() {
   return (
     <div className="space-y-6 sm:space-y-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-5 sm:pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5 sm:pb-6">
         <div>
           <div className="inline-flex items-center gap-2 text-[#FF3D00] text-xs font-bold uppercase tracking-wider mb-1">
             <Package className="w-4 h-4" />
             <span>eCommerce • Product Catalog</span>
           </div>
-          <h1 className="text-xl sm:text-3xl font-black text-slate-900 tracking-tight">
+          <h1 className="text-xl sm:text-3xl font-black text-white tracking-tight">
             All Products
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
+          <p className="text-xs sm:text-sm text-slate-400 mt-1">
             Manage simple products, main & gallery photos, product videos (file upload or YouTube), and pricing / Call for Price.
           </p>
         </div>
@@ -512,7 +512,7 @@ export default function AdminProductsPage() {
           <Link
             href="/products"
             target="_blank"
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider transition-all shadow-2xs"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#0B101D] hover:bg-[#0E1526] border border-white/10 text-slate-200 hover:text-white text-xs font-bold uppercase tracking-wider transition-all shadow-lg cyber-corner"
           >
             <span>View Shop</span>
             <ExternalLink className="w-4 h-4 text-[#FF3D00]" />
@@ -520,7 +520,7 @@ export default function AdminProductsPage() {
 
           <button
             onClick={openCreateForm}
-            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider shadow-md shadow-[#FF3D00]/20 transition-all cursor-pointer active:scale-[0.98]"
+            className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-4 sm:px-5 py-2.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.35)] transition-all cursor-pointer active:scale-[0.98]"
           >
             <Plus className="w-4 h-4" />
             <span>Add Product</span>
@@ -533,21 +533,21 @@ export default function AdminProductsPage() {
         <div
           className={`p-3.5 sm:p-4 rounded-xl border flex items-center justify-between gap-2 ${
             feedback.type === 'success'
-              ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
-              : 'bg-red-50 border-red-200 text-red-800'
+              ? 'bg-[#0B101D] border-emerald-500/40 text-emerald-400'
+              : 'bg-[#0B101D] border-red-500/40 text-red-400'
           }`}
         >
           <div className="flex items-center gap-2.5 text-xs sm:text-sm font-medium">
             {feedback.type === 'success' ? (
-              <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+              <Check className="w-4 h-4 text-emerald-400 shrink-0" />
             ) : (
-              <AlertCircle className="w-4 h-4 text-red-600 shrink-0" />
+              <AlertCircle className="w-4 h-4 text-red-400 shrink-0" />
             )}
             <span>{feedback.msg}</span>
           </div>
           <button
             onClick={() => setFeedback(null)}
-            className="text-slate-400 hover:text-slate-700"
+            className="text-slate-400 hover:text-white"
           >
             <X className="w-4 h-4" />
           </button>
@@ -556,9 +556,9 @@ export default function AdminProductsPage() {
 
       {/* CREATE / EDIT PRODUCT FORM PANEL */}
       {isFormOpen && (
-        <div className="bg-white border border-slate-200 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-lg space-y-5 sm:space-y-6">
-          <div className="flex items-center justify-between gap-3 border-b border-slate-200 pb-4">
-            <h2 className="text-base sm:text-xl font-black text-slate-900 flex items-center gap-2 min-w-0">
+        <div className="bg-[#0B101D] border border-cyan-500/30 rounded-2xl p-4 sm:p-6 lg:p-8 shadow-2xl space-y-5 sm:space-y-6 cyber-corner">
+          <div className="flex items-center justify-between gap-3 border-b border-white/10 pb-4">
+            <h2 className="text-base sm:text-xl font-black text-white flex items-center gap-2 min-w-0">
               {editingProduct ? (
                 <>
                   <Edit3 className="w-5 h-5 text-[#FF3D00] shrink-0" />
@@ -574,7 +574,7 @@ export default function AdminProductsPage() {
             <button
               type="button"
               onClick={() => setIsFormOpen(false)}
-              className="p-2 rounded-lg bg-slate-100 text-slate-500 hover:text-slate-900 hover:bg-slate-200 transition-colors shrink-0"
+              className="p-2 rounded-xl bg-[#0E1526] text-slate-400 hover:text-white hover:bg-white/10 border border-white/10 transition-colors shrink-0"
             >
               <X className="w-5 h-5" />
             </button>
@@ -587,7 +587,7 @@ export default function AdminProductsPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
                   <div>
                     <div className="flex items-center justify-between h-5 mb-1.5">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 whitespace-nowrap">
                         Product Name *
                       </label>
                     </div>
@@ -597,19 +597,19 @@ export default function AdminProductsPage() {
                       value={name}
                       onChange={(e) => handleNameChange(e.target.value)}
                       placeholder="e.g. HG-B1 Executive Control Console"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:bg-white focus:border-[#FF3D00]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#0E1526] border border-white/10 text-white placeholder-slate-500 text-sm focus:outline-none focus:bg-[#121B30] focus:border-[#FF3D00]"
                     />
                   </div>
 
                   <div>
                     <div className="flex items-center justify-between gap-2 h-5 mb-1.5">
-                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 whitespace-nowrap">
+                      <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 whitespace-nowrap">
                         Product Slug
                       </label>
                       <button
                         type="button"
                         onClick={handleRegenerateSlug}
-                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-orange-50 hover:bg-[#FF3D00] text-[#FF3D00] hover:text-white border border-orange-200 text-[10px] font-bold whitespace-nowrap shrink-0 transition-colors cursor-pointer"
+                        className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-[#FF3D00]/15 hover:bg-[#FF3D00] text-[#FF3D00] hover:text-white border border-[#FF3D00]/30 text-[10px] font-bold whitespace-nowrap shrink-0 transition-colors cursor-pointer"
                         title="Auto-generate slug from Product Name"
                       >
                         <Sparkles className="w-3 h-3 shrink-0" />
@@ -621,27 +621,27 @@ export default function AdminProductsPage() {
                       value={slug}
                       onChange={(e) => handleSlugChange(e.target.value)}
                       placeholder="hg-b1-executive-control-console"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-800 font-mono text-xs focus:outline-none focus:bg-white focus:border-[#FF3D00]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#0E1526] border border-white/10 text-white font-mono text-xs focus:outline-none focus:bg-[#121B30] focus:border-[#FF3D00]"
                     />
                     <p className="text-[11px] text-slate-400 mt-1 truncate">
-                      URL: <code>/products/{slug || toSlug(name) || 'product-slug'}</code>
+                      URL: <code className="text-cyan-400">/products/{slug || toSlug(name) || 'product-slug'}</code>
                     </p>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
                       Product Category *
                     </label>
                     <select
                       value={categoryId}
                       onChange={(e) => setCategoryId(e.target.value)}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:bg-white focus:border-[#FF3D00]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#0E1526] border border-white/10 text-white text-sm focus:outline-none focus:bg-[#121B30] focus:border-[#FF3D00]"
                     >
-                      <option value="">-- Select Category --</option>
+                      <option value="" className="bg-[#0E1526] text-white">-- Select Category --</option>
                       {categories.map((c) => (
-                        <option key={c.id} value={c.id}>
+                        <option key={c.id} value={c.id} className="bg-[#0E1526] text-white">
                           {c.name}
                         </option>
                       ))}
@@ -649,24 +649,24 @@ export default function AdminProductsPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
                       Publish Status
                     </label>
                     <select
                       value={status}
                       onChange={(e) => setStatus(e.target.value as 'published' | 'draft')}
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:bg-white focus:border-[#FF3D00]"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-[#0E1526] border border-white/10 text-white text-sm focus:outline-none focus:bg-[#121B30] focus:border-[#FF3D00]"
                     >
-                      <option value="published">Published (Visible in Shop)</option>
-                      <option value="draft">Draft (Hidden)</option>
+                      <option value="published" className="bg-[#0E1526] text-white">Published (Visible in Shop)</option>
+                      <option value="draft" className="bg-[#0E1526] text-white">Draft (Hidden)</option>
                     </select>
                   </div>
                 </div>
 
                 {/* Pricing Box */}
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+                <div className="p-4 rounded-xl bg-[#0E1526] border border-white/10 space-y-3">
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <label className="text-xs font-bold uppercase tracking-wider text-slate-700">
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-300">
                       Product Price (BDT) — Leave empty for &ldquo;Call for Price&rdquo;
                     </label>
                     <label className="inline-flex items-center gap-2 text-xs font-bold text-[#FF3D00] cursor-pointer">
@@ -674,7 +674,7 @@ export default function AdminProductsPage() {
                         type="checkbox"
                         checked={isCallForPrice}
                         onChange={(e) => setIsCallForPrice(e.target.checked)}
-                        className="rounded border-slate-300 bg-white text-[#FF3D00] focus:ring-[#FF3D00]"
+                        className="rounded border-white/20 bg-[#070A12] text-[#FF3D00] focus:ring-[#FF3D00]"
                       />
                       <span>Call for Price / Ask on WhatsApp</span>
                     </label>
@@ -682,7 +682,7 @@ export default function AdminProductsPage() {
 
                   {!isCallForPrice ? (
                     <div className="relative">
-                      <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-500">
+                      <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">
                         BDT ৳
                       </span>
                       <input
@@ -692,15 +692,15 @@ export default function AdminProductsPage() {
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                         placeholder="e.g. 165000 (Leave blank if Call for Price)"
-                        className="w-full pl-16 pr-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-900 text-sm focus:outline-none focus:border-[#FF3D00]"
+                        className="w-full pl-16 pr-4 py-2.5 rounded-xl bg-[#070A12] border border-white/10 text-white text-sm focus:outline-none focus:border-[#FF3D00]"
                       />
                     </div>
                   ) : (
-                    <div className="text-xs text-slate-600 bg-white p-3 rounded-lg border border-slate-200 flex items-center gap-2">
+                    <div className="text-xs text-slate-300 bg-[#070A12] p-3 rounded-xl border border-white/10 flex items-center gap-2">
                       <PhoneCall className="w-4 h-4 text-[#FF3D00] shrink-0" />
                       <span>
-                        Customer will see <strong>Call for Price (+8801976535654)</strong>,{' '}
-                        <strong>Ask Price on WhatsApp</strong>, and <strong>Send Query</strong> buttons.
+                        Customer will see <strong className="text-white">Call for Price (+8801976535654)</strong>,{' '}
+                        <strong className="text-white">Ask Price on WhatsApp</strong>, and <strong className="text-white">Send Query</strong> buttons.
                       </span>
                     </div>
                   )}
@@ -708,7 +708,7 @@ export default function AdminProductsPage() {
 
                 {/* Short Description (Rich Text Editor) */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
                     Short Description
                   </label>
                   <RichTextEditor
@@ -722,7 +722,7 @@ export default function AdminProductsPage() {
 
                 {/* Full Description (Rich Text Editor) */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
                     Full Product Description & Technical Specifications
                   </label>
                   <RichTextEditor
@@ -737,14 +737,14 @@ export default function AdminProductsPage() {
               {/* Right 5 Cols: Media (Main Image, Gallery Images, Video) */}
               <div className="lg:col-span-5 space-y-5">
                 {/* 1. Main Image */}
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+                <div className="p-4 rounded-xl bg-[#0E1526] border border-white/10 space-y-3">
                   <div className="flex items-center justify-between">
-                    <label className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
                       <ImageIcon className="w-4 h-4 text-[#FF3D00]" />
                       <span>Main Product Image *</span>
                     </label>
 
-                    <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold cursor-pointer transition-all shadow-2xs">
+                    <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold cursor-pointer transition-all shadow-[0_0_12px_rgba(255,61,0,0.35)]">
                       {uploadingMain ? (
                         <Loader2 className="w-3.5 h-3.5 animate-spin" />
                       ) : (
@@ -765,11 +765,11 @@ export default function AdminProductsPage() {
                     value={mainImage}
                     onChange={(e) => setMainImage(e.target.value)}
                     placeholder="Or paste image path/URL: /images/products/..."
-                    className="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs text-slate-700 focus:outline-none focus:border-[#FF3D00]"
+                    className="w-full px-3 py-2 rounded-xl bg-[#070A12] border border-white/10 text-xs text-slate-200 focus:outline-none focus:border-[#FF3D00]"
                   />
 
                   {mainImage && (
-                    <div className="relative aspect-square w-48 sm:w-56 rounded-xl overflow-hidden border border-slate-200 bg-white">
+                    <div className="relative aspect-square w-48 sm:w-56 rounded-xl overflow-hidden border border-white/10 bg-[#070A12]">
                       <Image
                         src={mainImage}
                         alt="Main preview"
@@ -781,13 +781,13 @@ export default function AdminProductsPage() {
                 </div>
 
                 {/* 2. Multiple Gallery Images */}
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
+                <div className="p-4 rounded-xl bg-[#0E1526] border border-white/10 space-y-3">
                   <div className="flex items-center justify-between">
-                    <label className="text-xs font-bold uppercase tracking-wider text-slate-700">
+                    <label className="text-xs font-bold uppercase tracking-wider text-slate-300">
                       Gallery Images ({galleryImages.length})
                     </label>
 
-                    <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-100 text-slate-800 text-xs font-bold cursor-pointer border border-slate-200 transition-all shadow-2xs">
+                    <label className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#0B101D] hover:bg-white/10 text-slate-200 text-xs font-bold cursor-pointer border border-white/10 transition-all shadow-sm">
                       {uploadingGallery ? (
                         <Loader2 className="w-3.5 h-3.5 animate-spin" />
                       ) : (
@@ -809,7 +809,7 @@ export default function AdminProductsPage() {
                       {galleryImages.map((imgUrl, index) => (
                         <div
                           key={`${imgUrl}-${index}`}
-                          className="relative group aspect-square w-full rounded-lg overflow-hidden border border-slate-200 bg-white"
+                          className="relative group aspect-square w-full rounded-lg overflow-hidden border border-white/10 bg-[#070A12]"
                         >
                           <Image
                             src={imgUrl}
@@ -829,15 +829,15 @@ export default function AdminProductsPage() {
                       ))}
                     </div>
                   ) : (
-                    <p className="text-xs text-slate-500">
+                    <p className="text-xs text-slate-400">
                       Upload multiple gallery photos to auto-slide on the single product page.
                     </p>
                   )}
                 </div>
 
                 {/* 3. Product Video (Upload or YouTube Link) */}
-                <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-3">
-                  <label className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                <div className="p-4 rounded-xl bg-[#0E1526] border border-white/10 space-y-3">
+                  <label className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
                     <Video className="w-4 h-4 text-[#FF3D00]" />
                     <span>Product Video (Auto-Slides in Gallery)</span>
                   </label>
@@ -849,10 +849,10 @@ export default function AdminProductsPage() {
                         setVideoType('none');
                         setVideoUrl('');
                       }}
-                      className={`py-2 px-3 rounded-lg text-xs font-bold border transition-all cursor-pointer ${
+                      className={`py-2 px-3 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                         videoType === 'none'
-                          ? 'bg-[#FF3D00] text-white border-[#FF3D00]'
-                          : 'bg-white text-slate-600 border-slate-200 hover:text-slate-900'
+                          ? 'bg-[#FF3D00] text-white border-[#FF3D00] shadow-[0_0_12px_rgba(255,61,0,0.35)]'
+                          : 'bg-[#0B101D] text-slate-300 border-white/10 hover:text-white'
                       }`}
                     >
                       No Video
@@ -861,10 +861,10 @@ export default function AdminProductsPage() {
                     <button
                       type="button"
                       onClick={() => setVideoType('upload')}
-                      className={`py-2 px-3 rounded-lg text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                      className={`py-2 px-3 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                         videoType === 'upload'
-                          ? 'bg-[#FF3D00] text-white border-[#FF3D00]'
-                          : 'bg-white text-slate-600 border-slate-200 hover:text-slate-900'
+                          ? 'bg-[#FF3D00] text-white border-[#FF3D00] shadow-[0_0_12px_rgba(255,61,0,0.35)]'
+                          : 'bg-[#0B101D] text-slate-300 border-white/10 hover:text-white'
                       }`}
                     >
                       <Upload className="w-3.5 h-3.5" />
@@ -874,10 +874,10 @@ export default function AdminProductsPage() {
                     <button
                       type="button"
                       onClick={() => setVideoType('youtube')}
-                      className={`py-2 px-3 rounded-lg text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                      className={`py-2 px-3 rounded-xl text-xs font-bold border flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                         videoType === 'youtube'
-                          ? 'bg-[#FF3D00] text-white border-[#FF3D00]'
-                          : 'bg-white text-slate-600 border-slate-200 hover:text-slate-900'
+                          ? 'bg-[#FF3D00] text-white border-[#FF3D00] shadow-[0_0_12px_rgba(255,61,0,0.35)]'
+                          : 'bg-[#0B101D] text-slate-300 border-white/10 hover:text-white'
                       }`}
                     >
                       <Youtube className="w-3.5 h-3.5" />
@@ -887,7 +887,7 @@ export default function AdminProductsPage() {
 
                   {videoType === 'upload' && (
                     <div className="space-y-2.5 pt-1">
-                      <label className="w-full py-2.5 px-4 rounded-xl bg-white hover:bg-slate-100 border border-dashed border-slate-300 text-xs font-bold text-slate-700 flex items-center justify-center gap-2 cursor-pointer transition-all">
+                      <label className="w-full py-2.5 px-4 rounded-xl bg-[#070A12] hover:bg-white/5 border border-dashed border-white/20 text-xs font-bold text-slate-300 flex items-center justify-center gap-2 cursor-pointer transition-all">
                         {uploadingVideo ? (
                           <>
                             <Loader2 className="w-4 h-4 animate-spin text-[#FF3D00]" />
@@ -914,10 +914,10 @@ export default function AdminProductsPage() {
                         value={videoUrl}
                         onChange={(e) => setVideoUrl(e.target.value)}
                         placeholder="Uploaded video URL: /api/uploads/videos/..."
-                        className="w-full px-3 py-2 rounded-lg bg-white border border-slate-200 text-xs text-slate-700"
+                        className="w-full px-3 py-2 rounded-xl bg-[#070A12] border border-white/10 text-xs text-slate-200"
                       />
                       {videoUrl && !extractYouTubeId(videoUrl) && (
-                        <div className="rounded-xl overflow-hidden border border-slate-200 bg-black">
+                        <div className="rounded-xl overflow-hidden border border-white/10 bg-black">
                           <video
                             src={videoUrl}
                             controls
@@ -936,15 +936,15 @@ export default function AdminProductsPage() {
                         value={videoUrl}
                         onChange={(e) => setVideoUrl(e.target.value)}
                         placeholder="Paste YouTube URL (watch, youtu.be, shorts, or embed link)"
-                        className="w-full px-3 py-2.5 rounded-lg bg-white border border-slate-200 text-xs text-slate-900 focus:outline-none focus:border-[#FF3D00]"
+                        className="w-full px-3 py-2.5 rounded-xl bg-[#070A12] border border-white/10 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#FF3D00]"
                       />
-                      <p className="text-[11px] text-slate-500">
+                      <p className="text-[11px] text-slate-400">
                         Supports standard watch links, shortened youtu.be links, YouTube Shorts, or embed URLs.
                       </p>
 
                       {videoUrl.trim() && (
                         extractYouTubeId(videoUrl) ? (
-                          <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-slate-200 bg-black">
+                          <div className="relative aspect-video w-full rounded-xl overflow-hidden border border-white/10 bg-black">
                             <iframe
                               src={`https://www.youtube.com/embed/${extractYouTubeId(
                                 videoUrl
@@ -957,7 +957,7 @@ export default function AdminProductsPage() {
                             />
                           </div>
                         ) : (
-                          <p className="text-[11px] font-semibold text-amber-600">
+                          <p className="text-[11px] font-semibold text-amber-400">
                             Could not detect a valid 11-character YouTube Video ID from this link.
                           </p>
                         )
@@ -968,18 +968,18 @@ export default function AdminProductsPage() {
               </div>
             </div>
 
-            <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 sm:gap-3 pt-4 border-t border-slate-200">
+            <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-end gap-2.5 sm:gap-3 pt-4 border-t border-white/10">
               <button
                 type="button"
                 onClick={() => setIsFormOpen(false)}
-                className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold uppercase tracking-wider cursor-pointer text-center"
+                className="px-5 py-2.5 rounded-xl bg-[#0E1526] hover:bg-white/10 text-slate-300 hover:text-white border border-white/10 text-xs font-bold uppercase tracking-wider cursor-pointer text-center transition-colors"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={submitting}
-                className="px-6 py-2.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] disabled:opacity-50 text-white text-xs font-bold uppercase tracking-wider shadow-md shadow-[#FF3D00]/25 flex items-center justify-center gap-2 cursor-pointer"
+                className="px-6 py-2.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] disabled:opacity-50 text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.35)] flex items-center justify-center gap-2 cursor-pointer transition-all active:scale-[0.98]"
               >
                 {submitting ? (
                   <>
@@ -999,15 +999,15 @@ export default function AdminProductsPage() {
       )}
 
       {/* FILTER & SEARCH BAR */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3.5 sm:gap-4 bg-white border border-slate-200 p-3.5 sm:p-4 rounded-2xl shadow-xs">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3.5 sm:gap-4 bg-[#0B101D] border border-white/10 p-3.5 sm:p-4 rounded-2xl shadow-xl cyber-corner">
         <div className="relative flex-1">
-          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search products by name, category, or description..."
-            className="w-full pl-10 pr-4 py-2 rounded-xl bg-slate-50 border border-slate-200 text-base sm:text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-[#FF3D00]"
+            className="w-full pl-10 pr-4 py-2 rounded-xl bg-[#0E1526] border border-white/10 text-base sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:bg-[#121B30] focus:ring-1 focus:ring-[#FF3D00] focus:border-[#FF3D00]"
           />
         </div>
 
@@ -1016,11 +1016,11 @@ export default function AdminProductsPage() {
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-bold text-slate-800 focus:outline-none focus:bg-white focus:border-[#FF3D00]"
+            className="w-full px-3.5 py-2.5 rounded-xl bg-[#0E1526] border border-white/10 text-xs font-bold text-white focus:outline-none focus:border-[#FF3D00]"
           >
-            <option value="all">Category: All Products ({products.length})</option>
+            <option value="all" className="bg-[#0E1526] text-white">Category: All Products ({products.length})</option>
             {categories.map((cat) => (
-              <option key={cat.id} value={String(cat.id)}>
+              <option key={cat.id} value={String(cat.id)} className="bg-[#0E1526] text-white">
                 Category: {cat.name}
               </option>
             ))}
@@ -1033,8 +1033,8 @@ export default function AdminProductsPage() {
             onClick={() => setSelectedCategory('all')}
             className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
               selectedCategory === 'all'
-                ? 'bg-[#FF3D00] text-white shadow-xs'
-                : 'bg-slate-50 text-slate-600 hover:text-slate-900 border border-slate-200'
+                ? 'bg-[#FF3D00] text-white shadow-[0_0_15px_rgba(255,61,0,0.35)]'
+                : 'bg-[#0E1526] text-slate-300 hover:text-white border border-white/10'
             }`}
           >
             All ({products.length})
@@ -1045,8 +1045,8 @@ export default function AdminProductsPage() {
               onClick={() => setSelectedCategory(String(cat.id))}
               className={`px-3.5 py-2 rounded-xl text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all cursor-pointer ${
                 selectedCategory === String(cat.id)
-                  ? 'bg-[#FF3D00] text-white shadow-xs'
-                  : 'bg-slate-50 text-slate-600 hover:text-slate-900 border border-slate-200'
+                  ? 'bg-[#FF3D00] text-white shadow-[0_0_15px_rgba(255,61,0,0.35)]'
+                  : 'bg-[#0E1526] text-slate-300 hover:text-white border border-white/10'
               }`}
             >
               {cat.name}
@@ -1057,16 +1057,16 @@ export default function AdminProductsPage() {
 
       {/* PRODUCTS TABLE / GRID */}
       {loading ? (
-        <div className="py-20 flex flex-col items-center justify-center text-slate-500 gap-3">
+        <div className="py-20 flex flex-col items-center justify-center text-slate-400 gap-3">
           <Loader2 className="w-8 h-8 animate-spin text-[#FF3D00]" />
           <span className="text-sm font-medium">Loading products...</span>
         </div>
       ) : filteredProducts.length === 0 ? (
-        <div className="py-16 text-center bg-white border border-dashed border-slate-300 rounded-2xl space-y-3">
-          <Package className="w-10 h-10 text-slate-400 mx-auto" />
-          <p className="text-base font-bold text-slate-800">No products found</p>
-          <p className="text-xs text-slate-500 max-w-md mx-auto">
-            Click &ldquo;Add New Product&rdquo; above to add a simple product to your catalog.
+        <div className="py-16 text-center bg-[#0B101D] border border-dashed border-white/15 rounded-2xl space-y-3 cyber-corner">
+          <Package className="w-10 h-10 text-slate-600 mx-auto" />
+          <p className="text-base font-bold text-white">No products found</p>
+          <p className="text-xs text-slate-400 max-w-md mx-auto">
+            Click &ldquo;Add Product&rdquo; above to add a simple product to your catalog.
           </p>
         </div>
       ) : (
@@ -1074,11 +1074,11 @@ export default function AdminProductsPage() {
           {filteredProducts.map((prod) => (
             <div
               key={prod.id}
-              className="bg-white border border-slate-200 hover:border-slate-300 rounded-2xl overflow-hidden flex flex-col justify-between shadow-xs hover:shadow-md group transition-all"
+              className="bg-[#0B101D] border border-white/10 hover:border-[#FF3D00]/50 rounded-2xl overflow-hidden flex flex-col justify-between shadow-xl hover:shadow-[0_0_20px_rgba(255,61,0,0.2)] group transition-all cyber-corner"
             >
               <div>
                 {/* Thumbnail (1:1 Square) */}
-                <div className="relative aspect-square w-full bg-slate-100 overflow-hidden">
+                <div className="relative aspect-square w-full bg-[#070A12] overflow-hidden border-b border-white/10">
                   <Image
                     src={prod.main_image}
                     alt={prod.name}
@@ -1086,12 +1086,12 @@ export default function AdminProductsPage() {
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 left-3 flex items-center gap-1.5 flex-wrap">
-                    <span className="px-2.5 py-1 rounded-md bg-white/95 backdrop-blur-md border border-slate-200 text-[11px] font-bold text-slate-800 flex items-center gap-1 shadow-2xs">
+                    <span className="px-2.5 py-1 rounded-lg bg-[#080C16]/90 backdrop-blur-md border border-white/15 text-[11px] font-bold text-white flex items-center gap-1 shadow-md">
                       <Tag className="w-3 h-3 text-[#FF3D00]" />
                       {prod.category_name || 'Uncategorized'}
                     </span>
                     {prod.video_type !== 'none' && prod.video_url && (
-                      <span className="px-2 py-1 rounded-md bg-[#FF3D00] text-white text-[10px] font-bold uppercase flex items-center gap-1 shadow-2xs">
+                      <span className="px-2 py-1 rounded-lg bg-[#FF3D00] text-white text-[10px] font-bold uppercase flex items-center gap-1 shadow-[0_0_10px_rgba(255,61,0,0.4)]">
                         <Video className="w-3 h-3" />
                         Video
                       </span>
@@ -1100,10 +1100,10 @@ export default function AdminProductsPage() {
 
                   <div className="absolute top-3 right-3">
                     <span
-                      className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-2xs ${
+                      className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider shadow-sm ${
                         prod.status === 'published'
-                          ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
-                          : 'bg-amber-50 text-amber-700 border border-amber-200'
+                          ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+                          : 'bg-amber-500/15 text-amber-400 border border-amber-500/30'
                       }`}
                     >
                       {prod.status}
@@ -1113,17 +1113,17 @@ export default function AdminProductsPage() {
 
                 {/* Details */}
                 <div className="p-5 space-y-2.5">
-                  <h3 className="text-base font-bold text-slate-900 line-clamp-1">
+                  <h3 className="text-base font-bold text-white group-hover:text-[#FF3D00] transition-colors line-clamp-1">
                     {prod.name}
                   </h3>
-                  <p className="text-[11px] font-mono text-slate-400 truncate">
+                  <p className="text-[11px] font-mono text-cyan-400 truncate">
                     /{prod.slug}
                   </p>
-                  <p className="text-xs text-slate-500 line-clamp-2 min-h-[2.5em]">
+                  <p className="text-xs text-slate-400 line-clamp-2 min-h-[2.5em] leading-relaxed">
                     {stripHtml(prod.short_description || prod.description)}
                   </p>
 
-                  <div className="pt-2 flex items-center justify-between border-t border-slate-100">
+                  <div className="pt-2 flex items-center justify-between border-t border-white/10">
                     <div>
                       {prod.is_call_for_price || !prod.price ? (
                         <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#FF3D00]">
@@ -1131,12 +1131,12 @@ export default function AdminProductsPage() {
                           <span>Call for Price</span>
                         </span>
                       ) : (
-                        <span className="text-base font-black text-slate-900">
+                        <span className="text-base font-black text-white">
                           ৳ {Number(prod.price).toLocaleString()}
                         </span>
                       )}
                     </div>
-                    <span className="text-[11px] font-medium text-slate-400">
+                    <span className="text-[11px] font-medium text-slate-500">
                       {1 + (prod.gallery_images?.length || 0)} Photos
                     </span>
                   </div>
@@ -1144,11 +1144,11 @@ export default function AdminProductsPage() {
               </div>
 
               {/* Card Footer Actions */}
-              <div className="px-5 py-3 bg-slate-50 border-t border-slate-200 flex items-center justify-between gap-2">
+              <div className="px-5 py-3 bg-[#080C16] border-t border-white/10 flex items-center justify-between gap-2">
                 <Link
                   href={`/products/${prod.slug}`}
                   target="_blank"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-[#FF3D00] transition-colors"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-[#FF3D00] transition-colors"
                 >
                   <span>View Page</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -1157,14 +1157,14 @@ export default function AdminProductsPage() {
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => openEditForm(prod)}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 text-xs font-semibold transition-colors cursor-pointer shadow-2xs"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-[#0E1526] hover:bg-[#FF3D00]/15 border border-white/10 hover:border-[#FF3D00]/30 text-white text-xs font-semibold transition-colors cursor-pointer shadow-sm"
                   >
                     <Edit3 className="w-3.5 h-3.5 text-[#FF3D00]" />
                     <span>Edit</span>
                   </button>
                   <button
                     onClick={() => handleDelete(prod)}
-                    className="p-1.5 rounded-lg bg-white hover:bg-red-50 border border-slate-200 hover:border-red-200 text-slate-500 hover:text-red-600 transition-colors cursor-pointer shadow-2xs"
+                    className="p-1.5 rounded-xl bg-[#0E1526] hover:bg-red-500/15 border border-white/10 hover:border-red-500/30 text-slate-400 hover:text-red-400 transition-colors cursor-pointer shadow-sm"
                     title="Delete Product"
                   >
                     <Trash2 className="w-4 h-4" />

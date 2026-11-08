@@ -14,11 +14,19 @@ export default function Footer() {
   }
 
   return (
-    <footer className="bg-slate-950 text-slate-300 pt-20 pb-10 border-t border-slate-900 bg-architectural-grid-dark">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="bg-[#030508] text-slate-300 pt-16 sm:pt-20 pb-10 border-t border-cyan-500/20 relative overflow-hidden bg-circuit-grid">
+      {/* Ambient Neon Atmosphere */}
+      <div className="absolute top-0 left-1/4 w-[400px] h-[200px] bg-[#FF3D00]/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[200px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
+
+      {/* Vertical Neon Laser Lines */}
+      <div className="neon-line-v-orange absolute top-0 bottom-0 left-0 z-20" />
+      <div className="neon-line-v-cyan absolute top-0 bottom-0 right-0 z-20" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-slate-900">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 pb-16 border-b border-white/10">
           
           {/* Brand & Purpose */}
           <div className="space-y-5">
@@ -28,7 +36,7 @@ export default function Footer() {
                   src="/logo-white.png"
                   alt="DOER Logo"
                   fill
-                  className="object-contain object-left"
+                  className="object-contain object-left drop-shadow-[0_0_12px_rgba(255,255,255,0.2)]"
                 />
               </div>
             </Link>
