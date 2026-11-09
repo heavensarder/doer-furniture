@@ -186,19 +186,7 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* 02. Introduction */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-[#070A12] border-b border-cyan-500/20 bg-cyber-grid text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3 sm:space-y-4">
-          <p className="text-lg sm:text-xl lg:text-2xl text-white font-bold leading-relaxed">
-            At DOER, we provide integrated solutions for commercial interiors, corporate spaces, customized furniture, and renovation projects.
-          </p>
-          <p className="text-xs sm:text-base lg:text-lg text-slate-400 leading-relaxed font-normal">
-            Our multidisciplinary capabilities allow us to manage projects from initial planning and design through manufacturing, installation, and final delivery.
-          </p>
-        </div>
-      </section>
-
-      {/* 03. Main 6 Core Services */}
+      {/* 02. Main 6 Core Services */}
       <section className="py-16 sm:py-20 lg:py-28 bg-[#05070B] bg-circuit-grid relative border-b border-cyan-500/20">
         <div className="neon-line-v-orange absolute top-0 bottom-0 left-0 z-20" />
         <div className="neon-line-v-cyan absolute top-0 bottom-0 right-0 z-20" />
