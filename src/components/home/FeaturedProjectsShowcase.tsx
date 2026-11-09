@@ -75,9 +75,22 @@ const projects: Project[] = [
     image: '/images/projects/walton-signature-showrooms-completed.jpg',
     href: '/projects',
   },
-  /* Hidden for now:
   {
     number: '04',
+    title: 'CDPL Control Rooms',
+    tagline: 'Mission-Critical Government Command Infrastructure',
+    category: 'Government Project',
+    location: 'Rupganj, Narayanganj, Cumilla & Chittagong',
+    scope: ['High-Tech Consoles', 'Acoustic Soundproofing', 'Electrical Infrastructure'],
+    description:
+      'Multi-divisional command hubs engineered for 24/7 continuous operations, integrating ergonomic technical desks, sound dampening walls, and clean electrical distributions.',
+    keyFeature: 'Multi-Location Nationwide Execution',
+    image: '/images/projects/cdpl.jpeg',
+    href: '/projects',
+  },
+  /* Hidden for now:
+  {
+    number: '05',
     title: '40-Person Conference Suite',
     tagline: 'Monumental Custom Executive Boardroom Table',
     category: 'Custom Millwork Fabrication',
@@ -87,19 +100,6 @@ const projects: Project[] = [
       'Handcrafted and assembled a massive 40-capacity executive boardroom table featuring seamless integrated audio-visual ports, hidden conduits, and high-durability matte lacquer finish.',
     keyFeature: 'Precision Factory Joinery for 40 Delegates',
     image: '/images/projects/custom-conference-table-completed.jpg',
-    href: '/projects',
-  },
-  {
-    number: '05',
-    title: 'CDPL Control Rooms',
-    tagline: 'Mission-Critical Government Command Infrastructure',
-    category: 'Government Project',
-    location: 'Rupganj, Narayanganj, Cumilla & Chittagong',
-    scope: ['High-Tech Consoles', 'Acoustic Soundproofing', 'Electrical Infrastructure'],
-    description:
-      'Multi-divisional command hubs engineered for 24/7 continuous operations, integrating ergonomic technical desks, sound dampening walls, and clean electrical distributions.',
-    keyFeature: 'Multi-Location Nationwide Execution',
-    image: '/images/projects/cdpl-control-rooms-completed.jpg',
     href: '/projects',
   },
   */

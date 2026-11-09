@@ -31,6 +31,7 @@ export default function ProjectsPage() {
     'south-pole': 'completed',
     'door-lock': 'completed',
     'walton': 'completed',
+    'cdpl': 'completed',
   });
 
   const projects: ProjectItem[] = [
@@ -79,7 +80,6 @@ export default function ProjectsPage() {
       completedImage:
         '/images/projects/walton-signature-showrooms-completed.jpg',
     },
-    /* Hidden for now:
     {
       id: 'cdpl',
       number: '04',
@@ -91,10 +91,11 @@ export default function ProjectsPage() {
       description:
         'DOER delivered electrical and interior solutions for CDPL control room projects across multiple locations, focusing on functional layouts and professional working environments.',
       designImage:
-        '/images/projects/cdpl-control-rooms-visualization.jpg',
+        '/images/projects/cdpl.jpeg',
       completedImage:
-        '/images/projects/cdpl-control-rooms-completed.jpg',
+        '/images/projects/cdpl.jpeg',
     },
+    /* Hidden for now:
     {
       id: 'conference',
       number: '05',
@@ -239,33 +240,35 @@ export default function ProjectsPage() {
                     </div>
 
                     {/* Interactive Gallery Toggle */}
-                    <div className="flex flex-col xs:flex-row items-stretch xs:items-center justify-between p-1.5 sm:p-2 bg-[#0E1526] rounded-xl border border-white/10 gap-1.5 sm:gap-2 text-xs">
-                      <span className="text-slate-400 font-bold uppercase tracking-wider text-[10px] sm:text-[11px] px-1 sm:pl-2 text-center xs:text-left">
-                        Gallery View:
-                      </span>
-                      <div className="flex items-center gap-1.5">
-                        <button
-                          onClick={() => toggleGallery(project.id, 'completed')}
-                          className={`flex-1 xs:flex-none px-3 sm:px-4 py-1.5 rounded-lg font-bold text-[11px] sm:text-xs transition-all cursor-pointer ${
-                            currentView === 'completed'
-                              ? 'bg-[#FF3D00] text-white shadow-[0_0_10px_rgba(255,61,0,0.4)]'
-                              : 'text-slate-400 hover:text-white bg-transparent'
-                          }`}
-                        >
-                          Completed Project
-                        </button>
-                        <button
-                          onClick={() => toggleGallery(project.id, 'design')}
-                          className={`flex-1 xs:flex-none px-3 sm:px-4 py-1.5 rounded-lg font-bold text-[11px] sm:text-xs transition-all cursor-pointer ${
-                            currentView === 'design'
-                              ? 'bg-[#FF3D00] text-white shadow-[0_0_10px_rgba(255,61,0,0.4)]'
-                              : 'text-slate-400 hover:text-white bg-transparent'
-                          }`}
-                        >
-                          Design Visualization
-                        </button>
+                    {project.designImage !== project.completedImage && (
+                      <div className="flex flex-col xs:flex-row items-stretch xs:items-center justify-between p-1.5 sm:p-2 bg-[#0E1526] rounded-xl border border-white/10 gap-1.5 sm:gap-2 text-xs">
+                        <span className="text-slate-400 font-bold uppercase tracking-wider text-[10px] sm:text-[11px] px-1 sm:pl-2 text-center xs:text-left">
+                          Gallery View:
+                        </span>
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            onClick={() => toggleGallery(project.id, 'completed')}
+                            className={`flex-1 xs:flex-none px-3 sm:px-4 py-1.5 rounded-lg font-bold text-[11px] sm:text-xs transition-all cursor-pointer ${
+                              currentView === 'completed'
+                                ? 'bg-[#FF3D00] text-white shadow-[0_0_10px_rgba(255,61,0,0.4)]'
+                                : 'text-slate-400 hover:text-white bg-transparent'
+                            }`}
+                          >
+                            Completed Project
+                          </button>
+                          <button
+                            onClick={() => toggleGallery(project.id, 'design')}
+                            className={`flex-1 xs:flex-none px-3 sm:px-4 py-1.5 rounded-lg font-bold text-[11px] sm:text-xs transition-all cursor-pointer ${
+                              currentView === 'design'
+                                ? 'bg-[#FF3D00] text-white shadow-[0_0_10px_rgba(255,61,0,0.4)]'
+                                : 'text-slate-400 hover:text-white bg-transparent'
+                            }`}
+                          >
+                            Design Visualization
+                          </button>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
 
                   {/* Project Meta & Details */}
