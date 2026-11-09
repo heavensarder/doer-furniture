@@ -59,27 +59,9 @@ export default function AboutPage() {
                 Innovative Interior Solutions with Complete In-House Execution
               </h2>
 
-              <p className="text-sm sm:text-base lg:text-lg text-slate-200 leading-relaxed font-medium">
-                DOER is a professional interior design and execution firm dedicated to delivering innovative, functional, and aesthetically refined spaces.
+              <p className="text-sm sm:text-base lg:text-lg text-slate-300 leading-relaxed font-normal">
+                We design and deliver ergonomically optimized control room environments that enhance operator comfort, efficiency, and performance. From workstation layouts and control consoles to lighting and equipment integration, every detail is planned for seamless monitoring and uninterrupted 24/7 operations. Our solutions combine functional design, advanced engineering, and human-centered planning to support critical decision-making.
               </p>
-
-              <div className="space-y-3 sm:space-y-4 text-xs sm:text-sm lg:text-base text-slate-400 leading-relaxed font-normal">
-                <p>
-                  We specialize in commercial interiors, corporate office solutions, furniture customization, manufacturing, and complete project execution.
-                </p>
-
-                <p>
-                  With a strong focus on quality, precision, and client satisfaction, we transform ideas into reality through modern design approaches, advanced manufacturing capabilities, and efficient project management.
-                </p>
-
-                <p>
-                  Our approach begins with understanding our clients&apos; vision and requirements. We then develop customized solutions that combine aesthetics, functionality, and practicality.
-                </p>
-
-                <p>
-                  From concept development and 3D visualization to material selection, fabrication, and installation, we manage every stage with attention to detail.
-                </p>
-              </div>
             </div>
 
             <div className="lg:col-span-6 flex items-center justify-center">

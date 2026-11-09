@@ -145,6 +145,12 @@ export default function Footer() {
                   <span>Contact Us</span>
                 </Link>
               </li>
+              <li>
+                <Link href="/career" className="hover:text-[#FF3D00] transition-colors flex items-center gap-2">
+                  <span className="text-slate-600">›</span>
+                  <span>Career</span>
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -155,9 +161,9 @@ export default function Footer() {
               <span>Core Solutions</span>
             </h4>
             <ul className="space-y-2.5 text-xs text-slate-400">
+              <li className="hover:text-white transition-colors">Control Room Interior</li>
               <li className="hover:text-white transition-colors">Commercial Space Design</li>
               <li className="hover:text-white transition-colors">Corporate Office Interior</li>
-              <li className="hover:text-white transition-colors">Furniture Customization & Fabrication</li>
               <li className="hover:text-white transition-colors">Interior Project Execution</li>
               <li className="hover:text-white transition-colors">Remodeling & Renovation</li>
               <li className="hover:text-white transition-colors">Restaurant & Café Interior</li>

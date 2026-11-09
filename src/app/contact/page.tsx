@@ -28,9 +28,9 @@ export default function ContactPage() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const servicesList = [
+    'Control Room Interior',
     'Commercial Space Design',
     'Corporate Office Interior',
-    'Furniture Customization & Fabrication',
     'Interior Project Execution',
     'Remodeling & Renovation',
     'Restaurant & Café Interior',

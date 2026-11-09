@@ -4,7 +4,7 @@ import Link from 'next/link';
 import {
   Building,
   Briefcase,
-  Armchair,
+  Monitor,
   Hammer,
   RotateCcw,
   Coffee,
@@ -17,16 +17,33 @@ import {
 import { constructMetadata } from '@/lib/metadata';
 
 export const metadata = constructMetadata({
-  title: 'Our Services – DOER Interior Design, Manufacturing & Execution',
-  description: 'Complete interior design, commercial fit-out, customized furniture manufacturing, and project execution solutions by DOER.',
+  title: 'Our Services – DOER Control Room & Commercial Interior Execution',
+  description: 'Complete control room interior, console workstation manufacturing, commercial fit-out, and turnkey project execution solutions by DOER.',
   path: '/services',
 });
 
 export default function ServicesPage() {
   const mainServices = [
     {
-      id: 'commercial',
+      id: 'control-room',
       number: '01',
+      title: 'Control Room Interior',
+      description:
+        'We design and execute complete control room and command console environments engineered for mission-critical operations. From custom console tables and operator workstations to video wall mounts, cabling infrastructure, and specialized technical tools and devices, we deliver integrated, ergonomic solutions built for 24/7 reliability.',
+      image: '/images/services/controlroom-servicej.jpg',
+      solutions: [
+        'Control room spatial planning',
+        'Command consoles & workstations',
+        'Video wall & display mounting',
+        'Equipment & device integration',
+        'EMI & cable management systems',
+        'Turnkey technical fit-outs',
+      ],
+      icon: Monitor,
+    },
+    {
+      id: 'commercial',
+      number: '02',
       title: 'Commercial Space Design',
       description:
         'We design commercial environments that combine creativity, functionality, and modern aesthetics. Our approach focuses on understanding your business requirements, brand identity, and customer expectations to create spaces that make a lasting impression.',
@@ -42,7 +59,7 @@ export default function ServicesPage() {
     },
     {
       id: 'corporate',
-      number: '02',
+      number: '03',
       title: 'Corporate Office Interior',
       description:
         'We create smart, functional, and professional office environments designed to encourage productivity and reflect your corporate identity. From workstations and meeting rooms to reception areas and collaborative spaces, we focus on creating comfortable and efficient workplaces.',
@@ -56,23 +73,6 @@ export default function ServicesPage() {
         'Electrical and interior fit-outs',
       ],
       icon: Briefcase,
-    },
-    {
-      id: 'furniture',
-      number: '03',
-      title: 'Furniture Customization & Fabrication',
-      description:
-        'We specialize in customized furniture design, manufacturing, and installation. Our in-house production capabilities allow us to develop furniture that meets specific space requirements, functional needs, and design preferences.',
-      image: '/images/services/furniture-customization-fabrication.jpg',
-      solutions: [
-        'Office furniture',
-        'Conference tables',
-        'Workstations',
-        'Reception desks',
-        'Custom cabinets and storage',
-        'Commercial furniture',
-      ],
-      icon: Armchair,
     },
     {
       id: 'execution',

@@ -18,6 +18,10 @@ import {
   FolderTree,
   ClipboardList,
   ChevronDown,
+  Briefcase,
+  UserPlus,
+  FileText,
+  Layers,
 } from 'lucide-react';
 
 export default function AdminDashboardLayout({
@@ -31,16 +35,19 @@ export default function AdminDashboardLayout({
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const [newCount, setNewCount] = useState<number>(0);
   const [pendingOrdersCount, setPendingOrdersCount] = useState<number>(0);
+  const [newApplicationsCount, setNewApplicationsCount] = useState<number>(0);
   const [ecommerceOpen, setEcommerceOpen] = useState<boolean>(true);
+  const [careerOpen, setCareerOpen] = useState<boolean>(true);
 
-  // Poll count of new inquiries & pending orders for live badges
+  // Poll count of new inquiries, pending orders & career applications for live badges
   useEffect(() => {
     let isMounted = true;
     const fetchCounts = async () => {
       try {
-        const [inqRes, ordRes] = await Promise.all([
+        const [inqRes, ordRes, appRes] = await Promise.all([
           fetch('/api/inquiries?status=new'),
           fetch('/api/orders?status=pending'),
+          fetch('/api/admin/career/applications?status=new'),
         ]);
         if (inqRes.ok) {
           const data = await inqRes.json();
@@ -52,6 +59,12 @@ export default function AdminDashboardLayout({
           const ordData = await ordRes.json();
           if (isMounted) {
             setPendingOrdersCount(ordData.orders?.length || 0);
+          }
+        }
+        if (appRes.ok) {
+          const appData = await appRes.json();
+          if (isMounted) {
+            setNewApplicationsCount(appData.counts?.count_new || 0);
           }
         }
       } catch (err) {
@@ -84,6 +97,8 @@ export default function AdminDashboardLayout({
     pathname?.startsWith('/admin/dashboard/orders') ||
     pathname?.startsWith('/admin/dashboard/products') ||
     pathname?.startsWith('/admin/dashboard/categories');
+
+  const isCareerRoute = pathname?.startsWith('/admin/dashboard/career');
 
   return (
     <div className="min-h-screen bg-[#05070B] text-slate-100 flex flex-col md:flex-row selection:bg-[#FF3D00] selection:text-white">
@@ -296,6 +311,113 @@ export default function AdminDashboardLayout({
                     >
                       <FolderTree className="w-4 h-4 shrink-0" />
                       <span>Categories</span>
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* CAREER NAV SECTION */}
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => setCareerOpen(!careerOpen)}
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer border ${
+                    isCareerRoute
+                      ? 'bg-[#0E1526] text-white border-white/15'
+                      : 'text-slate-300 hover:bg-white/5 hover:text-white border-transparent hover:border-white/10'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <Briefcase
+                      className={`w-5 h-5 shrink-0 ${
+                        isCareerRoute ? 'text-[#FF3D00]' : 'text-slate-400'
+                      }`}
+                    />
+                    <span>Career</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {newApplicationsCount > 0 && !careerOpen && (
+                      <span className="px-1.5 py-0.5 text-[10px] font-bold rounded-full bg-[#FF3D00] text-white shadow-[0_0_8px_#FF3D00]">
+                        {newApplicationsCount}
+                      </span>
+                    )}
+                    <ChevronDown
+                      className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+                        careerOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
+                </button>
+
+                {careerOpen && (
+                  <div className="mt-1.5 ml-4 pl-3 border-l-2 border-white/10 space-y-1">
+                    {/* Sub-item: Applications */}
+                    <Link
+                      href="/admin/dashboard/career/applications"
+                      onClick={() => setMobileSidebarOpen(false)}
+                      className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold transition-all border ${
+                        pathname?.startsWith('/admin/dashboard/career/applications')
+                          ? 'bg-[#FF3D00] text-white shadow-[0_0_12px_rgba(255,61,0,0.35)] border-[#FF3D00]'
+                          : 'text-slate-400 hover:bg-white/5 hover:text-white border-transparent'
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <FileText className="w-4 h-4 shrink-0" />
+                        <span>Applications</span>
+                      </div>
+                      {newApplicationsCount > 0 && (
+                        <span
+                          className={`px-1.5 py-0.5 text-[10px] font-bold rounded-full ${
+                            pathname?.startsWith('/admin/dashboard/career/applications')
+                              ? 'bg-white text-[#FF3D00]'
+                              : 'bg-[#FF3D00] text-white animate-pulse shadow-[0_0_8px_#FF3D00]'
+                          }`}
+                        >
+                          {newApplicationsCount}
+                        </span>
+                      )}
+                    </Link>
+
+                    {/* Sub-item: Create Job */}
+                    <Link
+                      href="/admin/dashboard/career/create-job"
+                      onClick={() => setMobileSidebarOpen(false)}
+                      className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all border ${
+                        pathname === '/admin/dashboard/career/create-job'
+                          ? 'bg-[#FF3D00] text-white shadow-[0_0_12px_rgba(255,61,0,0.35)] border-[#FF3D00]'
+                          : 'text-slate-400 hover:bg-white/5 hover:text-white border-transparent'
+                      }`}
+                    >
+                      <UserPlus className="w-4 h-4 shrink-0" />
+                      <span>Create Job</span>
+                    </Link>
+
+                    {/* Sub-item: All Jobs */}
+                    <Link
+                      href="/admin/dashboard/career/jobs"
+                      onClick={() => setMobileSidebarOpen(false)}
+                      className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all border ${
+                        pathname === '/admin/dashboard/career/jobs'
+                          ? 'bg-[#FF3D00] text-white shadow-[0_0_12px_rgba(255,61,0,0.35)] border-[#FF3D00]'
+                          : 'text-slate-400 hover:bg-white/5 hover:text-white border-transparent'
+                      }`}
+                    >
+                      <Briefcase className="w-4 h-4 shrink-0" />
+                      <span>All Jobs</span>
+                    </Link>
+
+                    {/* Sub-item: Positions */}
+                    <Link
+                      href="/admin/dashboard/career/positions"
+                      onClick={() => setMobileSidebarOpen(false)}
+                      className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all border ${
+                        pathname === '/admin/dashboard/career/positions'
+                          ? 'bg-[#FF3D00] text-white shadow-[0_0_12px_rgba(255,61,0,0.35)] border-[#FF3D00]'
+                          : 'text-slate-400 hover:bg-white/5 hover:text-white border-transparent'
+                      }`}
+                    >
+                      <Layers className="w-4 h-4 shrink-0" />
+                      <span>Positions</span>
                     </Link>
                   </div>
                 )}

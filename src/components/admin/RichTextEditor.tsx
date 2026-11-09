@@ -446,7 +446,7 @@ export default function RichTextEditor({
             onInput={triggerChange}
             onBlur={triggerChange}
             onPaste={handlePaste}
-            style={{ minHeight }}
+            style={{ minHeight, color: '#f1f5f9', caretColor: '#FF3D00' }}
             className="w-full p-3.5 text-sm !text-slate-100 focus:outline-none overflow-y-auto leading-relaxed
               [&_*]:!text-slate-200
               [&_h2]:!text-lg [&_h2]:!font-black [&_h2]:!text-white [&_h2]:mt-3 [&_h2]:mb-1.5
