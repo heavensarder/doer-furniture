@@ -229,7 +229,7 @@ export default function Footer() {
               href="https://www.heavensarder.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-[#FF3D00] font-medium transition-colors underline underline-offset-2"
+              className="text-slate-400 hover:text-[#FF3D00] font-medium transition-colors"
             >
               Web With Heaven
             </a>
