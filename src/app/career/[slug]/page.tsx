@@ -123,7 +123,7 @@ export default function CareerJobDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#070E22] text-slate-100 bg-cyber-grid pt-24 sm:pt-32 pb-24 sm:pb-32 relative overflow-hidden selection:bg-[#FF3D00] selection:text-white">
+    <div className="min-h-screen bg-[#070E22] text-slate-100 bg-cyber-grid pt-20 sm:pt-32 pb-16 sm:pb-32 relative overflow-hidden selection:bg-[#FF3D00] selection:text-white">
       {/* Neon Vertical Lasers */}
       <div className="neon-line-v-cyan absolute top-0 bottom-0 left-0 z-20 pointer-events-none" />
       <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20 pointer-events-none" />
@@ -132,10 +132,10 @@ export default function CareerJobDetailPage() {
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#FF3D00]/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 sm:space-y-12">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 relative z-10 space-y-6 sm:space-y-12">
         {/* Navigation Breadcrumb Bar */}
-        <div className="flex items-center justify-between gap-4 flex-wrap pb-4 border-b border-white/10">
-          <div className="flex items-center gap-2 text-xs text-slate-400">
+        <div className="flex items-center justify-between gap-3 flex-wrap pb-3 sm:pb-4 border-b border-white/10">
+          <div className="flex items-center gap-1.5 sm:gap-2 text-xs text-slate-400">
             <Link href="/" className="hover:text-[#FF3D00] transition-colors">
               Home
             </Link>
@@ -144,7 +144,7 @@ export default function CareerJobDetailPage() {
               Career
             </Link>
             <span className="text-white/20">/</span>
-            <span className="font-bold text-white truncate max-w-[200px] sm:max-w-md">
+            <span className="font-bold text-white truncate max-w-[150px] sm:max-w-md">
               {job.title}
             </span>
           </div>
@@ -154,19 +154,22 @@ export default function CareerJobDetailPage() {
             className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-[#FF3D00] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Back to All Careers</span>
+            <span className="hidden xs:inline">Back to All Careers</span>
+            <span className="xs:hidden">All Careers</span>
           </Link>
         </div>
 
         {/* Job Header Hero */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#0E1B3D]/95 border border-cyan-500/25 shadow-2xl cyber-corner relative overflow-hidden space-y-6">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            <div className="space-y-3">
-              <div className="flex items-center gap-2.5 flex-wrap">
+        <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#0E1B3D]/95 border border-cyan-500/25 shadow-2xl cyber-corner relative overflow-hidden space-y-4 sm:space-y-6">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6">
+            <div className="space-y-2 sm:space-y-3">
+              <div className="flex items-center gap-2 sm:gap-2.5 flex-wrap">
                 {/* HIGHLIGHTED POSITION BADGE */}
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF3D00]/20 border border-[#FF3D00]/50 text-[#FF3D00] text-xs sm:text-sm font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.35)]">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF3D00]/20 border border-[#FF3D00]/50 text-[#FF3D00] text-xs sm:text-sm font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.35)]">
                   <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse" />
-                  <span>Position: {job.position || job.title}</span>
+                  <span className="truncate max-w-[220px] sm:max-w-none">
+                    Position: {job.position || job.title}
+                  </span>
                 </div>
 
                 <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-bold uppercase tracking-wider">
@@ -188,32 +191,32 @@ export default function CareerJobDetailPage() {
                 )}
               </div>
 
-              <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+              <h1 className="text-xl sm:text-3xl lg:text-5xl font-black text-white tracking-tight leading-tight drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                 {job.title}
               </h1>
 
               <p className="text-xs sm:text-sm text-slate-300 flex items-center gap-2 font-mono">
-                <Briefcase className="w-4 h-4 text-[#FF3D00]" />
+                <Briefcase className="w-4 h-4 text-[#FF3D00] shrink-0" />
                 <span>DOER Command Center &amp; Interior Architecture Studio</span>
               </p>
             </div>
 
-            {/* Shareable Buttons */}
-            <div className="flex items-center gap-2.5 shrink-0 flex-wrap">
+            {/* Shareable Buttons - Mobile Responsive Grid */}
+            <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 sm:gap-2.5 w-full sm:w-auto shrink-0 pt-3 sm:pt-0 border-t border-white/10 sm:border-0">
               <button
                 type="button"
                 onClick={handleCopyLink}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#070E22] hover:bg-[#070E22]/80 border border-white/10 hover:border-[#FF3D00] text-slate-200 text-xs font-bold transition-all cursor-pointer shadow-md"
+                className="inline-flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl bg-[#070E22] hover:bg-[#070E22]/80 border border-white/10 hover:border-[#FF3D00] text-slate-200 text-xs font-bold transition-all cursor-pointer shadow-md"
               >
                 {copied ? (
                   <>
                     <Check className="w-4 h-4 text-emerald-400" />
-                    <span className="text-emerald-400">Apply Link Copied!</span>
+                    <span className="text-emerald-400">Copied!</span>
                   </>
                 ) : (
                   <>
                     <Copy className="w-4 h-4 text-[#FF3D00]" />
-                    <span>Copy Share Link</span>
+                    <span>Copy Link</span>
                   </>
                 )}
               </button>
@@ -221,7 +224,7 @@ export default function CareerJobDetailPage() {
               <button
                 type="button"
                 onClick={handleNativeShare}
-                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/30 text-cyan-300 text-xs font-bold transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-500/30 text-cyan-300 text-xs font-bold transition-all cursor-pointer"
               >
                 <Share2 className="w-4 h-4" />
                 <span>Share Job</span>
@@ -229,7 +232,7 @@ export default function CareerJobDetailPage() {
 
               <a
                 href="#apply-form"
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-95 text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.4)] transition-all"
+                className="col-span-2 sm:col-span-1 inline-flex items-center justify-center gap-2 px-6 py-3 sm:py-2.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-95 text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.4)] transition-all text-center"
               >
                 <span>Apply Now</span>
               </a>
@@ -238,28 +241,28 @@ export default function CareerJobDetailPage() {
         </div>
 
         {/* 2-Column Layout: Left = Job Details, Right = Application Form */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-10 items-start">
           {/* LEFT 6 COLS: Full Rich Text Job Details */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="p-6 sm:p-8 rounded-3xl bg-[#0E1B3D]/90 border border-white/10 shadow-xl space-y-5 cyber-corner">
+            <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#0E1B3D]/90 border border-white/10 shadow-xl space-y-4 sm:space-y-5 cyber-corner">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-bold uppercase tracking-wider">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Job Description &amp; Requirements</span>
               </div>
 
               <div
-                className="text-slate-300 text-sm sm:text-base leading-relaxed overflow-x-auto
+                className="text-slate-300 text-xs sm:text-sm lg:text-base leading-relaxed overflow-x-auto
                   [&_*]:!text-slate-300
-                  [&_h2]:text-lg [&_h2]:sm:text-xl [&_h2]:font-black [&_h2]:!text-white [&_h2]:mt-5 [&_h2]:mb-2.5 [&_h2:first-child]:mt-0
-                  [&_h3]:text-base [&_h3]:font-bold [&_h3]:!text-white [&_h3]:mt-4 [&_h3]:mb-2 [&_h3:first-child]:mt-0
+                  [&_h2]:text-base [&_h2]:sm:text-xl [&_h2]:font-black [&_h2]:!text-white [&_h2]:mt-4 [&_h2]:mb-2 [&_h2:first-child]:mt-0
+                  [&_h3]:text-sm [&_h3]:sm:text-base [&_h3]:font-bold [&_h3]:!text-white [&_h3]:mt-3 [&_h3]:mb-1.5 [&_h3:first-child]:mt-0
                   [&_strong]:!text-white [&_b]:!text-white
                   [&_p]:mb-3 [&_p:last-child]:mb-0
-                  [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-4 [&_ul]:space-y-1.5
-                  [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-4 [&_ol]:space-y-1.5
+                  [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-3 [&_ul]:space-y-1
+                  [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-3 [&_ol]:space-y-1
                   [&_blockquote]:border-l-4 [&_blockquote]:border-[#FF3D00] [&_blockquote]:bg-[#070E22] [&_blockquote]:pl-3.5 [&_blockquote]:py-2 [&_blockquote]:my-3.5 [&_blockquote]:italic [&_blockquote]:!text-slate-300 [&_blockquote]:rounded-r-xl
                   [&_hr]:my-4 [&_hr]:border-white/10
                   [&_a]:!text-cyan-400 [&_a]:underline
-                  [&_table]:w-full [&_table]:border-collapse [&_table]:my-4 [&_table]:bg-[#070E22] [&_table]:rounded-xl [&_table]:overflow-hidden [&_table]:text-xs [&_table]:sm:text-sm
+                  [&_table]:w-full [&_table]:border-collapse [&_table]:my-3 [&_table]:bg-[#070E22] [&_table]:rounded-xl [&_table]:overflow-hidden [&_table]:text-xs [&_table]:sm:text-sm
                   [&_th]:bg-[#070E22] [&_th]:!text-cyan-300 [&_th]:font-bold [&_th]:text-left [&_th]:p-2.5 [&_th]:border [&_th]:border-white/10
                   [&_td]:p-2.5 [&_td]:border [&_td]:border-white/10 [&_td]:!text-slate-300"
                 dangerouslySetInnerHTML={{
@@ -269,8 +272,8 @@ export default function CareerJobDetailPage() {
             </div>
 
             {/* Why Join DOER Quick Callout */}
-            <div className="p-6 rounded-2xl bg-[#070E22]/90 border border-white/10 space-y-3 cyber-corner">
-              <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+            <div className="p-4 sm:p-6 rounded-2xl bg-[#070E22]/90 border border-white/10 space-y-2 sm:space-y-3 cyber-corner">
+              <h3 className="text-xs sm:text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#FF3D00]" />
                 <span>Equal Opportunity &amp; Excellence</span>
               </h3>
@@ -281,7 +284,7 @@ export default function CareerJobDetailPage() {
           </div>
 
           {/* RIGHT 6 COLS: Direct Online Application Form */}
-          <div id="apply-form" className="lg:col-span-6 sticky top-28">
+          <div id="apply-form" className="lg:col-span-6 lg:sticky lg:top-28">
             <ApplicationFormModal
               job={job}
               isInline={true}

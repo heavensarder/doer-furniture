@@ -537,12 +537,12 @@ export default function ApplicationFormModal({
           </div>
 
           {/* Submit Action */}
-          <div className="pt-2 flex items-center justify-end gap-3 border-t border-white/10">
+          <div className="pt-2 flex flex-col-reverse sm:flex-row items-stretch sm:items-center sm:justify-end gap-2.5 sm:gap-3 border-t border-white/10">
             {onClose && (
               <button
                 type="button"
                 onClick={onClose}
-                className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-bold uppercase transition-colors cursor-pointer"
+                className="px-4 py-3 sm:py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-bold uppercase transition-colors cursor-pointer text-center"
               >
                 Cancel
               </button>
@@ -551,7 +551,7 @@ export default function ApplicationFormModal({
             <button
               type="submit"
               disabled={submitting}
-              className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-95 text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(255,61,0,0.4)] disabled:opacity-50 transition-all cursor-pointer"
+              className="inline-flex items-center justify-center gap-2 px-7 py-3.5 sm:py-3 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-95 text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(255,61,0,0.4)] disabled:opacity-50 transition-all cursor-pointer w-full sm:w-auto"
             >
               {submitting ? (
                 <>
@@ -574,15 +574,15 @@ export default function ApplicationFormModal({
   // If inline, return form wrapped in a clean section container
   if (isInline) {
     return (
-      <div className="p-5 sm:p-8 rounded-2xl bg-[#0B101D] border border-cyan-500/20 shadow-2xl cyber-corner text-white">
-        <div className="border-b border-white/10 pb-4 mb-6">
-          <div className="flex items-center gap-2">
+      <div className="p-4 sm:p-8 rounded-2xl sm:rounded-3xl bg-[#0B101D] border border-cyan-500/20 shadow-2xl cyber-corner text-white">
+        <div className="border-b border-white/10 pb-3 sm:pb-4 mb-5 sm:mb-6">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="px-2.5 py-0.5 rounded-md bg-[#FF3D00] text-white text-[10px] font-bold uppercase tracking-wider">
               Application Portal
             </span>
-            <span className="text-xs text-slate-400 font-mono">Job ID #{job.id}</span>
+            <span className="text-[11px] text-slate-400 font-mono">Job ID #{job.id}</span>
           </div>
-          <h2 className="text-xl sm:text-2xl font-black text-white mt-1">
+          <h2 className="text-lg sm:text-2xl font-black text-white mt-1">
             Apply for: {job.title}
           </h2>
         </div>
@@ -593,12 +593,12 @@ export default function ApplicationFormModal({
 
   // Otherwise, return modal overlay
   return (
-    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
-      <div className="relative w-full max-w-2xl bg-[#0B101D] border border-white/15 rounded-3xl shadow-2xl p-5 sm:p-8 space-y-4 my-8 text-white cyber-corner">
+    <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-2.5 sm:p-6 overflow-y-auto">
+      <div className="relative w-full max-w-2xl bg-[#0B101D] border border-white/15 rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-8 space-y-4 my-auto max-h-[92vh] flex flex-col text-white cyber-corner">
         {/* Header */}
-        <div className="flex items-start justify-between border-b border-white/10 pb-3">
-          <div>
-            <div className="flex items-center gap-2">
+        <div className="flex items-start justify-between border-b border-white/10 pb-3 shrink-0 gap-3">
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2 flex-wrap">
               <span className="px-2.5 py-0.5 rounded-md bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] text-[10px] font-bold uppercase tracking-wider">
                 DOER Careers
               </span>
@@ -608,7 +608,7 @@ export default function ApplicationFormModal({
                 </span>
               )}
             </div>
-            <h2 className="text-lg sm:text-xl font-bold text-white mt-1">
+            <h2 className="text-base sm:text-xl font-bold text-white mt-1 truncate">
               Apply for {job.title}
             </h2>
           </div>
@@ -617,14 +617,16 @@ export default function ApplicationFormModal({
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
+              className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors cursor-pointer shrink-0"
             >
               <X className="w-5 h-5" />
             </button>
           )}
         </div>
 
-        {formContent}
+        <div className="overflow-y-auto pr-1 flex-1">
+          {formContent}
+        </div>
       </div>
     </div>
   );

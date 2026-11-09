@@ -72,7 +72,7 @@ export default function CareerPage() {
   );
 
   return (
-    <div className="min-h-screen bg-[#070E22] text-slate-100 bg-cyber-grid pt-24 sm:pt-32 pb-24 sm:pb-32 relative overflow-hidden selection:bg-[#FF3D00] selection:text-white">
+    <div className="min-h-screen bg-[#070E22] text-slate-100 bg-cyber-grid pt-20 sm:pt-32 pb-16 sm:pb-32 relative overflow-hidden selection:bg-[#FF3D00] selection:text-white">
       {/* Neon Vertical Lasers */}
       <div className="neon-line-v-cyan absolute top-0 bottom-0 left-0 z-20 pointer-events-none" />
       <div className="neon-line-v-orange absolute top-0 bottom-0 right-0 z-20 pointer-events-none" />
@@ -81,29 +81,29 @@ export default function CareerPage() {
       <div className="absolute top-1/4 -left-32 w-96 h-96 bg-[#FF3D00]/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-[150px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16 sm:space-y-24">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8 relative z-10 space-y-12 sm:space-y-20">
         {/* 01. Hero Banner */}
-        <div className="text-center max-w-4xl mx-auto space-y-4 sm:space-y-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.25)]">
+        <div className="text-center max-w-4xl mx-auto space-y-3.5 sm:space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] text-[10px] sm:text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.25)]">
             <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse" />
             <span>Join DOER Careers</span>
           </div>
 
-          <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+          <h1 className="text-2xl xs:text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
             Build your future with{' '}
             <span className="text-[#FF3D00] drop-shadow-[0_0_25px_rgba(255,61,0,0.4)]">
               DOER
             </span>
           </h1>
 
-          <p className="max-w-2xl mx-auto text-sm sm:text-lg text-slate-300 font-normal leading-relaxed">
+          <p className="max-w-2xl mx-auto text-xs sm:text-base lg:text-lg text-slate-300 font-normal leading-relaxed px-2">
             We design, engineer, and manufacture mission-critical control room environments and turnkey commercial spaces. Discover where your craftsmanship and passion can thrive.
           </p>
 
-          <div className="pt-2 flex items-center justify-center gap-3">
+          <div className="pt-1 sm:pt-2 flex items-center justify-center gap-3">
             <a
               href="#openings"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-95 text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(255,61,0,0.4)] transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-3 sm:py-3.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-95 text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(255,61,0,0.4)] transition-all cursor-pointer"
             >
               <span>View Open Positions</span>
               <ArrowRight className="w-4 h-4" />
@@ -112,13 +112,13 @@ export default function CareerPage() {
         </div>
 
         {/* 02. Open Job Positions */}
-        <div id="openings" className="space-y-8 pt-4">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-cyan-500/20 pb-6">
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] font-bold uppercase tracking-wider">
+        <div id="openings" className="space-y-6 sm:space-y-8 pt-2">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-cyan-500/20 pb-5 sm:pb-6">
+            <div className="space-y-1.5 sm:space-y-2">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider">
                 <span>Current Openings</span>
               </div>
-              <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+              <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
                 Available Job Positions
               </h2>
               <p className="text-xs sm:text-sm text-slate-400">
@@ -127,12 +127,12 @@ export default function CareerPage() {
             </div>
 
             {/* Filter Pills */}
-            <div className="flex items-center gap-1.5 flex-wrap">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 no-scrollbar sm:flex-wrap">
               {['all', 'Full-Time', 'Part-Time', 'Internship', 'Contractual'].map((filter) => (
                 <button
                   key={filter}
                   onClick={() => setActiveFilter(filter)}
-                  className={`px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all cursor-pointer ${
+                  className={`px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shrink-0 whitespace-nowrap ${
                     activeFilter === filter
                       ? 'bg-[#FF3D00] text-white shadow-[0_0_12px_rgba(255,61,0,0.4)]'
                       : 'bg-[#0E1B3D] text-slate-300 hover:text-white border border-white/10 hover:border-white/20'
@@ -151,15 +151,15 @@ export default function CareerPage() {
               <p className="text-xs text-slate-400 font-mono">Loading available positions...</p>
             </div>
           ) : filteredJobs.length === 0 ? (
-            <div className="p-12 text-center rounded-3xl bg-[#0E1B3D]/90 border border-white/10 space-y-3">
-              <Briefcase className="w-12 h-12 text-slate-600 mx-auto" />
-              <h3 className="text-lg font-bold text-white">No Positions Open in This Category</h3>
+            <div className="p-8 sm:p-12 text-center rounded-3xl bg-[#0E1B3D]/90 border border-white/10 space-y-3">
+              <Briefcase className="w-10 h-10 sm:w-12 sm:h-12 text-slate-600 mx-auto" />
+              <h3 className="text-base sm:text-lg font-bold text-white">No Positions Open in This Category</h3>
               <p className="text-xs text-slate-400 max-w-md mx-auto">
                 We are always excited to connect with talented control room engineers, CAD modelers, and interior project managers. Check back soon or contact us directly.
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 gap-5">
+            <div className="grid grid-cols-1 gap-4 sm:gap-5">
               {filteredJobs.map((job) => {
                 const isCopied = copiedId === job.id;
                 const plainSnippet = stripHtml(job.details).slice(0, 180);
@@ -167,25 +167,27 @@ export default function CareerPage() {
                 return (
                   <div
                     key={job.id}
-                    className="p-6 sm:p-7 rounded-2xl bg-[#0E1B3D]/90 border border-white/10 hover:border-[#FF3D00]/60 transition-all space-y-4 shadow-xl cyber-corner text-white group"
+                    className="p-4 sm:p-7 rounded-2xl bg-[#0E1B3D]/90 border border-white/10 hover:border-[#FF3D00]/60 transition-all space-y-4 shadow-xl cyber-corner text-white group"
                   >
                     <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
                       {/* Job Header & Metadata */}
                       <div className="space-y-2 flex-1 min-w-0">
-                        <div className="flex items-center gap-2 flex-wrap">
+                        <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
                           {/* HIGHLIGHTED POSITION BADGE */}
-                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/40 text-[#FF3D00] text-xs font-bold uppercase tracking-wider shadow-[0_0_12px_rgba(255,61,0,0.3)]">
+                          <div className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/40 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider shadow-[0_0_12px_rgba(255,61,0,0.3)]">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#FF3D00] animate-pulse" />
-                            <span>Position: {job.position || job.title}</span>
+                            <span className="truncate max-w-[220px] sm:max-w-none">
+                              Position: {job.position || job.title}
+                            </span>
                           </div>
 
-                          <span className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[10px] font-bold uppercase tracking-wider">
+                          <span className="px-2.5 py-0.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[10px] font-bold uppercase tracking-wider">
                             {job.job_type}
                           </span>
 
                           {job.deadline && (
-                            <span className="text-[11px] font-mono text-slate-400 flex items-center gap-1.5">
-                              <Calendar className="w-3.5 h-3.5 text-[#FF3D00]" />
+                            <span className="text-[10px] sm:text-[11px] font-mono text-slate-400 flex items-center gap-1">
+                              <Calendar className="w-3 h-3 text-[#FF3D00]" />
                               <span>Deadline: {new Date(job.deadline).toLocaleDateString()}</span>
                             </span>
                           )}
@@ -200,7 +202,7 @@ export default function CareerPage() {
                           href={`/career/${job.slug}`}
                           className="block group-hover:text-[#FF3D00] transition-colors"
                         >
-                          <h3 className="text-xl sm:text-2xl font-black text-white group-hover:text-[#FF3D00] transition-colors tracking-tight">
+                          <h3 className="text-lg sm:text-2xl font-black text-white group-hover:text-[#FF3D00] transition-colors tracking-tight">
                             {job.title}
                           </h3>
                         </Link>
@@ -210,13 +212,22 @@ export default function CareerPage() {
                         </p>
                       </div>
 
-                      {/* Action Buttons */}
-                      <div className="flex items-center gap-2.5 flex-wrap sm:flex-nowrap shrink-0 pt-2 lg:pt-0">
+                      {/* Action Buttons: Responsive Grid on Mobile, Flex on Desktop */}
+                      <div className="grid grid-cols-2 sm:flex sm:items-center gap-2 sm:gap-2.5 w-full sm:w-auto pt-3 sm:pt-0 border-t border-white/10 sm:border-0 shrink-0">
+                        {/* View Details Button */}
+                        <button
+                          type="button"
+                          onClick={() => setSelectedJobForDetail(job)}
+                          className="inline-flex items-center justify-center gap-1.5 px-3 sm:px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-white text-xs font-bold uppercase transition-all cursor-pointer"
+                        >
+                          <span>Details</span>
+                        </button>
+
                         {/* Share Apply Link Button */}
                         <button
                           type="button"
                           onClick={() => handleCopyLink(job)}
-                          className={`inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase transition-all cursor-pointer border ${
+                          className={`inline-flex items-center justify-center gap-1.5 px-3 sm:px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase transition-all cursor-pointer border ${
                             isCopied
                               ? 'bg-emerald-500 text-white border-emerald-500 shadow-[0_0_12px_#10B981]'
                               : 'bg-[#132247] hover:bg-[#1a2d5c] text-cyan-300 border-cyan-500/30'
@@ -226,33 +237,24 @@ export default function CareerPage() {
                           {isCopied ? (
                             <>
                               <Check className="w-3.5 h-3.5" />
-                              <span>Copied Link</span>
+                              <span>Copied</span>
                             </>
                           ) : (
                             <>
                               <Share2 className="w-3.5 h-3.5" />
-                              <span>Share Link</span>
+                              <span>Share</span>
                             </>
                           )}
                         </button>
 
-                        {/* View Details Button */}
-                        <button
-                          type="button"
-                          onClick={() => setSelectedJobForDetail(job)}
-                          className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/15 border border-white/10 text-white text-xs font-bold uppercase transition-all cursor-pointer"
-                        >
-                          <span>Details</span>
-                        </button>
-
-                        {/* Apply Now Button */}
+                        {/* Apply Now Button - Spans full width on mobile for easy thumb tapping */}
                         <button
                           type="button"
                           onClick={() => setSelectedJobForApply(job)}
-                          className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-95 text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.35)] transition-all cursor-pointer"
+                          className="col-span-2 sm:col-span-1 inline-flex items-center justify-center gap-2 px-5 py-3 sm:py-2.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-95 text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.35)] transition-all cursor-pointer"
                         >
                           <span>Apply Now</span>
-                          <ArrowRight className="w-3.5 h-3.5" />
+                          <ArrowRight className="w-4 h-4" />
                         </button>
                       </div>
                     </div>
@@ -267,20 +269,24 @@ export default function CareerPage() {
       {/* JOB DETAIL POPUP MODAL */}
       {selectedJobForDetail && (
         <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
-          <div className="relative w-full max-w-3xl bg-[#0B101D] border border-white/15 rounded-3xl shadow-2xl p-6 sm:p-8 space-y-6 my-8 text-white cyber-corner">
-            <div className="flex items-start justify-between border-b border-white/10 pb-4">
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-md bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] text-[10px] font-bold uppercase tracking-wider">
+          <div className="relative w-full max-w-3xl bg-[#0B101D] border border-white/15 rounded-2xl sm:rounded-3xl shadow-2xl p-4 sm:p-8 space-y-4 sm:space-y-6 my-auto max-h-[92vh] flex flex-col text-white cyber-corner">
+            {/* Header */}
+            <div className="flex items-start justify-between border-b border-white/10 pb-3 sm:pb-4 gap-3 shrink-0">
+              <div className="space-y-1 sm:space-y-1.5 min-w-0 flex-1">
+                <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] text-[10px] sm:text-xs font-bold uppercase tracking-wider">
+                    <span>Position: {selectedJobForDetail.position || selectedJobForDetail.title}</span>
+                  </div>
+                  <span className="px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-300 text-[10px] font-bold uppercase">
                     {selectedJobForDetail.job_type}
                   </span>
                   {selectedJobForDetail.deadline && (
-                    <span className="text-[11px] font-mono text-slate-400">
+                    <span className="text-[10px] sm:text-[11px] font-mono text-slate-400">
                       Deadline: {new Date(selectedJobForDetail.deadline).toLocaleDateString()}
                     </span>
                   )}
                 </div>
-                <h2 className="text-xl sm:text-3xl font-black text-white">
+                <h2 className="text-lg sm:text-2xl lg:text-3xl font-black text-white leading-snug">
                   {selectedJobForDetail.title}
                 </h2>
               </div>
@@ -288,7 +294,7 @@ export default function CareerPage() {
               <button
                 type="button"
                 onClick={() => setSelectedJobForDetail(null)}
-                className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 cursor-pointer"
+                className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 cursor-pointer shrink-0"
               >
                 ✕
               </button>
@@ -296,35 +302,35 @@ export default function CareerPage() {
 
             {/* Rich Text Details */}
             <div
-              className="text-xs sm:text-base text-slate-300 leading-relaxed max-h-[50vh] overflow-y-auto pr-2
+              className="text-xs sm:text-sm lg:text-base text-slate-300 leading-relaxed overflow-y-auto pr-1 flex-1
                 [&_*]:!text-slate-300
-                [&_h2]:text-lg [&_h2]:font-black [&_h2]:!text-white [&_h2]:mt-4 [&_h2]:mb-2 [&_h2:first-child]:mt-0
-                [&_h3]:text-base [&_h3]:font-bold [&_h3]:!text-white [&_h3]:mt-3 [&_h3]:mb-1.5
+                [&_h2]:text-base [&_h2]:sm:text-lg [&_h2]:font-black [&_h2]:!text-white [&_h2]:mt-3 [&_h2]:mb-1.5 [&_h2:first-child]:mt-0
+                [&_h3]:text-sm [&_h3]:sm:text-base [&_h3]:font-bold [&_h3]:!text-white [&_h3]:mt-2.5 [&_h3]:mb-1
                 [&_strong]:!text-white [&_b]:!text-white
                 [&_p]:mb-2.5
-                [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1.5 [&_ul]:mb-3
-                [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1.5 [&_ol]:mb-3"
+                [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:space-y-1 [&_ul]:mb-2.5
+                [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:space-y-1 [&_ol]:mb-2.5"
               dangerouslySetInnerHTML={{
                 __html: normalizeToHtml(selectedJobForDetail.details),
               }}
             />
 
             {/* Footer Actions */}
-            <div className="flex items-center justify-between gap-3 pt-3 border-t border-white/10 flex-wrap">
+            <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-3 border-t border-white/10 shrink-0">
               <button
                 type="button"
                 onClick={() => handleCopyLink(selectedJobForDetail)}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#132247] hover:bg-[#1a2d5c] text-cyan-300 text-xs font-bold uppercase transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#132247] hover:bg-[#1a2d5c] text-cyan-300 text-xs font-bold uppercase transition-all cursor-pointer"
               >
                 <Share2 className="w-3.5 h-3.5" />
                 <span>Share Apply Link</span>
               </button>
 
-              <div className="flex items-center gap-2">
+              <div className="grid grid-cols-2 sm:flex sm:items-center gap-2">
                 <button
                   type="button"
                   onClick={() => setSelectedJobForDetail(null)}
-                  className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-bold uppercase"
+                  className="px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300 text-xs font-bold uppercase text-center"
                 >
                   Close
                 </button>
@@ -335,7 +341,7 @@ export default function CareerPage() {
                     setSelectedJobForDetail(null);
                     setSelectedJobForApply(target);
                   }}
-                  className="inline-flex items-center gap-1.5 px-6 py-2 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase shadow-lg cursor-pointer"
+                  className="inline-flex items-center justify-center gap-1.5 px-6 py-2.5 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase shadow-lg cursor-pointer"
                 >
                   <span>Apply Now</span>
                   <ArrowRight className="w-3.5 h-3.5" />
