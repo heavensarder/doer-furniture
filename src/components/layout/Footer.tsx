@@ -223,7 +223,17 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 text-center text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} DOER. All rights reserved. Designing Spaces. Creating Experiences.</p>
+          <p>
+            © {new Date().getFullYear()} DOER. All rights reserved. Developed by{' '}
+            <a
+              href="https://www.heavensarder.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-400 hover:text-[#FF3D00] font-medium transition-colors underline underline-offset-2"
+            >
+              Web With Heaven
+            </a>
+          </p>
         </div>
 
       </div>

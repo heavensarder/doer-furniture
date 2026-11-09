@@ -6,12 +6,11 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ slug: string }> }
+  { params }: { params: { slug: string } }
 ) {
   try {
     await ensureCareerTables();
-    const resolvedParams = await params;
-    const { slug } = resolvedParams;
+    const slug = params?.slug;
 
     if (!slug) {
       return NextResponse.json({ error: 'Job slug or ID is required' }, { status: 400 });
@@ -49,4 +48,3 @@ export async function GET(
     );
   }
 }
-

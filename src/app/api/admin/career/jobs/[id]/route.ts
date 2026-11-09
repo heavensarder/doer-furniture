@@ -17,7 +17,7 @@ function slugify(text: string): string {
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const admin = await getCurrentAdmin();
@@ -26,8 +26,7 @@ export async function GET(
     }
 
     await ensureCareerTables();
-    const resolvedParams = await params;
-    const id = Number(resolvedParams.id);
+    const id = Number(params?.id);
 
     const [jobs]: any = await pool.execute('SELECT * FROM jobs WHERE id = ?', [id]);
     if (!jobs || jobs.length === 0) {
@@ -42,7 +41,7 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const admin = await getCurrentAdmin();
@@ -51,8 +50,7 @@ export async function PUT(
     }
 
     await ensureCareerTables();
-    const resolvedParams = await params;
-    const id = Number(resolvedParams.id);
+    const id = Number(params?.id);
 
     const body = await request.json();
 
@@ -121,7 +119,7 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const admin = await getCurrentAdmin();
@@ -130,8 +128,7 @@ export async function DELETE(
     }
 
     await ensureCareerTables();
-    const resolvedParams = await params;
-    const id = Number(resolvedParams.id);
+    const id = Number(params?.id);
 
     // Delete associated applications and job
     await pool.execute('DELETE FROM job_applications WHERE job_id = ?', [id]);
@@ -143,4 +140,3 @@ export async function DELETE(
     return NextResponse.json({ error: 'Failed to delete job', details: error.message }, { status: 500 });
   }
 }
-

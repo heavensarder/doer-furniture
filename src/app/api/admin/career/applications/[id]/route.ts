@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const admin = await getCurrentAdmin();
@@ -16,8 +16,7 @@ export async function GET(
     }
 
     await ensureCareerTables();
-    const resolvedParams = await params;
-    const id = Number(resolvedParams.id);
+    const id = Number(params?.id);
 
     const [apps]: any = await pool.execute('SELECT * FROM job_applications WHERE id = ?', [id]);
     if (!apps || apps.length === 0) {
@@ -32,7 +31,7 @@ export async function GET(
 
 export async function PUT(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const admin = await getCurrentAdmin();
@@ -41,8 +40,7 @@ export async function PUT(
     }
 
     await ensureCareerTables();
-    const resolvedParams = await params;
-    const id = Number(resolvedParams.id);
+    const id = Number(params?.id);
 
     const body = await request.json();
     const status = body.status;
@@ -70,7 +68,7 @@ export async function PUT(
 
 export async function DELETE(
   request: Request,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string } }
 ) {
   try {
     const admin = await getCurrentAdmin();
@@ -79,8 +77,7 @@ export async function DELETE(
     }
 
     await ensureCareerTables();
-    const resolvedParams = await params;
-    const id = Number(resolvedParams.id);
+    const id = Number(params?.id);
 
     await pool.execute('DELETE FROM job_applications WHERE id = ?', [id]);
 
@@ -90,4 +87,3 @@ export async function DELETE(
     return NextResponse.json({ error: 'Failed to delete application', details: error.message }, { status: 500 });
   }
 }
-
