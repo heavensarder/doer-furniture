@@ -57,6 +57,7 @@ export default function ApplicationFormModal({
   const [agreed, setAgreed] = useState(false);
 
   const [submitting, setSubmitting] = useState(false);
+  const [uploadStatus, setUploadStatus] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
@@ -64,6 +65,153 @@ export default function ApplicationFormModal({
   const cvInputRef = useRef<HTMLInputElement>(null);
 
   if (!isOpen && !isInline) return null;
+
+  // Compress photo on client canvas if > 350KB to keep upload light and fast
+  const compressCandidatePhoto = async (file: File): Promise<File> => {
+    if (!file.type.startsWith('image/') || file.size <= 350 * 1024) {
+      return file;
+    }
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new (window as any).Image();
+        img.onload = () => {
+          const MAX_DIM = 1200;
+          let width = img.width;
+          let height = img.height;
+          if (width > MAX_DIM || height > MAX_DIM) {
+            if (width > height) {
+              height = Math.round((height * MAX_DIM) / width);
+              width = MAX_DIM;
+            } else {
+              width = Math.round((width * MAX_DIM) / height);
+              height = MAX_DIM;
+            }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) {
+            resolve(file);
+            return;
+          }
+          ctx.drawImage(img, 0, 0, width, height);
+          canvas.toBlob(
+            (blob) => {
+              if (!blob) {
+                resolve(file);
+                return;
+              }
+              const cleanName = file.name.replace(/\.[^/.]+$/, '') + '.jpg';
+              const compressed = new File([blob], cleanName, {
+                type: 'image/jpeg',
+                lastModified: Date.now(),
+              });
+              resolve(compressed);
+            },
+            'image/jpeg',
+            0.85
+          );
+        };
+        img.onerror = () => resolve(file);
+        img.src = e.target?.result as string;
+      };
+      reader.onerror = () => resolve(file);
+      reader.readAsDataURL(file);
+    });
+  };
+
+  // Upload file in 512KB chunks to bypass Nginx 1MB client_max_body_size limit
+  const uploadCareerFileChunked = async (
+    file: File,
+    category: 'photos' | 'cvs',
+    onProgress?: (msg: string) => void
+  ): Promise<string> => {
+    const CHUNK_SIZE = 512 * 1024; // 512 KB chunks
+
+    if (file.size <= 450 * 1024) {
+      onProgress?.(`Uploading ${category === 'photos' ? 'photo' : 'CV'}...`);
+      const fd = new FormData();
+      fd.append('file', file);
+      fd.append('category', category);
+
+      const res = await fetch('/api/careers/upload', {
+        method: 'POST',
+        body: fd,
+      });
+
+      const text = await res.text();
+      let data: any = null;
+      try {
+        data = JSON.parse(text);
+      } catch {}
+
+      if (!res.ok) {
+        if (res.status === 413) {
+          throw new Error(`The ${category === 'photos' ? 'photo' : 'CV'} exceeds the server upload limit. Please upload a smaller file.`);
+        }
+        throw new Error((data && data.error) || `Upload failed with status ${res.status}.`);
+      }
+      if (!data?.url) {
+        throw new Error('Upload succeeded but server did not return a valid file URL.');
+      }
+      return data.url;
+    }
+
+    const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+    let targetName = '';
+
+    for (let i = 0; i < totalChunks; i++) {
+      const pct = Math.round(((i + 1) / totalChunks) * 100);
+      onProgress?.(`Uploading ${category === 'photos' ? 'photo' : 'CV'} (${pct}%)...`);
+
+      const start = i * CHUNK_SIZE;
+      const end = Math.min(file.size, start + CHUNK_SIZE);
+      const chunk = file.slice(start, end);
+
+      const fd = new FormData();
+      fd.append('chunk', chunk);
+      fd.append('fileName', file.name);
+      fd.append('category', category);
+      fd.append('chunkIndex', String(i));
+      fd.append('totalChunks', String(totalChunks));
+      if (targetName) {
+        fd.append('targetName', targetName);
+      }
+
+      const res = await fetch('/api/careers/upload', {
+        method: 'POST',
+        body: fd,
+      });
+
+      const text = await res.text();
+      let data: any = null;
+      try {
+        data = JSON.parse(text);
+      } catch {}
+
+      if (!res.ok) {
+        if (res.status === 413) {
+          throw new Error(`File chunk exceeded server limit. Please upload a smaller ${category === 'photos' ? 'photo' : 'CV'}.`);
+        }
+        throw new Error((data && data.error) || `Upload failed with status ${res.status}.`);
+      }
+
+      if (data?.targetName) {
+        targetName = data.targetName;
+      }
+
+      if (i === totalChunks - 1) {
+        if (!data?.url) {
+          throw new Error('Upload finished but server did not return a valid file URL.');
+        }
+        return data.url;
+      }
+    }
+
+    throw new Error('Upload loop ended without returning URL.');
+  };
 
   // Handle Photo Selection
   const handlePhotoFile = (file: File) => {
@@ -151,37 +299,68 @@ export default function ApplicationFormModal({
 
     try {
       setSubmitting(true);
-      const formData = new FormData();
-      formData.append('job_id', String(job.id));
-      formData.append('job_title', job.title);
-      formData.append('position', job.position || job.title);
-      formData.append('photo', photo);
-      formData.append('full_name', fullName.trim());
-      formData.append('email', email.trim());
-      formData.append('phone', phone.trim());
-      formData.append('current_address', currentAddress.trim());
-      formData.append('highest_qualification', highestQualification.trim());
-      formData.append('institution', institution.trim());
-      formData.append('experience_years', experienceYears.trim());
-      formData.append('cv', cv);
-      formData.append('why_join', whyJoin.trim());
-      formData.append('agreed', 'true');
+      setError(null);
 
+      // 1. Optimize photo on client canvas if needed
+      setUploadStatus('Optimizing photo...');
+      const readyPhoto = await compressCandidatePhoto(photo);
+
+      // 2. Upload candidate photo (chunked/safe)
+      const photoUrl = await uploadCareerFileChunked(readyPhoto, 'photos', setUploadStatus);
+
+      // 3. Upload candidate CV (chunked/safe up to 5MB)
+      const cvUrl = await uploadCareerFileChunked(cv, 'cvs', setUploadStatus);
+
+      // 4. Submit application JSON to /api/careers/apply
+      setUploadStatus('Submitting application...');
       const res = await fetch('/api/careers/apply', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          job_id: job.id,
+          job_title: job.title,
+          position: job.position || job.title,
+          full_name: fullName.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          current_address: currentAddress.trim(),
+          highest_qualification: highestQualification.trim(),
+          institution: institution.trim(),
+          experience_years: experienceYears.trim(),
+          why_join: whyJoin.trim(),
+          agreed: true,
+          photo_url: photoUrl,
+          cv_url: cvUrl,
+        }),
       });
 
-      const data = await res.json();
+      const text = await res.text();
+      let data: any = null;
+      try {
+        data = JSON.parse(text);
+      } catch {
+        // Response was not JSON (e.g. HTML 413/502/500)
+      }
+
       if (!res.ok) {
-        throw new Error(data.error || 'Failed to submit application.');
+        if (res.status === 413) {
+          throw new Error('Your files exceeded the server upload limit. Please upload smaller files or contact support.');
+        }
+        if (data && data.error) {
+          throw new Error(data.error);
+        }
+        throw new Error(`Application submission failed (Server status ${res.status}). Please try again.`);
       }
 
       setSuccess(true);
     } catch (err: any) {
-      setError(err.message || 'An error occurred during submission. Please try again.');
+      console.error('Submission error:', err);
+      setError(err.message || 'An error occurred during submission. Please check your connection and try again.');
     } finally {
       setSubmitting(false);
+      setUploadStatus('');
     }
   };
 
@@ -556,7 +735,7 @@ export default function ApplicationFormModal({
               {submitting ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  <span>Submitting Application...</span>
+                  <span>{uploadStatus || 'Submitting Application...'}</span>
                 </>
               ) : (
                 <>

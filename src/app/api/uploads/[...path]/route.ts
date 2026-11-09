@@ -17,6 +17,10 @@ const MIME_TYPES: Record<string, string> = {
   '.mov': 'video/quicktime',
   '.webm': 'video/webm',
   '.ogg': 'video/ogg',
+  '.pdf': 'application/pdf',
+  '.doc': 'application/msword',
+  '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  '.txt': 'text/plain',
 };
 
 export async function GET(

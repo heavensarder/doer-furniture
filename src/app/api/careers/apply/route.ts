@@ -20,29 +20,110 @@ function sanitizeFileName(rawName: string, prefix: string): string {
   return `${prefix}-${baseName || 'file'}-${Date.now()}-${Math.round(Math.random() * 10000)}${ext}`;
 }
 
+async function saveFileBuffer(category: 'photos' | 'cvs', fileName: string, buffer: Buffer): Promise<string> {
+  const primaryDir = path.join(process.cwd(), 'public', 'uploads', 'careers', category);
+  const fallbackDir = path.join(process.cwd(), 'uploads', 'careers', category);
+
+  try {
+    await mkdir(primaryDir, { recursive: true, mode: 0o775 });
+    await writeFile(path.join(primaryDir, fileName), buffer, { mode: 0o644 });
+  } catch {
+    await mkdir(fallbackDir, { recursive: true, mode: 0o775 });
+    await writeFile(path.join(fallbackDir, fileName), buffer, { mode: 0o644 });
+  }
+
+  return `/api/uploads/careers/${category}/${fileName}`;
+}
+
 export async function POST(request: Request) {
   try {
     await ensureCareerTables();
 
-    const formData = await request.formData();
+    const contentType = request.headers.get('content-type') || '';
 
-    const jobId = Number(formData.get('job_id'));
-    const jobTitle = String(formData.get('job_title') || '').trim();
-    const position = String(formData.get('position') || jobTitle).trim();
-    const fullName = String(formData.get('full_name') || '').trim();
-    const email = String(formData.get('email') || '').trim();
-    const phone = String(formData.get('phone') || '').trim();
-    const currentAddress = String(formData.get('current_address') || '').trim();
-    const highestQualification = String(formData.get('highest_qualification') || '').trim();
-    const institution = String(formData.get('institution') || '').trim();
-    const experienceYears = String(formData.get('experience_years') || '').trim();
-    const whyJoin = String(formData.get('why_join') || '').trim();
-    const agreed = formData.get('agreed') === 'true' || formData.get('agreed') === '1' || formData.get('agreed') === 'on';
+    let jobId = 0;
+    let jobTitle = '';
+    let position = '';
+    let fullName = '';
+    let email = '';
+    let phone = '';
+    let currentAddress = '';
+    let highestQualification = '';
+    let institution = '';
+    let experienceYears = '';
+    let whyJoin = '';
+    let agreed = false;
+    let photoUrl = '';
+    let cvUrl = '';
 
-    const photoFile = formData.get('photo') as File | null;
-    const cvFile = formData.get('cv') as File | null;
+    if (contentType.includes('application/json')) {
+      const body = await request.json();
+      jobId = Number(body.job_id);
+      jobTitle = String(body.job_title || '').trim();
+      position = String(body.position || jobTitle).trim();
+      fullName = String(body.full_name || '').trim();
+      email = String(body.email || '').trim();
+      phone = String(body.phone || '').trim();
+      currentAddress = String(body.current_address || '').trim();
+      highestQualification = String(body.highest_qualification || '').trim();
+      institution = String(body.institution || '').trim();
+      experienceYears = String(body.experience_years || '').trim();
+      whyJoin = String(body.why_join || '').trim();
+      agreed = Boolean(body.agreed);
+      photoUrl = String(body.photo_url || '').trim();
+      cvUrl = String(body.cv_url || '').trim();
+    } else {
+      const formData = await request.formData();
 
-    // Validation
+      jobId = Number(formData.get('job_id'));
+      jobTitle = String(formData.get('job_title') || '').trim();
+      position = String(formData.get('position') || jobTitle).trim();
+      fullName = String(formData.get('full_name') || '').trim();
+      email = String(formData.get('email') || '').trim();
+      phone = String(formData.get('phone') || '').trim();
+      currentAddress = String(formData.get('current_address') || '').trim();
+      highestQualification = String(formData.get('highest_qualification') || '').trim();
+      institution = String(formData.get('institution') || '').trim();
+      experienceYears = String(formData.get('experience_years') || '').trim();
+      whyJoin = String(formData.get('why_join') || '').trim();
+      agreed =
+        formData.get('agreed') === 'true' ||
+        formData.get('agreed') === '1' ||
+        formData.get('agreed') === 'on';
+
+      photoUrl = String(formData.get('photo_url') || '').trim();
+      cvUrl = String(formData.get('cv_url') || '').trim();
+
+      const photoFile = formData.get('photo') as File | null;
+      const cvFile = formData.get('cv') as File | null;
+
+      // Handle direct file uploads if URLs were not pre-provided
+      if (!photoUrl && photoFile && typeof photoFile.arrayBuffer === 'function') {
+        if (photoFile.size > MAX_FILE_SIZE) {
+          return NextResponse.json(
+            { error: 'Candidate photo must not exceed 5MB.' },
+            { status: 400 }
+          );
+        }
+        const photoName = sanitizeFileName(photoFile.name || 'photo.jpg', 'photo');
+        const photoBuffer = Buffer.from(await photoFile.arrayBuffer());
+        photoUrl = await saveFileBuffer('photos', photoName, photoBuffer);
+      }
+
+      if (!cvUrl && cvFile && typeof cvFile.arrayBuffer === 'function') {
+        if (cvFile.size > MAX_FILE_SIZE) {
+          return NextResponse.json(
+            { error: 'CV document must not exceed 5MB.' },
+            { status: 400 }
+          );
+        }
+        const cvName = sanitizeFileName(cvFile.name || 'resume.pdf', 'cv');
+        const cvBuffer = Buffer.from(await cvFile.arrayBuffer());
+        cvUrl = await saveFileBuffer('cvs', cvName, cvBuffer);
+      }
+    }
+
+    // Comprehensive Validations
     if (!jobId || !jobTitle) {
       return NextResponse.json({ error: 'Valid job position must be selected.' }, { status: 400 });
     }
@@ -76,36 +157,12 @@ export async function POST(request: Request) {
         { status: 400 }
       );
     }
-
-    if (!photoFile || typeof photoFile.arrayBuffer !== 'function') {
-      return NextResponse.json({ error: 'Candidate photo is required.' }, { status: 400 });
+    if (!photoUrl) {
+      return NextResponse.json({ error: 'Candidate photo upload is required.' }, { status: 400 });
     }
-    if (photoFile.size > MAX_FILE_SIZE) {
-      return NextResponse.json({ error: 'Candidate photo must not exceed 5MB.' }, { status: 400 });
-    }
-
-    if (!cvFile || typeof cvFile.arrayBuffer !== 'function') {
+    if (!cvUrl) {
       return NextResponse.json({ error: 'CV document upload is required.' }, { status: 400 });
     }
-    if (cvFile.size > MAX_FILE_SIZE) {
-      return NextResponse.json({ error: 'CV document must not exceed 5MB.' }, { status: 400 });
-    }
-
-    // Save Photo
-    const photoName = sanitizeFileName(photoFile.name || 'photo.jpg', 'photo');
-    const photoDir = path.join(process.cwd(), 'public', 'uploads', 'careers', 'photos');
-    await mkdir(photoDir, { recursive: true, mode: 0o775 });
-    const photoBuffer = Buffer.from(await photoFile.arrayBuffer());
-    await writeFile(path.join(photoDir, photoName), photoBuffer);
-    const photoUrl = `/uploads/careers/photos/${photoName}`;
-
-    // Save CV
-    const cvName = sanitizeFileName(cvFile.name || 'resume.pdf', 'cv');
-    const cvDir = path.join(process.cwd(), 'public', 'uploads', 'careers', 'cvs');
-    await mkdir(cvDir, { recursive: true, mode: 0o775 });
-    const cvBuffer = Buffer.from(await cvFile.arrayBuffer());
-    await writeFile(path.join(cvDir, cvName), cvBuffer);
-    const cvUrl = `/uploads/careers/cvs/${cvName}`;
 
     // Save record to MySQL
     const [result]: any = await pool.execute(
@@ -139,9 +196,8 @@ export async function POST(request: Request) {
   } catch (error: any) {
     console.error('Error submitting application:', error);
     return NextResponse.json(
-      { error: 'Failed to submit application. Please try again.', details: error.message },
+      { error: 'Failed to submit application. Please check your data and try again.', details: error.message },
       { status: 500 }
     );
   }
 }
-

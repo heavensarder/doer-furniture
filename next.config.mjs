@@ -38,6 +38,10 @@ const nextConfig = {
         source: '/uploads/:path*',
         destination: '/api/uploads/:path*',
       },
+      {
+        source: '/api/career/:path*',
+        destination: '/api/careers/:path*',
+      },
     ];
   },
 };
