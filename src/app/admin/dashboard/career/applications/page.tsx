@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
@@ -57,7 +57,7 @@ interface StatusCounts {
   count_hired: number;
 }
 
-export default function ApplicationsPage() {
+function ApplicationsPageContent() {
   const searchParams = useSearchParams();
   const initialJobId = searchParams.get('job_id') || 'all';
 
@@ -649,6 +649,21 @@ export default function ApplicationsPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function ApplicationsPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="py-20 text-center space-y-3">
+          <Loader2 className="w-8 h-8 animate-spin text-[#FF3D00] mx-auto" />
+          <p className="text-xs text-slate-400 font-mono">Loading recruitment portal...</p>
+        </div>
+      }
+    >
+      <ApplicationsPageContent />
+    </Suspense>
   );
 }
 
