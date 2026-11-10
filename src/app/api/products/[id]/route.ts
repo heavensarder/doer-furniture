@@ -3,6 +3,7 @@ import pool from '@/lib/db';
 import { getCurrentAdmin } from '@/lib/auth';
 import { ensureEcommerceTables } from '@/lib/ecommerce-db';
 import { cleanHtmlStyles } from '@/components/admin/RichTextEditor';
+import { deleteUploadedFile, deleteUploadedFiles } from '@/lib/file-storage';
 
 export const dynamic = 'force-dynamic';
 
@@ -267,8 +268,26 @@ export async function DELETE(
       return NextResponse.json({ error: 'Invalid product ID' }, { status: 400 });
     }
 
+    // 1. Fetch physical image and video assets to clean up from disk
+    const [existingRows]: any = await pool.execute(
+      'SELECT main_image, gallery_images, og_image, video_url FROM products WHERE id = ? LIMIT 1',
+      [id]
+    );
+
+    if (existingRows && existingRows.length > 0) {
+      const prod = existingRows[0];
+      await deleteUploadedFile(prod.main_image);
+      await deleteUploadedFiles(prod.gallery_images);
+      await deleteUploadedFile(prod.og_image);
+      await deleteUploadedFile(prod.video_url);
+    }
+
+    // 2. Unlink any order references so orders keep their snapshot text
+    await pool.execute('UPDATE orders SET product_id = NULL WHERE product_id = ?', [id]);
+
+    // 3. Delete product record from database
     await pool.execute('DELETE FROM products WHERE id = ?', [id]);
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, message: 'Product, media assets, and database records purged successfully.' });
   } catch (error: any) {
     console.error('Error deleting product:', error);
     return NextResponse.json(

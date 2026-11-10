@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getCurrentAdmin } from '@/lib/auth';
 import { ensureEcommerceTables } from '@/lib/ecommerce-db';
+import { deleteUploadedFile } from '@/lib/file-storage';
 
 function slugify(text: string): string {
   return text
@@ -86,11 +87,25 @@ export async function DELETE(
       return NextResponse.json({ error: 'Invalid category ID' }, { status: 400 });
     }
 
-    // Set products in this category to null category_id
+    // 1. Fetch category to clean up image if one exists
+    const [existingRows]: any = await pool.execute(
+      'SELECT * FROM product_categories WHERE id = ? LIMIT 1',
+      [id]
+    );
+
+    if (existingRows && existingRows.length > 0) {
+      const cat = existingRows[0];
+      if (cat.image) await deleteUploadedFile(cat.image);
+    }
+
+    // 2. Unlink products and home sections referencing this category
     await pool.execute('UPDATE products SET category_id = NULL WHERE category_id = ?', [id]);
+    await pool.execute('DELETE FROM home_category_sections WHERE category_id = ?', [id]);
+
+    // 3. Delete category record from database
     await pool.execute('DELETE FROM product_categories WHERE id = ?', [id]);
 
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, message: 'Category deleted and unlinked.' });
   } catch (error: any) {
     console.error('Error deleting category:', error);
     return NextResponse.json(

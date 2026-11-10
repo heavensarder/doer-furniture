@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getCurrentAdmin } from '@/lib/auth';
 import { ensureEcommerceTables } from '@/lib/ecommerce-db';
+import { deleteUploadedFile } from '@/lib/file-storage';
 
 export async function PUT(
   request: Request,
@@ -60,8 +61,21 @@ export async function DELETE(
       return NextResponse.json({ error: 'Invalid order ID' }, { status: 400 });
     }
 
+    // 1. Fetch order to clean up any potential attachments/receipts
+    const [existingRows]: any = await pool.execute(
+      'SELECT * FROM orders WHERE id = ? LIMIT 1',
+      [id]
+    );
+
+    if (existingRows && existingRows.length > 0) {
+      const order = existingRows[0];
+      if (order.receipt_url) await deleteUploadedFile(order.receipt_url);
+      if (order.attachment_url) await deleteUploadedFile(order.attachment_url);
+    }
+
+    // 2. Permanently delete order record from database
     await pool.execute('DELETE FROM orders WHERE id = ?', [id]);
-    return NextResponse.json({ success: true });
+    return NextResponse.json({ success: true, message: 'Order record and all details permanently purged from database.' });
   } catch (error: any) {
     console.error('Error deleting order:', error);
     return NextResponse.json(

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getCurrentAdmin } from '@/lib/auth';
 import { ensureCareerTables } from '@/lib/career-db';
+import { deleteUploadedFiles } from '@/lib/file-storage';
 
 export const dynamic = 'force-dynamic';
 
@@ -130,11 +131,23 @@ export async function DELETE(
     await ensureCareerTables();
     const id = Number(params?.id);
 
-    // Delete associated applications and job
+    // 1. Fetch and clean up all candidate uploaded files (CVs and photos) for this job
+    const [apps]: any = await pool.execute(
+      'SELECT photo_url, cv_url FROM job_applications WHERE job_id = ?',
+      [id]
+    );
+
+    if (apps && apps.length > 0) {
+      for (const app of apps) {
+        await deleteUploadedFiles([app.photo_url, app.cv_url]);
+      }
+    }
+
+    // 2. Delete associated applications and job record from database
     await pool.execute('DELETE FROM job_applications WHERE job_id = ?', [id]);
     await pool.execute('DELETE FROM jobs WHERE id = ?', [id]);
 
-    return NextResponse.json({ success: true, message: 'Job and associated applications deleted.' });
+    return NextResponse.json({ success: true, message: 'Job, associated candidate applications, and files deleted.' });
   } catch (error: any) {
     console.error('Error deleting job:', error);
     return NextResponse.json({ error: 'Failed to delete job', details: error.message }, { status: 500 });

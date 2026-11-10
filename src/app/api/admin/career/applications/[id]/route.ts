@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getCurrentAdmin } from '@/lib/auth';
 import { ensureCareerTables } from '@/lib/career-db';
+import { deleteUploadedFiles } from '@/lib/file-storage';
 
 export const dynamic = 'force-dynamic';
 
@@ -79,9 +80,21 @@ export async function DELETE(
     await ensureCareerTables();
     const id = Number(params?.id);
 
+    // 1. Fetch physical file paths (photo & CV) to clean up from disk
+    const [existingRows]: any = await pool.execute(
+      'SELECT photo_url, cv_url FROM job_applications WHERE id = ? LIMIT 1',
+      [id]
+    );
+
+    if (existingRows && existingRows.length > 0) {
+      const app = existingRows[0];
+      await deleteUploadedFiles([app.photo_url, app.cv_url]);
+    }
+
+    // 2. Permanently delete application record from database
     await pool.execute('DELETE FROM job_applications WHERE id = ?', [id]);
 
-    return NextResponse.json({ success: true, message: 'Application deleted.' });
+    return NextResponse.json({ success: true, message: 'Application and associated files deleted.' });
   } catch (error: any) {
     console.error('Error deleting application:', error);
     return NextResponse.json({ error: 'Failed to delete application', details: error.message }, { status: 500 });

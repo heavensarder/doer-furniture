@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getCurrentAdmin } from '@/lib/auth';
 import { ensureHeroSlidesTable } from '@/lib/frontend-db';
+import { deleteUploadedFile } from '@/lib/file-storage';
 
 export const dynamic = 'force-dynamic';
 
@@ -157,10 +158,20 @@ export async function DELETE(
     await ensureHeroSlidesTable();
     const id = Number(params?.id);
 
-    // Ensure at least 1 slide remains active or let them delete with confirmation
+    // 1. Fetch physical image to clean up from disk if it was an uploaded file
+    const [existingRows]: any = await pool.execute(
+      'SELECT image FROM hero_slides WHERE id = ? LIMIT 1',
+      [id]
+    );
+
+    if (existingRows && existingRows.length > 0) {
+      await deleteUploadedFile(existingRows[0].image);
+    }
+
+    // 2. Delete slide record from database
     await pool.execute('DELETE FROM hero_slides WHERE id = ?', [id]);
 
-    return NextResponse.json({ success: true, message: 'Hero slide deleted successfully.' });
+    return NextResponse.json({ success: true, message: 'Hero slide and associated image deleted successfully.' });
   } catch (error: any) {
     console.error('Error deleting hero slide:', error);
     return NextResponse.json(

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getCurrentAdmin } from '@/lib/auth';
 import { ensureSeoTables } from '@/lib/seo-db';
+import { deleteUploadedFiles } from '@/lib/file-storage';
 
 export const dynamic = 'force-dynamic';
 
@@ -124,13 +125,17 @@ export async function DELETE(
     const id = Number(params?.id);
 
     // Prevent deletion of homepage '/'
-    const [rows]: any = await pool.execute('SELECT page_path FROM seo_pages WHERE id = ?', [id]);
+    const [rows]: any = await pool.execute('SELECT page_path, og_image, twitter_image FROM seo_pages WHERE id = ?', [id]);
     if (rows && rows[0] && rows[0].page_path === '/') {
       return NextResponse.json({ error: 'Cannot delete the Home Page SEO record.' }, { status: 400 });
     }
 
+    if (rows && rows.length > 0) {
+      await deleteUploadedFiles([rows[0].og_image, rows[0].twitter_image]);
+    }
+
     await pool.execute('DELETE FROM seo_pages WHERE id = ?', [id]);
-    return NextResponse.json({ success: true, message: 'Page SEO record removed.' });
+    return NextResponse.json({ success: true, message: 'Page SEO record and associated images removed.' });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
