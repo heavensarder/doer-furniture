@@ -259,11 +259,11 @@ export default function ServicesPage() {
 
                   <div className="pt-1 sm:pt-2">
                     <Link
-                      href="/contact"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(255,61,0,0.4)] border border-[#FF3D00] transition-all"
+                      href={`/contact?service=${encodeURIComponent(service.title)}`}
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-[#FF3D00] hover:bg-[#eb3800] text-white text-xs font-bold uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(255,61,0,0.4)] border border-[#FF3D00] transition-all group/btn"
                     >
                       <span>Inquire About This Service</span>
-                      <ArrowRight className="w-4 h-4" />
+                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </div>
@@ -309,10 +309,17 @@ export default function ServicesPage() {
                       <span className="font-bold text-xs sm:text-sm tracking-tight truncate">{item.title}</span>
                     </div>
                   </div>
-                  <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+                  <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between gap-4">
                     <p className="text-xs text-slate-400 leading-relaxed font-normal">
                       {item.desc}
                     </p>
+                    <Link
+                      href={`/contact?service=${encodeURIComponent(item.title)}`}
+                      className="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-[#0E1526] hover:bg-[#FF3D00] text-slate-300 hover:text-white text-xs font-bold uppercase tracking-wider border border-white/10 hover:border-[#FF3D00] transition-all shadow-sm"
+                    >
+                      <span>Inquire Now</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
                   </div>
                 </div>
               );

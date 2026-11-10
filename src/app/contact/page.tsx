@@ -1,7 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 import {
   MapPin,
   Phone,
@@ -10,10 +11,45 @@ import {
   Send,
   CheckCircle2,
   AlertCircle,
+  Sparkles,
 } from 'lucide-react';
 import { trackLead } from '@/lib/fpixel';
 
-export default function ContactPage() {
+const servicesList = [
+  'Control Room Interior',
+  'Commercial Space Design',
+  'Corporate Office Interior',
+  'Interior Project Execution',
+  'Remodeling & Renovation',
+  'Restaurant & Café Interior',
+  'Retail & Showroom Interior',
+  'Hotel & Hospitality Interior',
+  'Other Custom Requirements',
+];
+
+function matchServiceFromQuery(param: string | null): string {
+  if (!param) return 'Commercial Space Design';
+  const clean = decodeURIComponent(param).trim().toLowerCase();
+
+  const exact = servicesList.find((s) => s.toLowerCase() === clean);
+  if (exact) return exact;
+
+  if (clean.includes('control') || clean.includes('console')) return 'Control Room Interior';
+  if (clean.includes('corporate') || clean.includes('office') || clean.includes('business')) return 'Corporate Office Interior';
+  if (clean.includes('execution') || clean.includes('project')) return 'Interior Project Execution';
+  if (clean.includes('remodel') || clean.includes('renovat')) return 'Remodeling & Renovation';
+  if (clean.includes('restaurant') || clean.includes('caf')) return 'Restaurant & Café Interior';
+  if (clean.includes('retail') || clean.includes('showroom')) return 'Retail & Showroom Interior';
+  if (clean.includes('hotel') || clean.includes('hospitality')) return 'Hotel & Hospitality Interior';
+  if (clean.includes('commercial')) return 'Commercial Space Design';
+
+  return 'Other Custom Requirements';
+}
+
+function ContactPageContent() {
+  const searchParams = useSearchParams();
+  const serviceParam = searchParams.get('service');
+
   const [formData, setFormData] = useState({
     fullName: '',
     companyName: '',
@@ -24,21 +60,29 @@ export default function ContactPage() {
     projectDetails: '',
   });
 
+  const [hasAutoSelected, setHasAutoSelected] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const servicesList = [
-    'Control Room Interior',
-    'Commercial Space Design',
-    'Corporate Office Interior',
-    'Interior Project Execution',
-    'Remodeling & Renovation',
-    'Restaurant & Café Interior',
-    'Retail & Showroom Interior',
-    'Hotel & Hospitality Interior',
-    'Other Custom Requirements',
-  ];
+  useEffect(() => {
+    if (serviceParam) {
+      const matched = matchServiceFromQuery(serviceParam);
+      setFormData((prev) => ({
+        ...prev,
+        serviceInterested: matched,
+      }));
+      setHasAutoSelected(true);
+
+      // Smooth scroll to the inquiry form
+      const formEl = document.getElementById('project-form');
+      if (formEl) {
+        setTimeout(() => {
+          formEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    }
+  }, [serviceParam]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -80,13 +124,14 @@ export default function ContactPage() {
         value: 0,
         currency: 'BDT',
       });
+
       // Reset form
       setFormData({
         fullName: '',
         companyName: '',
         email: '',
         phone: '',
-        serviceInterested: 'Commercial Space Design',
+        serviceInterested: serviceParam ? matchServiceFromQuery(serviceParam) : 'Commercial Space Design',
         projectLocation: '',
         projectDetails: '',
       });
@@ -118,110 +163,106 @@ export default function ContactPage() {
         <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3 sm:space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.25)]">
             <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse" />
-            <span>Connect With Us</span>
+            <span>Direct Communications</span>
           </div>
           <h1 className="text-3xl xs:text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]">
-            Let&apos;s Talk About Your Project.
+            Contact DOER
           </h1>
           <p className="max-w-2xl mx-auto text-sm sm:text-lg lg:text-xl text-slate-300 font-normal px-2 sm:px-0 leading-relaxed">
-            Have an idea or a project in mind? We would love to hear from you.
+            Let&apos;s build mission-critical spaces and luxury interior experiences together.
           </p>
         </div>
       </section>
 
-      {/* 02. Main Content: Info & Inquiry Form */}
-      <section className="py-16 sm:py-20 lg:py-24 bg-[#070A12] bg-cyber-grid relative text-white border-b border-cyan-500/20">
+      {/* 02. Main Contact Grid */}
+      <section className="py-16 sm:py-20 lg:py-28 bg-[#05070B] bg-cyber-grid relative">
         <div className="neon-line-v-orange absolute top-0 bottom-0 left-0 z-20" />
         <div className="neon-line-v-cyan absolute top-0 bottom-0 right-0 z-20" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 lg:gap-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             
-            {/* Left: Contact Information */}
-            <div className="lg:col-span-5 space-y-6 sm:space-y-8">
-              <div className="space-y-3 sm:space-y-4">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
-                  <span>Get in Touch</span>
+            {/* Left: Direct Information */}
+            <div className="lg:col-span-5 space-y-8">
+              <div>
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-[11px] sm:text-xs font-bold uppercase tracking-wider mb-3">
+                  <span>Headquarters &amp; Factory</span>
                 </div>
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
-                  Start a Conversation
+                  Get In Touch
                 </h2>
-                <p className="text-slate-300 leading-relaxed text-xs sm:text-sm lg:text-base font-normal">
-                  Whether you are planning a commercial interior, corporate office, showroom, customized furniture, or renovation project, our team is ready to discuss your requirements.
-                </p>
-                <p className="text-slate-400 leading-relaxed text-xs sm:text-sm lg:text-base font-normal">
-                  Reach out to us and let&apos;s explore how we can work together.
+                <p className="mt-3 text-slate-300 leading-relaxed text-xs sm:text-sm lg:text-base font-normal">
+                  Whether you require bespoke 24/7 command console tables, turnkey control room interior fit-outs, or architectural metal art, our team is ready to consult.
                 </p>
               </div>
 
-              {/* Contact Information Card */}
-              <div className="bg-[#0B101D]/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 border border-white/10 shadow-2xl space-y-5 sm:space-y-6 cyber-corner text-white">
-                <h3 className="text-lg sm:text-xl font-black text-white border-b border-white/10 pb-3 sm:pb-4 flex items-center justify-between">
-                  <span>DOER</span>
-                  <span className="text-[11px] sm:text-xs uppercase tracking-widest text-[#FF3D00] font-bold">Studio Office</span>
-                </h3>
-
-                <ul className="space-y-4 sm:space-y-5 text-xs sm:text-sm">
+              {/* Contact Information Cards */}
+              <div className="bg-[#0B101D]/90 rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl space-y-6 cyber-corner text-white">
+                <ul className="space-y-6">
                   {/* Address */}
-                  <li className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_15px_rgba(255,61,0,0.25)]">
-                      <MapPin className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <li className="flex items-start gap-4">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(255,61,0,0.25)]">
+                      <MapPin className="w-5 h-5" />
                     </div>
-                    <div>
-                      <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
-                        Address
+                    <div className="space-y-1">
+                      <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 block">
+                        Factory &amp; Engineering Studio
                       </span>
-                      <p className="text-slate-200 font-semibold leading-relaxed">
-                        House: DOER, Pachkani, Barua, Khilkhet, Dhaka, Bangladesh.
+                      <p className="text-xs sm:text-sm text-slate-200 leading-snug font-medium">
+                        Kazi Bari Road, Jagannathpur, Khilkhet, Dhaka-1229, Bangladesh
                       </p>
                     </div>
                   </li>
 
                   {/* Phone */}
-                  <li className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_15px_rgba(255,61,0,0.25)]">
-                      <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <li className="flex items-start gap-4">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(0,240,255,0.25)]">
+                      <Phone className="w-5 h-5" />
                     </div>
-                    <div>
-                      <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
-                        Phone
+                    <div className="space-y-1">
+                      <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 block">
+                        Direct Lines &amp; WhatsApp
                       </span>
-                      <a
-                        href="tel:01976535654"
-                        className="text-white font-bold hover:text-[#FF3D00] transition-colors text-sm sm:text-base"
-                      >
-                        01976535654
-                      </a>
+                      <div className="flex flex-col text-xs sm:text-sm text-slate-200 font-semibold space-y-0.5">
+                        <a href="tel:+8801976535654" className="hover:text-[#FF3D00] transition-colors">
+                          +880 1976-535654
+                        </a>
+                        <a href="tel:+8801712716075" className="hover:text-[#FF3D00] transition-colors">
+                          +880 1712-716075
+                        </a>
+                      </div>
                     </div>
                   </li>
 
                   {/* Email */}
-                  <li className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_15px_rgba(255,61,0,0.25)]">
-                      <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <li className="flex items-start gap-4">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(255,61,0,0.25)]">
+                      <Mail className="w-5 h-5" />
                     </div>
-                    <div>
-                      <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
-                        Email
+                    <div className="space-y-1">
+                      <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 block">
+                        Official Correspondence
                       </span>
-                      <a
-                        href="mailto:info@doerbd.com"
-                        className="text-white font-bold hover:text-[#FF3D00] transition-colors text-xs sm:text-sm"
-                      >
-                        info@doerbd.com
-                      </a>
+                      <div className="flex flex-col text-xs sm:text-sm text-slate-200 font-semibold space-y-0.5">
+                        <a href="mailto:doer.interior@gmail.com" className="hover:text-[#FF3D00] transition-colors">
+                          doer.interior@gmail.com
+                        </a>
+                        <a href="mailto:info@doerbd.com" className="hover:text-[#FF3D00] transition-colors">
+                          info@doerbd.com
+                        </a>
+                      </div>
                     </div>
                   </li>
 
-                  {/* Website */}
-                  <li className="flex items-start gap-3 sm:gap-4">
-                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FF3D00]/15 border border-[#FF3D00]/30 text-[#FF3D00] flex items-center justify-center shrink-0 mt-0.5 shadow-[0_0_15px_rgba(255,61,0,0.25)]">
-                      <Globe className="w-4 h-4 sm:w-5 sm:h-5" />
+                  {/* Web */}
+                  <li className="flex items-start gap-4">
+                    <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 flex items-center justify-center shrink-0 shadow-[0_0_15px_rgba(0,240,255,0.25)]">
+                      <Globe className="w-5 h-5" />
                     </div>
-                    <div>
-                      <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider text-slate-400 block mb-0.5">
-                        Website
+                    <div className="space-y-1">
+                      <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-slate-400 block">
+                        Official Domains
                       </span>
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2 text-slate-200 font-bold text-xs sm:text-sm">
+                      <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200 font-semibold">
                         <a
                           href="https://www.doerbd.com"
                           target="_blank"
@@ -247,12 +288,22 @@ export default function ContactPage() {
             </div>
 
             {/* Right: Inquiry Form */}
-            <div className="lg:col-span-7">
+            <div id="project-form" className="lg:col-span-7 scroll-mt-28">
               <div className="bg-[#0B101D]/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-12 border border-white/10 shadow-2xl cyber-corner text-white">
-                <div className="mb-6 sm:mb-8 space-y-1.5 sm:space-y-2">
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
-                    <span>Project Form</span>
+                <div className="mb-6 sm:mb-8 space-y-2">
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FF3D00]/10 border border-[#FF3D00]/30 text-[#FF3D00] text-[11px] sm:text-xs font-bold uppercase tracking-wider">
+                      <span>Project Form</span>
+                    </div>
+
+                    {hasAutoSelected && (
+                      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-300 text-[11px] font-mono font-bold animate-in fade-in duration-300">
+                        <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                        <span>Pre-selected: {formData.serviceInterested}</span>
+                      </div>
+                    )}
                   </div>
+
                   <h3 className="text-xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight leading-tight">
                     Tell Us About Your Project
                   </h3>
@@ -351,14 +402,29 @@ export default function ContactPage() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                     {/* Service Interested In */}
                     <div>
-                      <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5 sm:mb-2">
-                        Service Interested In
-                      </label>
+                      <div className="flex items-center justify-between mb-1.5 sm:mb-2">
+                        <label className="block text-[11px] sm:text-xs font-bold uppercase tracking-wider text-slate-300">
+                          Service Interested In
+                        </label>
+                        {hasAutoSelected && (
+                          <span className="text-[10px] text-cyan-400 font-mono font-bold flex items-center gap-1">
+                            <Sparkles className="w-3 h-3 text-cyan-400" />
+                            <span>Auto-Selected</span>
+                          </span>
+                        )}
+                      </div>
                       <select
                         name="serviceInterested"
                         value={formData.serviceInterested}
-                        onChange={handleChange}
-                        className="w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-[#0E1526] border border-white/10 text-white text-xs sm:text-sm focus:outline-none focus:bg-[#121B30] focus:border-[#FF3D00] transition-colors font-medium"
+                        onChange={(e) => {
+                          setHasAutoSelected(false);
+                          handleChange(e);
+                        }}
+                        className={`w-full px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-xl bg-[#0E1526] border text-white text-xs sm:text-sm focus:outline-none focus:bg-[#121B30] focus:border-[#FF3D00] transition-all font-medium ${
+                          hasAutoSelected
+                            ? 'border-cyan-400 shadow-[0_0_15px_rgba(0,240,255,0.25)]'
+                            : 'border-white/10'
+                        }`}
                       >
                         {servicesList.map((srv) => (
                           <option key={srv} value={srv} className="bg-[#0E1526] text-white">
@@ -428,5 +494,19 @@ export default function ContactPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-[#05070B] flex items-center justify-center text-slate-400 text-xs font-mono">
+          Loading contact form...
+        </div>
+      }
+    >
+      <ContactPageContent />
+    </Suspense>
   );
 }
