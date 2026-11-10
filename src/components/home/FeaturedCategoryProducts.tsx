@@ -15,6 +15,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { stripHtml } from '@/components/admin/RichTextEditor';
+import { trackAddToCart, trackContact, trackViewContent } from '@/lib/fpixel';
 
 export interface ProductItem {
   id: number;
@@ -345,6 +346,13 @@ export default function FeaturedCategoryProducts() {
                             <div className="grid grid-cols-2 gap-2">
                               <Link
                                 href={`/checkout?product=${product.slug}`}
+                                onClick={() =>
+                                  trackAddToCart({
+                                    content_name: product.name,
+                                    content_ids: [product.id],
+                                    value: product.price || 0,
+                                  })
+                                }
                                 className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.35)] transition-all cursor-pointer"
                               >
                                 <ShoppingBag className="w-3.5 h-3.5 shrink-0" />
@@ -355,6 +363,12 @@ export default function FeaturedCategoryProducts() {
                                 href={getWhatsAppUrl(product, section.categoryName)}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={() =>
+                                  trackContact({
+                                    channel: 'WhatsApp',
+                                    content_name: product.name,
+                                  })
+                                }
                                 className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#66CC66] hover:bg-[#55b855] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-[0_0_12px_rgba(102,204,102,0.3)]"
                               >
                                 <Image
@@ -371,6 +385,12 @@ export default function FeaturedCategoryProducts() {
                             <div className="grid grid-cols-2 gap-2">
                               <a
                                 href="tel:+8801976535654"
+                                onClick={() =>
+                                  trackContact({
+                                    channel: 'Phone',
+                                    content_name: product.name,
+                                  })
+                                }
                                 className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_15px_rgba(255,61,0,0.35)] transition-all cursor-pointer"
                               >
                                 <Phone className="w-3.5 h-3.5 shrink-0" />
@@ -381,6 +401,12 @@ export default function FeaturedCategoryProducts() {
                                 href={getWhatsAppUrl(product, section.categoryName)}
                                 target="_blank"
                                 rel="noopener noreferrer"
+                                onClick={() =>
+                                  trackContact({
+                                    channel: 'WhatsApp',
+                                    content_name: product.name,
+                                  })
+                                }
                                 className="inline-flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-xl bg-[#66CC66] hover:bg-[#55b855] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider transition-all cursor-pointer shadow-[0_0_12px_rgba(102,204,102,0.3)]"
                               >
                                 <Image

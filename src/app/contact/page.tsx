@@ -11,6 +11,7 @@ import {
   CheckCircle2,
   AlertCircle,
 } from 'lucide-react';
+import { trackLead } from '@/lib/fpixel';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -71,6 +72,14 @@ export default function ContactPage() {
         data.message ||
           'Thank you for contacting DOER. We have received your inquiry and look forward to discussing your project.'
       );
+
+      // Meta Pixel Lead Event
+      trackLead({
+        content_name: formData.serviceInterested || 'General Contact Inquiry',
+        content_category: 'Contact Form',
+        value: 0,
+        currency: 'BDT',
+      });
       // Reset form
       setFormData({
         fullName: '',

@@ -22,6 +22,7 @@ import {
   Loader2,
 } from 'lucide-react';
 import { normalizeToHtml, stripHtml } from '@/components/admin/RichTextEditor';
+import { trackViewContent, trackAddToCart, trackContact, trackLead } from '@/lib/fpixel';
 
 interface ProductDetail {
   id: number;
@@ -99,6 +100,17 @@ export default function SingleProductPage() {
           const data = await res.json();
           setProduct(data.product);
           setActiveSlide(0);
+
+          // Meta Pixel ViewContent Event
+          if (data.product) {
+            trackViewContent({
+              content_name: data.product.name,
+              content_category: data.product.category_name,
+              content_ids: [String(data.product.id)],
+              value: data.product.price || 0,
+              currency: 'BDT',
+            });
+          }
 
           // Load related products
           const allRes = await fetch('/api/products?status=published');
@@ -576,6 +588,14 @@ export default function SingleProductPage() {
 
                     <Link
                       href={`/checkout?product=${product.slug}&qty=${quantity}`}
+                      onClick={() =>
+                        trackAddToCart({
+                          content_name: product.name,
+                          content_ids: [product.id],
+                          value: (product.price || 0) * quantity,
+                          quantity,
+                        })
+                      }
                       className="flex-1 inline-flex items-center justify-center gap-2 py-3 sm:py-3.5 px-4 sm:px-6 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white text-xs sm:text-sm font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(255,61,0,0.4)] transition-all"
                     >
                       <ShoppingBag className="w-4 h-4 shrink-0" />
@@ -589,6 +609,12 @@ export default function SingleProductPage() {
                       href={getWhatsAppLink()}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() =>
+                        trackContact({
+                          channel: 'WhatsApp',
+                          content_name: product.name,
+                        })
+                      }
                       className="inline-flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl bg-[#66CC66] hover:bg-[#55b855] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider transition-all"
                     >
                       <Image
@@ -603,6 +629,12 @@ export default function SingleProductPage() {
 
                     <a
                       href="tel:+8801976535654"
+                      onClick={() =>
+                        trackContact({
+                          channel: 'Phone',
+                          content_name: product.name,
+                        })
+                      }
                       className="inline-flex items-center justify-center gap-1.5 sm:gap-2 py-2.5 sm:py-3 px-3 sm:px-4 rounded-xl bg-[#0E1526] hover:bg-[#FF3D00]/20 active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider border border-white/10 hover:border-[#FF3D00]/50 transition-all"
                     >
                       <Phone className="w-4 h-4 text-[#FF3D00] shrink-0" />
@@ -615,6 +647,12 @@ export default function SingleProductPage() {
                   <div className="grid grid-cols-2 gap-2.5">
                     <a
                       href="tel:+8801976535654"
+                      onClick={() =>
+                        trackContact({
+                          channel: 'Phone',
+                          content_name: product.name,
+                        })
+                      }
                       className="inline-flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl bg-[#0E1526] hover:bg-[#FF3D00]/20 active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider border border-white/10 hover:border-[#FF3D00]/50 transition-all"
                     >
                       <Phone className="w-4 h-4 text-[#FF3D00] shrink-0" />
@@ -625,6 +663,12 @@ export default function SingleProductPage() {
                       href={getWhatsAppLink()}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() =>
+                        trackContact({
+                          channel: 'WhatsApp',
+                          content_name: product.name,
+                        })
+                      }
                       className="inline-flex items-center justify-center gap-1.5 py-3 px-3 rounded-xl bg-[#66CC66] hover:bg-[#55b855] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider transition-all"
                     >
                       <Image
@@ -640,6 +684,12 @@ export default function SingleProductPage() {
 
                   <Link
                     href={`/checkout?product=${product.slug}&qty=1`}
+                    onClick={() =>
+                      trackLead({
+                        content_name: product.name,
+                        content_category: 'Custom Product Query',
+                      })
+                    }
                     className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white text-xs font-bold uppercase tracking-wider shadow-[0_0_20px_rgba(255,61,0,0.4)] transition-all"
                   >
                     <Send className="w-4 h-4 shrink-0" />

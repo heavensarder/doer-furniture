@@ -21,12 +21,22 @@ export async function ensureSeoTables() {
         twitter_handle VARCHAR(100) NULL,
         google_site_verification VARCHAR(255) NULL,
         bing_site_verification VARCHAR(255) NULL,
+        facebook_pixel_id VARCHAR(100) NULL,
         robots_default_index TINYINT(1) NOT NULL DEFAULT 1,
         robots_default_follow TINYINT(1) NOT NULL DEFAULT 1,
         robots_custom_directives TEXT NULL,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
       ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
     `);
+
+    // Ensure facebook_pixel_id exists on seo_settings
+    try {
+      await pool.execute('ALTER TABLE seo_settings ADD COLUMN facebook_pixel_id VARCHAR(100) NULL AFTER bing_site_verification');
+    } catch (err: any) {
+      if (err.errno !== 1060 && !String(err.message).includes('Duplicate column')) {
+        console.warn('Note on adding facebook_pixel_id column:', err.message);
+      }
+    }
 
     // 2. seo_pages table
     await pool.execute(`
@@ -235,5 +245,18 @@ export async function ensureSeoTables() {
     console.error('Error ensuring SEO tables:', error);
     throw error;
   }
+}
+
+export async function getFacebookPixelId(): Promise<string> {
+  try {
+    await ensureSeoTables();
+    const [rows]: any = await pool.execute('SELECT facebook_pixel_id FROM seo_settings LIMIT 1');
+    if (rows && rows[0]?.facebook_pixel_id) {
+      return String(rows[0].facebook_pixel_id).trim();
+    }
+  } catch (err) {
+    console.error('Error fetching facebook_pixel_id:', err);
+  }
+  return process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID || '';
 }
 

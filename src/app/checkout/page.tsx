@@ -18,6 +18,7 @@ import {
   FileText,
   Package,
 } from 'lucide-react';
+import { trackInitiateCheckout, trackPurchase } from '@/lib/fpixel';
 
 interface CheckoutProduct {
   id: number;
@@ -64,6 +65,17 @@ function CheckoutContent() {
         if (res.ok) {
           const data = await res.json();
           setProduct(data.product);
+
+          // Meta Pixel InitiateCheckout Event
+          if (data.product) {
+            trackInitiateCheckout({
+              content_name: data.product.name,
+              content_ids: [data.product.id],
+              num_items: initialQty,
+              value: data.product.price ? data.product.price * initialQty : 0,
+              currency: 'BDT',
+            });
+          }
         }
       } catch (err) {
         console.error('Error loading checkout product:', err);
@@ -115,6 +127,18 @@ function CheckoutContent() {
 
       setPlacedOrder(data.order);
       window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Meta Pixel Purchase Event
+      if (data.order) {
+        trackPurchase({
+          order_id: data.order.order_number || data.order.id,
+          content_name: data.order.product_name,
+          content_ids: data.order.product_id ? [data.order.product_id] : [],
+          num_items: data.order.quantity || quantity,
+          value: Number(data.order.total_price) || 0,
+          currency: 'BDT',
+        });
+      }
     } catch (err: any) {
       setError(err.message || 'Something went wrong while placing your order.');
     } finally {

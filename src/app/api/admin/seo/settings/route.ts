@@ -46,6 +46,11 @@ export async function PUT(request: Request) {
     const twitterHandle = String(body.twitter_handle || '@doerbd').trim();
     const googleSiteVerification = String(body.google_site_verification || '').trim();
     const bingSiteVerification = String(body.bing_site_verification || '').trim();
+    let facebookPixelId = String(body.facebook_pixel_id || '').trim();
+    const pixelSnippetMatch = facebookPixelId.match(/fbq\s*\(\s*['"]init['"]\s*,\s*['"](\d+)['"]/i);
+    if (pixelSnippetMatch && pixelSnippetMatch[1]) {
+      facebookPixelId = pixelSnippetMatch[1];
+    }
     const robotsDefaultIndex = body.robots_default_index !== undefined ? (body.robots_default_index ? 1 : 0) : 1;
     const robotsDefaultFollow = body.robots_default_follow !== undefined ? (body.robots_default_follow ? 1 : 0) : 1;
     const robotsCustomDirectives = String(body.robots_custom_directives || '').trim();
@@ -63,6 +68,7 @@ export async function PUT(request: Request) {
         twitter_handle = ?,
         google_site_verification = ?,
         bing_site_verification = ?,
+        facebook_pixel_id = ?,
         robots_default_index = ?,
         robots_default_follow = ?,
         robots_custom_directives = ?
@@ -79,6 +85,7 @@ export async function PUT(request: Request) {
         twitterHandle,
         googleSiteVerification,
         bingSiteVerification,
+        facebookPixelId,
         robotsDefaultIndex,
         robotsDefaultFollow,
         robotsCustomDirectives,

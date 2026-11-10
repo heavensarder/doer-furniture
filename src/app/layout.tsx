@@ -5,14 +5,23 @@ import Footer from '@/components/layout/Footer';
 import { constructMetadata } from '@/lib/metadata';
 import { CyberDialogProvider } from '@/components/ui/CyberDialog';
 import JsonLd, { getGlobalSchema } from '@/components/seo/JsonLd';
+import MetaPixel from '@/components/analytics/MetaPixel';
+import { getFacebookPixelId } from '@/lib/seo-db';
 
 export const metadata: Metadata = constructMetadata();
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  let pixelId = '';
+  try {
+    pixelId = await getFacebookPixelId();
+  } catch {
+    pixelId = process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID || '';
+  }
+
   const globalSchema = getGlobalSchema('http://doerbd.com');
 
   return (
@@ -28,6 +37,9 @@ export default function RootLayout({
         <JsonLd data={globalSchema} />
       </head>
       <body className="min-h-screen flex flex-col bg-[#05070B] text-slate-100 antialiased selection:bg-[#FF3D00] selection:text-white font-sans relative overflow-x-hidden">
+        {/* Meta Pixel Tracker */}
+        <MetaPixel initialPixelId={pixelId} />
+
         {/* Vertical Neon Laser Lines Streaming Downward From Navbar */}
         <div
           aria-hidden="true"

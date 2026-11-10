@@ -18,6 +18,7 @@ import {
   Check,
   Sparkles,
 } from 'lucide-react';
+import { trackLead } from '@/lib/fpixel';
 
 interface ApplicationFormModalProps {
   job: {
@@ -355,6 +356,10 @@ export default function ApplicationFormModal({
       }
 
       setSuccess(true);
+      trackLead({
+        content_name: job.title,
+        content_category: 'Career Application',
+      });
     } catch (err: any) {
       console.error('Submission error:', err);
       setError(err.message || 'An error occurred during submission. Please check your connection and try again.');

@@ -28,6 +28,7 @@ import {
   ArrowRight,
   HelpCircle,
   FolderTree,
+  Activity,
 } from 'lucide-react';
 
 interface SeoSettings {
@@ -43,6 +44,7 @@ interface SeoSettings {
   twitter_handle: string;
   google_site_verification: string;
   bing_site_verification: string;
+  facebook_pixel_id?: string;
   robots_default_index: number;
   robots_default_follow: number;
   robots_custom_directives: string;
@@ -725,41 +727,70 @@ export default function SeoManagerPage() {
                 </div>
               </div>
 
-              {/* Card 3: Google & Bing Search Console Verifications */}
-              <div className="p-6 rounded-2xl bg-[#0B101D] border border-white/15 space-y-4">
-                <div className="flex items-center gap-2 border-b border-white/10 pb-3">
-                  <ShieldCheck className="w-5 h-5 text-emerald-400" />
-                  <h3 className="text-base font-bold text-white">Search Console Site Verifications</h3>
+              {/* Card 3: Meta Pixel Tracking & Conversions */}
+              <div className="p-6 rounded-2xl bg-[#0B101D] border border-cyan-500/30 space-y-5">
+                <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                  <div className="flex items-center gap-2">
+                    <Activity className="w-5 h-5 text-cyan-400" />
+                    <h3 className="text-base font-bold text-white">Meta Pixel & Conversion Tracking</h3>
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-300 text-[10px] font-mono uppercase font-bold border border-cyan-500/30">
+                    Live Event Tracking
+                  </span>
                 </div>
-                <p className="text-xs text-slate-400">
-                  Verify ownership on Google Search Console and Bing Webmaster Tools by entering your HTML verification meta tag content.
+
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Connect your <strong className="text-white">Meta (Facebook) Pixel</strong> to trace every visitor action and event across the entire website in real-time.
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block">
-                      Google Search Console Token
+                {/* Meta Pixel Field */}
+                <div className="p-4 rounded-xl bg-[#070A12] border border-cyan-500/30 space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
+                    <label className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-[#1877F2] animate-pulse" />
+                      <span>Meta Pixel ID (Facebook Pixel)</span>
                     </label>
-                    <input
-                      type="text"
-                      value={settings.google_site_verification}
-                      onChange={(e) => setSettings({ ...settings, google_site_verification: e.target.value })}
-                      placeholder="e.g. google-site-verification code"
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#070A12] border border-white/15 text-white text-xs font-mono focus:border-[#FF3D00] focus:outline-none"
-                    />
+                    <span className="text-[10px] text-cyan-400 font-mono">
+                      Enter 15–16 digit Pixel ID (or paste embed snippet)
+                    </span>
                   </div>
 
-                  <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-slate-300 uppercase tracking-wider block">
-                      Bing Webmaster Tools Token
-                    </label>
-                    <input
-                      type="text"
-                      value={settings.bing_site_verification}
-                      onChange={(e) => setSettings({ ...settings, bing_site_verification: e.target.value })}
-                      placeholder="e.g. msvalidate.01 token"
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#070A12] border border-white/15 text-white text-xs font-mono focus:border-[#FF3D00] focus:outline-none"
-                    />
+                  <input
+                    type="text"
+                    value={settings.facebook_pixel_id || ''}
+                    onChange={(e) => setSettings({ ...settings, facebook_pixel_id: e.target.value })}
+                    placeholder="e.g. 123456789012345"
+                    className="w-full px-4 py-2.5 rounded-xl bg-[#0B101D] border border-white/15 text-white text-xs font-mono focus:border-cyan-400 focus:outline-none"
+                  />
+
+                  {/* Standard Events Covered Status Pill Box */}
+                  <div className="pt-2 border-t border-white/10">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-2">
+                      Structured Standard Events Monitored:
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-300 text-[10px] font-mono">
+                        ✓ PageView (All route changes)
+                      </span>
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-300 text-[10px] font-mono">
+                        ✓ ViewContent (Product catalog & details)
+                      </span>
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-300 text-[10px] font-mono">
+                        ✓ AddToCart (Order Now button clicks)
+                      </span>
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-300 text-[10px] font-mono">
+                        ✓ InitiateCheckout (Checkout page views)
+                      </span>
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-300 text-[10px] font-mono">
+                        ✓ Purchase (Orders submitted with BDT value)
+                      </span>
+                      <span className="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-300 text-[10px] font-mono">
+                        ✓ Lead (Contact, workshop tour & layout requests)
+                      </span>
+                      <span className="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-[10px] font-mono">
+                        ✓ Contact (WhatsApp & direct phone clicks)
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
