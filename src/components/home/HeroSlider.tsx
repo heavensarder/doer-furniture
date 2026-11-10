@@ -10,8 +10,8 @@ import {
   ChevronRight,
 } from 'lucide-react';
 
-interface Slide {
-  id: string;
+export interface Slide {
+  id: string | number;
   tag: string;
   titleLight: string;
   titleHighlight: string;
@@ -23,9 +23,9 @@ interface Slide {
   secondaryBtnHref: string;
 }
 
-const SLIDES: Slide[] = [
+const DEFAULT_SLIDES: Slide[] = [
   {
-    id: 'console-tables',
+    id: 1,
     tag: 'Command Center Consoles • Turnkey Control Room Fit-Out',
     titleLight: 'Smart Console Tables &',
     titleHighlight: 'Control Room Design.',
@@ -38,7 +38,7 @@ const SLIDES: Slide[] = [
     secondaryBtnHref: '/contact',
   },
   {
-    id: 'architectural-materials',
+    id: 2,
     tag: 'Architectural Materials • Patinas & Surface Textures',
     titleLight: 'Architectural Patinas &',
     titleHighlight: 'Surface Textures.',
@@ -55,16 +55,43 @@ const SLIDES: Slide[] = [
 const SLIDE_DURATION = 5500; // 5.5s auto-slide
 
 export default function HeroSlider() {
+  const [slides, setSlides] = useState<Slide[]>(DEFAULT_SLIDES);
   const [activeSlide, setActiveSlide] = useState(0);
   const touchStartX = useRef<number | null>(null);
 
-  const nextSlide = useCallback(() => {
-    setActiveSlide((prev) => (prev + 1) % SLIDES.length);
+  // Fetch dynamic slides from database
+  useEffect(() => {
+    let isMounted = true;
+    const fetchDynamicSlides = async () => {
+      try {
+        const res = await fetch('/api/frontend/hero-slides');
+        if (res.ok) {
+          const data = await res.json();
+          if (isMounted && data.slides && data.slides.length > 0) {
+            setSlides(data.slides);
+          }
+        }
+      } catch (err) {
+        // Fallback to default slides on network/server error
+      }
+    };
+    fetchDynamicSlides();
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
+  const currentSlides = slides.length > 0 ? slides : DEFAULT_SLIDES;
+  const safeActiveIndex = activeSlide % currentSlides.length;
+  const current = currentSlides[safeActiveIndex] || currentSlides[0];
+
+  const nextSlide = useCallback(() => {
+    setActiveSlide((prev) => (prev + 1) % currentSlides.length);
+  }, [currentSlides.length]);
+
   const prevSlide = useCallback(() => {
-    setActiveSlide((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
-  }, []);
+    setActiveSlide((prev) => (prev - 1 + currentSlides.length) % currentSlides.length);
+  }, [currentSlides.length]);
 
   const goToSlide = (idx: number) => {
     setActiveSlide(idx);
@@ -73,11 +100,11 @@ export default function HeroSlider() {
   // Reliable Auto-slide Interval
   useEffect(() => {
     const timer = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % SLIDES.length);
+      setActiveSlide((prev) => (prev + 1) % currentSlides.length);
     }, SLIDE_DURATION);
 
     return () => clearInterval(timer);
-  }, [activeSlide]);
+  }, [activeSlide, currentSlides.length]);
 
   // Touch handlers for mobile swipe
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -93,8 +120,6 @@ export default function HeroSlider() {
     }
     touchStartX.current = null;
   };
-
-  const current = SLIDES[activeSlide];
 
   return (
     <section
@@ -120,16 +145,16 @@ export default function HeroSlider() {
 
       {/* 01. FULL-BLEED BACKGROUND SLIDER WITH SMOOTH CROSSFADE */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {SLIDES.map((slide, idx) => (
+        {currentSlides.map((slide, idx) => (
           <div
-            key={slide.id}
+            key={slide.id || idx}
             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              idx === activeSlide ? 'opacity-100 z-0' : 'opacity-0 -z-10'
+              idx === safeActiveIndex ? 'opacity-100 z-0' : 'opacity-0 -z-10'
             }`}
           >
             <Image
-              src={slide.image}
-              alt={`${slide.titleLight} ${slide.titleHighlight}`}
+              src={slide.image || '/images/hero-slider-one.jpg'}
+              alt={`${slide.titleLight || ''} ${slide.titleHighlight || ''}`}
               fill
               priority={idx === 0}
               className="object-cover object-center"
@@ -144,65 +169,75 @@ export default function HeroSlider() {
       <div className="relative z-10 max-w-7xl mx-auto w-full flex-1 flex flex-col items-start justify-center my-auto">
         <div className="w-full max-w-xl lg:max-w-2xl text-left space-y-3.5 sm:space-y-5 md:space-y-6 p-4 sm:p-7 md:p-10 rounded-2xl sm:rounded-3xl bg-[#090D18]/90 sm:bg-[#070A12]/85 backdrop-blur-xl border border-white/10 shadow-2xl cyber-corner">
           {/* Studio Category Badge */}
-          <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#0E1526]/90 border border-[#FF3D00]/30 backdrop-blur-md text-[10px] sm:text-xs font-semibold tracking-wider uppercase text-[#FF3D00] shadow-sm transition-all duration-500 max-w-full">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF3D00] animate-pulse shrink-0 shadow-[0_0_8px_#FF3D00]" />
-            <span className="truncate">{current.tag}</span>
-          </div>
+          {current.tag && (
+            <div className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#0E1526]/90 border border-[#FF3D00]/30 backdrop-blur-md text-[10px] sm:text-xs font-semibold tracking-wider uppercase text-[#FF3D00] shadow-sm transition-all duration-500 max-w-full">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF3D00] animate-pulse shrink-0 shadow-[0_0_8px_#FF3D00]" />
+              <span className="truncate">{current.tag}</span>
+            </div>
+          )}
 
           {/* Main Headline */}
           <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight drop-shadow-md transition-all duration-500">
-            <span className="block">{current.titleLight}</span>
-            <span className="text-[#FF3D00] block mt-0.5 sm:mt-1 drop-shadow-[0_0_15px_rgba(255,61,0,0.35)]">
-              {current.titleHighlight}
-            </span>
+            {current.titleLight && <span className="block">{current.titleLight}</span>}
+            {current.titleHighlight && (
+              <span className="text-[#FF3D00] block mt-0.5 sm:mt-1 drop-shadow-[0_0_15px_rgba(255,61,0,0.35)]">
+                {current.titleHighlight}
+              </span>
+            )}
           </h1>
 
           {/* Subheading */}
-          <p className="text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed font-normal drop-shadow-sm max-w-xl transition-all duration-500 line-clamp-4 sm:line-clamp-none">
-            {current.description}
-          </p>
+          {current.description && (
+            <p className="text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed font-normal drop-shadow-sm max-w-xl transition-all duration-500 line-clamp-4 sm:line-clamp-none">
+              {current.description}
+            </p>
+          )}
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-start gap-2 sm:gap-3.5 pt-1 w-full sm:w-auto">
-            <Link
-              href={current.primaryBtnHref}
-              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(255,61,0,0.45)] border border-[#FF3D00] transition-all text-center"
-            >
-              <span>{current.primaryBtnText}</span>
-              <ArrowRight className="w-4 h-4 shrink-0" />
-            </Link>
+            {current.primaryBtnText && current.primaryBtnHref && (
+              <Link
+                href={current.primaryBtnHref}
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-[#FF3D00] hover:bg-[#eb3800] active:scale-[0.98] text-white font-bold text-xs uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(255,61,0,0.45)] border border-[#FF3D00] transition-all text-center"
+              >
+                <span>{current.primaryBtnText}</span>
+                <ArrowRight className="w-4 h-4 shrink-0" />
+              </Link>
+            )}
 
-            <Link
-              href={current.secondaryBtnHref}
-              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-[#0E1526]/80 hover:bg-[#131d33] active:scale-[0.98] text-white hover:text-[#FF3D00] font-bold text-xs uppercase tracking-wider rounded-xl border border-white/20 hover:border-[#FF3D00] backdrop-blur-md transition-all text-center group"
-            >
-              <span>{current.secondaryBtnText}</span>
-              <ArrowUpRight className="w-4 h-4 text-slate-300 group-hover:text-[#FF3D00] shrink-0 transition-colors" />
-            </Link>
+            {current.secondaryBtnText && current.secondaryBtnHref && (
+              <Link
+                href={current.secondaryBtnHref}
+                className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-[#0E1526]/80 hover:bg-[#131d33] active:scale-[0.98] text-white hover:text-[#FF3D00] font-bold text-xs uppercase tracking-wider rounded-xl border border-white/20 hover:border-[#FF3D00] backdrop-blur-md transition-all text-center group"
+              >
+                <span>{current.secondaryBtnText}</span>
+                <ArrowUpRight className="w-4 h-4 text-slate-300 group-hover:text-[#FF3D00] shrink-0 transition-colors" />
+              </Link>
+            )}
           </div>
 
           {/* 03. SLIDER INDICATORS & TOUCH-FRIENDLY CONTROLS */}
           <div className="pt-2.5 sm:pt-4 flex items-center justify-between gap-3 border-t border-white/10">
             <div className="flex items-center gap-2">
-              {SLIDES.map((slide, idx) => {
-                const isActive = idx === activeSlide;
+              {currentSlides.map((slide, idx) => {
+                const isItemActive = idx === safeActiveIndex;
                 return (
                   <button
-                    key={slide.id}
+                    key={slide.id || idx}
                     onClick={() => goToSlide(idx)}
                     className="group py-2 focus:outline-none flex items-center cursor-pointer"
                     aria-label={`Go to slide ${idx + 1}`}
                   >
                     <div
                       className={`h-1.5 rounded-full overflow-hidden transition-all duration-300 relative ${
-                        isActive
+                        isItemActive
                           ? 'w-12 sm:w-20 md:w-24 bg-white/25'
                           : 'w-5 sm:w-7 md:w-8 bg-white/35 hover:bg-white/60'
                       }`}
                     >
-                      {isActive && (
+                      {isItemActive && (
                         <div
-                          key={`bar-${activeSlide}-${idx}`}
+                          key={`bar-${safeActiveIndex}-${idx}`}
                           className="h-full bg-[#FF3D00] rounded-full"
                           style={{
                             animation: `sliderLineFill ${SLIDE_DURATION}ms linear forwards`,
@@ -218,9 +253,9 @@ export default function HeroSlider() {
             {/* Micro Controls & Numbering */}
             <div className="flex items-center gap-2">
               <div className="text-[11px] font-bold tracking-wider text-slate-300/80 select-none flex items-center gap-1">
-                <span className="text-[#FF3D00] font-black">{`0${activeSlide + 1}`}</span>
+                <span className="text-[#FF3D00] font-black">{`0${safeActiveIndex + 1}`}</span>
                 <span className="text-white/30">/</span>
-                <span>{`0${SLIDES.length}`}</span>
+                <span>{`0${currentSlides.length}`}</span>
               </div>
 
               {/* Mobile Prev / Next Arrows */}

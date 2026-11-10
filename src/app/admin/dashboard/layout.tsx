@@ -22,6 +22,8 @@ import {
   UserPlus,
   FileText,
   Layers,
+  Monitor,
+  Home,
 } from 'lucide-react';
 
 export default function AdminDashboardLayout({
@@ -38,6 +40,7 @@ export default function AdminDashboardLayout({
   const [newApplicationsCount, setNewApplicationsCount] = useState<number>(0);
   const [ecommerceOpen, setEcommerceOpen] = useState<boolean>(true);
   const [careerOpen, setCareerOpen] = useState<boolean>(true);
+  const [frontendOpen, setFrontendOpen] = useState<boolean>(true);
 
   // Poll count of new inquiries, pending orders & career applications for live badges
   useEffect(() => {
@@ -99,6 +102,7 @@ export default function AdminDashboardLayout({
     pathname?.startsWith('/admin/dashboard/categories');
 
   const isCareerRoute = pathname?.startsWith('/admin/dashboard/career');
+  const isFrontendRoute = pathname?.startsWith('/admin/dashboard/frontend');
 
   return (
     <div className="min-h-screen bg-[#05070B] text-slate-100 flex flex-col md:flex-row selection:bg-[#FF3D00] selection:text-white">
@@ -418,6 +422,51 @@ export default function AdminDashboardLayout({
                     >
                       <Layers className="w-4 h-4 shrink-0" />
                       <span>Positions</span>
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              {/* FRONTEND NAV SECTION */}
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => setFrontendOpen(!frontendOpen)}
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer border ${
+                    isFrontendRoute
+                      ? 'bg-[#0E1526] text-white border-white/15'
+                      : 'text-slate-300 hover:bg-white/5 hover:text-white border-transparent hover:border-white/10'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <Monitor
+                      className={`w-5 h-5 shrink-0 ${
+                        isFrontendRoute ? 'text-[#FF3D00]' : 'text-slate-400'
+                      }`}
+                    />
+                    <span>Frontend</span>
+                  </div>
+                  <ChevronDown
+                    className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+                      frontendOpen ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+
+                {frontendOpen && (
+                  <div className="mt-1.5 ml-4 pl-3 border-l-2 border-white/10 space-y-1">
+                    {/* Sub-item: Home page */}
+                    <Link
+                      href="/admin/dashboard/frontend/home"
+                      onClick={() => setMobileSidebarOpen(false)}
+                      className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all border ${
+                        pathname?.startsWith('/admin/dashboard/frontend/home')
+                          ? 'bg-[#FF3D00] text-white shadow-[0_0_12px_rgba(255,61,0,0.35)] border-[#FF3D00]'
+                          : 'text-slate-400 hover:bg-white/5 hover:text-white border-transparent'
+                      }`}
+                    >
+                      <Home className="w-4 h-4 shrink-0" />
+                      <span>Home page</span>
                     </Link>
                   </div>
                 )}
