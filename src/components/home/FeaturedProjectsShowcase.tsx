@@ -190,12 +190,6 @@ export default function FeaturedProjectsShowcase() {
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 sm:mb-16 lg:mb-20">
           <div className="space-y-3 sm:space-y-4 max-w-3xl">
-            <div className="inline-flex items-center gap-2.5 px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-[#FF3D00]/15 border border-[#FF3D00]/40 text-[#FF3D00] text-[11px] sm:text-xs font-semibold uppercase tracking-wider shadow-[0_0_12px_rgba(255,61,0,0.3)]">
-              <span className="w-2 h-2 rounded-full bg-[#FF3D00] animate-pulse shadow-[0_0_8px_#FF3D00]" />
-              <span className="font-bold">Featured Portfolio</span>
-              <span className="text-white/20">|</span>
-              <span className="text-slate-300">Interactive Monograph</span>
-            </div>
             <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.12)]">
               Spaces Designed with Vision. <br className="hidden sm:inline" />
               <span className="text-[#FF3D00] drop-shadow-[0_0_15px_rgba(255,61,0,0.5)]">Executed with Precision.</span>
