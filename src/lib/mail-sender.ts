@@ -379,4 +379,131 @@ export async function sendOrderNotifications(order: {
   }
 }
 
+export interface CareerApplicationData {
+  id?: number | string;
+  job_id?: number | string | null;
+  job_title: string;
+  position?: string | null;
+  photo_url?: string | null;
+  full_name: string;
+  email: string;
+  phone: string;
+  current_address?: string | null;
+  highest_qualification?: string | null;
+  institution?: string | null;
+  experience_years?: string | null;
+  cv_url?: string | null;
+  why_join?: string | null;
+  created_at?: string | Date | null;
+}
+
+export async function sendCareerNotification(application: CareerApplicationData): Promise<void> {
+  try {
+    const settings = await getActiveMailSettings();
+    if (!settings) {
+      console.warn('Mail settings not configured. Career notification email skipped.');
+      return;
+    }
+
+    const transporter = createNodemailerTransporter(settings);
+    const fromAddress = `"${settings.sender_name || 'DOER Careers'}" <${settings.sender_email || settings.smtp_user}>`;
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://doerbd.com';
+
+    const submissionTime = application.created_at
+      ? new Date(application.created_at).toLocaleString('en-US', {
+          timeZone: 'Asia/Dhaka',
+          dateStyle: 'full',
+          timeStyle: 'medium',
+        })
+      : new Date().toLocaleString('en-US', {
+          timeZone: 'Asia/Dhaka',
+          dateStyle: 'full',
+          timeStyle: 'medium',
+        });
+
+    // Format full CV and photo URLs so links work directly from email clients
+    const cvUrl = application.cv_url
+      ? application.cv_url.startsWith('http')
+        ? application.cv_url
+        : `${siteUrl}${application.cv_url.startsWith('/') ? '' : '/'}${application.cv_url}`
+      : '#';
+
+    const photoUrl = application.photo_url
+      ? application.photo_url.startsWith('http')
+        ? application.photo_url
+        : `${siteUrl}${application.photo_url.startsWith('/') ? '' : '/'}${application.photo_url}`
+      : '';
+
+    const variables: Record<string, string | number> = {
+      job_title: application.job_title || 'Position Not Specified',
+      position: application.position || application.job_title || 'General Application',
+      full_name: application.full_name,
+      email: application.email,
+      phone: application.phone,
+      experience_years: application.experience_years || 'Not specified',
+      highest_qualification: application.highest_qualification || 'Not specified',
+      institution: application.institution || 'Not specified',
+      current_address: application.current_address || 'Not specified',
+      why_join: application.why_join || 'No cover note provided',
+      cv_url: cvUrl,
+      photo_url: photoUrl,
+      submission_time: submissionTime,
+      application_id: String(application.id || 'N/A'),
+      admin_dashboard_url: `${siteUrl}/admin/dashboard/career/applications`,
+      site_name: 'DOER',
+      site_url: siteUrl,
+      hotline: '+880 1976-535654',
+    };
+
+    // 1. Dispatch New Career Application Alert to Admin Inbox
+    const isCareerAdminEnabled =
+      settings.career_notification_enabled === 1 || settings.career_notification_enabled === true;
+
+    if (isCareerAdminEnabled && settings.receiver_email) {
+      const adminTemplate = await getMailTemplate('career_admin');
+      if (adminTemplate && adminTemplate.is_active) {
+        const adminSubject = replacePlaceholders(adminTemplate.subject, variables);
+        const adminHtml = replacePlaceholders(adminTemplate.body_html, variables);
+
+        await transporter.sendMail({
+          from: fromAddress,
+          to: settings.receiver_email,
+          cc: settings.cc_email || undefined,
+          replyTo: application.email,
+          subject: adminSubject,
+          html: adminHtml,
+        });
+
+        console.log(`Career application notification for "${application.job_title}" from ${application.full_name} sent to admin: ${settings.receiver_email}`);
+      }
+    }
+
+    // 2. Dispatch Confirmation & Next-Steps Auto-Reply to Candidate
+    const isCandidateReplyEnabled =
+      settings.customer_reply_enabled === 1 || settings.customer_reply_enabled === true;
+
+    if (isCandidateReplyEnabled && application.email) {
+      const candidateTemplate = await getMailTemplate('career_applicant');
+      if (candidateTemplate && candidateTemplate.is_active) {
+        const candidateSubject = replacePlaceholders(candidateTemplate.subject, variables);
+        const candidateHtml = replacePlaceholders(candidateTemplate.body_html, variables);
+
+        await transporter.sendMail({
+          from: fromAddress,
+          to: application.email,
+          replyTo: settings.reply_to_email || settings.sender_email || undefined,
+          subject: candidateSubject,
+          html: candidateHtml,
+        });
+
+        console.log(`Career acknowledgment auto-reply sent to candidate: ${application.email}`);
+      }
+    }
+  } catch (err: any) {
+    console.error('Failed to dispatch career application notification emails:', err.message || err);
+    // Don't throw to prevent interrupting the candidate's submission
+  }
+}
+
+
 

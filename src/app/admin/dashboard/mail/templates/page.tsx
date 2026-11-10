@@ -251,10 +251,15 @@ export default function MailTemplatesPage() {
       site_url: 'http://doerbd.com',
       hotline: '+880 1976-535654',
       job_title: 'Control Room Project Engineer',
+      position: 'Senior Systems Architect',
       experience_years: '4+ Years',
       highest_qualification: 'B.Sc in Industrial & Production Engineering',
       institution: 'BUET',
+      current_address: 'Kazi Bari Road, Khilkhet, Dhaka-1229',
+      why_join: 'I have 4+ years of hands-on experience in mission-critical control room console design and wish to contribute my engineering expertise to DOER projects.',
       cv_url: '#',
+      photo_url: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+      application_id: '108',
       order_number: 'DOER-2026-9041',
       product_name: 'HG-B1 Executive Modular Control Console',
       quantity: '2',
@@ -409,18 +414,18 @@ export default function MailTemplatesPage() {
         </div>
 
         {/* BOTTOM BAR: Specific Templates within Active Category */}
-        <div className="p-2.5 rounded-xl bg-[#080C16] border border-white/10 shadow-inner">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2 px-1">
+        <div className="rounded-2xl bg-[#080C16] border border-white/10 shadow-inner overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-4 py-2.5 border-b border-white/5 bg-[#060911]">
             <span className="text-[10px] font-mono text-cyan-400 uppercase tracking-wider font-semibold flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-              Templates in {CATEGORIES.find((c) => c.id === selectedCategory)?.label || 'Active Category'} (Bottom Bar):
+              Templates in {CATEGORIES.find((c) => c.id === selectedCategory)?.label || 'Active Category'} (Bottom Tab Bar):
             </span>
             <span className="text-[10px] text-slate-500 font-mono hidden sm:inline">
-              Click template tab to switch editor
+              Click template tab to switch editor &amp; preview
             </span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2">
+          <div className="flex items-center gap-1 overflow-x-auto px-3 pt-2 border-b-2 border-white/10 bg-[#070A12]">
             {templates
               .filter((tpl) => (tpl.category || 'enquiries') === selectedCategory)
               .map((tpl) => {
@@ -432,32 +437,28 @@ export default function MailTemplatesPage() {
                     key={tpl.template_key}
                     type="button"
                     onClick={() => handleSelectTemplate(tpl.template_key)}
-                    className={`flex items-center justify-between gap-3 p-3 rounded-lg text-xs font-bold tracking-wide transition-all border text-left cursor-pointer ${
+                    className={`flex items-center gap-2.5 px-4 py-3 text-xs font-bold uppercase tracking-wider transition-all border-b-2 cursor-pointer whitespace-nowrap rounded-t-lg -mb-0.5 ${
                       isSelected
-                        ? 'bg-gradient-to-r from-[#FF3D00]/25 via-[#0E1526] to-[#0A0F1D] border-[#FF3D00] text-white shadow-[0_0_15px_rgba(255,61,0,0.15)] ring-1 ring-[#FF3D00]/50'
-                        : 'bg-[#060911] border-white/10 text-slate-300 hover:text-white hover:border-white/20 hover:bg-[#0B101D]'
+                        ? 'border-[#FF3D00] text-white bg-white/[0.04] shadow-[0_2px_15px_rgba(255,61,0,0.5)]'
+                        : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-white/[0.02]'
                     }`}
                   >
-                    <div className="flex items-center gap-2.5 min-w-0">
-                      <Mail
-                        className={`w-4 h-4 shrink-0 ${
-                          isSelected ? 'text-[#FF3D00]' : 'text-slate-500'
-                        }`}
-                      />
-                      <span className="truncate">{tpl.name}</span>
-                    </div>
+                    <Mail
+                      className={`w-4 h-4 shrink-0 ${
+                        isSelected ? 'text-[#FF3D00]' : 'text-slate-500'
+                      }`}
+                    />
+                    <span>{tpl.name}</span>
 
-                    <div className="shrink-0 flex items-center gap-1.5">
-                      {isTplActive ? (
-                        <span className="px-2 py-0.5 rounded text-[9px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase tracking-wider">
-                          Active
-                        </span>
-                      ) : (
-                        <span className="px-2 py-0.5 rounded text-[9px] font-mono font-bold bg-slate-800 text-slate-400 border border-slate-700 uppercase tracking-wider">
-                          Off
-                        </span>
-                      )}
-                    </div>
+                    <span
+                      className={`ml-1 px-2 py-0.5 rounded text-[9px] font-mono font-bold uppercase tracking-wider ${
+                        isTplActive
+                          ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'
+                          : 'bg-slate-800 text-slate-400 border border-slate-700'
+                      }`}
+                    >
+                      {isTplActive ? 'Active' : 'Off'}
+                    </span>
                   </button>
                 );
               })}
@@ -653,18 +654,37 @@ export default function MailTemplatesPage() {
               {viewMode === 'preview' ? (
                 <div className="p-4 sm:p-8 bg-[#05070B] flex justify-center items-center overflow-x-auto min-h-[580px]">
                   <div
-                    className={`transition-all duration-300 w-full ${
-                      previewDevice === 'mobile' ? 'max-w-sm shadow-2xl rounded-2xl overflow-hidden border border-white/20' : 'max-w-3xl'
+                    className={`transition-all duration-300 ${
+                      previewDevice === 'mobile'
+                        ? 'w-[380px] max-w-full bg-[#000000] p-3.5 rounded-[40px] border-4 border-slate-700 shadow-[0_0_60px_rgba(0,0,0,0.9)] ring-1 ring-white/15'
+                        : 'w-full max-w-3xl'
                     }`}
                   >
-                    <div className="bg-[#0A0F1D] rounded-xl overflow-hidden border border-white/10 shadow-2xl">
+                    {previewDevice === 'mobile' && (
+                      <div className="w-24 h-4 bg-slate-900 rounded-full mx-auto mb-3 flex items-center justify-center gap-1.5 border border-white/10">
+                        <div className="w-2 h-2 rounded-full bg-slate-800" />
+                        <div className="w-8 h-1 bg-slate-800 rounded-full" />
+                      </div>
+                    )}
+                    <div
+                      className={`overflow-hidden shadow-2xl ${
+                        previewDevice === 'mobile'
+                          ? 'rounded-[26px] border border-white/10 bg-[#0A0F1D]'
+                          : 'bg-[#0A0F1D] rounded-xl border border-white/10'
+                      }`}
+                    >
                       <iframe
                         srcDoc={getInterpolatedPreview()}
                         title="Live Email Preview"
-                        className="w-full min-h-[650px] border-0"
+                        className={`w-full border-0 ${
+                          previewDevice === 'mobile' ? 'min-h-[680px]' : 'min-h-[650px]'
+                        }`}
                         sandbox="allow-same-origin"
                       />
                     </div>
+                    {previewDevice === 'mobile' && (
+                      <div className="w-28 h-1 bg-slate-600 rounded-full mx-auto mt-3" />
+                    )}
                   </div>
                 </div>
               ) : (

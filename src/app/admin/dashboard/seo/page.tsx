@@ -636,7 +636,58 @@ export default function SeoManagerPage() {
                 </div>
               </div>
 
-              {/* Card 2: Open Graph & Social Sharing Card (With 1200x630 Direct Upload Option) */}
+              {/* Card 2: Webmaster Verification Tokens (Google Search Console & Bing) */}
+              <div className="p-6 rounded-2xl bg-[#0B101D] border border-white/15 space-y-4">
+                <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                  <div className="flex items-center gap-2">
+                    <ShieldCheck className="w-5 h-5 text-[#FF3D00]" />
+                    <h3 className="text-base font-bold text-white">Search Engine Webmaster Verification</h3>
+                  </div>
+                  <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 text-[10px] font-mono uppercase font-bold border border-emerald-500/30">
+                    Ownership Verification
+                  </span>
+                </div>
+
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Verify domain ownership with <strong className="text-white">Google Search Console</strong> and <strong className="text-white">Bing Webmaster Tools</strong>. Paste the verification tokens or HTML meta snippets below to automatically inject them into the website &lt;head&gt;.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-bold text-slate-300 uppercase tracking-wider block">
+                      GOOGLE SEARCH CONSOLE TOKEN
+                    </label>
+                    <input
+                      type="text"
+                      value={settings.google_site_verification || ''}
+                      onChange={(e) => setSettings({ ...settings, google_site_verification: e.target.value })}
+                      placeholder="e.g. google-site-verification code"
+                      className="w-full px-4 py-2.5 rounded-xl bg-[#070A12] border border-white/15 text-white text-xs font-mono focus:border-cyan-400 focus:outline-none"
+                    />
+                    <span className="text-[10px] text-slate-500 font-mono block">
+                      Token from &lt;meta name=&quot;google-site-verification&quot; content=&quot;...&quot;&gt;
+                    </span>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <label className="text-[11px] font-bold text-slate-300 uppercase tracking-wider block">
+                      BING WEBMASTER TOOLS TOKEN
+                    </label>
+                    <input
+                      type="text"
+                      value={settings.bing_site_verification || ''}
+                      onChange={(e) => setSettings({ ...settings, bing_site_verification: e.target.value })}
+                      placeholder="e.g. msvalidate.01 token"
+                      className="w-full px-4 py-2.5 rounded-xl bg-[#070A12] border border-white/15 text-white text-xs font-mono focus:border-cyan-400 focus:outline-none"
+                    />
+                    <span className="text-[10px] text-slate-500 font-mono block">
+                      Token from &lt;meta name=&quot;msvalidate.01&quot; content=&quot;...&quot;&gt;
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Card 3: Open Graph & Social Sharing Card (With 1200x630 Direct Upload Option) */}
               <div className="p-6 rounded-2xl bg-[#0B101D] border border-cyan-500/30 space-y-5">
                 <div className="flex items-center justify-between border-b border-white/10 pb-3">
                   <div className="flex items-center gap-2">

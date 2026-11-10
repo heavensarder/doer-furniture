@@ -44,8 +44,19 @@ export async function PUT(request: Request) {
     const defaultOgImage = String(body.default_og_image || '/images/introduction-image.png').trim();
     const twitterCardType = String(body.twitter_card_type || 'summary_large_image').trim();
     const twitterHandle = String(body.twitter_handle || '@doerbd').trim();
-    const googleSiteVerification = String(body.google_site_verification || '').trim();
-    const bingSiteVerification = String(body.bing_site_verification || '').trim();
+
+    let googleSiteVerification = String(body.google_site_verification || '').trim();
+    const googleSnippetMatch = googleSiteVerification.match(/content=["']([^"']+)["']/i);
+    if (googleSnippetMatch && googleSnippetMatch[1]) {
+      googleSiteVerification = googleSnippetMatch[1];
+    }
+
+    let bingSiteVerification = String(body.bing_site_verification || '').trim();
+    const bingSnippetMatch = bingSiteVerification.match(/content=["']([^"']+)["']/i);
+    if (bingSnippetMatch && bingSnippetMatch[1]) {
+      bingSiteVerification = bingSnippetMatch[1];
+    }
+
     let facebookPixelId = String(body.facebook_pixel_id || '').trim();
     const pixelSnippetMatch = facebookPixelId.match(/fbq\s*\(\s*['"]init['"]\s*,\s*['"](\d+)['"]/i);
     if (pixelSnippetMatch && pixelSnippetMatch[1]) {

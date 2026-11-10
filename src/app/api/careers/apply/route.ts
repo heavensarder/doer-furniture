@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { ensureCareerTables } from '@/lib/career-db';
+import { sendCareerNotification } from '@/lib/mail-sender';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 
@@ -187,6 +188,27 @@ export async function POST(request: Request) {
         whyJoin,
       ]
     );
+
+    // Dispatch asynchronous email notifications (Admin alert + Candidate acknowledgment)
+    sendCareerNotification({
+      id: result.insertId,
+      job_id: jobId,
+      job_title: jobTitle,
+      position: position,
+      photo_url: photoUrl,
+      full_name: fullName,
+      email: email,
+      phone: phone,
+      current_address: currentAddress,
+      highest_qualification: highestQualification,
+      institution: institution,
+      experience_years: experienceYears,
+      cv_url: cvUrl,
+      why_join: whyJoin,
+      created_at: new Date(),
+    }).catch((mailErr) => {
+      console.error('Non-blocking error dispatching career application emails:', mailErr);
+    });
 
     return NextResponse.json({
       success: true,
