@@ -426,7 +426,7 @@ export default function MailTemplatesPage() {
             </span>
           </div>
 
-          <div className="flex items-center gap-1 overflow-x-auto px-3 pt-2 border-b-2 border-white/10 bg-[#070A12]">
+          <div className="flex items-center gap-1.5 overflow-x-auto overflow-y-hidden no-scrollbar px-3 pt-2 border-b border-white/10 bg-[#070A12]">
             {templates
               .filter((tpl) => (tpl.category || 'enquiries') === selectedCategory)
               .map((tpl) => {
@@ -438,9 +438,9 @@ export default function MailTemplatesPage() {
                     key={tpl.template_key}
                     type="button"
                     onClick={() => handleSelectTemplate(tpl.template_key)}
-                    className={`flex items-center gap-2.5 px-4 py-3 text-xs font-bold uppercase tracking-wider transition-all border-b-2 cursor-pointer whitespace-nowrap rounded-t-lg -mb-0.5 ${
+                    className={`flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-all border-b-2 cursor-pointer whitespace-nowrap rounded-t-lg ${
                       isSelected
-                        ? 'border-[#FF3D00] text-white bg-white/[0.04] shadow-[0_2px_15px_rgba(255,61,0,0.5)]'
+                        ? 'border-[#FF3D00] text-white bg-white/[0.05] shadow-[0_2px_12px_rgba(255,61,0,0.35)]'
                         : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-white/[0.02]'
                     }`}
                   >
