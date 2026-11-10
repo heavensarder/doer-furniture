@@ -222,9 +222,10 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 text-center text-xs text-slate-500">
-          <p>
-            © {new Date().getFullYear()} DOER. All Rights Reserved. Developed by{' '}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-2.5 sm:gap-4 text-xs text-slate-500 text-center sm:text-left">
+          <p>© {new Date().getFullYear()} DOER. All Rights Reserved.</p>
+          <p className="text-center sm:text-right">
+            Developed by{' '}
             <a
               href="https://www.heavensarder.com/"
               target="_blank"
