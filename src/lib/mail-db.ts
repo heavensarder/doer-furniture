@@ -135,6 +135,7 @@ export async function ensureMailTables() {
           { key: 'admin_dashboard_url', label: 'Admin Dashboard URL', desc: 'Direct link to open in Admin Portal' },
           { key: 'site_name', label: 'Site Name', desc: 'DOER brand name' },
           { key: 'site_url', label: 'Website URL', desc: 'Website domain link' },
+          { key: 'logo_url', label: 'Site Logo URL', desc: 'Direct URL to DOER white brand logo' },
         ]),
         body: `<!DOCTYPE html>
 <html lang="en">
@@ -188,10 +189,10 @@ export async function ensureMailTables() {
               <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                   <td class="mobile-stack-header-left">
-                    <div style="font-size: 22px; font-weight: 900; letter-spacing: -0.5px; color: #FFFFFF;">
-                      <span style="color: #FF3D00;">D</span>OER
-                    </div>
-                    <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #00F0FF; margin-top: 3px;">
+                    <a href="{{site_url}}" target="_blank" style="text-decoration: none; display: inline-block;">
+                      <img src="{{logo_url}}" alt="{{site_name}}" width="130" height="28" border="0" style="display: block; width: 130px; max-width: 130px; height: auto; border: 0; outline: none; text-decoration: none;" />
+                    </a>
+                    <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #00F0FF; margin-top: 6px;">
                       Mission-Critical Command Interiors
                     </div>
                   </td>
@@ -328,6 +329,7 @@ export async function ensureMailTables() {
           { key: 'site_name', label: 'Site Name', desc: 'DOER brand name' },
           { key: 'hotline', label: 'Direct Hotline', desc: '+880 1976-535654' },
           { key: 'site_url', label: 'Website URL', desc: 'Website URL link' },
+          { key: 'logo_url', label: 'Site Logo URL', desc: 'Direct URL to DOER white brand logo' },
         ]),
         body: `<!DOCTYPE html>
 <html lang="en">
@@ -366,10 +368,10 @@ export async function ensureMailTables() {
           </tr>
           <tr>
             <td class="mobile-pad-header" style="padding: 30px 36px 18px; background-color: #080C16; border-bottom: 1px solid rgba(255,255,255,0.08);">
-              <div style="font-size: 22px; font-weight: 900; color: #FFFFFF;">
-                <span style="color: #FF3D00;">D</span>OER
-              </div>
-              <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #00F0FF; margin-top: 3px;">
+              <a href="{{site_url}}" target="_blank" style="text-decoration: none; display: inline-block;">
+                <img src="{{logo_url}}" alt="{{site_name}}" width="130" height="28" border="0" style="display: block; width: 130px; max-width: 130px; height: auto; border: 0; outline: none; text-decoration: none;" />
+              </a>
+              <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #00F0FF; margin-top: 6px;">
                 Control Room Interiors &amp; Metal Art Supply
               </div>
             </td>
@@ -430,6 +432,9 @@ export async function ensureMailTables() {
           { key: 'institution', label: 'Institution', desc: 'University or institute' },
           { key: 'cv_url', label: 'CV Download Link', desc: 'Direct URL to candidate resume' },
           { key: 'admin_dashboard_url', label: 'Admin Portal URL', desc: 'Link to application in Admin' },
+          { key: 'site_name', label: 'Site Name', desc: 'DOER brand name' },
+          { key: 'site_url', label: 'Website URL', desc: 'Website domain link' },
+          { key: 'logo_url', label: 'Site Logo URL', desc: 'Direct URL to DOER white brand logo' },
         ]),
         body: `<!DOCTYPE html>
 <html lang="en">
@@ -477,10 +482,10 @@ export async function ensureMailTables() {
               <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                   <td class="mobile-stack-header-left">
-                    <div style="font-size: 22px; font-weight: 900; letter-spacing: -0.5px; color: #FFFFFF;">
-                      <span style="color: #FF3D00;">D</span>OER
-                    </div>
-                    <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #00F0FF; margin-top: 3px;">
+                    <a href="{{site_url}}" target="_blank" style="text-decoration: none; display: inline-block;">
+                      <img src="{{logo_url}}" alt="{{site_name}}" width="130" height="28" border="0" style="display: block; width: 130px; max-width: 130px; height: auto; border: 0; outline: none; text-decoration: none;" />
+                    </a>
+                    <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #00F0FF; margin-top: 6px;">
                       Recruitment &amp; Careers
                     </div>
                   </td>
@@ -593,6 +598,7 @@ export async function ensureMailTables() {
           { key: 'hotline', label: 'Talent Hotline', desc: '+880 1976-535654' },
           { key: 'site_name', label: 'Site Name', desc: 'DOER brand name' },
           { key: 'site_url', label: 'Website URL', desc: 'Website domain link' },
+          { key: 'logo_url', label: 'Site Logo URL', desc: 'Direct URL to DOER white brand logo' },
         ]),
         body: `<!DOCTYPE html>
 <html lang="en">
@@ -645,10 +651,10 @@ export async function ensureMailTables() {
               <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                   <td class="mobile-stack-header-left">
-                    <div style="font-size: 22px; font-weight: 900; letter-spacing: -0.5px; color: #FFFFFF;">
-                      <span style="color: #FF3D00;">D</span>OER
-                    </div>
-                    <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #00F0FF; margin-top: 3px;">
+                    <a href="{{site_url}}" target="_blank" style="text-decoration: none; display: inline-block;">
+                      <img src="{{logo_url}}" alt="{{site_name}}" width="130" height="28" border="0" style="display: block; width: 130px; max-width: 130px; height: auto; border: 0; outline: none; text-decoration: none;" />
+                    </a>
+                    <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #00F0FF; margin-top: 6px;">
                       Careers &amp; Talent Acquisition
                     </div>
                   </td>
@@ -798,6 +804,7 @@ export async function ensureMailTables() {
           { key: 'admin_dashboard_url', label: 'Admin Portal URL', desc: 'Link to manage order in Admin' },
           { key: 'site_name', label: 'Site Name', desc: 'DOER brand name' },
           { key: 'site_url', label: 'Website URL', desc: 'Website domain link' },
+          { key: 'logo_url', label: 'Site Logo URL', desc: 'Direct URL to DOER white brand logo' },
         ]),
         body: `<!DOCTYPE html>
 <html lang="en">
@@ -846,10 +853,10 @@ export async function ensureMailTables() {
               <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                   <td class="mobile-stack-header-left">
-                    <div style="font-size: 22px; font-weight: 900; letter-spacing: -0.5px; color: #FFFFFF;">
-                      <span style="color: #FF3D00;">D</span>OER
-                    </div>
-                    <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #00F0FF; margin-top: 3px;">
+                    <a href="{{site_url}}" target="_blank" style="text-decoration: none; display: inline-block;">
+                      <img src="{{logo_url}}" alt="{{site_name}}" width="130" height="28" border="0" style="display: block; width: 130px; max-width: 130px; height: auto; border: 0; outline: none; text-decoration: none;" />
+                    </a>
+                    <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #00F0FF; margin-top: 6px;">
                       E-Commerce Order Notification
                     </div>
                   </td>
@@ -986,6 +993,7 @@ export async function ensureMailTables() {
           { key: 'hotline', label: 'Customer Hotline', desc: '+880 1976-535654' },
           { key: 'site_name', label: 'Site Name', desc: 'DOER brand name' },
           { key: 'site_url', label: 'Website URL', desc: 'Website domain link' },
+          { key: 'logo_url', label: 'Site Logo URL', desc: 'Direct URL to DOER white brand logo' },
         ]),
         body: `<!DOCTYPE html>
 <html lang="en">
@@ -1037,10 +1045,10 @@ export async function ensureMailTables() {
               <table role="presentation" width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                   <td class="mobile-stack-header-left">
-                    <div style="font-size: 22px; font-weight: 900; letter-spacing: -0.5px; color: #FFFFFF;">
-                      <span style="color: #FF3D00;">D</span>OER
-                    </div>
-                    <div style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #00F0FF; margin-top: 3px;">
+                    <a href="{{site_url}}" target="_blank" style="text-decoration: none; display: inline-block;">
+                      <img src="{{logo_url}}" alt="{{site_name}}" width="130" height="28" border="0" style="display: block; width: 130px; max-width: 130px; height: auto; border: 0; outline: none; text-decoration: none;" />
+                    </a>
+                    <div style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #00F0FF; margin-top: 6px;">
                       Mission-Critical Furniture &amp; Interior
                     </div>
                   </td>
@@ -1182,8 +1190,8 @@ export async function ensureMailTables() {
           [t.key, t.name, t.category, t.subject, t.body, t.description, t.variables]
         );
       } else {
-        // Upgrade existing template to the 100% mobile-responsive edition if not already upgraded
-        if (!existing[0]?.body_html || !existing[0].body_html.includes('@media screen and (max-width: 600px)')) {
+        // Upgrade existing template to the 100% mobile-responsive edition with official site logo
+        if (!existing[0]?.body_html || !existing[0].body_html.includes('logo_url')) {
           await pool.execute(
             `UPDATE mail_templates SET name = ?, subject = ?, body_html = ?, available_variables = ?, updated_at = NOW() WHERE template_key = ?`,
             [t.name, t.subject, t.body, t.variables, t.key]

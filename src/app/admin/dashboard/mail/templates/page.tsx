@@ -249,6 +249,7 @@ export default function MailTemplatesPage() {
       admin_dashboard_url: '#',
       site_name: 'DOER',
       site_url: 'http://doerbd.com',
+      logo_url: '/logo-white.png',
       hotline: '+880 1976-535654',
       job_title: 'Control Room Project Engineer',
       position: 'Senior Systems Architect',

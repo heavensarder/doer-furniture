@@ -198,6 +198,7 @@ export async function sendEnquiryNotification(inquiry: {
       admin_dashboard_url: `${siteUrl}/admin/dashboard/enquiries`,
       site_name: 'DOER',
       site_url: siteUrl,
+      logo_url: `${siteUrl}/logo-white.png`,
       hotline: '+880 1976-535654',
     };
 
@@ -321,6 +322,7 @@ export async function sendOrderNotifications(order: {
       admin_dashboard_url: `${siteUrl}/admin/dashboard/orders`,
       site_name: 'DOER',
       site_url: siteUrl,
+      logo_url: `${siteUrl}/logo-white.png`,
       hotline: '+880 1976-535654',
     };
 
@@ -452,6 +454,7 @@ export async function sendCareerNotification(application: CareerApplicationData)
       admin_dashboard_url: `${siteUrl}/admin/dashboard/career/applications`,
       site_name: 'DOER',
       site_url: siteUrl,
+      logo_url: `${siteUrl}/logo-white.png`,
       hotline: '+880 1976-535654',
     };
 
