@@ -232,16 +232,16 @@ export default function AdminDashboardLayout({
                 <button
                   type="button"
                   onClick={() => setEcommerceOpen(!ecommerceOpen)}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer border ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer border border-transparent ${
                     isEcommerceRoute
-                      ? 'bg-[#0E1526] text-white border-white/15'
-                      : 'text-slate-300 hover:bg-white/5 hover:text-white border-transparent hover:border-white/10'
+                      ? 'text-white hover:bg-white/5'
+                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <ShoppingBag
                       className={`w-5 h-5 shrink-0 ${
-                        isEcommerceRoute ? 'text-[#FF3D00]' : 'text-slate-400'
+                        isEcommerceRoute ? 'text-slate-200' : 'text-slate-400'
                       }`}
                     />
                     <span>Ecommerce</span>
@@ -325,16 +325,16 @@ export default function AdminDashboardLayout({
                 <button
                   type="button"
                   onClick={() => setCareerOpen(!careerOpen)}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer border ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer border border-transparent ${
                     isCareerRoute
-                      ? 'bg-[#0E1526] text-white border-white/15'
-                      : 'text-slate-300 hover:bg-white/5 hover:text-white border-transparent hover:border-white/10'
+                      ? 'text-white hover:bg-white/5'
+                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <Briefcase
                       className={`w-5 h-5 shrink-0 ${
-                        isCareerRoute ? 'text-[#FF3D00]' : 'text-slate-400'
+                        isCareerRoute ? 'text-slate-200' : 'text-slate-400'
                       }`}
                     />
                     <span>Career</span>
@@ -432,16 +432,16 @@ export default function AdminDashboardLayout({
                 <button
                   type="button"
                   onClick={() => setFrontendOpen(!frontendOpen)}
-                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer border ${
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer border border-transparent ${
                     isFrontendRoute
-                      ? 'bg-[#0E1526] text-white border-white/15'
-                      : 'text-slate-300 hover:bg-white/5 hover:text-white border-transparent hover:border-white/10'
+                      ? 'text-white hover:bg-white/5'
+                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     <Monitor
                       className={`w-5 h-5 shrink-0 ${
-                        isFrontendRoute ? 'text-[#FF3D00]' : 'text-slate-400'
+                        isFrontendRoute ? 'text-slate-200' : 'text-slate-400'
                       }`}
                     />
                     <span>Frontend</span>

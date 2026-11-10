@@ -71,7 +71,7 @@ interface AdminCategorySection {
 }
 
 export default function AdminFrontendHomePage() {
-  const [activeTab, setActiveTab] = useState<'hero' | 'categories'>('categories');
+  const [activeTab, setActiveTab] = useState<'hero' | 'categories'>('hero');
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
   const [categories, setCategories] = useState<CategoryOption[]>([]);
 
@@ -646,21 +646,6 @@ export default function AdminFrontendHomePage() {
       {/* Tabs Navigation */}
       <div className="flex border-b border-white/10 gap-2 overflow-x-auto">
         <button
-          onClick={() => setActiveTab('categories')}
-          className={`flex items-center gap-2 px-5 py-3 border-b-2 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap ${
-            activeTab === 'categories'
-              ? 'border-[#FF3D00] text-white bg-white/[0.04]'
-              : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-white/[0.01]'
-          }`}
-        >
-          <FolderTree className="w-4 h-4 text-[#FF3D00]" />
-          <span>Category Showcase Sections</span>
-          <span className="ml-1.5 px-2 py-0.5 rounded-full text-[10px] bg-white/10 text-slate-300 font-mono">
-            {categorySections.length}
-          </span>
-        </button>
-
-        <button
           onClick={() => setActiveTab('hero')}
           className={`flex items-center gap-2 px-5 py-3 border-b-2 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap ${
             activeTab === 'hero'
@@ -672,6 +657,21 @@ export default function AdminFrontendHomePage() {
           <span>Hero Slider</span>
           <span className="ml-1.5 px-2 py-0.5 rounded-full text-[10px] bg-white/10 text-slate-300 font-mono">
             {slides.length}
+          </span>
+        </button>
+
+        <button
+          onClick={() => setActiveTab('categories')}
+          className={`flex items-center gap-2 px-5 py-3 border-b-2 text-xs font-bold uppercase tracking-wider transition-all cursor-pointer whitespace-nowrap ${
+            activeTab === 'categories'
+              ? 'border-[#FF3D00] text-white bg-white/[0.04]'
+              : 'border-transparent text-slate-400 hover:text-slate-200 hover:bg-white/[0.01]'
+          }`}
+        >
+          <FolderTree className="w-4 h-4 text-[#FF3D00]" />
+          <span>Category Showcase Sections</span>
+          <span className="ml-1.5 px-2 py-0.5 rounded-full text-[10px] bg-white/10 text-slate-300 font-mono">
+            {categorySections.length}
           </span>
         </button>
       </div>
