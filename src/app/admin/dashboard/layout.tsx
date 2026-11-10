@@ -25,6 +25,9 @@ import {
   Monitor,
   Home,
   Search,
+  Mail,
+  Settings,
+  FileCode,
 } from 'lucide-react';
 
 export default function AdminDashboardLayout({
@@ -42,6 +45,7 @@ export default function AdminDashboardLayout({
   const [ecommerceOpen, setEcommerceOpen] = useState<boolean>(true);
   const [careerOpen, setCareerOpen] = useState<boolean>(true);
   const [frontendOpen, setFrontendOpen] = useState<boolean>(true);
+  const [mailConfigOpen, setMailConfigOpen] = useState<boolean>(true);
 
   // Poll count of new inquiries, pending orders & career applications for live badges
   useEffect(() => {
@@ -104,6 +108,7 @@ export default function AdminDashboardLayout({
 
   const isCareerRoute = pathname?.startsWith('/admin/dashboard/career');
   const isFrontendRoute = pathname?.startsWith('/admin/dashboard/frontend');
+  const isMailConfigRoute = pathname?.startsWith('/admin/dashboard/mail');
 
   return (
     <div className="min-h-screen bg-[#05070B] text-slate-100 flex flex-col md:flex-row selection:bg-[#FF3D00] selection:text-white">
@@ -486,6 +491,65 @@ export default function AdminDashboardLayout({
                 <Search className="w-5 h-5 shrink-0" />
                 <span>SEO Manager</span>
               </Link>
+
+              {/* MAIL CONFIG NAV SECTION */}
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => setMailConfigOpen(!mailConfigOpen)}
+                  className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all cursor-pointer border border-transparent ${
+                    isMailConfigRoute
+                      ? 'text-white hover:bg-white/5'
+                      : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <Mail
+                      className={`w-5 h-5 shrink-0 ${
+                        isMailConfigRoute ? 'text-slate-200' : 'text-slate-400'
+                      }`}
+                    />
+                    <span>Mail Config</span>
+                  </div>
+                  <ChevronDown
+                    className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+                      mailConfigOpen ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+
+                {mailConfigOpen && (
+                  <div className="mt-1.5 ml-4 pl-3 border-l-2 border-white/10 space-y-1">
+                    {/* Sub-item: Settings */}
+                    <Link
+                      href="/admin/dashboard/mail/settings"
+                      onClick={() => setMobileSidebarOpen(false)}
+                      className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all border ${
+                        pathname === '/admin/dashboard/mail/settings'
+                          ? 'bg-[#FF3D00] text-white shadow-[0_0_12px_rgba(255,61,0,0.35)] border-[#FF3D00]'
+                          : 'text-slate-400 hover:bg-white/5 hover:text-white border-transparent'
+                      }`}
+                    >
+                      <Settings className="w-4 h-4 shrink-0" />
+                      <span>Settings</span>
+                    </Link>
+
+                    {/* Sub-item: Templates */}
+                    <Link
+                      href="/admin/dashboard/mail/templates"
+                      onClick={() => setMobileSidebarOpen(false)}
+                      className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all border ${
+                        pathname?.startsWith('/admin/dashboard/mail/templates')
+                          ? 'bg-[#FF3D00] text-white shadow-[0_0_12px_rgba(255,61,0,0.35)] border-[#FF3D00]'
+                          : 'text-slate-400 hover:bg-white/5 hover:text-white border-transparent'
+                      }`}
+                    >
+                      <FileCode className="w-4 h-4 shrink-0" />
+                      <span>Templates</span>
+                    </Link>
+                  </div>
+                )}
+              </div>
             </nav>
           </div>
         </div>

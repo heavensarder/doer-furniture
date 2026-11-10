@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getCurrentAdmin } from '@/lib/auth';
 import { ensureEcommerceTables } from '@/lib/ecommerce-db';
+import { sendOrderNotifications } from '@/lib/mail-sender';
 
 export const dynamic = 'force-dynamic';
 
@@ -135,6 +136,13 @@ export async function POST(request: Request) {
       'SELECT * FROM orders WHERE id = ?',
       [result.insertId]
     );
+
+    // Trigger SMTP order notifications (Admin alert + Customer order receipt reply)
+    if (newOrder && newOrder[0]) {
+      sendOrderNotifications(newOrder[0]).catch((err) => {
+        console.error('Failed to trigger order notifications:', err);
+      });
+    }
 
     return NextResponse.json(
       {

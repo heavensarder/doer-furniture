@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import pool from '@/lib/db';
 import { getCurrentAdmin } from '@/lib/auth';
+import { sendEnquiryNotification } from '@/lib/mail-sender';
 
 export async function GET(request: Request) {
   try {
@@ -65,6 +66,20 @@ export async function POST(request: Request) {
        VALUES (?, ?, ?, ?, ?, ?, ?, 'new')`,
       [fullName, companyName, email, phone, serviceInterested, projectLocation, projectDetails]
     );
+
+    // Asynchronously send automated email notification via Hostinger Titan SMTP
+    sendEnquiryNotification({
+      id: result.insertId,
+      fullName,
+      companyName,
+      email,
+      phone,
+      serviceInterested,
+      projectLocation,
+      projectDetails,
+    }).catch((mailErr) => {
+      console.error('Asynchronous inquiry email sending failed:', mailErr);
+    });
 
     return NextResponse.json({
       success: true,
