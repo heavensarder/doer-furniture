@@ -136,37 +136,101 @@ export async function PUT(
       slug = `${slug}-${id}`;
     }
 
-    await pool.execute(
-      `UPDATE products SET
-        category_id = ?,
-        name = ?,
-        slug = ?,
-        short_description = ?,
-        description = ?,
-        price = ?,
-        is_call_for_price = ?,
-        main_image = ?,
-        gallery_images = ?,
-        video_type = ?,
-        video_url = ?,
-        status = ?
-      WHERE id = ?`,
-      [
-        categoryId,
-        name,
-        slug,
-        shortDescription,
-        description,
-        price,
-        isCallForPrice,
-        mainImage,
-        JSON.stringify(galleryImages),
-        videoType,
-        videoUrl,
-        status,
-        id,
-      ]
-    );
+    // Optional SEO updates
+    const hasSeoUpdates =
+      body.meta_title !== undefined ||
+      body.meta_description !== undefined ||
+      body.focus_keywords !== undefined ||
+      body.sku !== undefined ||
+      body.schema_rating_value !== undefined;
+
+    if (hasSeoUpdates) {
+      const metaTitle = (body.meta_title || `${name} | DOER Console Tables`).trim();
+      const metaDesc = (body.meta_description || '').trim();
+      const focusKeywords = (body.focus_keywords || '').trim();
+      const sku = (body.sku || '').trim();
+      const mpn = (body.mpn || '').trim();
+      const rating = body.schema_rating_value ? Number(body.schema_rating_value) : 4.90;
+      const reviews = body.schema_review_count ? Number(body.schema_review_count) : 28;
+
+      await pool.execute(
+        `UPDATE products SET
+          category_id = ?,
+          name = ?,
+          slug = ?,
+          short_description = ?,
+          description = ?,
+          price = ?,
+          is_call_for_price = ?,
+          main_image = ?,
+          gallery_images = ?,
+          video_type = ?,
+          video_url = ?,
+          status = ?,
+          meta_title = ?,
+          meta_description = ?,
+          focus_keywords = ?,
+          sku = ?,
+          mpn = ?,
+          schema_rating_value = ?,
+          schema_review_count = ?
+        WHERE id = ?`,
+        [
+          categoryId,
+          name,
+          slug,
+          shortDescription,
+          description,
+          price,
+          isCallForPrice,
+          mainImage,
+          JSON.stringify(galleryImages),
+          videoType,
+          videoUrl,
+          status,
+          metaTitle,
+          metaDesc,
+          focusKeywords,
+          sku,
+          mpn,
+          rating,
+          reviews,
+          id,
+        ]
+      );
+    } else {
+      await pool.execute(
+        `UPDATE products SET
+          category_id = ?,
+          name = ?,
+          slug = ?,
+          short_description = ?,
+          description = ?,
+          price = ?,
+          is_call_for_price = ?,
+          main_image = ?,
+          gallery_images = ?,
+          video_type = ?,
+          video_url = ?,
+          status = ?
+        WHERE id = ?`,
+        [
+          categoryId,
+          name,
+          slug,
+          shortDescription,
+          description,
+          price,
+          isCallForPrice,
+          mainImage,
+          JSON.stringify(galleryImages),
+          videoType,
+          videoUrl,
+          status,
+          id,
+        ]
+      );
+    }
 
     const [updated]: any = await pool.execute(
       `SELECT p.*, c.name as category_name, c.slug as category_slug

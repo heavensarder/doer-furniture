@@ -26,14 +26,19 @@ import {
   Monitor,
   Lightbulb,
 } from 'lucide-react';
-import { constructMetadata } from '@/lib/metadata';
+import type { Metadata } from 'next';
+import { getDynamicPageMetadata } from '@/lib/metadata';
 
-export const metadata = constructMetadata({
-  title: 'DOER – High-End Console Tables & Control Room Design',
-  description:
-    'DOER manufactures mission-critical command consoles, ergonomic modular workstations, and turnkey control room interiors in our in-house Khilkhet facility.',
-  path: '/',
-});
+export const dynamic = 'force-dynamic';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getDynamicPageMetadata('/', {
+    title: 'DOER – High-Performance Console Tables, Control Room Interior & Metal Art Supply',
+    description:
+      'DOER manufactures 24/7 mission-critical console tables, turnkey control room interiors, and signature Water Bubble Stainless Steel metal art in Khilkhet, Dhaka.',
+    path: '/',
+  });
+}
 
 export default function HomePage() {
   const services = [

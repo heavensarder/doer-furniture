@@ -16,13 +16,19 @@ import {
   ShieldCheck,
   Disc,
 } from 'lucide-react';
-import { constructMetadata } from '@/lib/metadata';
+import type { Metadata } from 'next';
+import { getDynamicPageMetadata } from '@/lib/metadata';
 
-export const metadata = constructMetadata({
-  title: 'Workshop & Capabilities – DOER Manufacturing & Facilities',
-  description: 'Explore DOER in-house manufacturing facilities, modern machinery, multidisciplinary workforce, and materials like Water Bubble Stainless Steel.',
-  path: '/workshop',
-});
+export const dynamic = 'force-dynamic';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getDynamicPageMetadata('/workshop', {
+    title: 'In-House Factory, Metal Art Supply & Precision Machinery | DOER',
+    description:
+      'Visit our Khilkhet Dhaka factory. Direct supplier of Water Bubble Stainless Steel sheets, architectural metal art, CNC precision cutting, and timber joinery.',
+    path: '/workshop',
+  });
+}
 
 export default function WorkshopPage() {
   const sections = [

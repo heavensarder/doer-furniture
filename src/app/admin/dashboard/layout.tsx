@@ -24,6 +24,7 @@ import {
   Layers,
   Monitor,
   Home,
+  Search,
 } from 'lucide-react';
 
 export default function AdminDashboardLayout({
@@ -471,6 +472,20 @@ export default function AdminDashboardLayout({
                   </div>
                 )}
               </div>
+
+              {/* SEO MANAGER NAV ITEM */}
+              <Link
+                href="/admin/dashboard/seo"
+                onClick={() => setMobileSidebarOpen(false)}
+                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all border ${
+                  pathname?.startsWith('/admin/dashboard/seo')
+                    ? 'bg-[#FF3D00] text-white shadow-[0_0_15px_rgba(255,61,0,0.4)] border-[#FF3D00]'
+                    : 'text-slate-300 hover:bg-white/5 hover:text-white border-transparent hover:border-white/10'
+                }`}
+              >
+                <Search className="w-5 h-5 shrink-0" />
+                <span>SEO Manager</span>
+              </Link>
             </nav>
           </div>
         </div>

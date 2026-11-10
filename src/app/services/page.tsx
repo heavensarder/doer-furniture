@@ -14,13 +14,19 @@ import {
   CheckCircle2,
   ArrowRight,
 } from 'lucide-react';
-import { constructMetadata } from '@/lib/metadata';
+import type { Metadata } from 'next';
+import { getDynamicPageMetadata } from '@/lib/metadata';
 
-export const metadata = constructMetadata({
-  title: 'Our Services – DOER Control Room & Commercial Interior Execution',
-  description: 'Complete control room interior, console workstation manufacturing, commercial fit-out, and turnkey project execution solutions by DOER.',
-  path: '/services',
-});
+export const dynamic = 'force-dynamic';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getDynamicPageMetadata('/services', {
+    title: 'Control Room Interior Design & Turnkey Fit-Out Solutions | DOER',
+    description:
+      'Complete turnkey control room interior solutions in Bangladesh: spatial planning, command console fabrication, video wall mounts, raised flooring, and acoustic wall cladding.',
+    path: '/services',
+  });
+}
 
 export default function ServicesPage() {
   const mainServices = [

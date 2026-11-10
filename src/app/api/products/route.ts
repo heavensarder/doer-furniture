@@ -143,12 +143,27 @@ export async function POST(request: Request) {
       slug = `${slug}-${Date.now().toString().slice(-4)}`;
     }
 
+    // Default SEO & Rich Snippet fields
+    const metaTitle = (body.meta_title || `${name} | DOER Console Tables`).trim();
+    const cleanDesc = (shortDescription || description || '').replace(/<[^>]*>?/gm, '').trim();
+    const metaDescription = (body.meta_description || cleanDesc).trim();
+    const focusKeywords = (body.focus_keywords || `${name}, console tables, control room console, 24/7 operator desks`).trim();
+    const canonicalUrl = (body.canonical_url || `http://doerbd.com/products/${slug}`).trim();
+    const ogImage = body.og_image ? String(body.og_image).trim() : null;
+    const sku = (body.sku || `DOER-${slug.toUpperCase()}`).trim();
+    const mpn = (body.mpn || slug.toUpperCase()).trim();
+    const schemaRatingValue = body.schema_rating_value ? Number(body.schema_rating_value) : 4.90;
+    const schemaReviewCount = body.schema_review_count ? Number(body.schema_review_count) : 28;
+    const robotsIndex = body.robots_index !== undefined ? (body.robots_index ? 1 : 0) : 1;
+
     const [result]: any = await pool.execute(
       `INSERT INTO products (
         category_id, name, slug, short_description, description,
         price, is_call_for_price, main_image, gallery_images,
-        video_type, video_url, status, display_order
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)`,
+        video_type, video_url, status, display_order,
+        meta_title, meta_description, focus_keywords, canonical_url,
+        og_image, sku, mpn, schema_rating_value, schema_review_count, robots_index
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         categoryId,
         name,
@@ -162,6 +177,16 @@ export async function POST(request: Request) {
         videoType,
         videoUrl,
         status,
+        metaTitle,
+        metaDescription,
+        focusKeywords,
+        canonicalUrl,
+        ogImage,
+        sku,
+        mpn,
+        schemaRatingValue,
+        schemaReviewCount,
+        robotsIndex,
       ]
     );
 

@@ -2,13 +2,19 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Target, Compass, Award, ArrowRight, Quote, ShieldCheck, Factory, Users } from 'lucide-react';
-import { constructMetadata } from '@/lib/metadata';
+import type { Metadata } from 'next';
+import { getDynamicPageMetadata } from '@/lib/metadata';
 
-export const metadata = constructMetadata({
-  title: 'About DOER – Creating Spaces That Inspire and Perform',
-  description: 'Learn about DOER, our vision, mission, leadership, and our commitment to excellence in interior design, fit-out, and furniture manufacturing.',
-  path: '/about',
-});
+export const dynamic = 'force-dynamic';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getDynamicPageMetadata('/about', {
+    title: 'About DOER – Leader in Console Tables, Control Room Interiors & Metal Fabrication',
+    description:
+      'DOER operates an integrated manufacturing factory in Khilkhet, Dhaka with 33+ permanent craftsmen delivering zero-subcontracting control rooms and metal art.',
+    path: '/about',
+  });
+}
 
 export default function AboutPage() {
   return (

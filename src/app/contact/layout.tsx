@@ -1,12 +1,16 @@
 import type { Metadata } from 'next';
-import { constructMetadata } from '@/lib/metadata';
+import { getDynamicPageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = constructMetadata({
-  title: 'Contact Us – Start Your Project with DOER',
-  description:
-    'Connect with DOER interior design and execution specialists. Discuss your commercial fit-out, residential design, or custom fabrication project.',
-  path: '/contact',
-});
+export const dynamic = 'force-dynamic';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getDynamicPageMetadata('/contact', {
+    title: 'Contact DOER – Request Console Table & Control Room Interior Layout',
+    description:
+      'Connect with our control room engineers. Request bespoke console table dimensional drawings or architectural metal art samples. Hotline: +8801976535654.',
+    path: '/contact',
+  });
+}
 
 export default function ContactLayout({
   children,
@@ -15,4 +19,3 @@ export default function ContactLayout({
 }) {
   return <>{children}</>;
 }
-

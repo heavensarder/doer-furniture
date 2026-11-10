@@ -1,12 +1,16 @@
 import type { Metadata } from 'next';
-import { constructMetadata } from '@/lib/metadata';
+import { getDynamicPageMetadata } from '@/lib/metadata';
 
-export const metadata: Metadata = constructMetadata({
-  title: 'Our Products – DOER',
-  description:
-    'Explore and order from the official DOER product catalog.',
-  path: '/products',
-});
+export const dynamic = 'force-dynamic';
+
+export async function generateMetadata(): Promise<Metadata> {
+  return getDynamicPageMetadata('/products', {
+    title: 'Console Tables & Ergonomic Command Workstations Catalog | DOER',
+    description:
+      'Explore precision-engineered modular console tables, multi-screen operator command desks, and motorized workstations with 24/7 heavy-duty chassis.',
+    path: '/products',
+  });
+}
 
 export default function ProductsLayout({
   children,
